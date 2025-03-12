@@ -1,9 +1,14 @@
 import React from 'react';
 
+import TopRented from './TopRented';
+
 const Home = () => {
   return (
     <div>
-  <h2 className='text-4xl'>Hello EveryOne</h2>
+  <main className='mx-12'>
+     <TopRented></TopRented>
+  </main>
+ 
     </div>
   );
 };
