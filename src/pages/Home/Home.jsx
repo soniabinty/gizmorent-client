@@ -1,9 +1,14 @@
 import React from 'react';
 
+import Feature from './Feature';
+
 const Home = () => {
   return (
     <div>
-  <h2 className='text-4xl'>Hello EveryOne</h2>
+  <main className='mx-12'>
+     <Feature></Feature>
+  </main>
+ 
     </div>
   );
 };
