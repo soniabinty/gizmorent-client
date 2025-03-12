@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from '../../Shared/Card';
 
-const Feature = () => {
+const TopRented = () => {
 
 
-  const featuredGadgets = [
+  const TopRentedGadgets = [
     {
       id: 1,
       name: "Canon EOS Revel T7",
@@ -43,12 +43,12 @@ const Feature = () => {
     <div>
 
 
-      <h2 className='text-4xl font-bold'>Feature Gadgets</h2>
+      <h2 className='text-4xl font-bold my-8'>Top Rented Gadgets</h2>
 
       <div className='grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mt-7'>
    
       {
-        featuredGadgets.map((gadget) =>(
+        TopRentedGadgets.map((gadget) =>(
              <Card key={gadget.id} gadget={gadget}></Card>
         ))
       }
@@ -59,4 +59,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default TopRented;

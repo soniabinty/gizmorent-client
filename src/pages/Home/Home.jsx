@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Feature from './Feature';
+import TopRented from './TopRented';
 
 const Home = () => {
   return (
     <div>
   <main className='mx-12'>
-     <Feature></Feature>
+     <TopRented></TopRented>
   </main>
  
     </div>
