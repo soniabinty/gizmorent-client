@@ -7,21 +7,21 @@ const Testimonial = () => {
     const testimonials = [
         {
             image: img1,
-            name: "Avinash Kr",
+            name: "Anay Kr",
             position: "Co-Founder at xyz",
-            quote: "Like this video and ask your questions in the comment section, don't forget to Subscribe Easy Tutorials YouTube channel to watch more videos of website designing, digital marketing, and Photoshop."
+            quote: "Explore the world of rental gadgets and unlock new possibilities. Drop your questions in the comments, and don't forget to subscribe to our channel for more updates on rental services, tech tips, and more!"
         },
         {
             image: img2,
-            name: "John Doe",
+            name: "Jamie Doe",
             position: "CEO at ABC",
-            quote: "This platform has been a game changer for our business. Highly recommended!"
+            quote: "Need a gadget for a short time? We've got you covered! Ask us anything in the comments and make sure to subscribe for more insights on the best gadgets, rental tips, and tech trends."
         },
         {
             image: img3,
             name: "Jane Smith",
             position: "Marketing Head at 123 Corp",
-            quote: "Fantastic tutorials that helped me improve my skills in web design and marketing."
+            quote: "Rent smarter, not harder! Have questions? Leave them in the comments, and subscribe for more videos on how our gadget rental marketplace can make your life easier."
         }
     ];
 
