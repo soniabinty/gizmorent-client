@@ -1,9 +1,10 @@
 import React from 'react';
+import Testimonial from './Testimonial';
 
 const Home = () => {
   return (
     <div>
-  <h2 className='text-4xl'>Hello EveryOne</h2>
+  <Testimonial/>
     </div>
   );
 };
