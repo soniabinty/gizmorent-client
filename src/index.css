@@ -1,11 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
-}
-@theme {
-  --color-primary: oklch(70.7% 0.177 42.63);
-}
+@plugin "daisyui";
 
-@theme dark {
-  --color-primary: oklch(30.7% 0.177 42.63);
+@theme {
+  --color-Primary: #ff6b00;
+  --color-Secondary: #005f73;
+  --color-Accent: #ffd166;
 }

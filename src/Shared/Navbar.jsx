@@ -8,9 +8,7 @@ const Navbar = () => {
     const signOutUser = () => console.log("User signed out");
 
     const [activeTab, setActiveTab] = useState("register");
-    const activeStyle = "font-semibold text-primary dark:text-primary ";
-
-
+    const activeStyle = "font-semibold text-Primary";
 
     const links = (
         <>
@@ -24,8 +22,8 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100 z-50">
             <div className="navbar-start">
-                <div className="text-2xl font-bold text-primary dark:text-primary">
-                    <NavLink to="/">GizmoRent</NavLink>
+                <div className="text-2xl font-bold text-Primary">
+                    <NavLink to="/" >GizmoRent</NavLink>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -59,10 +57,10 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className="flex items-center gap-2">
-                        <Link to="/login" className={`px-6 py-2 rounded-lg text-sm font-normal ${activeTab === "login" ? "bg-primary text-white font-semibold" : "text-cyan-900"}`} onClick={() => setActiveTab("login")}>
+                        <Link to="/login" className={`px-6 py-2 rounded-lg text-sm font-normal ${activeTab === "login" ? "bg-Primary text-white font-semibold" : "text-cyan-900"}`} onClick={() => setActiveTab("login")}>
                             Sign In
                         </Link>
-                        <Link to="/register" className={`px-6 py-2 rounded-lg text-sm font-normal ${activeTab === "register" ? "bg-primary text-white font-semibold" : "text-cyan-900"}`} onClick={() => setActiveTab("register")}>
+                        <Link to="/register" className={`px-6 py-2 rounded-lg text-sm font-normal ${activeTab === "register" ? "bg-Primary text-white font-semibold" : "text-cyan-900"}`} onClick={() => setActiveTab("register")}>
                             Get Started
                         </Link>
                     </div>
