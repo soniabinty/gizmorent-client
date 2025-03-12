@@ -47,7 +47,7 @@ const CategorySlider = () => {
   return (
     <div className="relative w-11/12 mx-auto mt-10">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4">Top Rented Categories</h2>
+        <h2 className="text-2xl font-bold mb-4">Top Categories</h2>
         <div>
           <button className="prev-btn -translate-y-1/2 mr-3 bg-[#ffd166] p-2 shadow-lg rounded-full z-10">
             {/* <ChevronLeft className="w-6 h-6" /> */}
