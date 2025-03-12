@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import CategorySlider from "./Categories";
 
 const Home = () => {
   return (
     <div>
-  <h2 className='text-4xl'>Hello EveryOne</h2>
+      <CategorySlider></CategorySlider>
     </div>
   );
 };
