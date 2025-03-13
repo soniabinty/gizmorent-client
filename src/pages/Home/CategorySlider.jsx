@@ -45,16 +45,16 @@ const categories = [
 
 const CategorySlider = () => {
   return (
-    <div className="relative w-11/12 mx-auto mt-10">
+    <div>
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4">Top Categories</h2>
+        <h2 className="md:text-4xl text-3xl font-bold mb-4">Top Categories</h2>
         <div>
-          <button className="prev-btn -translate-y-1/2 mr-3 bg-[#ffd166] p-2 shadow-lg rounded-full z-10">
+          <button className="prev-btn  mr-3 bg-Accent p-2 shadow-lg rounded-full z-10">
             {/* <ChevronLeft className="w-6 h-6" /> */}
             <FaChevronLeft />
           </button>
 
-          <button className="next-btn -translate-y-1/2 bg-[#ffd166] p-2 shadow-lg rounded-full z-10">
+          <button className="next-btn  bg-[#ffd166] p-2 shadow-lg rounded-full z-10">
             {/* <ChevronRight className="w-6 h-6" /> */}
             <FaChevronRight />
           </button>
@@ -62,24 +62,25 @@ const CategorySlider = () => {
       </div>
 
       {/* Swiper Container */}
-      <div className="">
+      <div className="w-full">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={4}
-          spaceBetween={15}
+          slidesPerView={1}
+          spaceBetween={10}
           navigation={{
             nextEl: ".next-btn",
             prevEl: ".prev-btn",
           }}
           breakpoints={{
-            640: { slidesPerView: 2 },
+            480: { slidesPerView: 2 },
+            640: { slidesPerView: 3 },
             768: { slidesPerView: 4 },
             1024: { slidesPerView: 6 },
           }}
         >
           {categories.map((category, index) => (
             <SwiperSlide key={index}>
-              <div className="flex flex-col items-center bg-[#FFD166] p-4 rounded-lg">
+              <div className="flex flex-col items-center w-44 h-44 bg-[#FFD166] p-4 rounded-lg">
                 <img
                   src={category.img}
                   alt={category.name}

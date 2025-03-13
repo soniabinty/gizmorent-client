@@ -1,7 +1,9 @@
 import React from "react";
-import CategorySlider from "./Categories";
+
 import TopRented from "./TopRented";
 import TopContributor from "./TopContributor";
+import CategorySlider from "./CategorySlider";
+import BookYourGadgets from "./BookYourGadgets";
 
 const Home = () => {
   return (
@@ -10,6 +12,7 @@ const Home = () => {
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
         <TopContributor></TopContributor>
+        <BookYourGadgets></BookYourGadgets>
       </main>
     </div>
   );
