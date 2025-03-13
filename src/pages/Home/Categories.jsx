@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const categories = [
   {
@@ -45,7 +45,7 @@ const categories = [
 
 const CategorySlider = () => {
   return (
-    <div className="relative w-11/12 mx-auto mt-10">
+    <div className="relative mt-10">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold mb-4">Top Categories</h2>
         <div>
