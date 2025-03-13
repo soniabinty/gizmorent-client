@@ -1,3 +1,6 @@
+
+import React from 'react';
+import Testimonial from './Testimonial';
 import React from "react";
 import AboutGizmoRent from "./AboutGizmoRent";
 import CategorySlider from "./Categories";
@@ -14,6 +17,7 @@ const Home = () => {
         <TopContributor></TopContributor>
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
+        <Testimonial/>
       </main>
     </div>
   );
