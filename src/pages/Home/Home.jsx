@@ -1,3 +1,6 @@
+
+import React from 'react';
+import Testimonial from './Testimonial';
 import React from "react";
 import CategorySlider from "./Categories";
 import TopRented from "./TopRented";
@@ -12,6 +15,7 @@ const Home = () => {
         <TopRented></TopRented>
         <TopContributor></TopContributor>
         <AboutGizmoRent></AboutGizmoRent>
+     <Testimonial/>
       </main>
     </div>
   );
