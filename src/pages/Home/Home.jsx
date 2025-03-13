@@ -1,19 +1,23 @@
+
+import React from 'react';
+import Testimonial from './Testimonial';
 import React from "react";
+import AboutGizmoRent from "./AboutGizmoRent";
 import CategorySlider from "./Categories";
-import TopRented from "./TopRented";
+import RealTimeBooking from "./RealTimeBooking";
 import TopContributor from "./TopContributor";
 import AboutGizmoRent from "./AboutGizmoRent";
-import Login from "../Login/Login";
 
 const Home = () => {
   return (
     <div>
-      <main className="max-w-7xl mx-auto space-y-12">
-      
+      <main className="md:mx-12">
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
         <TopContributor></TopContributor>
         <AboutGizmoRent></AboutGizmoRent>
+        <RealTimeBooking></RealTimeBooking>
+        <Testimonial/>
       </main>
     </div>
   );

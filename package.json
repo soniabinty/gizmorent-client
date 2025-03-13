@@ -17,7 +17,11 @@
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "react-hook-form": "^7.54.2",
+=======
+    "react-router": "^7.3.0",
+>>>>>>> d4b0b3c8c251e8051ffaa661aa7a933431d87143
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.3.0",
     "sort-by": "^1.2.0",
