@@ -2,11 +2,11 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import truckRentImg from "../../assets/banner_1.jpg";
-import eventSoundSystemsRent from "../../assets/banner_2.jpg";
-import movieCameraRent from "../../assets/banner_3.jpg";
+import Our_Feature_Product from "../../assets/Our_Feature_Product.jpg";
+import Top_Rented_This_Weeik from "../../assets/Top_Rented_This_Weeik.jpg";
+import Happy_Customers from "../../assets/Happy_Customers.jpg";
 import cameraRent from "../../assets/banner_4.jpg";
-import eventGeneratorRent from "../../assets/banner_5.jpg";
+import Fast_Scure_Delivery from "../../assets/Fast_Scure_Delivery.jpg";
 import { Typewriter } from "react-simple-typewriter";
 import { Bounce } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
@@ -26,48 +26,65 @@ export default function SimpleSlider() {
 
   const slides = [
     {
-      src: truckRentImg,
-      title: "Rent Trucks for Every Need",
-      description: "Affordable truck rentals for your business or personal use.",
-      buttons: ["Rent Now", "Learn More"],
+      src: Our_Feature_Product,
+      title: "Explore Our Featured Products",
+      description: "Top-rated gadgets available for rent at unbeatable prices.",
+      buttons: ["Browse Now", "Get Started"],
     },
     {
-      src: eventSoundSystemsRent,
-      title: "Premium Sound Systems for Rent",
-      description: "Get high-quality sound systems for your events and parties.",
-      buttons: ["Explore Options", "Book Now"],
+      src: Top_Rented_This_Weeik,
+      title: "This Week's Top Rentals",
+      description: "Check out the most popular rented items of the week!",
+      buttons: ["View Rentals", "Book Yours"],
     },
     {
-      src: movieCameraRent,
-      title: "Professional Cameras for Filmmaking",
-      description: "Rent top-tier cameras for your next big project.",
-      buttons: ["See Cameras", "Get a Quote"],
+      src: Happy_Customers,
+      title: "Join Our Happy Customers",
+      description: "Thousands of satisfied users renting with confidence.",
+      buttons: ["Read Reviews", "Join Us"],
     },
     {
       src: cameraRent,
-      title: "High-Quality DSLR Rentals",
-      description: "Capture every moment with our latest DSLR cameras.",
-      buttons: ["Browse Collection", "Reserve Now"],
+      title: "Professional Camera Rentals",
+      description: "High-quality cameras for your photography and filming needs.",
+      buttons: ["See Cameras", "Reserve Now"],
     },
     {
-      src: eventGeneratorRent,
-      title: "Reliable Generators for Your Events",
-      description: "Ensure uninterrupted power supply for any occasion.",
-      buttons: ["View Plans", "Book a Generator"],
+      src: Fast_Scure_Delivery,
+      title: "Fast & Secure Delivery",
+      description: "Get your rentals delivered quickly and safely to your doorstep.",
+      buttons: ["Learn More", "Track Order"],
     },
   ];
 
   return (
-    <div className=" mx-auto mt-4">
+    <div className="mx-auto mt-4">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="h-[600px] w-full rounded-xl overflow-hidden relative bg-black bg-opacity-75">
-            <img className="h-[600px] object-cover w-full rounded-xl " src={slide.src} alt={slide.title} />
-            <div className="absolute top-0 h-full flex flex-col justify-center items-center   w-full  rounded-xl">
+          <div
+            key={index}
+            className="h-[600px]  w-full rounded-xl overflow-hidden relative bg-black bg-opacity-75"
+          >
+            <img
+              className="h-[600px] object-cover w-full rounded-xl "
+              src={slide.src}
+              alt={slide.title}
+            />
+            <div className="absolute  top-0 h-full flex flex-col justify-center items-center w-full rounded-xl">
               <h3 className="text-4xl font-semibold text-center text-[#ffd166]">
-                <Typewriter words={[slide.title]} loop={0} cursor cursorStyle="_" typeSpeed={50} deleteSpeed={30} delaySpeed={1000} />
+                <Typewriter
+                  words={[slide.title]}
+                  loop={0}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={50}
+                  deleteSpeed={30}
+                  delaySpeed={1000}
+                />
               </h3>
-              <p className="mt-4 text-lg text-center text-white">{slide.description}</p>
+              <p className="mt-4 text-lg text-center text-white">
+                {slide.description}
+              </p>
               <Bounce>
                 <div className="flex gap-7 mt-12">
                   {slide.buttons.map((button, idx) => (
