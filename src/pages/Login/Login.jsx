@@ -10,18 +10,19 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   return (
-    <div className="md:flex min-h-screen  mx-auto bg-gradient-to-t from-[#ffd166] to-gray-200 ... rounded-lg">
-      <div className="flex-1  py-10 lg:px-6">
+<div className="bg-gradient-to-t from-[#ffd166] to-gray-200 ... ">
+ <div className="md:flex min-h-screen  mx-auto  rounded-lg max-w-7xl">
+      <div className="flex-1 flex flex-col justify-center  py-10 lg:px-6">
+        <div className="text-center">
+          <h2 className="text-4xl font-bold mb-4">Welcome to GizmoRent</h2>
+          <p className="px-12">
+            Discover the best rental options tailored to your needs. Explore
+            listings, compare prices, and secure your ideal rental today
+          </p>
+        </div>
 
-      
-<div className="text-center">
-    <h2 className="text-4xl font-bold mb-4">Welcome to GizmoRent</h2>
-      <p className="px-12">Discover the best rental options tailored to your needs. Explore listings, compare prices, and secure your ideal rental today</p>
-</div>
-    
         <div className=" lg:px-12  ">
-       
-          <form className="card-body">
+          <form className="card-body " >
             {/* Email Field */}
             <div className="form-control flex flex-col">
               <label className="label">
@@ -79,27 +80,27 @@ const Login = () => {
                 LOGIN
               </button>
             </div>
-            
           </form>
           <p className="px-6">
-        Don't have an account?{' '}
-        <Link className="text-Primary" to={'/register'}>
-          Register!
-        </Link>
-      </p>
+            Don't have an account?{" "}
+            <Link className="text-Primary" to={"/register"}>
+              Register!
+            </Link>
+          </p>
         </div>
 
-       <div className="lg:px-10 max-sm: ">
-        <SocialLogin></SocialLogin>
-       </div>
+        <div className="lg:px-10 max-sm: ">
+          <SocialLogin></SocialLogin>
+        </div>
 
-       <div className="lg:px-12 m-6">
-  <Link to="/"> <button className=" mb-4 underline  text-Primary ">
-          Back To Home
-        </button>
-  </Link>
- 
-</div>
+        <div className="lg:px-12 m-6">
+          <Link to="/">
+            {" "}
+            <button className=" mb-4 underline  text-Primary ">
+              Back To Home
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div
@@ -112,7 +113,6 @@ const Login = () => {
       >
         <div className=" bg-opacity-80 absolute inset-0 mx-auto text-white  ">
           <div className="p-3 text-center space-y-4 w-11/12 mx-auto ">
-           
             <div className="mt-[380px]">
               <div class="chat chat-start">
                 <div class="chat-bubble c bg-Accent text-black">
@@ -121,7 +121,7 @@ const Login = () => {
               </div>
               <div class="chat chat-start">
                 <div class="chat-bubble  bg-Primary text-black">
-                Assign me to your Necessity of Daily Life.
+                  Assign me to your Necessity of Daily Life.
                 </div>
               </div>
               <div class="chat chat-start">
@@ -138,9 +138,10 @@ const Login = () => {
           </div>
         </div>
       </div>
-
-      
     </div>
+</div>
+    
+   
   );
 };
 
