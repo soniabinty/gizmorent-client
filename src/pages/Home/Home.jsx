@@ -5,6 +5,7 @@ import CategorySlider from "./CategorySlider";
 import RealTimeBooking from "./RealTimeBooking";
 import Testimonial from "./Testimonial";
 import TopContributor from "./TopContributor";
+import SimpleSlider from "./SimpleSlider";
 
 import TopRented from "./TopRented";
 
@@ -14,7 +15,11 @@ const Home = () => {
     <div>
 
 
+
+        <SimpleSlider></SimpleSlider>
+
       <main className="space-y-10">
+
 
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
