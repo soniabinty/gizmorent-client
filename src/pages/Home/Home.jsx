@@ -31,7 +31,7 @@ const Home = () => {
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
         <Testimonial />
-    s
+  
         <BookYourGadgets></BookYourGadgets>
 
       </main>
