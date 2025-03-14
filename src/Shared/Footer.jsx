@@ -1,30 +1,68 @@
 import React from 'react';
+import { FaLocationDot } from "react-icons/fa6";
+import { IoMdMailOpen } from "react-icons/io";
+import { IoCallOutline } from "react-icons/io5";
 
 const Footer = () => {
     return (
-        <footer style={footerStyle}>
-            <div style={containerStyle}>
-                <p>&copy; {new Date().getFullYear()} GizmoRent. All rights reserved.</p>
+        <footer className="bg-gray-800 text-gray-300 py-10">
+            <div className="container mx-auto px-6 md:px-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    {/* Column 1 - Company Info */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-white">GizmoRent</h2>
+                        <p className="mt-3 text-gray-400">
+                            Your go-to platform for renting and lending gadgets securely and affordably.
+                        </p>
+                    </div>
+
+                    {/* Column 2 - Quick Links */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-white">Quick Links</h2>
+                        <ul className="mt-3 space-y-2">
+                            {["Home", "Browse Gadgets", "How It Works", "Pricing", "Contact Us"].map((link, index) => (
+                                <li key={index}>
+                                    <a href="#" className="hover:text-Primary transition">{link}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Column 3 - Services */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-white">Our Services</h2>
+                        <ul className="mt-3 space-y-2">
+                            {["Instant Rental Confirmation", "Secure Payments", "Flexible Rental Periods", "Verified Users"].map((service, index) => (
+                                <li key={index}>
+                                    <a href="#" className="hover:text-Primary transition">{service}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Column 4 - Contact Info */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-white">Contact Us</h2>
+                        <p className="mt-3 text-gray-400 flex items-center gap-2"><FaLocationDot></FaLocationDot> 1234 Gadget Street, Tech City, USA</p>
+                        <p className="text-gray-400 flex items-center gap-2"><IoCallOutline></IoCallOutline> +1 234 567 890</p>
+                        <p className="text-gray-400 flex items-center gap-2"><IoMdMailOpen /> support@gizmorent.com</p>
+                        <div className="flex gap-4 mt-3">
+                            <a href="#" className="hover:text-Primary transition">Facebook</a>
+                            <a href="#" className="hover:text-Primary transition">Twitter</a>
+                            <a href="#" className="hover:text-Primary transition">Instagram</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/* Bottom Section */}
+                <div className="text-center text-gray-500 mt-8 border-t border-gray-700 pt-4">
+                    <p>&copy; {new Date().getFullYear()} GizmoRent. All rights reserved.</p>
+                </div>
             </div>
         </footer>
     );
-};
-
-const footerStyle = {
-    backgroundColor: '#333',
-    color: '#fff',
-    padding: '10px 0',
-    textAlign: 'center',
-    position: 'fixed',
-    left: '0',
-    bottom: '0',
-    width: '100%',
-};
-
-const containerStyle = {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '0 20px',
 };
 
 export default Footer;
