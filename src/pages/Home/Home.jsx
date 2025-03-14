@@ -10,7 +10,7 @@ import Testimonial from "./Testimonial";
 
 import SimpleSlider from "./SimpleSlider";
 
-import TopRented from "./TopRented";
+
 
 
 
