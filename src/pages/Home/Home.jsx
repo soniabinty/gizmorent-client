@@ -1,15 +1,21 @@
+
 import AboutGizmoRent from "./AboutGizmoRent";
 import BookYourGadgets from "./BookYourGadgets";
 import CategorySlider from "./CategorySlider";
 import RealTimeBooking from "./RealTimeBooking";
 import Testimonial from "./Testimonial";
 import TopContributor from "./TopContributor";
+
 import TopRented from "./TopRented";
+
 
 const Home = () => {
   return (
     <div>
-      <main className="mx-12">
+
+
+      <main className="space-y-10">
+
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
         <TopContributor></TopContributor>
