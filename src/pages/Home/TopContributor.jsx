@@ -2,8 +2,8 @@ import React from "react";
 
 const TopContributor = () => {
   return (
-    <section className="p-6 min-h-screen bg-gradient-to-r from-amber-300 to-yellow-400 flex flex-col items-center">
-      <h2 className="text-4xl font-extrabold mb-6 text-center text-white drop-shadow-lg">
+    <section className="w-full py-5 bg-gradient-to-r from-amber-300 to-yellow-400 flex flex-col items-center my-5">
+      <h2 className=" text-xl md:text-4xl font-extrabold mb-7 text-center text-white drop-shadow-lg">
         Top Contributors
       </h2>
 
@@ -27,7 +27,7 @@ const TopContributor = () => {
         ].map((contributor, index) => (
           <div
             key={index}
-            className="w-[320px] h-[400px] bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center gap-4 p-6 border border-amber-300"
+            className="w-[320px] h-[320px] bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center gap-2 p-6 border border-amber-300"
           >
             {/* Profile Image */}
             <div className="w-[120px] h-[120px] rounded-full border-4 border-yellow-400 overflow-hidden shadow-md hover:scale-105 transition-all duration-300">
@@ -39,7 +39,7 @@ const TopContributor = () => {
             </div>
 
             {/* Contributor Details */}
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-2xl font-bold text-gray-800">
               {contributor.name}
             </h1>
             <p className="text-lg text-gray-600 font-medium">
@@ -48,7 +48,7 @@ const TopContributor = () => {
                 {contributor.contribution}
               </span>
             </p>
-            <p className="text-xl font-bold text-gray-800">
+            <p className="text-lg font-bold text-gray-800">
               {contributor.userType}
             </p>
           </div>
