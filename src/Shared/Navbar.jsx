@@ -91,8 +91,8 @@ const Navbar = () => {
 
 
                                 <div className="flex gap-2 mt-3 justify-center items-center mx-4">
-                                    <Link to="/register" className="px-4 py-2 bg-Primary text-white rounded-lg text-sm font-semibold w-full">Register</Link>
-                                    <Link to="/login" className="px-4 py-2 border border-gray-400 rounded-lg text-sm font-semibold w-full">Log in</Link>
+                                    <Link to="/register" className="px-4 py-2 bg-Primary text-white rounded-lg text-sm font-semibold w-full text-center">Register</Link>
+                                    <Link to="/login" className="px-4 py-2 border border-gray-400 rounded-lg text-sm font-semibold w-full text-center">Log in</Link>
                                 </div>
                                 {/* Settings and Logout */}
                                 <div className="mt-3">
