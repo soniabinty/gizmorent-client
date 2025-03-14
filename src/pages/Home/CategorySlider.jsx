@@ -47,8 +47,8 @@ const CategorySlider = () => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h2 className="md:text-4xl text-3xl font-bold mb-4">Top Categories</h2>
-        <div>
+        <h2 className="md:text-4xl text-2xl font-bold mb-4">Top Categories</h2>
+        <div className="flex">
           <button className="prev-btn  mr-3 bg-Accent p-2 shadow-lg rounded-full z-10">
             {/* <ChevronLeft className="w-6 h-6" /> */}
             <FaChevronLeft />
