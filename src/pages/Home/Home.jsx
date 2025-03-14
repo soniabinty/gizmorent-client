@@ -3,10 +3,14 @@ import AboutGizmoRent from "./AboutGizmoRent";
 import BookYourGadgets from "./BookYourGadgets";
 import CategorySlider from "./CategorySlider";
 import RealTimeBooking from "./RealTimeBooking";
-import Testimonial from "./Testimonial";
-import TopContributor from "./TopContributor";
 
+import TopContributor from "./TopContributor";
 import TopRented from "./TopRented";
+import Testimonial from "./Testimonial";
+
+import SimpleSlider from "./SimpleSlider";
+
+
 
 
 const Home = () => {
@@ -14,7 +18,11 @@ const Home = () => {
     <div>
 
 
+
+        <SimpleSlider></SimpleSlider>
+
       <main className="space-y-10">
+
 
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
@@ -22,8 +30,9 @@ const Home = () => {
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
         <Testimonial />
-        <RealTimeBooking></RealTimeBooking>
+
         <BookYourGadgets></BookYourGadgets>
+
       </main>
     </div>
   );
