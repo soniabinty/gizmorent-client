@@ -1,20 +1,23 @@
-import React from "react";
-
-import TopRented from "./TopRented";
-import TopContributor from "./TopContributor";
-import CategorySlider from "./CategorySlider";
-import BookYourGadgets from "./BookYourGadgets";
 import AboutGizmoRent from "./AboutGizmoRent";
+import BookYourGadgets from "./BookYourGadgets";
+import CategorySlider from "./CategorySlider";
+import RealTimeBooking from "./RealTimeBooking";
+import Testimonial from "./Testimonial";
+import TopContributor from "./TopContributor";
+import TopRented from "./TopRented";
 
 const Home = () => {
   return (
     <div>
-      <main className="md:mx-12">
+      <main className="mx-12">
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
         <TopContributor></TopContributor>
-        <BookYourGadgets></BookYourGadgets>
         <AboutGizmoRent></AboutGizmoRent>
+        <RealTimeBooking></RealTimeBooking>
+        <Testimonial />
+        <RealTimeBooking></RealTimeBooking>
+        <BookYourGadgets></BookYourGadgets>
       </main>
     </div>
   );

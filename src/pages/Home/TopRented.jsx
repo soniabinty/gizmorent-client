@@ -43,9 +43,9 @@ const TopRented = () => {
     <div>
 
 
-      <h2 className='text-4xl font-bold my-8'>Top Rented Gadgets</h2>
+      <h2 className='text-4xl max-sm:text-3xl font-bold max-sm:px-4 '>Top Rented Gadgets</h2>
 
-      <div className='grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mt-7'>
+      <div className='grid grid-cols-1 md:grid-cols-4 max-sm:px-4 gap-4 md:gap-8 mt-7'>
    
       {
         TopRentedGadgets.map((gadget) =>(
