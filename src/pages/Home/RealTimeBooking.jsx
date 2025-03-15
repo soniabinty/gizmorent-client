@@ -9,7 +9,7 @@ const RealTimeBooking = () => {
     "Rent top-quality gadgets at affordable prices",
   ];
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 bg-white">
+    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16  bg-white">
       {/* Text Section */}
       <div className="md:w-1/2">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
