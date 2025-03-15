@@ -22,16 +22,17 @@ const Home = () => {
 
         <SimpleSlider></SimpleSlider>
 
-      <main className="space-y-10">
+      <main className="space-y-10 w-11/12 mx-auto max-w-7xl'">
 
 
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
-        <TopContributor></TopContributor>
+      
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
         <Testimonial />
-  
+    <TopContributor></TopContributor>
+
         <BookYourGadgets></BookYourGadgets>
 
       </main>
