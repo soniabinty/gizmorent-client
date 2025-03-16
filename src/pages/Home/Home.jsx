@@ -9,15 +9,11 @@ import Testimonial from "./Testimonial";
 import TopContributor from "./TopContributor";
 import TopRented from "./TopRented";
 
-
-
-
-
 const Home = () => {
   return (
     <div>
       <SimpleSlider></SimpleSlider>
-      <main className="space-y-10">
+      <main className="space-y-10 max-w-7xl mx-auto">
         <FilterBar />
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>

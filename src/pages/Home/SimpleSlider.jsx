@@ -3,21 +3,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import gadget from "../../assets/gadget.png";
-import Augmented_reality from "../../assets/Augmented_reality.jpg";
+import Augmented_reality from "../../assets/vr.png";
 import camera_collection from "../../assets/camera_collection.png";
 import { Typewriter } from "react-simple-typewriter";
 import { Bounce } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
+import NavCategory from "../../Shared/NavCategory";
 
 export default function SimpleSlider() {
   var settings = {
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 6000,
     pauseOnHover: true,
     dots: true,
     infinite: true,
     fade: true,
-    speed: 4000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
@@ -78,26 +79,28 @@ export default function SimpleSlider() {
   ];
 
   return (
-    <div className="mx-auto mt-4">
+    <div>
+      <NavCategory></NavCategory>
+
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="h-[600px] w-full rounded-xl overflow-hidden relative bg-Accent bg-opacity-75"
+            className=" w-full bg-Accent overflow-hidden relative md:px-10 "
           >
-            <div className="flex flex-col md:flex-row p-5 h-full">
+            <div className="flex flex-col md:flex-row-reverse max-w-7xl mx-auto justify-center items-center gap-8 p-5 h-full">
               {/* Image Section (50% width on desktop, full width on mobile) */}
-              <div className="w-full md:w-1/2 h-full">
+              <div className="w-full md:h-[420px] flex items-center justify-center md:w-1/2">
                 <img
-                  className="h-full rounded-md w-full object-cover"
+                  className=" object-cover rounded-md "
                   src={slide.src}
                   alt={slide.title}
                 />
               </div>
 
               {/* Text and Buttons Section (50% width on desktop, full width on mobile) */}
-              <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-center p-4 md:p-8">
-                <h3 className="text-2xl md:text-4xl font-semibold text-center text-[#ffd166]">
+              <div className="w-full md:w-1/2 h-full flex flex-col justify-center">
+                <h3 className="text-2xl md:text-4xl font-semibold ">
                   <Typewriter
                     words={[slide.title]}
                     loop={0}
@@ -108,7 +111,7 @@ export default function SimpleSlider() {
                     delaySpeed={1000}
                   />
                 </h3>
-                <p className="mt-4 text-base md:text-lg text-center text-black font-semibold">
+                <p className="mt-4 text-black font-semibold">
                   {slide.description}
                 </p>
                 <Bounce>
@@ -118,7 +121,7 @@ export default function SimpleSlider() {
                         key={idx}
                         className={`${
                           idx === 0
-                            ? "bg-[#ff6b00] hover:bg-orange-700"
+                            ? " bg-Primary hover:bg-Accent"
                             : "bg-white  hover:bg-yellow-500"
                         } inline-flex text-black items-center justify-center rounded-lg py-3 px-5 md:py-4 md:px-6 text-center text-sm md:text-base font-medium `}
                       >

@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const signOutUser = () => console.log("User signed out");
-  const activeStyle = "font-semibold text-Primary";
+  // const activeStyle = "font-semibold text-Primary";
 
   // Category Data with Products
   const categories = [
@@ -87,7 +87,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <div className="w-11/12 mx-auto py-1 max-w-7xl">
+      <div className="w-11/12 mx-auto max-w-7xl">
         <div className="navbar bg-base-100 z-50">
           {/* Navbar Start (Logo and Search Bar) */}
           <div className="navbar-start gap-6">
@@ -105,39 +105,6 @@ const Navbar = () => {
                 className="w-full pl-10 pr-4 py-2 border focus:border-none rounded-full focus:outline-none focus:ring-2 focus:ring-Primary"
               />
             </div>
-          </div>
-
-          {/* Navbar Middle (Nav Items - Visible on Desktop) */}
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal gap-4">
-              {categories.map((category, index) => (
-                <li className="font-bold relative group" key={index}>
-                  <NavLink
-                    to={category.to}
-                    className={({ isActive }) =>
-                      isActive ? activeStyle : "hover:text-Primary"
-                    }
-                  >
-                    {category.name}
-                  </NavLink>
-                  {/* Dropdown for Products */}
-                  {category.products && (
-                    <ul className="absolute mx-auto hidden group-hover:block mt-8 bg-white shadow-lg rounded-lg  p-2 space-y-2 min-w-[200px] z-50">
-                      {category.products.map((product, productIndex) => (
-                        <li key={productIndex}>
-                          <NavLink
-                            to={product.to}
-                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                          >
-                            {product.name}
-                          </NavLink>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Navbar End (Icons and Dropdowns) */}
