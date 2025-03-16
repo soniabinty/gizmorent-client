@@ -5,9 +5,7 @@ import FAQs from "./FAQs";
 import FilterBar from "./FilterBar";
 import RealTimeBooking from "./RealTimeBooking";
 import SimpleSlider from "./SimpleSlider";
-import Testimonial from "./Testimonial";
-import TopContributor from "./TopContributor";
-import TopRented from "./TopRented";
+
 
 const Home = () => {
   return (
@@ -21,6 +19,7 @@ const Home = () => {
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
         <Testimonial />
+
         <BookYourGadgets></BookYourGadgets>
         <FAQs />
       </main>
