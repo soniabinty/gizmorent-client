@@ -13,7 +13,7 @@ const BookYourGadgets = () => {
   };
 
   return (
-    <div className="bg-gray-100 md:flex items-center px-8 py-12">
+    <div className="bg-gray-100 md:flex items-center px-8 py-12 rounded-lg">
       <div className="md:w-1/2">
         <img className="md:p-8" src={gadget} alt="Gadget" />
       </div>
