@@ -79,7 +79,7 @@ export default function SimpleSlider() {
   ];
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <NavCategory></NavCategory>
 
       <Slider {...settings}>
