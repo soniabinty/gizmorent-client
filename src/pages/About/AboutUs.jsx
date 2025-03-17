@@ -17,13 +17,14 @@ const AboutUs = () => {
     };
     return (
         <section className="container mx-auto px-4 py-10">
-            <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-8">
                 {/* Left Side - Image & Video */}
-                <div className="relative md:w-1/2">
+                <div className="relative md:w-1/2 ">
                     <img
                         src={aboutImg}
                         alt="Gadget Rental"
-                        className=""
+                        className="w-full h-full object-cover"
+
                     />
 
                     <button

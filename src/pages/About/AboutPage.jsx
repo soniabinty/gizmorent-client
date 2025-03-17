@@ -1,4 +1,5 @@
 import React from 'react';
+import FAQs from '../Home/FAQs';
 import AboutUs from './AboutUs';
 import Gallery from './Gallery';
 import HowItWorks from './HowItWorks';
@@ -14,6 +15,7 @@ const AboutPage = () => {
             <Services />
             <div className="space-y-10 max-w-7xl mx-auto mt-10">
                 <Gallery />
+                <FAQs />
             </div>
         </>
     );

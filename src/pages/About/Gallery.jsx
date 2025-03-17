@@ -19,11 +19,11 @@ const Gallery = () => {
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="py-20 px-10">
             <h2 className="text-3xl font-bold text-center mb-8">Gallery</h2>
 
             {/* Image Grid */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
                 {images.map((image) => (
                     <div
                         key={image.id}
