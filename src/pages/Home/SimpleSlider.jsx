@@ -8,7 +8,6 @@ import camera_collection from "../../assets/camera_collection.png";
 import { Typewriter } from "react-simple-typewriter";
 import { Bounce } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import NavCategory from "../../Shared/NavCategory";
 
 export default function SimpleSlider() {
   var settings = {
@@ -80,8 +79,6 @@ export default function SimpleSlider() {
 
   return (
     <div className="overflow-hidden">
-      <NavCategory></NavCategory>
-
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div
