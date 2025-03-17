@@ -6,6 +6,7 @@ import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 
 
 
@@ -18,6 +19,12 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>
+      },
+
+      {
+        path: "/gadgetdetail",
+        element: <GadgetDetail></GadgetDetail>
+    
       },
      
     ]

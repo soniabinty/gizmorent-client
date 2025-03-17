@@ -1,40 +1,29 @@
-
 import AboutGizmoRent from "./AboutGizmoRent";
 import BookYourGadgets from "./BookYourGadgets";
 import CategorySlider from "./CategorySlider";
+import FAQs from "./FAQs";
+import FilterBar from "./FilterBar";
 import RealTimeBooking from "./RealTimeBooking";
-
-import TopContributor from "./TopContributor";
-import TopRented from "./TopRented";
-import Testimonial from "./Testimonial";
-
 import SimpleSlider from "./SimpleSlider";
-
-
-
+import TopRented from "./TopRented";
+import Testimonial from './Testimonial'
 
 
 const Home = () => {
   return (
     <div>
-
-
-
-        <SimpleSlider></SimpleSlider>
-
-      <main className="space-y-10 w-11/12 mx-auto max-w-7xl'">
-
-
+      <SimpleSlider></SimpleSlider>
+      <main className="space-y-10 w-11/12 mx-auto max-w-7xl">
+        <FilterBar />
         <CategorySlider></CategorySlider>
-        <TopRented></TopRented>
+       <TopRented></TopRented>
       
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
-        <Testimonial />
-    <TopContributor></TopContributor>
-
+        <Testimonial></Testimonial>
+  
         <BookYourGadgets></BookYourGadgets>
-
+        <FAQs />
       </main>
     </div>
   );
