@@ -120,6 +120,8 @@ const CheckAvail = () => {
           </div>
         </div>
 
+        <button className="btn bg-Primary hover:bg-Primary text-white mt-4 rounded-lg">Check Availibity</button>
+
       </form>
     </div>
   );
