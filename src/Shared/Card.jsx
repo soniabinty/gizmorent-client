@@ -3,6 +3,7 @@ import { CiStar } from 'react-icons/ci';
 import { FaHeart, FaRegStar } from 'react-icons/fa';
 import { LuUsers } from 'react-icons/lu';
 import { MdOutlineEventNote } from 'react-icons/md';
+import { Link } from 'react-router';
 
 const Card = ({gadget}) => {
   
@@ -50,9 +51,11 @@ const Card = ({gadget}) => {
 
 <div className='flex justify-between items-center'>
   <h6 className='font-bold'>{gadget.price}.00/<span className='text-sm font-normal'>day</span></h6>
+  <Link to={'/gadgetdetail'}>
   <button className='bg-Primary py-2 px-5 rounded-lg text-white font-bold'>
     Rent Now
   </button>
+  </Link>
 
 </div>
 

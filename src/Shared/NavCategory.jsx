@@ -60,9 +60,38 @@ const NavCategory = () => {
         { name: "Smart Glasses", to: "/smart-glasses" },
       ],
     },
+    {
+      name: "Computers",
+      to: "/computers",
+      products: [
+        { name: "Laptops", to: "/laptops" },
+        { name: "Desktops", to: "/desktops" },
+        { name: "Monitors", to: "/monitors" },
+        { name: "Accessories", to: "/computer-accessories" },
+      ],
+    },
+    {
+      name: "Cameras",
+      to: "/cameras",
+      products: [
+        { name: "DSLR Cameras", to: "/dslr-cameras" },
+        { name: "Mirrorless Cameras", to: "/mirrorless-cameras" },
+        { name: "Action Cameras", to: "/action-cameras" },
+        { name: "Lenses", to: "/camera-lenses" },
+      ],
+    },
+    {
+      name: "Gaming & VR",
+      to: "/gaming-vr",
+      products: [
+        { name: "Gaming Consoles", to: "/gaming-consoles" },
+        { name: "VR Headsets", to: "/vr-headsets" },
+        { name: "Gaming Accessories", to: "/gaming-accessories" },
+      ],
+    },
   ];
   return (
-    <div className="max-w-7xl mx-auto hidden lg:flex py-2 px-6">
+    <div className="max-w-7xl mx-auto hidden lg:flex mb-2 px-6">
       <ul className="flex text-sm gap-6">
         {categories.map((category, index) => (
           <li className="font-bold relative group" key={index}>
@@ -81,7 +110,7 @@ const NavCategory = () => {
                   <li key={productIndex}>
                     <NavLink
                       to={product.to}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                      className="block px-2 py-1 text-gray-700 hover:bg-gray-100 rounded-md"
                     >
                       {product.name}
                     </NavLink>

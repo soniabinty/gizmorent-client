@@ -8,65 +8,35 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const signOutUser = () => console.log("User signed out");
-  // const activeStyle = "font-semibold text-Primary";
 
-  // Category Data with Products
-  const categories = [
+  // Sample cart and wishlist data
+  const cartItems = [
     {
-      name: "Cell Phones & Tablets",
-      to: "/cell-phones-tablets",
-      products: [
-        { name: "Smartphones", to: "/smartphones" },
-        { name: "Tablets", to: "/tablets" },
-        { name: "Accessories", to: "/phone-accessories" },
-      ],
+      id: 1,
+      name: "Canon EOS Revel T7",
+      price: "$25",
+      image: "https://i.ibb.co.com/RTN5YDY8/realistic-digital-photo-camera-tripod.png",
     },
     {
-      name: "Computers",
-      to: "/computers",
-      products: [
-        { name: "Laptops", to: "/laptops" },
-        { name: "Desktops", to: "/desktops" },
-        { name: "Monitors", to: "/monitors" },
-        { name: "Accessories", to: "/computer-accessories" },
-      ],
+      id: 2,
+      name: "iPhone 14 Pro Max",
+      price: "$18",
+      image: "https://i.ibb.co.com/wZw1bjwJ/Adobe-Express-file-7.png",
+    },
+  ];
+
+  const wishlistItems = [
+    {
+      id: 1,
+      name: "Epson 4K Projector",
+      price: "$42",
+      image: "https://i.ibb.co.com/W4NGdTwz/Adobe-Express-file-4.png",
     },
     {
-      name: "Cameras",
-      to: "/cameras",
-      products: [
-        { name: "DSLR Cameras", to: "/dslr-cameras" },
-        { name: "Mirrorless Cameras", to: "/mirrorless-cameras" },
-        { name: "Action Cameras", to: "/action-cameras" },
-        { name: "Lenses", to: "/camera-lenses" },
-      ],
-    },
-    {
-      name: "Gaming & VR",
-      to: "/gaming-vr",
-      products: [
-        { name: "Gaming Consoles", to: "/gaming-consoles" },
-        { name: "VR Headsets", to: "/vr-headsets" },
-        { name: "Gaming Accessories", to: "/gaming-accessories" },
-      ],
-    },
-    {
-      name: "Audio & Music",
-      to: "/audio-music",
-      products: [
-        { name: "Headphones", to: "/headphones" },
-        { name: "Speakers", to: "/speakers" },
-        { name: "Microphones", to: "/microphones" },
-      ],
-    },
-    {
-      name: "Wearables",
-      to: "/wearables",
-      products: [
-        { name: "Smartwatches", to: "/smartwatches" },
-        { name: "Fitness Trackers", to: "/fitness-trackers" },
-        { name: "Smart Glasses", to: "/smart-glasses" },
-      ],
+      id: 2,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
     },
   ];
 
@@ -109,13 +79,83 @@ const Navbar = () => {
 
           {/* Navbar End (Icons and Dropdowns) */}
           <div className="navbar-end gap-5">
-            {/* Wishlist and Cart Icons */}
-            <button className="text-2xl hidden md:block">
-              <AiOutlineHeart />
-            </button>
-            <button className="text-2xl hidden md:block">
-              <AiOutlineShoppingCart />
-            </button>
+            {/* Wishlist Dropdown */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex="0" className="btn btn-ghost btn-circle">
+                <AiOutlineHeart className="text-2xl" />
+              </label>
+              <ul
+                tabIndex="0"
+                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-64 z-50"
+              >
+                <li className="font-semibold text-Primary mb-2">Wishlist</li>
+                {wishlistItems.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      to="/wishlist"
+                      className="flex items-center space-x-4 p-2 hover:bg-gray-100 rounded-lg"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-10 h-10 object-cover rounded-lg"
+                      />
+                      <div>
+                        <p className="text-sm font-semibold">{item.name}</p>
+                        <p className="text-xs text-gray-600">{item.price}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    to="/wishlist"
+                    className="block text-center text-Primary hover:bg-gray-100 rounded-lg p-2"
+                  >
+                    View All
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Cart Dropdown */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex="0" className="btn btn-ghost btn-circle">
+                <AiOutlineShoppingCart className="text-2xl" />
+              </label>
+              <ul
+                tabIndex="0"
+                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-64 z-50"
+              >
+                <li className="font-semibold text-Primary mb-2">Cart</li>
+                {cartItems.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      to="/cart"
+                      className="flex items-center space-x-4 p-2 hover:bg-gray-100 rounded-lg"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-10 h-10 object-cover rounded-lg"
+                      />
+                      <div>
+                        <p className="text-sm font-semibold">{item.name}</p>
+                        <p className="text-xs text-gray-600">{item.price}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    to="/cart"
+                    className="block text-center text-Primary hover:bg-gray-100 rounded-lg p-2"
+                  >
+                    View All
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             {/* Profile Dropdown */}
             <div className="dropdown dropdown-end">
@@ -179,7 +219,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu (Hamburger Icon) */}
-            <div className="dropdown dropdown-end lg:hidden">
+            <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -200,20 +240,18 @@ const Navbar = () => {
                 tabIndex="0"
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-1 shadow"
               >
-                {categories.map((category, index) => (
-                  <li key={index}>
-                    <NavLink to={category.to}>{category.name}</NavLink>
-                    {category.products && (
-                      <ul className="pl-4">
-                        {category.products.map((product, productIndex) => (
-                          <li key={productIndex}>
-                            <NavLink to={product.to}>{product.name}</NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
+                <li>
+                  <Link to="/wishlist">Wishlist</Link>
+                </li>
+                <li>
+                  <Link to="/cart">Cart</Link>
+                </li>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
               </ul>
             </div>
           </div>
