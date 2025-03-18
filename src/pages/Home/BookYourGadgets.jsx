@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import gadget from "./../../assets/gadget1.png";
+import { useNavigate } from "react-router";
 
 const BookYourGadgets = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -10,6 +12,7 @@ const BookYourGadgets = () => {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
+    navigate("/checkout");
   };
 
   return (

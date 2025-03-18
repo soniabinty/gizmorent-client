@@ -8,67 +8,6 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const signOutUser = () => console.log("User signed out");
-  // const activeStyle = "font-semibold text-Primary";
-
-  // Category Data with Products
-  const categories = [
-    {
-      name: "Cell Phones & Tablets",
-      to: "/cell-phones-tablets",
-      products: [
-        { name: "Smartphones", to: "/smartphones" },
-        { name: "Tablets", to: "/tablets" },
-        { name: "Accessories", to: "/phone-accessories" },
-      ],
-    },
-    {
-      name: "Computers",
-      to: "/computers",
-      products: [
-        { name: "Laptops", to: "/laptops" },
-        { name: "Desktops", to: "/desktops" },
-        { name: "Monitors", to: "/monitors" },
-        { name: "Accessories", to: "/computer-accessories" },
-      ],
-    },
-    {
-      name: "Cameras",
-      to: "/cameras",
-      products: [
-        { name: "DSLR Cameras", to: "/dslr-cameras" },
-        { name: "Mirrorless Cameras", to: "/mirrorless-cameras" },
-        { name: "Action Cameras", to: "/action-cameras" },
-        { name: "Lenses", to: "/camera-lenses" },
-      ],
-    },
-    {
-      name: "Gaming & VR",
-      to: "/gaming-vr",
-      products: [
-        { name: "Gaming Consoles", to: "/gaming-consoles" },
-        { name: "VR Headsets", to: "/vr-headsets" },
-        { name: "Gaming Accessories", to: "/gaming-accessories" },
-      ],
-    },
-    {
-      name: "Audio & Music",
-      to: "/audio-music",
-      products: [
-        { name: "Headphones", to: "/headphones" },
-        { name: "Speakers", to: "/speakers" },
-        { name: "Microphones", to: "/microphones" },
-      ],
-    },
-    {
-      name: "Wearables",
-      to: "/wearables",
-      products: [
-        { name: "Smartwatches", to: "/smartwatches" },
-        { name: "Fitness Trackers", to: "/fitness-trackers" },
-        { name: "Smart Glasses", to: "/smart-glasses" },
-      ],
-    },
-  ];
 
   return (
     <div>
@@ -179,7 +118,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu (Hamburger Icon) */}
-            <div className="dropdown dropdown-end lg:hidden">
+            <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -200,20 +139,12 @@ const Navbar = () => {
                 tabIndex="0"
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-1 shadow"
               >
-                {categories.map((category, index) => (
-                  <li key={index}>
-                    <NavLink to={category.to}>{category.name}</NavLink>
-                    {category.products && (
-                      <ul className="pl-4">
-                        {category.products.map((product, productIndex) => (
-                          <li key={productIndex}>
-                            <NavLink to={product.to}>{product.name}</NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
               </ul>
             </div>
           </div>

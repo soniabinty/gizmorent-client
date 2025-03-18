@@ -51,11 +51,19 @@ const Card = ({gadget}) => {
 
 <div className='flex justify-between items-center'>
   <h6 className='font-bold'>{gadget.price}.00/<span className='text-sm font-normal'>day</span></h6>
+<<<<<<< HEAD
   <Link to={'/gadgetdetail'}>  <button className='bg-Primary py-2 px-5 rounded-lg text-white font-bold'>
     Rent Now
   </button>
   </Link>
 
+=======
+  <Link to={'/gadgetdetail'}>
+  <button className='bg-Primary py-2 px-5 rounded-lg text-white font-bold'>
+    Rent Now
+  </button>
+  </Link>
+>>>>>>> 91f905ec8fb7f18ff8a905354d9c45b8632fe98f
 
 </div>
 
