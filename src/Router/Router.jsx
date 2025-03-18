@@ -8,6 +8,7 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import AboutPage from '../pages/About/AboutPage'
 import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
 import Checkout from '../pages/Checkout/Checkout'
+import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/wishlist", 
         element: <Wishlist></Wishlist>,
+      },
+      {
+        path: "/AdminDashboard", 
+        element: <AdminDashboard></AdminDashboard>,
       },
       
       {
