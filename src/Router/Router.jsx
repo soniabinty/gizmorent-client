@@ -1,8 +1,6 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "../MainLayout/Root";
-import ErrorPage from "../pages/ErrorPage";
+import AboutPage from "../pages/About/AboutPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
@@ -15,7 +13,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    
+
     children: [
       {
         path: "/",
@@ -28,18 +26,18 @@ export const router = createBrowserRouter([
       {
         path: "/wishlist", // Route for Wishlist page
         element: <Wishlist></Wishlist>,
-      }
+      },
     ]
   },
   {
-      
-    path: "login",
-    element: <Login></Login>
-  },
-  {
-      
-    path: "register",
-    element: <Register></Register>
-  },
 
+    path: "login",
+    element: <Login></Login>,
+  },
+     
+  {
+
+    path: "register",
+    element: <Register></Register>,
+  },
 ]);

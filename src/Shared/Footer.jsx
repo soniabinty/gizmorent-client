@@ -21,9 +21,15 @@ const Footer = () => {
                     <div>
                         <h2 className="text-xl font-semibold text-white">Quick Links</h2>
                         <ul className="mt-3 space-y-2">
-                            {["Home", "Browse Gadgets", "How It Works", "Pricing", "Contact Us"].map((link, index) => (
+                            {[
+                                { name: "Home", link: "/" },
+                                { name: "Browse Gadgets", link: "/browse" },
+                                { name: "Pricing", link: "/pricing" },
+                                { name: "About", link: "/about" },
+                                { name: "Contact Us", link: "/contact" }
+                            ].map((linkItem, index) => (
                                 <li key={index}>
-                                    <a href="#" className="hover:text-Primary transition">{link}</a>
+                                    <a href={linkItem.link} className="hover:text-Primary transition">{linkItem.name}</a>
                                 </li>
                             ))}
                         </ul>
@@ -33,9 +39,14 @@ const Footer = () => {
                     <div>
                         <h2 className="text-xl font-semibold text-white">Our Services</h2>
                         <ul className="mt-3 space-y-2">
-                            {["Instant Rental Confirmation", "Secure Payments", "Flexible Rental Periods", "Verified Users"].map((service, index) => (
+                            {[
+                                { name: "Instant Rental Confirmation", link: "https://abc.com" },
+                                { name: "Secure Payments", link: "https://securepay.com" },
+                                { name: "Flexible Rental Periods", link: "https://rentals.com" },
+                                { name: "Verified Users", link: "https://verifyusers.com" }
+                            ].map((service, index) => (
                                 <li key={index}>
-                                    <a href="#" className="hover:text-Primary transition">{service}</a>
+                                    <a href={service.link} className="hover:text-Primary transition">{service.name}</a>
                                 </li>
                             ))}
                         </ul>

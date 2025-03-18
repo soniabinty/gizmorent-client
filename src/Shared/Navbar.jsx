@@ -219,7 +219,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu (Hamburger Icon) */}
-            <div className="dropdown dropdown-end lg:hidden">
+            <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -245,6 +245,12 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/cart">Cart</Link>
+                </li>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
                 </li>
               </ul>
             </div>
