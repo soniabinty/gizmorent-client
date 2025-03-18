@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: "/cart", // Route for CartList page
+        path: "/cart", 
         element: <CartList></CartList>,
       },
       {
