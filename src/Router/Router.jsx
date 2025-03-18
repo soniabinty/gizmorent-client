@@ -4,10 +4,9 @@ import AboutPage from "../pages/About/AboutPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import CartList from "../pages/Shopping/CartList";
+import Wishlist from "../pages/Shopping/Wishlist";
 
-import Checkout from "../pages/Checkout/Checkout";
-
-import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 
 
 export const router = createBrowserRouter([
@@ -18,27 +17,16 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
-      },
-
-
-      {
-        path: "/checkout",
-        element: <Checkout></Checkout>,
-      },
-    ],
-  },
-  {
-
-      {
-        path: "about",
-        element: <AboutPage></AboutPage>
+        element: <Home></Home>
       },
       {
-        path: "gadgetdetail",
-        element: <GadgetDetail></GadgetDetail>
-      }
-
+        path: "/cart", 
+        element: <CartList></CartList>,
+      },
+      {
+        path: "/wishlist", // Route for Wishlist page
+        element: <Wishlist></Wishlist>,
+      },
     ]
   },
   {
@@ -46,6 +34,7 @@ export const router = createBrowserRouter([
     path: "login",
     element: <Login></Login>,
   },
+     
   {
 
     path: "register",

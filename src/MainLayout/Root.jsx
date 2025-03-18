@@ -9,8 +9,10 @@ const Root = () => {
     <div className="font-sans">
       <nav>
         <Navbar />
-        <NavCategory></NavCategory>
-      </nav>
+        
+       <NavCategory></NavCategory>
+      </nav >
+     
       <div className="">
         <Outlet></Outlet>
       </div>
