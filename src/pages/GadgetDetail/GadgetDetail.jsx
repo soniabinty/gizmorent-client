@@ -6,11 +6,8 @@ import { MdLocationOn } from 'react-icons/md';
 import CheckAvail from './CheckAvail';
 import Description from './Description';
 import Message from './Message';
-<<<<<<< HEAD
-=======
 import ReviewdData from './ReviewdData';
 import ReviewInput from './ReviewInput';
->>>>>>> 91f905ec8fb7f18ff8a905354d9c45b8632fe98f
 
 const GadgetDetail = () => {
   return (
@@ -94,8 +91,6 @@ Old BrookFeild Street, USA</p>
 </div>
 
 
-<<<<<<< HEAD
-=======
 <div className='md:grid  grid-cols-3 md:p-12 max-sm:py-4 '>
 
 <div className='col-span-2 mx-6 '>
@@ -124,7 +119,6 @@ Old BrookFeild Street, USA</p>
 
 
 
->>>>>>> 91f905ec8fb7f18ff8a905354d9c45b8632fe98f
     </div>
   );
 };
