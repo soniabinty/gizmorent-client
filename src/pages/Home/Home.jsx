@@ -5,6 +5,9 @@ import FAQs from "./FAQs";
 import FilterBar from "./FilterBar";
 import RealTimeBooking from "./RealTimeBooking";
 import SimpleSlider from "./SimpleSlider";
+import TopRented from "./TopRented";
+import TopContributor from "./TopContributor";
+import Testimonial from "./Testimonial";
 
 
 const Home = () => {
