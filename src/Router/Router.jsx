@@ -8,6 +8,7 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import AboutPage from '../pages/About/AboutPage'
 import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
 import Checkout from '../pages/Checkout/Checkout'
+import AllGadgets from "../pages/AllGadgets/AllGadgets";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout></Checkout>,
+},
+
+{
+  path: "/allgadgets",
+  element: <AllGadgets></AllGadgets>,
 },
 
 

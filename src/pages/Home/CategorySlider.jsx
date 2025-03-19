@@ -1,4 +1,5 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
@@ -44,6 +45,7 @@ const categories = [
 ];
 
 const CategorySlider = () => {
+ 
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -80,6 +82,7 @@ const CategorySlider = () => {
         >
           {categories.map((category, index) => (
             <SwiperSlide key={index}>
+              
               <div className="flex flex-col items-center w-44 h-44 bg-[#FFD166] p-4 rounded-lg">
                 <img
                   src={category.img}
