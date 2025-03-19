@@ -1,12 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../MainLayout/Root";
-import AboutPage from '../pages/About/AboutPage';
+
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
-import TrackingPage from "../pages/TrackingPage/TrackingPage";
+
+import AboutPage from '../pages/About/AboutPage'
+import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
+import Checkout from '../pages/Checkout/Checkout'
+import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
+
 
 export const router = createBrowserRouter([
   {
@@ -23,8 +28,13 @@ export const router = createBrowserRouter([
         element: <CartList></CartList>,
       },
       {
-        path: "/wishlist",
+
+        path: "/wishlist", 
         element: <Wishlist></Wishlist>,
+      },
+      {
+        path: "/AdminDashboard", 
+        element: <AdminDashboard></AdminDashboard>,
       },
 
       {
@@ -32,9 +42,15 @@ export const router = createBrowserRouter([
         element: <AboutPage></AboutPage>
       },
       {
-        path: "tracking",
-        element: <TrackingPage></TrackingPage>
-      }
+
+        path: "/gadgetdetail",
+        element: <GadgetDetail></GadgetDetail>
+      },
+      {
+        path: "/checkout",
+        element: <Checkout></Checkout>,
+},
+
 
     ]
   },
