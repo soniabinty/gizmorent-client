@@ -14,6 +14,7 @@ import TrackingPage from "../pages/TrackingPage/TrackingPage";
 import AboutPage from '../pages/About/AboutPage'
 import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
 import Checkout from '../pages/Checkout/Checkout'
+import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
 
 
@@ -64,6 +65,11 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout></Checkout>,
+},
+
+{
+  path: "/allgadgets",
+  element: <AllGadgets></AllGadgets>,
 },
 
 

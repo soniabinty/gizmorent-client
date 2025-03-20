@@ -280,6 +280,10 @@ const Navbar = () => {
                   <Link to="/about">About</Link>
                   <Link to="/AdminDashboard">Admin Dashboard</Link>
                 </li>
+
+                <li>
+                  <Link to="/allgadgets">All Gadgets</Link>
+                </li>
               </ul>
             </div>
           </div>

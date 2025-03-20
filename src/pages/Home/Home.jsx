@@ -1,13 +1,14 @@
 import AboutGizmoRent from "./AboutGizmoRent";
 import BookYourGadgets from "./BookYourGadgets";
 import CategorySlider from "./CategorySlider";
-// import CategorySlider from "./CategorySlider";
+
 import TopRented from "./TopRented";
 import Testimonial  from "./Testimonial";
 import FAQs from "./FAQs";
 import FilterBar from "./FilterBar";
 import RealTimeBooking from "./RealTimeBooking";
 import SimpleSlider from "./SimpleSlider";
+import TopContributor from "./TopContributor";
 
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
       
         <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
+        <TopContributor></TopContributor>
         <Testimonial></Testimonial>
   
         <BookYourGadgets></BookYourGadgets>
