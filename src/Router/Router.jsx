@@ -1,11 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../MainLayout/Root";
 
+import AboutPage from '../pages/About/AboutPage';
+
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
+
+import TrackingPage from "../pages/TrackingPage/TrackingPage";
 
 import AboutPage from '../pages/About/AboutPage'
 import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
@@ -30,6 +34,11 @@ export const router = createBrowserRouter([
       },
       {
 
+        path: "/wishlist",
+        element: <Wishlist></Wishlist>,
+      },
+
+
         path: "/wishlist", 
         element: <Wishlist></Wishlist>,
       },
@@ -38,11 +47,17 @@ export const router = createBrowserRouter([
         element: <AdminDashboard></AdminDashboard>,
       },
 
+
       {
         path: "/about",
         element: <AboutPage></AboutPage>
       },
       {
+
+        path: "/tracking",
+        element: <TrackingPage></TrackingPage>
+      }
+
 
         path: "/gadgetdetail",
         element: <GadgetDetail></GadgetDetail>
@@ -56,6 +71,7 @@ export const router = createBrowserRouter([
   path: "/allgadgets",
   element: <AllGadgets></AllGadgets>,
 },
+
 
 
     ]
