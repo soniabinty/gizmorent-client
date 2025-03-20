@@ -42,13 +42,6 @@ const Root = () => {
       <div className="">
         <Outlet />
 
-        <Navbar
-        />
-        <NavCategory></NavCategory>
-      </nav >
-      <div className=''>
-        <Outlet></Outlet>
-
       </div>
       <div className="mt-4">
         <Footer />
