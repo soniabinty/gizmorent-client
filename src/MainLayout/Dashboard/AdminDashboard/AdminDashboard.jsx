@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "rec
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("statistics");
 
-  // Sample data for the chart
+
   const chartData = [
     { name: "Products", value: 120 },
     { name: "Orders", value: 80 },

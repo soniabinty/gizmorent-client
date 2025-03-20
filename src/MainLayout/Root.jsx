@@ -8,12 +8,11 @@ const Root = () => {
   return (
     <div className="font-sans">
       <nav>
-        <Navbar />
-        
-       <NavCategory></NavCategory>
+        <Navbar
+        />
+        <NavCategory></NavCategory>
       </nav >
-     
-      <div className="">
+      <div className=''>
         <Outlet></Outlet>
       </div>
       <div className="mt-4">
