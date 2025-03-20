@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.0.13",
     "date-fns": "^4.1.0",
     "firebase": "^11.5.0",
+    "firebase": "^11.4.0",
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.482.0",

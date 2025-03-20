@@ -278,6 +278,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/about">About</Link>
+                  <Link to="/AdminDashboard">Admin Dashboard</Link>
                 </li>
               </ul>
             </div>
