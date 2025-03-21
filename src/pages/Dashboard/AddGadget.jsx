@@ -58,7 +58,7 @@ const AddGadget = () => {
   };
 
   return (
-    <div>
+    <div className="pt-14">
       <h2 className="text-3xl font-semibold">Add Gadget</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-4">
         <input

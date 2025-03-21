@@ -13,6 +13,7 @@ import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboar
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import AddGadget from "../pages/Dashboard/AddGadget";
 import MyGadget from "../pages/Dashboard/MyGadget";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome></DashboardHome>,
+      },
       {
         path: "add-gadget",
         element: <AddGadget></AddGadget>,
