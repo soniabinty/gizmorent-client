@@ -15,8 +15,8 @@ const GadgetDetail = () => {
 
       <div className='md:grid md:grid-cols-3  md:mx-12 p-8'>
 
-        <div className='md:col-span-2'>
-          <img className='w-[700px] mx-auto' src={"https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png"} alt="" />
+        <div className='md:col-span-2 flex items-center '>
+          <img className='w-[500px] mx-auto' src={"https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png"} alt="" />
 
         </div>
 
