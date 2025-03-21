@@ -26,7 +26,8 @@ const Navbar = () => {
       id: 1,
       name: "Canon EOS Revel T7",
       price: "$25",
-      image: "https://i.ibb.co.com/RTN5YDY8/realistic-digital-photo-camera-tripod.png",
+      image:
+        "https://i.ibb.co.com/RTN5YDY8/realistic-digital-photo-camera-tripod.png",
     },
     {
       id: 2,
@@ -275,6 +276,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/about">About</Link>

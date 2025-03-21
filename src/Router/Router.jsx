@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../MainLayout/Root";
 
@@ -23,76 +22,70 @@ import AllGadgets from "../pages/AllGadgets/AllGadgets";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-
+    element: <Root />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/cart",
-        element: <CartList></CartList>,
+        element: <CartList />,
       },
       {
         path: "/wishlist",
-        element: <Wishlist></Wishlist>,
+        element: <Wishlist />,
       },
-
       {
         path: "/AdminDashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        element: <AdminDashboard />,
       },
-
       {
         path: "/about",
-        element: <AboutPage></AboutPage>,
+        element: <AboutPage />,
       },
       {
         path: "/gadgetdetail",
-        element: <GadgetDetail></GadgetDetail>,
+        element: <GadgetDetail />,
       },
       {
         path: "/checkout",
-        element: <Checkout></Checkout>,
-},
+        element: <Checkout />,
+      },
       {
         path: "/renter",
-        element:<Renter></Renter>
-},
-
-
+        element: <Renter />,
+      },
       {
         path: "/allgadgets",
-        element: <AllGadgets></AllGadgets>,
+        element: <AllGadgets />,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <DashboardLayout />,
     children: [
       {
-        path: "/dashboard",
-        element: <DashboardHome></DashboardHome>,
+        path: "/dashboard", 
+        element: <DashboardHome />,
       },
       {
         path: "add-gadget",
-        element: <AddGadget></AddGadget>,
+        element: <AddGadget />,
       },
       {
         path: "my-gadget",
-        element: <MyGadget></MyGadget>,
+        element: <MyGadget />,
       },
     ],
   },
   {
-    path: "login",
-    element: <Login></Login>,
+    path: "/login", 
+    element: <Login />,
   },
-
   {
-    path: "register",
-    element: <Register></Register>,
+    path: "/register", 
+    element: <Register />,
   },
 ]);

@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+} from "recharts";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("statistics");
@@ -21,16 +29,24 @@ const AdminDashboard = () => {
 
   // Sample seller data
   const [sellers, setSellers] = useState([
-    { id: 1, name: "Seller One", email: "seller1@example.com", status: "Pending" },
-    { id: 2, name: "Seller Two", email: "seller2@example.com", status: "Approved" },
+    {
+      id: 1,
+      name: "Seller One",
+      email: "seller1@example.com",
+      status: "Pending",
+    },
+    {
+      id: 2,
+      name: "Seller Two",
+      email: "seller2@example.com",
+      status: "Approved",
+    },
   ]);
 
   // Function to update user role
   const updateUserRole = (id, newRole) => {
     setUsers(
-      users.map((user) =>
-        user.id === id ? { ...user, role: newRole } : user
-      )
+      users.map((user) => (user.id === id ? { ...user, role: newRole } : user))
     );
   };
 
@@ -63,7 +79,9 @@ const AdminDashboard = () => {
             <button
               onClick={() => setActiveTab("manage-users")}
               className={`block w-full text-left p-2 rounded-lg ${
-                activeTab === "manage-users" ? "bg-Accent" : "hover:bg-Accent/50"
+                activeTab === "manage-users"
+                  ? "bg-Accent"
+                  : "hover:bg-Accent/50"
               }`}
             >
               Manage Users
@@ -73,7 +91,9 @@ const AdminDashboard = () => {
             <button
               onClick={() => setActiveTab("approve-seller")}
               className={`block w-full text-left p-2 rounded-lg ${
-                activeTab === "approve-seller" ? "bg-Accent" : "hover:bg-Accent/50"
+                activeTab === "approve-seller"
+                  ? "bg-Accent"
+                  : "hover:bg-Accent/50"
               }`}
             >
               Approve Seller
@@ -91,26 +111,36 @@ const AdminDashboard = () => {
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-bold text-Secondary">Total Products</h2>
+                <h2 className="text-xl font-bold text-Secondary">
+                  Total Products
+                </h2>
                 <p className="text-3xl font-bold">120</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-bold text-Secondary">Total Orders</h2>
+                <h2 className="text-xl font-bold text-Secondary">
+                  Total Orders
+                </h2>
                 <p className="text-3xl font-bold">80</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-bold text-Secondary">Total Revenue</h2>
+                <h2 className="text-xl font-bold text-Secondary">
+                  Total Revenue
+                </h2>
                 <p className="text-3xl font-bold">$5000</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-bold text-Secondary">Total Users</h2>
+                <h2 className="text-xl font-bold text-Secondary">
+                  Total Users
+                </h2>
                 <p className="text-3xl font-bold">50</p>
               </div>
             </div>
 
             {/* Chart */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl font-bold text-Secondary mb-4">Overview</h2>
+              <h2 className="text-xl font-bold text-Secondary mb-4">
+                Overview
+              </h2>
               <BarChart width={600} height={300} data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -125,7 +155,9 @@ const AdminDashboard = () => {
 
         {activeTab === "manage-users" && (
           <div>
-            <h1 className="text-3xl font-bold text-Primary mb-6">Manage Users</h1>
+            <h1 className="text-3xl font-bold text-Primary mb-6">
+              Manage Users
+            </h1>
 
             {/* User Table */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -168,7 +200,9 @@ const AdminDashboard = () => {
 
         {activeTab === "approve-seller" && (
           <div>
-            <h1 className="text-3xl font-bold text-Primary mb-6">Approve Seller</h1>
+            <h1 className="text-3xl font-bold text-Primary mb-6">
+              Approve Seller
+            </h1>
 
             {/* Seller Table */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
