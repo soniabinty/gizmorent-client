@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/image/visual.png";
-import { loginUser } from "../../redux/authSlice";
+import { loginUser } from "../../Redux/authSlice";
 import SocialLogin from "../../Shared/SocialLogin";
 
 const Login = () => {
