@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { uploadImage } from "../../utility/utility";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const AddGadget = () => {
+
+  const axiosPubic = useAxiosPublic()
   const {
     register,
     handleSubmit,
@@ -12,7 +15,7 @@ const AddGadget = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [uploading, setUploading] = useState(false);
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -46,8 +49,8 @@ const AddGadget = () => {
         price: parseFloat(data.price),
         quantity: parseInt(data.quantity, 10),
       };
-
-      console.log("Final Form Data:", formattedData);
+      const newgadget = await axiosPubic.post('/gadgets',formattedData );
+      console.log("Final Form Data:", newgadget);
 
       alert("Gadget added successfully!");
     } catch (error) {
