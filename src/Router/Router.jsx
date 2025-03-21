@@ -11,6 +11,7 @@ import GadgetDetail from '../pages/GadgetDetail/GadgetDetail'
 import Checkout from '../pages/Checkout/Checkout'
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
+import Renter from "../BecomeRenter/Renter";
 
 
 export const router = createBrowserRouter([
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout></Checkout>,
+},
+      {
+        path: "/renter",
+        element:<Renter></Renter>
 },
 
 {
