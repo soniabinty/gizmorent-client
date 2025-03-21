@@ -43,7 +43,7 @@ const MyGadget = () => {
   ];
 
   return (
-    <div>
+    <div className="pt-14">
       <h2 className="text-3xl font-semibold">My Gadget</h2>
       <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-6">
         <table className="table">
@@ -70,12 +70,12 @@ const MyGadget = () => {
                 <td>{gadget.price}</td>
                 <td>{gadget.quantity}</td>
                 <td>
-                  <button className="bg-Primary px-3 py-1 rounded-lg text-white">
+                  <button className="bg-Primary px-3 py-1 rounded-lg text-white cursor-pointer">
                     Update
                   </button>
                 </td>
                 <td>
-                  <button className="bg-Primary px-3 py-1 rounded-lg text-white">
+                  <button className="bg-Primary px-3 py-1 rounded-lg text-white cursor-pointer">
                     Delete
                   </button>
                 </td>
