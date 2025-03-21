@@ -37,6 +37,7 @@
     "recharts": "^2.15.1",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
+    "sweetalert2": "^11.17.2",
     "swiper": "^11.2.5",
     "tailwindcss": "^4.0.13"
   },
