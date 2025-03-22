@@ -43,7 +43,7 @@ const Root = () => {
         <Outlet />
 
       </div>
-      <div className="mt-4">
+      <div>
         <Footer />
       </div>
     </div>

@@ -6,18 +6,20 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
-
-import AboutPage from "../pages/About/AboutPage";
-import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
-import Checkout from "../pages/Checkout/Checkout";
 import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
+import AboutPage from "../pages/About/AboutPage";
+import Checkout from "../pages/Checkout/Checkout";
+import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 import Renter from "../BecomeRenter/Renter";
-
 import DashboardLayout from "../MainLayout/DashboardLayout";
-import AddGadget from "../pages/Dashboard/AddGadget";
-import MyGadget from "../pages/Dashboard/MyGadget";
-import DashboardHome from "../pages/Dashboard/DashboardHome";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
+import AddGadget from "../pages/Dashboard/AddGadget";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
+import MyGadget from "../pages/Dashboard/MyGadget";
+import PackagePage from "../pages/Package/PackagePage";
+import OrderForm from "../pages/TrackingPage/OrderForm";
+import TrackingPage from "../pages/TrackingPage/TrackingPage";
+
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +61,18 @@ export const router = createBrowserRouter([
       {
         path: "/allgadgets",
         element: <AllGadgets />,
+      },
+      {
+        path: "/tracking-page",
+        element: <TrackingPage></TrackingPage>,
+      },
+      {
+        path: "/tracking",
+        element: <OrderForm></OrderForm>,
+      },
+      {
+        path: "/pricing",
+        element: <PackagePage></PackagePage>,
       },
     ],
   },
