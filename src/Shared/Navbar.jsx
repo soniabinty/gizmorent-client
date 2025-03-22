@@ -284,7 +284,12 @@ const Navbar = () => {
                   <Link to="/about">About</Link>
                   <Link to="/AdminDashboard">Admin Dashboard</Link>
                 </li>
-
+                <li>
+                  <Link to="/pricing">Pricing</Link>
+                </li>
+                <li>
+                  <Link to="/tracking-page">Tracking</Link>
+                </li>
                 <li>
                   <Link to="/allgadgets">All Gadgets</Link>
                 </li>
