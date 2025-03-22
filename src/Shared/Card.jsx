@@ -38,7 +38,7 @@ const Card = ({gadget}) => {
 
   <div className='font-bold   flex items-center gap-2'>
   <MdOutlineEventNote  className='text-xl' />
-  <p>{gadget.avail}</p>
+  <p>Available</p>
   </div>
 
 
