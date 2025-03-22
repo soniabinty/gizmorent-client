@@ -293,6 +293,9 @@ const Navbar = () => {
                 <li>
                   <Link to="/allgadgets">All Gadgets</Link>
                 </li>
+                <li>
+                  <Link to="/renter">Become a Renter</Link>
+                </li>
               </ul>
             </div>
           </div>

@@ -6,12 +6,11 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
-
 import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
 import AboutPage from "../pages/About/AboutPage";
 import Checkout from "../pages/Checkout/Checkout";
 import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
-
+import Renter from "../BecomeRenter/Renter";
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import AddGadget from "../pages/Dashboard/AddGadget";
@@ -25,42 +24,43 @@ import TrackingPage from "../pages/TrackingPage/TrackingPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-
+    element: <Root />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/cart",
-        element: <CartList></CartList>,
+        element: <CartList />,
       },
       {
         path: "/wishlist",
-        element: <Wishlist></Wishlist>,
+        element: <Wishlist />,
       },
-
       {
         path: "/AdminDashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        element: <AdminDashboard />,
       },
-
       {
         path: "/about",
-        element: <AboutPage></AboutPage>,
+        element: <AboutPage />,
       },
       {
         path: "/gadgetdetail",
-        element: <GadgetDetail></GadgetDetail>,
+        element: <GadgetDetail />,
       },
       {
         path: "/checkout",
-        element: <Checkout></Checkout>,
+        element: <Checkout />,
+      },
+      {
+        path: "/renter",
+        element: <Renter />,
       },
       {
         path: "/allgadgets",
-        element: <AllGadgets></AllGadgets>,
+        element: <AllGadgets />,
       },
       {
         path: "/tracking-page",
@@ -78,29 +78,28 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <DashboardLayout />,
     children: [
       {
-        path: "/dashboard",
-        element: <DashboardHome></DashboardHome>,
+        path: "/dashboard", 
+        element: <DashboardHome />,
       },
       {
         path: "add-gadget",
-        element: <AddGadget></AddGadget>,
+        element: <AddGadget />,
       },
       {
         path: "my-gadget",
-        element: <MyGadget></MyGadget>,
+        element: <MyGadget />,
       },
     ],
   },
   {
-    path: "login",
-    element: <Login></Login>,
+    path: "/login", 
+    element: <Login />,
   },
-
   {
-    path: "register",
-    element: <Register></Register>,
+    path: "/register", 
+    element: <Register />,
   },
 ]);
