@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
         element: <AboutPage />,
       },
       {
-        path: "/gadgetdetail",
+        path: "/gadgetdetail/:id",
         element: <GadgetDetail />,
       },
       {
