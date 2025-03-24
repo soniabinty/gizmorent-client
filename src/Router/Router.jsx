@@ -1,22 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../MainLayout/Root";
 
-import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
-import CartList from "../pages/Shopping/CartList";
-import Wishlist from "../pages/Shopping/Wishlist";
 import AdminDashboard from "../MainLayout/Dashboard/AdminDashboard/AdminDashboard";
-import AboutPage from "../pages/About/AboutPage";
-import Checkout from "../pages/Checkout/Checkout";
-import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
-import Renter from "../BecomeRenter/Renter";
 import DashboardLayout from "../MainLayout/DashboardLayout";
+import AboutPage from "../pages/About/AboutPage";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
+import Renter from "../pages/BecomeRenter/Renter";
+import Checkout from "../pages/Checkout/Checkout";
 import AddGadget from "../pages/Dashboard/AddGadget";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
+import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
+import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
 import PackagePage from "../pages/Package/PackagePage";
+import Register from "../pages/Register/Register";
+import CartList from "../pages/Shopping/CartList";
+import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
 
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "/dashboard", 
+        path: "/dashboard",
         element: <DashboardHome />,
       },
       {
@@ -95,11 +95,11 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login", 
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "/register", 
+    path: "/register",
     element: <Register />,
   },
 ]);
