@@ -3,6 +3,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/gadgets";
 
+// Fetch all gadgets 
 export const fetchGadgets = createAsyncThunk(
   "gadgets/fetchGadgets",
   async ({ query = "", category = "", minPrice = 0, maxPrice = 999999, sortOption = "Default" }) => {
@@ -17,10 +18,24 @@ export const fetchGadgets = createAsyncThunk(
   }
 );
 
+// Fetch a single gadget
+export const fetchGadgetDetails = createAsyncThunk(
+  "gadgets/fetchGadgetDetails",
+  async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || "Failed to fetch gadget details");
+    }
+  }
+);
+
 const gadgetSlice = createSlice({
   name: "gadgets",
   initialState: {
-    gadgets: [],
+    gadgets: [], 
+    gadgetDetails: {},
     loading: false,
     error: null,
     filters: {
@@ -28,7 +43,7 @@ const gadgetSlice = createSlice({
       category: "",
       minPrice: 0,
       maxPrice: Infinity,
-      sortOption: "Default", 
+      sortOption: "Default",
     },
   },
   reducers: {
@@ -37,6 +52,7 @@ const gadgetSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    
     builder
       .addCase(fetchGadgets.pending, (state) => {
         state.loading = true;
@@ -47,6 +63,20 @@ const gadgetSlice = createSlice({
         state.gadgets = action.payload;
       })
       .addCase(fetchGadgets.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+     
+      .addCase(fetchGadgetDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchGadgetDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.gadgetDetails = action.payload; // Storing gadget details
+      })
+      .addCase(fetchGadgetDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
