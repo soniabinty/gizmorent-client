@@ -75,7 +75,20 @@ const gadgetSlice = createSlice({
       .addCase(fetchGadgets.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchGadgetDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchGadgetDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.gadgetDetails = action.payload; // Store gadget details properly
+      })
+      .addCase(fetchGadgetDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
+      
   },
 });
 

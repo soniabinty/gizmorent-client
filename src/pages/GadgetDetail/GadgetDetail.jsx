@@ -20,6 +20,8 @@ const GadgetDetail = () => {
     (state) => state.gadgets
   );
 
+  console.log(gadgetDetails)
+
   useEffect(() => {
     if (id) {
       dispatch(fetchGadgetDetails(id));
