@@ -1,26 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 const Wishlist = () => {
-  // Sample wishlist data
-  const wishlistItems = [
-    {
-      id: 1,
-      name: "Epson 4K Projector",
-      description: "10/Brown/#MPC#487",
-      brand: "Sony",
-      price: "$42",
-      image: "https://i.ibb.co.com/W4NGdTwz/Adobe-Express-file-4.png", // Replace with actual image URL
-    },
-    {
-      id: 2,
-      name: "Oculus Quest 3",
-      description: "Wired/Headphone",
-      brand: "Apple",
-      price: "$35",
-      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png", // Replace with actual image URL
-    },
-  ];
+  const [wishlistItems, setWishlistItems] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/wishlisted")
+      .then((res) => res.json())
+      .then((data) => setWishlistItems(data))
+      .catch((error) => console.error("Error fetching wishlist:", error));
+  }, []);
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -33,7 +21,7 @@ const Wishlist = () => {
         <div className="space-y-6">
           {wishlistItems.map((item) => (
             <div
-              key={item.id}
+              key={item._id} 
               className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
             >
               <div className="flex items-center space-x-4">
@@ -46,9 +34,8 @@ const Wishlist = () => {
                   <h2 className="text-xl font-semibold text-Secondary">
                     {item.name}
                   </h2>
-                  <p className="text-gray-600">{item.description}</p>
-                  <p className="text-gray-600">{item.brand}</p>
-                  <p className="text-gray-600">{item.price}</p>
+                  <p className="text-gray-600">{item.category}</p>
+                  <p className="text-gray-600">${item.price}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
