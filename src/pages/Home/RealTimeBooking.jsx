@@ -46,8 +46,6 @@ const RealTimeBooking = () => {
 
       {/* Image Section */}
       <div className="md:w-1/2 mt-6 md:mt-0 relative">
-        {/* <div className="absolute -top-6 -left-6 w-24 h-24 bg-red-100 rounded-full"></div>
-                <div className="absolute bottom-0 right-0 w-20 h-20 bg-red-200 rounded-full"></div> */}
         <img src={delivery} alt="GizmoRent Booking" className="rounded-lg " />
       </div>
     </section>
