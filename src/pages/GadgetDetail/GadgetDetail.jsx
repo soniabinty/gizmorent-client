@@ -82,7 +82,7 @@ const GadgetDetail = () => {
       {/* description start */}
       <div className="md:grid bg-sky-100 grid-cols-3 md:p-12 max-sm:py-4">
         <div className="col-span-2 mx-6">
-          <Description />
+          <Description gadgetDetails={gadgetDetails} />
         </div>
 
         <div className="bg-white col-span-1 space-y-5 max-sm:mt-4 max-sm:pt-3 rounded-lg md:mr-8">
