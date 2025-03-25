@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -9,6 +10,40 @@ const Wishlist = () => {
       .then((data) => setWishlistItems(data))
       .catch((error) => console.error("Error fetching wishlist:", error));
   }, []);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will delete the item permanently.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/wishlisted/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", 
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              setWishlistItems((prev) => prev.filter((wish) => wish._id !== id));
+              Swal.fire("Deleted!", "Your gadget has been deleted.", "success");
+            } else {
+              Swal.fire("Failed!", "Failed to delete the gadget.", "error");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting gadget:", error);
+            Swal.fire("Error!", "An error occurred while deleting the gadget.", "error");
+          });
+      }
+    });
+};
+
+
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -42,7 +77,7 @@ const Wishlist = () => {
                 <button className="text-Accent hover:text-Primary">
                   MOVE TO CART
                 </button>
-                <button className="text-red-500 hover:text-red-700">
+                <button onClick={()=>handleDelete(item._id)} className="text-red-500 hover:text-red-700">
                   REMOVE
                 </button>
               </div>
