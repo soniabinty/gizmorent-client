@@ -39,7 +39,7 @@ const Root = () => {
         <NavCategory />
       </nav>
 
-      <div className="">
+      <div className="mt-6">
         <Outlet />
 
       </div>
