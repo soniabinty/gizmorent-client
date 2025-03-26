@@ -59,7 +59,7 @@ const Card = ({ gadget }) => {
   
   return (
     <div className='flex flex-grow'>
-      <div className='bg-gray-100 rounded-lg p-4 flex flex-col grow h-full'>
+      <div className='bg-sky-100 rounded-lg p-4 flex flex-col grow h-full'>
 
         <div className='flex justify-between items-center'>
           <div>
