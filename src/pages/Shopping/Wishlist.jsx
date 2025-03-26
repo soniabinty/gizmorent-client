@@ -10,39 +10,42 @@ const Wishlist = () => {
       .then((data) => setWishlistItems(data))
       .catch((error) => console.error("Error fetching wishlist:", error));
   }, []);
+
+
   const handleDelete = (id) => {
+    console.log("Deleting from wishlist, ID:", id); 
+
     Swal.fire({
       title: "Are you sure?",
-      text: "This action will delete the item permanently.",
+      text: "This will remove the item from your wishlist but keep it available in all gadgets.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`http://localhost:3000/wishlisted/${id}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          credentials: "include", 
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
               setWishlistItems((prev) => prev.filter((wish) => wish._id !== id));
-              Swal.fire("Deleted!", "Your gadget has been deleted.", "success");
+              Swal.fire("Removed!", "The gadget was removed from your wishlist.", "success");
             } else {
-              Swal.fire("Failed!", "Failed to delete the gadget.", "error");
+              Swal.fire("Not Found!", "Item not found in your wishlist.", "error");
             }
           })
           .catch((error) => {
-            console.error("Error deleting gadget:", error);
-            Swal.fire("Error!", "An error occurred while deleting the gadget.", "error");
+            console.error("Error removing from wishlist:", error);
+            Swal.fire("Error!", "An error occurred while removing the gadget.", "error");
           });
       }
     });
 };
-
 
 
   return (
