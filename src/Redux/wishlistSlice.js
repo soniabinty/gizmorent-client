@@ -1,3 +1,4 @@
+//for wishlist management
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchWishlist = createAsyncThunk("wishlist/fetchWishlist", async () => {
