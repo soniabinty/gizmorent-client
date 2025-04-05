@@ -4,6 +4,7 @@ const DashboardHome = () => {
   return (
     <div>
       <RenterDashboardHome></RenterDashboardHome>
+      
     </div>
   );
 };
