@@ -66,6 +66,17 @@ const Sidebar = () => {
                   <MdHomeWork></MdHomeWork> My Gadget
                 </p>
               </NavLink>
+{/* admin dash */}
+              <NavLink to="/dashboard/adminhome">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <BsFillHouseAddFill></BsFillHouseAddFill> Home
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/renterapprove">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <BsFillHouseAddFill></BsFillHouseAddFill> Renter Approve
+                </p>
+              </NavLink>
             </nav>
           </div>
         </div>
