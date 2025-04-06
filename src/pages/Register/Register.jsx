@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { LuEye, LuEyeOff } from "react-icons/lu";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../../Redux/authSlice';
 import SocialLogin from '../../Shared/SocialLogin';
 import loginImg from "../../assets/image/visual.png";
+import { uploadImage } from '../../utility/utility';
 
 const Register = () => {
-  const {
-    register,
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
+  const [isVisible, setIsVisible] = useState(false);
 
-    formState: { errors },
-  } = useForm();
+  const onSubmit = async (data) => {
+    if (data.image[0]) {
+      const uploadedImageUrl = await uploadImage(data.image[0]);
+      if (uploadedImageUrl) {
+        data.photoURL = uploadedImageUrl;
+      }
+    }
+    dispatch(registerUser(data)).then((action) => {
+      if (action.meta.requestStatus === 'fulfilled') {
+        console.log("Registration successful", action.payload);
+        navigate("/");
+      } else {
+        console.log("Registration failed", action.error);
+      }
+    });
+  };
+
+
   return (
     <div className="bg-gradient-to-t from-[#ffd166] to-gray-200 ... ">
       <div className="md:flex min-h-screen  mx-auto  rounded-lg max-w-7xl">
@@ -23,9 +46,7 @@ const Register = () => {
           </div>
 
           <div className=" lg:px-12  ">
-            <form className="card-body " >
-
-
+            <form className="card-body " onSubmit={handleSubmit(onSubmit)} >
               {/* Name Field */}
               <div className="form-control flex flex-col">
                 <label className="label">
@@ -39,7 +60,6 @@ const Register = () => {
                 />
                 {errors.name && <span className="pl-1 text-red-600">{errors.name.message}</span>}
               </div>
-
 
               {/* Email Field */}
               <div className="form-control flex flex-col">
@@ -66,32 +86,35 @@ const Register = () => {
               </div>
 
               {/* Password Field */}
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label text-start">
                   <span className="label-text mb-2">Password</span>
                 </label>
                 <input
-                  // {...register("password", {
-                  //   required: "Password is required.",
-                  //   minLength: {
-                  //     value: 6,
-                  //     message: "Password must be at least 6 characters long.",
-                  //   },
-                  //   pattern: {
-                  //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                  //     message:
-                  //       "Password must include uppercase, lowercase, number, and special character.",
-                  //   },
-                  // })}
-                  type="password"
+                  {...register("password", {
+                    required: "Password is required.",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters long.",
+                    },
+                  })}
+                  type={isVisible ? "text" : "password"}
                   placeholder="Password"
                   className="input input-bordered border-none w-full rounded-lg"
                 />
-                {/* {errors.password && (
-               <span className="pl-1 text-red-600">{errors.password.message}</span>
-             )} */}
+                <button
+                  type="button"
+                  onClick={() => setIsVisible((prev) => !prev)}
+                  className="absolute inset-y-12 right-0 outline-none flex items-center justify-center w-9 text-muted-foreground/80 hover:text-foreground"
+                >
+                  {isVisible ? <LuEyeOff size={16} /> : <LuEye size={16} />}
+                </button>
+                {errors.password && (
+                  <span className="pl-1 text-red-600">{errors.password.message}</span>
+                )}
               </div>
-              {/* Photo Field */}
+
+              {/* Image Upload Field */}
               <div className="form-control flex flex-col">
                 <label className="label">
                   <span className="label-text mb-2">Photo</span>
@@ -106,11 +129,12 @@ const Register = () => {
 
               {/* Submit Button */}
               <div className="form-control mt-6">
-                <button className="btn w-full border-none rounded-lg hover:bg-Primary bg-Primary text-white ">
-                  REGISTER
+                <button className="btn w-full border-none rounded-lg hover:bg-Primary bg-Primary text-white " disabled={loading}>
+                  {loading ? "Registering..." : "REGISTER"}
                 </button>
               </div>
             </form>
+            {error && <p className="text-red-600">{error}</p>}
             <p className='px-6'>
               Already have an account?{" "}
               <Link className="text-Primary" to={"/login"}>
