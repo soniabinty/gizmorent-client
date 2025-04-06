@@ -19,6 +19,10 @@ import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
+import HomeAdmin from "../pages/Dashboard/AdminDashboard/HomeAdmin";
+import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx'
+
+
 
 
 export const router = createBrowserRouter([
@@ -91,6 +95,15 @@ export const router = createBrowserRouter([
       {
         path: "my-gadget",
         element: <MyGadget />,
+      },
+// admin
+      {
+        path: "adminhome",
+        element: <HomeAdmin></HomeAdmin>,
+      },
+      {
+        path: "renterapprove",
+        element: <RenterApproval></RenterApproval>
       },
     ],
   },
