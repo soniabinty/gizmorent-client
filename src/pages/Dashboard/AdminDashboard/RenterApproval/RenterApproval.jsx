@@ -1,103 +1,124 @@
-import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchRenterRequests,
+  approveRenter,
+  rejectRenter,
+} from "../../../../Redux/Feature/renterRequestSlice";
+
 import Swal from "sweetalert2";
 
+const RenterApproval = () => {
+  const dispatch = useDispatch();
+  const { requests = [], loading } = useSelector(
+    (state) => state.renterRequests
+  ); // added fallback for requests
 
-const BuyerHome = () => {
+  useEffect(() => {
+    dispatch(fetchRenterRequests());
+  }, [dispatch]);
 
-  const [modalData, setModalData] = useState(null);
+  console.log(requests);
+  const handleApprove = (email) => {
+    dispatch(approveRenter(email))
+      .unwrap()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Renter approved successfully!",
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to approve renter.",
+        });
+      });
+  };
 
- 
+  const handleReject = (email) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, reject!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(rejectRenter(email))
+          .unwrap()
+          .then(() => {
+            Swal.fire(
+              "Rejected!",
+              "The renter request has been rejected.",
+              "success"
+            );
+          })
+          .catch(() => {
+            Swal.fire("Oops!", "Failed to reject renter.", "error");
+          });
+      }
+    });
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Approve Renter</h1>
-
-
-   
-
-      {/* Submissions Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
-          <thead className="bg-gray-200">
+    <div className="pt-14">
+      <h2 className="text-3xl font-semibold">Approve Renter</h2>
+      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-6">
+        <table className="table">
+          <thead>
             <tr>
-              <th className="border border-gray-300 px-4 py-2">#</th>
-              <th className="border border-gray-300 px-4 py-2">Company Name</th>
-              <th className="border border-gray-300 px-4 py-2">Renter Name</th>
-              <th className="border border-gray-300 px-4 py-2">Actions</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-         
-              <tr
-              
-                className="hover:bg-gray-100 transition duration-200"
-              >
-                <td className="border border-gray-300 px-4 py-2 text-center">
-                <h2>1</h2>
-                </td>
-              
-                <td className="border border-gray-300 px-4 py-2">  <h2>renovo</h2></td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
-                <h2>John Smith</h2>
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <div className="flex flex-wrap gap-2 justify-center">
-                 
-                    {/* <button
-                      onClick={() => updateStatus(task, "approve")}
-                      className={`btn-sm max-sm:btn-xs text-white px-4 py-1 rounded ${
-                        task.status === "approve"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-green-500 hover:bg-green-600"
-                      }`}
-                      disabled={task.status === "approve"}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => updateStatus(task, "rejected")}
-                      className={`btn-sm max-sm:btn-xs text-white px-4 py-1 rounded ${
-                        task.status === "rejected"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-red-500 hover:bg-red-600"
-                      }`}
-                      disabled={task.status === "rejected"}
-                    >
-                      Reject
-                    </button> */}
-                  </div>
+            {loading ? (
+              <tr>
+                <td colSpan="3" className="text-center py-4">
+                  Loading...
                 </td>
               </tr>
-          
+            ) : requests.length === 0 ? (
+              <tr>
+                <td colSpan="3" className="text-center py-4">
+                  No requests found
+                </td>
+              </tr>
+            ) : (
+              requests.map((renter) => (
+                <tr key={renter._id}>
+                  <td>{renter.name}</td>
+                  <td>{renter.email}</td>
+                  <td>
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => handleApprove(renter.email)}
+                        className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg text-white"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => handleReject(renter.email)}
+                        className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-lg text-white"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
-
-      {/* Modal for Submission Details */}
-      {modalData && (
-        <div
-          className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"
-          onClick={() => setModalData(null)}
-        >
-          <div
-            className="bg-white rounded-lg p-6 w-11/12 md:w-1/2"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-xl font-bold mb-4">Submission Details</h3>
-            <p><strong>Worker Name:</strong> {modalData.worker_name}</p>
-            <p><strong>Task Title:</strong> {modalData.title}</p>
-            <p><strong>Amount:</strong> ${modalData.amount}</p>
-            <p><strong>Details:</strong> {modalData.submission_detail || "No details provided"}</p>
-            <button
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              onClick={() => setModalData(null)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default BuyerHome;
+export default RenterApproval;

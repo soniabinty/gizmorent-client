@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
-import { GrLogout } from "react-icons/gr";
 
 import { MdHomeWork } from "react-icons/md";
-import { useSelector } from "react-redux";
+
 import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+ 
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -81,28 +80,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div>
-          <div class="mt-auto p-4 border-t border-gray-800">
-            <div class="flex items-center">
-              <img class="h-8 w-8 rounded-full" src={user.photoURL} alt="" />
-              <div class="ml-3">
-                <p class="text-sm font-medium">{user.displayName}</p>
-                <p class="text-xs text-gray-500">View profile</p>
-              </div>
-            </div>
-          </div>
-          <hr />
-
-          {/* profile */}
-          <button
-            // onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300  hover:text-gray-700 transition-colors duration-300 transform"
-          >
-            <GrLogout className="w-5 h-5" />
-
-            <span className="mx-4 font-medium">Logout</span>
-          </button>
-        </div>
+     
       </div>
     </>
   );
