@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
@@ -10,6 +11,9 @@ import {
 import { auth } from "../Firebase/firebase.config.js";
 
 const googleProvider = new GoogleAuthProvider();
+const axiosPublic = axios.create({
+    baseURL: 'http://localhost:3000'
+});
 
 // Helper function to transform Firebase user object to a serializable format
 const transformUser = (user) => ({
@@ -25,6 +29,10 @@ export const registerUser = createAsyncThunk("auth/register", async ({ name, ema
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(userCredential.user, { displayName: name, photoURL });
     console.log("User registered successfully:", userCredential.user);
+
+    // Save user data to the database
+    await axiosPublic.post("/users", { name, email, password, photoURL, role: 'user' });
+
     return transformUser(userCredential.user);
 });
 
@@ -41,6 +49,16 @@ export const loginUser = createAsyncThunk("auth/login", async ({ email, password
 export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
     const userCredential = await signInWithPopup(auth, googleProvider);
     console.log("User logged in with Google successfully:", userCredential.user);
+
+    // Check if the user already exists in the database
+    const { email, displayName, photoURL } = userCredential.user;
+    const response = await axiosPublic.get(`/users?email=${email}`);
+
+    if (response.data.length === 0) {
+        // Save new user data to the database with default role 'user'
+        await axiosPublic.post("/users", { name: displayName, email, photoURL, role: 'user' });
+    }
+
     return transformUser(userCredential.user);
 });
 

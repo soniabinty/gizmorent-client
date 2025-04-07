@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { GrLogout } from "react-icons/gr";
-import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
-import { BsFillHouseAddFill, BsGraphUp } from "react-icons/bs";
+import { BsFillHouseAddFill } from "react-icons/bs";
+import { GrLogout } from "react-icons/gr";
 
-import { Link, NavLink } from "react-router-dom";
 import { MdHomeWork } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -36,9 +37,8 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -66,7 +66,7 @@ const Sidebar = () => {
                   <MdHomeWork></MdHomeWork> My Gadget
                 </p>
               </NavLink>
-{/* admin dash */}
+              {/* admin dash */}
               <NavLink to="/dashboard/adminhome">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <BsFillHouseAddFill></BsFillHouseAddFill> Home
@@ -82,12 +82,21 @@ const Sidebar = () => {
         </div>
 
         <div>
+          <div class="mt-auto p-4 border-t border-gray-800">
+            <div class="flex items-center">
+              <img class="h-8 w-8 rounded-full" src={user.photoURL} alt="" />
+              <div class="ml-3">
+                <p class="text-sm font-medium">{user.displayName}</p>
+                <p class="text-xs text-gray-500">View profile</p>
+              </div>
+            </div>
+          </div>
           <hr />
 
           {/* profile */}
           <button
             // onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
+            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300  hover:text-gray-700 transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />
 
