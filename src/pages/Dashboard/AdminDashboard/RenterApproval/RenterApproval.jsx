@@ -1,34 +1,68 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRenterRequests, approveRenter } from "../../../../Redux/Feature/renterRequestSlice";
-import Swal from 'sweetalert2';
+import {
+  fetchRenterRequests,
+  approveRenter,
+  rejectRenter,
+} from "../../../../Redux/Feature/renterRequestSlice";
+
+import Swal from "sweetalert2";
 
 const RenterApproval = () => {
   const dispatch = useDispatch();
-  const { requests = [], loading } = useSelector((state) => state.renterRequests); // added fallback for requests
+  const { requests = [], loading } = useSelector(
+    (state) => state.renterRequests
+  ); // added fallback for requests
 
   useEffect(() => {
     dispatch(fetchRenterRequests());
   }, [dispatch]);
 
-  console.log(requests)
+  console.log(requests);
   const handleApprove = (email) => {
     dispatch(approveRenter(email))
       .unwrap()
       .then(() => {
         Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Renter approved successfully!',
+          icon: "success",
+          title: "Success",
+          text: "Renter approved successfully!",
         });
       })
       .catch(() => {
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to approve renter.',
+          icon: "error",
+          title: "Error",
+          text: "Failed to approve renter.",
         });
       });
+  };
+
+  const handleReject = (email) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, reject!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(rejectRenter(email))
+          .unwrap()
+          .then(() => {
+            Swal.fire(
+              "Rejected!",
+              "The renter request has been rejected.",
+              "success"
+            );
+          })
+          .catch(() => {
+            Swal.fire("Oops!", "Failed to reject renter.", "error");
+          });
+      }
+    });
   };
 
   return (
@@ -46,11 +80,15 @@ const RenterApproval = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="3" className="text-center py-4">Loading...</td>
+                <td colSpan="3" className="text-center py-4">
+                  Loading...
+                </td>
               </tr>
             ) : requests.length === 0 ? (
               <tr>
-                <td colSpan="3" className="text-center py-4">No requests found</td>
+                <td colSpan="3" className="text-center py-4">
+                  No requests found
+                </td>
               </tr>
             ) : (
               requests.map((renter) => (
@@ -66,8 +104,8 @@ const RenterApproval = () => {
                         Approve
                       </button>
                       <button
+                        onClick={() => handleReject(renter.email)}
                         className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-lg text-white"
-                        disabled
                       >
                         Reject
                       </button>
