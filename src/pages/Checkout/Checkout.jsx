@@ -1,19 +1,32 @@
+import { useSelector } from "react-redux";
 import CartTotal from "./CartTotal";
 import CheckoutForm from "./CheckoutForm";
 import { useForm } from "react-hook-form";
+import LocationSelector from "../../Shared/LocationSelector";
 
 const Checkout = () => {
+  const { bookingDetails, checkoutProduct, loading, error } = useSelector(
+    (state) => state.checkout
+  );
+  console.log(bookingDetails);
+  console.log(checkoutProduct);
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
+    control,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form Data:", data);
   };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
   return (
-    <div className="max-w-7xl mx-auto px-5">
+    <div className="max-w-7xl mx-auto px-5 mb-6">
       <h2 className="text-4xl font-semibold mb-4">Checkout</h2>
       <div className="flex flex-col-reverse md:flex-row gap-6">
         <div className="md:w-2/3">
@@ -22,6 +35,7 @@ const Checkout = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-4">
               <input
                 type="text"
+                defaultValue={bookingDetails?.name}
                 {...register("name", { required: "Name is required" })}
                 className="input w-full py-6"
                 placeholder="Name*"
@@ -32,6 +46,7 @@ const Checkout = () => {
 
               <input
                 type="number"
+                defaultValue={bookingDetails?.phone}
                 {...register("phone", { required: "Phone number is required" })}
                 className="input w-full py-6"
                 placeholder="Phone Number*"
@@ -42,6 +57,7 @@ const Checkout = () => {
 
               <input
                 type="email"
+                defaultValue={bookingDetails?.email}
                 {...register("email", { required: "Email is required" })}
                 className="input w-full py-6"
                 placeholder="Email*"
@@ -50,7 +66,7 @@ const Checkout = () => {
                 <p className="text-red-500">{errors.email.message}</p>
               )}
 
-              <input
+              {/* <input
                 type="text"
                 {...register("productCode", {
                   required: "Product code is required",
@@ -60,11 +76,12 @@ const Checkout = () => {
               />
               {errors.productCode && (
                 <p className="text-red-500">{errors.productCode.message}</p>
-              )}
+              )} */}
 
-              <div className="flex gap-2">
+              {/* <div className="flex gap-2">
                 <input
                   type="text"
+                  defaultValue={bookingDetails.pickupLocation}
                   {...register("pickupLocation", {
                     required: "Pick-up location is required",
                   })}
@@ -73,13 +90,14 @@ const Checkout = () => {
                 />
                 <input
                   type="date"
+                  defaultValue={bookingDetails.pickupDate}
                   {...register("pickupDate", {
                     required: "Pick-up date is required",
                   })}
                   className="input w-full py-6"
                 />
-              </div>
-              <div className="flex">
+              </div> */}
+              {/* <div className="flex">
                 {errors.pickupLocation && (
                   <p className="text-red-500 w-1/2">
                     {errors.pickupLocation.message}
@@ -95,6 +113,7 @@ const Checkout = () => {
               <div className="flex gap-2">
                 <input
                   type="text"
+                  defaultValue={bookingDetails.dropLocation}
                   {...register("dropLocation", {
                     required: "Drop-off location is required",
                   })}
@@ -103,6 +122,7 @@ const Checkout = () => {
                 />
                 <input
                   type="date"
+                  defaultValue={bookingDetails.dropDate}
                   {...register("dropDate", {
                     required: "Drop-off date is required",
                   })}
@@ -120,7 +140,13 @@ const Checkout = () => {
                     {errors.dropDate.message}
                   </p>
                 )}
-              </div>
+              </div> */}
+              <LocationSelector
+                control={control}
+                register={register}
+                setValue={setValue}
+                watch={watch}
+              />
 
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold">Payment Method</h3>
