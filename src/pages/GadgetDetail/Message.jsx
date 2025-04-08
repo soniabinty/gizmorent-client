@@ -14,12 +14,7 @@ const Message = () => {
     <div className='space-y-6 '>
 
 {/* seller detail */}
-      <div className='border rounded-lg border-gray-300 rounded-lgn m-6 p-6 text-center'>
-        <img className='w-25 h-25 mx-auto rounded-full' src={"https://i.ibb.co.com/sMydcvR/profile-picture-smiling-successful-young-260nw-2040223583.webp"} alt="" />
-        <h2 className='text-2xl font-bold my-3'>William Tennyson</h2>
-        <div className='flex justify-center items-center gap-3'><FaPhone></FaPhone> <p>+88008090767</p> </div>
-        <div className='flex justify-center items-center gap-3'><FaWhatsapp></FaWhatsapp> <p>+88008090767</p> </div>
-      </div>
+ 
 
       {/* contact seller */}
 

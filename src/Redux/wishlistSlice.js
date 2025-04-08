@@ -1,28 +1,59 @@
 //for wishlist management
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchWishlist = createAsyncThunk("wishlist/fetchWishlist", async () => {
-  const response = await fetch("http://localhost:3000/wishlisted");
-  return response.json();
-});
 
-export const addToWishlist = createAsyncThunk("wishlist/addToWishlist", async (gadget) => {
+export const addToWishlist = createAsyncThunk("wishlist/addToWishlist", async ({ gadget, email }) => {
   const response = await fetch("http://localhost:3000/wishlisted", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(gadget),
+    body: JSON.stringify({
+      gadgetId: gadget._id,
+      name: gadget.name,
+      image: gadget.image,
+      price: gadget.price,
+      category: gadget.category,
+      email,
+    }),
   });
+  
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to add to wishlist");
+  }
+
   return response.json();
 });
 
+export const fetchWishlist = createAsyncThunk("wishlist/fetchWishlist", async (email) => {
+  const response = await fetch(`http://localhost:3000/wishlisted?email=${email}`);
+  ;
+  return await response.json();
+});
+
+// In wishlistSlice.js
+export const removeFromWishlist = createAsyncThunk("wishlist/removeFromWishlist", async (id) => {
+  const response = await fetch(`http://localhost:3000/wishlisted/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to remove from wishlist");
+  }
+
+  return id; // Return the id so we can filter it from state
+});
+
+
 const wishlistSlice = createSlice({
   name: "wishlist",
-  initialState: { items: [], status: "idle", error: null },
-  reducers: {
-    removeFromWishlist: (state, action) => {
-      state.items = state.items.filter((item) => item._id !== action.payload);
-    },
+  initialState: {
+    items: [],
+    status: "idle", // <- important to set this
+    error: null,
   },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchWishlist.pending, (state) => {
@@ -36,12 +67,12 @@ const wishlistSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(addToWishlist.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+
+      .addCase(removeFromWishlist.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item._id !== action.payload);
       });
-      
   },
 });
 
-export const { removeFromWishlist } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
+

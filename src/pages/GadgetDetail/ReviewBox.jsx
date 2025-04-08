@@ -6,11 +6,11 @@ import { format } from "date-fns";
 const ReviewBox = ({ review }) => {
   return (
     <div className="mb-5 border-b pb-4">
-      <div className="md:flex gap-6 md:gap-8">
+      <div className="md:flex gap-4 md:gap-5">
         {/* Profile Image */}
         <div>
           <img
-            className="w-24 h-24 rounded-full mx-auto"
+            className="md:w-20 md:h-20 h-12 w-12  rounded-full md:mx-auto"
             src={review.image}
             alt={review.user}
           />
