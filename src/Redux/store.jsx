@@ -5,6 +5,7 @@ import gadgetReducer from "./Feature/gadgetSlice";
 import reviewReducer from "./Feature/reviewSlice";
 import wishlistReducer from "./wishlistSlice"; 
 import renterRequestsReducer from './Feature/renterRequestSlice'
+import cartReducer from './Feature/cartSlice'
 const store = configureStore({
 
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     wishlist: wishlistReducer,
     renterRequests: renterRequestsReducer, 
     failedAttempts: failedAttemptsReducer,
+    cart : cartReducer
   },
 
 });
