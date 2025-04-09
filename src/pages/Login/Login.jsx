@@ -60,6 +60,9 @@ const Login = () => {
 
     dispatch(loginUser(data))
       .unwrap()
+      .then(() => {
+        navigate('/');
+      })
       .catch(() => {
         if (failedAttempts + 1 >= 3) {
           const lockTime = Date.now() + 5 * 60 * 1000; // Lock for 5 minutes

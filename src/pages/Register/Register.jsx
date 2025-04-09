@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { registerUser } from '../../Redux/authSlice';
 import SocialLogin from '../../Shared/SocialLogin';
 import loginImg from "../../assets/image/visual.png";
-
 const Register = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const dispatch = useDispatch();
@@ -21,13 +21,22 @@ const Register = () => {
     // Add the default photoURL to the user data
     data.photoURL = "https://i.ibb.co/rQr6L83/default-avatar-icon-of-social-media-user-vector.jpg";
 
-    // Dispatch the registration action
     dispatch(registerUser(data)).then((action) => {
       if (action.meta.requestStatus === 'fulfilled') {
-        console.log("Registration successful", action.payload);
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          text: 'Welcome to GizmoRent!',
+          timer: 2000,
+          showConfirmButton: false
+        });
         navigate("/");
       } else {
-        console.log("Registration failed", action.error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Failed',
+          text: action?.error?.message || 'Something went wrong!',
+        });
       }
     });
   };

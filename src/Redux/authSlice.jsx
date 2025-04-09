@@ -31,7 +31,6 @@ export const registerUser = createAsyncThunk("auth/register", async ({ name, ema
     await updateProfile(userCredential.user, { displayName: name, photoURL });
     console.log("User registered successfully:", userCredential.user);
 
-    // Save user data to the database
     await axiosPublic.post("/users", { name, email, password, photoURL, role: 'user' });
 
     return transformUser(userCredential.user);
@@ -47,21 +46,42 @@ export const loginUser = createAsyncThunk("auth/login", async ({ email, password
     }
 });
 
+// export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
+//     const userCredential = await signInWithPopup(auth, googleProvider);
+//     const { email, displayName, photoURL } = userCredential.user;
+
+//     console.log("Google login:", email);
+
+//     const response = await axiosPublic.get(`/users?email=${email}`);
+//     console.log("DB check result:", response.data);
+
+//     // Save user only if not found
+//     if (!response.data?._id && !response.data?.email) {
+//         const newUser = { name: displayName, email, photoURL, role: 'user' };
+//         const postResponse = await axiosPublic.post("/users", newUser);
+//         console.log("User saved:", postResponse.data);
+//     } else {
+//         console.log("User already exists in DB");
+//     }
+
+//     return transformUser(userCredential.user);
+// });
+
 export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    console.log("User logged in with Google successfully:", userCredential.user);
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
 
-    // Check if the user already exists in the database
-    const { email, displayName, photoURL } = userCredential.user;
-    const response = await axiosPublic.get(`/users?email=${email}`);
+    // 🛑 Do you have a DB insert here?
+    await axiosPublic.post("/auth/google", {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        role: 'user',
+    });
 
-    if (response.data.length === 0) {
-        // Save new user data to the database with default role 'user'
-        await axiosPublic.post("/users", { name: displayName, email, photoURL, role: 'user' });
-    }
-
-    return transformUser(userCredential.user);
+    return transformUser(user);
 });
+
 
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
     await signOut(auth);
