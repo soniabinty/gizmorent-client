@@ -15,6 +15,7 @@ import MyGadget from "../pages/Dashboard/MyGadget";
 import UpdateGadget from "../pages/Dashboard/UpdateGadget";
 import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 import Home from "../pages/Home/Home";
+import ForgotPassword from "../pages/Login/ForgotPassword";
 import Login from "../pages/Login/Login";
 import PackagePage from "../pages/Package/PackagePage";
 import Register from "../pages/Register/Register";
@@ -116,6 +117,10 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/register",

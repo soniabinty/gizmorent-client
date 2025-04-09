@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
@@ -75,6 +76,15 @@ export const updateUserProfile = createAsyncThunk("auth/updateProfile", async ({
     }
 });
 
+export const forgotPassword = createAsyncThunk("auth/forgotPassword", async (email, { rejectWithValue }) => {
+    try {
+        await sendPasswordResetEmail(auth, email);
+        return "Password reset email sent!";
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
 // Auth Slice
 const authSlice = createSlice({
     name: 'auth',
@@ -85,6 +95,7 @@ const authSlice = createSlice({
         isLocked: false,
         lockExpiration: null,
         error: null,
+        resetPasswordSuccess: null, // Add this state to track password reset success
     },
     reducers: {
         setUser: (state, action) => {
@@ -104,6 +115,10 @@ const authSlice = createSlice({
             state.failedAttempts = 0;
             state.isLocked = false;
             state.lockExpiration = null;
+        },
+        clearResetPasswordState: (state) => { // Add this reducer
+            state.resetPasswordSuccess = null;
+            state.error = null;
         },
     },
     extraReducers: (builder) => {
@@ -159,9 +174,22 @@ const authSlice = createSlice({
                     state.user.displayName = action.payload.displayName;
                     state.user.photoURL = action.payload.photoURL;
                 }
+            })
+            .addCase(forgotPassword.pending, (state) => {
+                state.loading = true;
+                state.resetPasswordSuccess = null;
+                state.error = null;
+            })
+            .addCase(forgotPassword.fulfilled, (state, action) => {
+                state.loading = false;
+                state.resetPasswordSuccess = action.payload;
+            })
+            .addCase(forgotPassword.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
     },
 });
 
-export const { setUser, clearUser, incrementFailedAttempts, resetFailedAttempts } = authSlice.actions;
+export const { setUser, clearUser, incrementFailedAttempts, resetFailedAttempts, clearResetPasswordState, resetPassword } = authSlice.actions;
 export default authSlice.reducer;

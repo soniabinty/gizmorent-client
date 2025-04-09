@@ -6,22 +6,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../../Redux/authSlice';
 import SocialLogin from '../../Shared/SocialLogin';
 import loginImg from "../../assets/image/visual.png";
-import { uploadImage } from '../../utility/utility';
 
 const Register = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
   const [isVisible, setIsVisible] = useState(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
 
-  const onSubmit = async (data) => {
-    if (data.image[0]) {
-      const uploadedImageUrl = await uploadImage(data.image[0]);
-      if (uploadedImageUrl) {
-        data.photoURL = uploadedImageUrl;
-      }
-    }
+  const password = watch("password");
+
+  const onSubmit = (data) => {
+    // Add the default photoURL to the user data
+    data.photoURL = "https://i.ibb.co/rQr6L83/default-avatar-icon-of-social-media-user-vector.jpg";
+
+    // Dispatch the registration action
     dispatch(registerUser(data)).then((action) => {
       if (action.meta.requestStatus === 'fulfilled') {
         console.log("Registration successful", action.payload);
@@ -31,7 +31,6 @@ const Register = () => {
       }
     });
   };
-
 
   return (
     <div className="bg-gradient-to-t from-[#ffd166] to-gray-200 ... ">
@@ -114,17 +113,31 @@ const Register = () => {
                 )}
               </div>
 
-              {/* Image Upload Field */}
-              <div className="form-control flex flex-col">
-                <label className="label">
-                  <span className="label-text mb-2">Photo</span>
+              {/* Confirm Password Field */}
+              <div className="form-control relative">
+                <label className="label text-start">
+                  <span className="label-text mb-2">Confirm Password</span>
                 </label>
                 <input
-                  {...register("image", { required: "Photo is required." })}
-                  type="file"
-                  className="file-input file-input-bordered file-input-warning w-full lg:w-auto"
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required.",
+                    validate: (value) =>
+                      value === password || "Passwords do not match.",
+                  })}
+                  type={isConfirmVisible ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  className="input input-bordered border-none w-full rounded-lg"
                 />
-                {errors.image && <span className="pl-1 text-red-600">{errors.image.message}</span>}
+                <button
+                  type="button"
+                  onClick={() => setIsConfirmVisible((prev) => !prev)}
+                  className="absolute inset-y-12 right-0 outline-none flex items-center justify-center w-9 text-muted-foreground/80 hover:text-foreground"
+                >
+                  {isConfirmVisible ? <LuEyeOff size={16} /> : <LuEye size={16} />}
+                </button>
+                {errors.confirmPassword && (
+                  <span className="pl-1 text-red-600">{errors.confirmPassword.message}</span>
+                )}
               </div>
 
               {/* Submit Button */}
