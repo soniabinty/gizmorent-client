@@ -12,41 +12,7 @@ const CheckAvail = () => {
       <h3 className="px-5 pt-5 text-2xl">Check Availability</h3>
       <form className="card-body ">
         {/* pickup */}
-        <div className="form-control flex flex-col">
-          <label className="label">
-            <span className="label-text mb-2 font-bold">Pick-up Location</span>
-          </label>
-          <input
-            {...register("pickup")}
-            type="text"
-            placeholder="Pick-up Location"
-            className="input input-bordered border-none w-full rounded-lg"
-          />
-          {errors.pickup && (
-            <span className="pl-1 text-red-600">{errors.pickup.message}</span>
-          )}
-        </div>
-
-        {/* drop-off */}
-        <div className="form-control flex flex-col">
-          <label className="label">
-            <span className="label-text mb-2 font-bold">Drop-off Location</span>
-          </label>
-
-          <div className="flex items-center">
-            <input
-              {...register("dropoff")}
-              type="text"
-              placeholder="Drop-off Location"
-              className="input input-bordered border-none w-full rounded-lg"
-            />
-            {errors.drofoff && (
-              <span className="pl-1 text-red-600">
-                {errors.drofoff.message}
-              </span>
-            )}
-          </div>
-        </div>
+    
 
         {/* pickup date */}
 

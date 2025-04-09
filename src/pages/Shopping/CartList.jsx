@@ -1,47 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart, removeFromCart, updateCartQuantity } from "../../Redux/Feature/cartSlice";
+import Swal from "sweetalert2";
 
 const CartList = () => {
-  // Sample cart data
-  const cartItems = [
-    {
-      id: 1,
-      name: "Realistic-digital-photo-camera-tripod",
-      description: "10/Brown/#MPC#487",
-      brand: "DJI",
-      price: "25",
-      image: "https://i.ibb.co.com/RTN5YDY8/realistic-digital-photo-camera-tripod.png", // Replace with actual image URL
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "iPhone 14 Pro Max",
-      description: "128GB/Black",
-      brand: "Apple",
-      price: "18",
-      image: "https://i.ibb.co.com/wZw1bjwJ/Adobe-Express-file-7.png", // Replace with actual image URL
-      quantity: 1,
-    },
-  ];
+  const dispatch = useDispatch();
+  const { items, status, error } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.auth.user);
 
-  // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + parseFloat(item.price.replace("TK ", "").replace(",", "")) * item.quantity,
-    0
-  );
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(fetchCart(user.email)); 
+    }
+  }, [dispatch, user?.email]);
+
+  const handleDelete = (_id) => { 
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This gadget will be removed from your cart.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeFromCart(_id)); 
+        Swal.fire("Removed!", "The gadget was removed from your cart.", "success");
+      }
+    });
+  };
+
+  const handleQuantityChange = (_id, newQty) => { 
+    if (newQty < 1 || !user?.email) return;
+
+    dispatch(updateCartQuantity({
+      _id, 
+      userEmail: user.email,
+      quantity: newQty,
+    }));
+  };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Calculate total price 
+  const totalPrice = items.reduce((total, item) => {
+    let price = item.price;
+    if (typeof price === 'string') {
+      price = price.replace("TK ", "").replace(",", "");
+    }
+    return total + parseFloat(price) * item.quantity;
+  }, 0);
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold text-Primary mb-6">YOUR CART</h1>
-      <p className="text-Secondary mb-6">PRODUCT(S)</p>
+      <p className="text-Secondary mb-6">PRODUCT({items.length})</p>
 
-      {cartItems.length === 0 ? (
+      {items.length === 0 ? (
         <p className="text-Secondary">Your cart is empty.</p>
       ) : (
         <div className="space-y-6">
-          {cartItems.map((item) => (
+          {items.map((item) => (
             <div
-              key={item.id}
+              key={item._id} 
               className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
             >
               <div className="flex items-center space-x-4">
@@ -55,22 +84,37 @@ const CartList = () => {
                     {item.name}
                   </h2>
                   <p className="text-gray-600">{item.description}</p>
-                  <p className="text-gray-600">{item.brand}</p>
-                  <p className="text-gray-600">{item.price}</p>
+                  <p className="text-gray-600">{item.category}</p>
+                  <p className="text-gray-600">${item.price}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
-                  <button className="text-Accent hover:text-Primary">-</button>
+                  <button
+                    onClick={() => handleQuantityChange(item._id, item.quantity - 1)} 
+                    disabled={item.quantity <= 1} 
+                  >
+                    -
+                  </button>
                   <input
                     type="number"
-                    defaultValue={item.quantity}
+                    value={item.quantity}
                     min="1"
-                    className="w-16 p-2 border border-gray-200 rounded-lg text-center"
+                    onChange={(e) =>
+                      handleQuantityChange(item._id, Math.max(1, parseInt(e.target.value) || 1)) 
+                    }
+                    className="w-12 text-center"
                   />
-                  <button className="text-Accent hover:text-Primary">+</button>
+                  <button
+                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)} 
+                  >
+                    +
+                  </button>
                 </div>
-                <button className="text-red-500 hover:text-red-700">
+                <button
+                  onClick={() => handleDelete(item._id)} 
+                  className="text-red-500 hover:text-red-700"
+                >
                   REMOVE
                 </button>
               </div>
@@ -78,7 +122,7 @@ const CartList = () => {
           ))}
           <div className="text-right">
             <p className="text-xl font-bold text-Secondary">
-              Total: ${totalPrice.toLocaleString()}
+              Total: {totalPrice ? `TK ${totalPrice.toLocaleString()}` : "TK 0"}
             </p>
             <Link
               to="/checkout"

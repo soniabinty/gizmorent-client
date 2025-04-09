@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { GrLogout } from "react-icons/gr";
-import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
-import { BsFillHouseAddFill, BsGraphUp } from "react-icons/bs";
+import { BsFillHouseAddFill } from "react-icons/bs";
+
+import { MdHomeWork } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
-import { MdHomeWork } from "react-icons/md";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+ 
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -36,9 +36,8 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -66,23 +65,22 @@ const Sidebar = () => {
                   <MdHomeWork></MdHomeWork> My Gadget
                 </p>
               </NavLink>
+              {/* admin dash */}
+              <NavLink to="/dashboard/adminhome">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <BsFillHouseAddFill></BsFillHouseAddFill> Home
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/renterapprove">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <BsFillHouseAddFill></BsFillHouseAddFill> Renter Approve
+                </p>
+              </NavLink>
             </nav>
           </div>
         </div>
 
-        <div>
-          <hr />
-
-          {/* profile */}
-          <button
-            // onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
-          >
-            <GrLogout className="w-5 h-5" />
-
-            <span className="mx-4 font-medium">Logout</span>
-          </button>
-        </div>
+     
       </div>
     </>
   );
