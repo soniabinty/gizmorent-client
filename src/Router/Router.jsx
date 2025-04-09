@@ -8,8 +8,11 @@ import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
 import AddGadget from "../pages/Dashboard/AddGadget";
+import HomeAdmin from "../pages/Dashboard/AdminDashboard/HomeAdmin";
+import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx';
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
+import UpdateGadget from "../pages/Dashboard/UpdateGadget";
 import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -19,6 +22,8 @@ import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
+
+
 
 
 export const router = createBrowserRouter([
@@ -89,8 +94,22 @@ export const router = createBrowserRouter([
         element: <AddGadget />,
       },
       {
+        path: "update-gadget/:id",
+        element: <UpdateGadget />,
+        loader: ({ params }) => fetch(`http://localhost:3000/gadgets/${params.id}`),
+      },
+      {
         path: "my-gadget",
         element: <MyGadget />,
+      },
+      // admin
+      {
+        path: "adminhome",
+        element: <HomeAdmin></HomeAdmin>,
+      },
+      {
+        path: "renterapprove",
+        element: <RenterApproval></RenterApproval>
       },
     ],
   },

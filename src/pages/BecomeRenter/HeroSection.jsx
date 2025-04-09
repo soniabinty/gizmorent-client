@@ -9,7 +9,7 @@ const HeroSection = () => {
         name: "",
         email: "",
         phone: "",
-        rentalItem: "",
+        company: "",
         address: ""
     });
     const [errorMessage, setErrorMessage] = useState("");
@@ -19,13 +19,14 @@ const HeroSection = () => {
 
     useEffect(() => {
         if (user) {
-            setFormData({
-                ...formData,
+            setFormData((prev) => ({
+                ...prev,
                 name: user.displayName || "",
                 email: user.email || ""
-            });
+            }));
         }
-    }, [user, formData]);
+    }, [user]);
+    
 
     const toggleModal = () => {
         if (!user) {
@@ -45,7 +46,7 @@ const HeroSection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/renters", formData);
+            const response = await axios.post("http://localhost:3000/renter_request", formData);
             console.log(response.data);
             toggleModal();
         } catch (error) {
@@ -131,14 +132,14 @@ const HeroSection = () => {
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 mb-2" htmlFor="rentalItem">
-                                    Rental Item Interest
+                                <label className="block text-gray-700 mb-2" htmlFor="company">
+                                    Company Name
                                 </label>
                                 <input
                                     type="text"
-                                    id="rentalItem"
+                                    id="company"
                                     className="w-full px-3 py-2 border rounded"
-                                    value={formData.rentalItem}
+                                    value={formData.company}
                                     onChange={handleChange}
                                     required
                                 />
