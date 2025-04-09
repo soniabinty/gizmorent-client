@@ -38,7 +38,7 @@ const reviewSlice = createSlice({
       })
       .addCase(fetchReviews.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; // Updated to use rejectWithValue error
+        state.error = action.payload;
       });
   },
 });
