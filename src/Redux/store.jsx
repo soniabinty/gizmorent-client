@@ -7,6 +7,9 @@ import checkoutReducer from "./Feature/checkoutSlice";
 
 import wishlistReducer from "./wishlistSlice";
 import renterRequestsReducer from "./Feature/renterRequestSlice";
+
+import cartReducer from "./Feature/cartSlice";
+
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -16,6 +19,7 @@ const store = configureStore({
     wishlist: wishlistReducer,
     renterRequests: renterRequestsReducer,
     failedAttempts: failedAttemptsReducer,
+    cart: cartReducer,
   },
 });
 
