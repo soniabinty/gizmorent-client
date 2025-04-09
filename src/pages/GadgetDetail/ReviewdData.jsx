@@ -29,7 +29,7 @@ const ReviewdData = ({ productId }) => {
 
   return (
     <div>
-      <h2 className="text-3xl pt-6">Customer Reviews</h2>
+      <h2 className="text-2xl pt-6">Customer Reviews</h2>
       <div className="mb-6 flex gap-3 items-center">
         <Rating
           style={{ maxWidth: 120 }}
