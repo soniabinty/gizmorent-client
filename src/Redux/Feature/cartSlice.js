@@ -1,65 +1,69 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const addToCart = createAsyncThunk(
+  "cart/addToCart",
+  async ({ gadget, email, quantity }) => {
+    try {
+      const response = await fetch("http://localhost:3000/cartlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          gadgetId: gadget._id,
+          name: gadget.name,
+          image: gadget.image,
+          price: gadget.price,
+          category: gadget.category,
+          email,
+          quantity,
+        }),
+      });
 
-export const addToCart = createAsyncThunk("cart/addToCart", async ({ gadget, email, quantity }) => {
-  try {
-    const response = await fetch("http://localhost:3000/cartlist", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        gadgetId: gadget._id, 
-        name: gadget.name,
-        image: gadget.image,
-        price: gadget.price,
-        category: gadget.category,
-        email,
-        quantity,
-      }),
-      
-    });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to add to cart");
+      }
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to add to cart");
+      const data = await response.json();
+      console.log("Item added to cart:", data);
+
+      return data;
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      throw error;
     }
-
-    const data = await response.json();
-    console.log("Item added to cart:", data); 
-
-    return data; 
-  } catch (error) {
-    console.error("Error adding item to cart:", error); 
-    throw error; 
   }
-});
+);
 
 // Fetch cart
 export const fetchCart = createAsyncThunk("cart/fetchCart", async (email) => {
   const response = await fetch(`http://localhost:3000/cartlist?email=${email}`);
   const data = await response.json();
-  return Array.isArray(data) ? data : []; 
+  return Array.isArray(data) ? data : [];
 });
 
 // Remove from cart
-export const removeFromCart = createAsyncThunk("cart/removeFromCart", async (_id) => { 
-  const response = await fetch(`http://localhost:3000/cartlist/${_id}`, {
-    method: "DELETE",
-  });
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (_id) => {
+    const response = await fetch(`http://localhost:3000/cartlist/${_id}`, {
+      method: "DELETE",
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Failed to remove from cart");
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to remove from cart");
+    }
+
+    return _id;
   }
-
-  return _id; 
-});
+);
 
 // Update quantity
 export const updateCartQuantity = createAsyncThunk(
   "cart/updateCartQuantity",
-  async ({ _id, userEmail, quantity }) => { 
+  async ({ _id, userEmail, quantity }) => {
     const response = await fetch(`http://localhost:3000/cartlist/${_id}`, {
-      method: "PATCH", 
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: userEmail, quantity }),
     });
@@ -90,7 +94,7 @@ const cartSlice = createSlice({
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.items = Array.isArray(action.payload) ? action.payload : []; 
+        state.items = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = "failed";
@@ -99,7 +103,9 @@ const cartSlice = createSlice({
 
       // Add to Cart
       .addCase(addToCart.fulfilled, (state, action) => {
-        const existingItem = state.items.find((item) => item._id === action.payload._id);
+        const existingItem = state.items.find(
+          (item) => item._id === action.payload._id
+        );
         if (existingItem) {
           existingItem.quantity += 1;
         } else {
@@ -114,9 +120,11 @@ const cartSlice = createSlice({
 
       // Update Quantity
       .addCase(updateCartQuantity.fulfilled, (state, action) => {
-        const updatedItem = action.payload; 
-        const existingItem = state.items.find((item) => item._id === updatedItem._id); // Find the item in the state
-  
+        const updatedItem = action.payload;
+        const existingItem = state.items.find(
+          (item) => item._id === updatedItem._id
+        ); // Find the item in the state
+
         if (existingItem) {
           // Update the item's quantity in the state
           existingItem.quantity = updatedItem.quantity;

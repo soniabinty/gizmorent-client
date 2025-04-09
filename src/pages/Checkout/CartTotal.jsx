@@ -6,8 +6,8 @@ const CartTotal = () => {
     (state) => state.checkout
   );
 
-  const months = bookingDetails?.months || 1;
-  const quantity = bookingDetails?.quantity || 1;
+  // const months = bookingDetails?.months || 1;
+  // const quantity = bookingDetails?.quantity || 1;
   const [products, setProducts] = useState(checkoutProduct);
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -27,12 +27,12 @@ const CartTotal = () => {
   };
 
   // Calculate Subtotal based on quantity and months
-  const subtotal = products.reduce(
-    (total, product) => total + product.price * months * quantity,
-    0
-  );
+  const subtotal = products.reduce((total, product) => {
+    const quantity = bookingDetails?.quantity || product?.quantity || 1;
+    const months = bookingDetails?.months || product?.months || 1;
+    return total + product.price * months * quantity;
+  }, 0);
 
-  // Shipping Cost
   const shipping = products.length > 0 ? 5.0 : 0;
 
   const discountAmount = (subtotal * discount) / 100;
@@ -55,8 +55,9 @@ const CartTotal = () => {
             </div>
             <div>
               <p className=" font-semibold">
-                {product.price} * {quantity} * {months} =$
-                {quantity * months * product.price}
+                {product.price} * {product?.quantity} * {product?.months || 1}{" "}
+                =$
+                {product?.quantity * product?.months || 1 * product.price}
               </p>
             </div>
           </div>

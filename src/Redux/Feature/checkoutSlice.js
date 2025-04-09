@@ -25,6 +25,10 @@ const checkoutSlice = createSlice({
   },
   reducers: {
     setCheckoutProduct: (state, action) => {
+      state.checkoutProduct = action.payload; // array of products (e.g., from cart)
+    },
+
+    setBookingDetails: (state, action) => {
       state.bookingDetails = action.payload; // Store form data
     },
     clearCheckout: (state) => {
@@ -49,6 +53,7 @@ const checkoutSlice = createSlice({
   },
 });
 
-export const { setCheckoutProduct, clearCheckout } = checkoutSlice.actions;
+export const { setCheckoutProduct, setBookingDetails, clearCheckout } =
+  checkoutSlice.actions;
 
 export default checkoutSlice.reducer;
