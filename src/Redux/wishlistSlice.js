@@ -50,7 +50,7 @@ const wishlistSlice = createSlice({
   name: "wishlist",
   initialState: {
     items: [],
-    status: "idle", // <- important to set this
+    status: "idle", 
     error: null,
   },
   reducers: {},

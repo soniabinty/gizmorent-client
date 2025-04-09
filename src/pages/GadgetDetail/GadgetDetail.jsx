@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FaRegStar } from "react-icons/fa6";
-import { IoLocationOutline } from "react-icons/io5";
+
 import { LuUsers } from "react-icons/lu";
 import { MdLocationOn } from "react-icons/md";
 import CheckAvail from "./CheckAvail";
@@ -11,7 +11,7 @@ import ReviewInput from "./ReviewInput";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGadgetDetails } from "../../Redux/Feature/gadgetSlice";
-;
+import { addToCart } from "../../Redux/Feature/cartSlice";
 import { addToWishlist } from "../../Redux/wishlistSlice";
 import Swal from "sweetalert2";
 
@@ -27,7 +27,28 @@ const GadgetDetail = () => {
     (state) => state.gadgets
   );
 
-  console.log(gadgetDetails)
+   const cartItems = useSelector((state) => state.cart.items);
+
+const handleAddToCart = () => {
+  const isAlreadyInCart = cartItems.some(item => item.gadgetId === gadgetDetails._id);
+
+  if (isAlreadyInCart) {
+    Swal.fire({
+      icon: "info",
+      title: "Already in Cart",
+      text: "This item is already in your cart!",
+    });
+    return;
+  }
+
+  if (user?.email) {
+    dispatch(addToCart({ gadget: gadgetDetails, email: user?.email , quantity: 1 }));
+    Swal.fire("Success", "Item added to cart!", "success");
+  } else {
+    Swal.fire("Error", "You need to log in first.", "error");
+  }
+};
+
 
   useEffect(() => {
     if (id) {
@@ -97,7 +118,7 @@ const GadgetDetail = () => {
           </div>
     
           <div className="md:flex justify-center gap-8">
-          <button className="btn border border-Primary hover:bg-Primary text-Primary hover:text-white mt-4 uppercase rounded-lg">Add to cartlist</button>
+          <button onClick={handleAddToCart}className="btn border border-Primary hover:bg-Primary text-Primary hover:text-white mt-4 uppercase rounded-lg">Add to cartlist</button>
           <button onClick={handleAddToWishlist} className="btn border border-Primary hover:bg-Primary text-Primary hover:text-white mt-4 uppercase rounded-lg">add to wishlist</button>
 
           </div>

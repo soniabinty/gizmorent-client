@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWishlist, removeFromWishlist } from "../../Redux/wishlistSlice";
+import { addToCart } from "../../Redux/Feature/cartSlice"; 
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -10,14 +11,14 @@ const Wishlist = () => {
 
   useEffect(() => {
     if (user?.email) {
-      dispatch(fetchWishlist(user.email));
+      dispatch(fetchWishlist(user.email)); 
     }
   }, [user?.email, dispatch]);
 
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "This gadget will remove the item from your wishlist.",
+      text: "This gadget will be removed from your wishlist.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -31,10 +32,25 @@ const Wishlist = () => {
     });
   };
 
+  const handleMoveToCart = (item) => {
+  
+    dispatch(addToCart({
+      gadget: item,
+      email: user?.email,
+      quantity: 1,
+    }))
+      .then(() => {
+      
+        dispatch(removeFromWishlist(item._id));
+        Swal.fire("Moved!", "The gadget has been moved to your cart.", "success");
+      })
+   
+  };
+
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold text-Primary mb-6">YOUR WISHLIST</h1>
-      <p className="text-Secondary mb-6">PRODUCT(S)</p>
+      <p className="text-Secondary mb-6">PRODUCT({items.length})</p>
 
       {status === "loading" && <p>Loading wishlist...</p>}
       {status === "failed" && <p className="text-red-500">Error: {error}</p>}
@@ -60,12 +76,14 @@ const Wishlist = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                {/* Add functionality to Move to Cart if needed */}
-                <button className="text-Accent hover:text-Primary" disabled>
+                <button
+                  onClick={() => handleMoveToCart(item)} 
+                  className="text-Accent hover:text-Primary"
+                >
                   MOVE TO CART
                 </button>
                 <button
-                  onClick={() => handleDelete(item._id)}
+                  onClick={() => handleDelete(item._id)} 
                   className="text-red-500 hover:text-red-700"
                 >
                   REMOVE

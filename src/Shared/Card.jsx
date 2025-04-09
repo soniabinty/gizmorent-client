@@ -87,7 +87,7 @@ const Card = ({ gadget }) => {
 
         <div className="flex justify-between items-center">
           <h6 className="font-bold">
-            {gadget.price}.00/<span className="text-sm font-normal">day</span>
+            ${gadget.price}.00/<span className="text-sm font-normal">day</span>
           </h6>
 
           <Link to={`/gadgetdetail/${gadget._id}`}>
