@@ -3,6 +3,7 @@ import CartTotal from "./CartTotal";
 import CheckoutForm from "./CheckoutForm";
 import { useForm } from "react-hook-form";
 import LocationSelector from "../../Shared/LocationSelector";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
   const { bookingDetails, checkoutProduct, loading, error } = useSelector(
@@ -10,6 +11,7 @@ const Checkout = () => {
   );
   console.log(bookingDetails);
   console.log(checkoutProduct);
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -21,9 +23,20 @@ const Checkout = () => {
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
+    
   };
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
+
+  const paymentMethod = watch("paymentMethod");
+
+  const handleOrder = () => {
+    if (paymentMethod === 'Credit Card') {
+      navigate('/creditpayment');
+    }
+  };
+  
+  
 
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
@@ -193,8 +206,9 @@ const Checkout = () => {
                   <p className="text-red-500">{errors.paymentMethod.message}</p>
                 )}
               </div>
-
+           
               <button
+              onClick={handleOrder}
                 type="submit"
                 className="bg-Primary py-4 px-10 mt-4 text-white"
               >
