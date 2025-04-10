@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 import { MdHomeWork } from "react-icons/md";
 
@@ -8,7 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
- 
+
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -76,12 +77,17 @@ const Sidebar = () => {
                   <BsFillHouseAddFill></BsFillHouseAddFill> Renter Approve
                 </p>
               </NavLink>
+              <NavLink to="/dashboard/userprofile">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <FaRegCircleUser></FaRegCircleUser> Uaer Profile
+                </p>
+              </NavLink>
             </nav>
           </div>
         </div>
 
-     
-      </div>
+
+      </div >
     </>
   );
 };

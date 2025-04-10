@@ -13,15 +13,19 @@ import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/Ren
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
 import UpdateGadget from "../pages/Dashboard/UpdateGadget";
+import UserProfiles from "../pages/Dashboard/UserProfile/UserProfiles";
 import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 import Home from "../pages/Home/Home";
+import ForgotPassword from "../pages/Login/ForgotPassword";
 import Login from "../pages/Login/Login";
+import ResetPasswordPage from "../pages/Login/ResetPasswordPage";
 import PackagePage from "../pages/Package/PackagePage";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
+import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 
 
 
@@ -58,6 +62,11 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+
+      {
+        path: "/creditpayment",
+        element: <CreditPayment></CreditPayment>,
       },
       {
         path: "/renter",
@@ -102,6 +111,10 @@ export const router = createBrowserRouter([
         path: "my-gadget",
         element: <MyGadget />,
       },
+      {
+        path: "userprofile",
+        element: <UserProfiles />,
+      },
       // admin
       {
         path: "adminhome",
@@ -116,6 +129,14 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPasswordPage />,
   },
   {
     path: "/register",

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import loginImg from "../../assets/image/visual.png";
 import { loginUser, resetFailedAttempts } from "../../Redux/authSlice";
@@ -11,6 +11,7 @@ import SocialLogin from "../../Shared/SocialLogin";
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, failedAttempts } = useSelector((state) => state.auth);
   const [isLockedLocal, setIsLockedLocal] = useState(false);
   const [countdown, setCountdown] = useState('');
@@ -59,6 +60,9 @@ const Login = () => {
 
     dispatch(loginUser(data))
       .unwrap()
+      .then(() => {
+        navigate('/');
+      })
       .catch(() => {
         if (failedAttempts + 1 >= 3) {
           const lockTime = Date.now() + 5 * 60 * 1000; // Lock for 5 minutes
@@ -151,6 +155,19 @@ const Login = () => {
                 {errors.password && (
                   <span className="pl-1 text-red-600">{errors.password.message}</span>
                 )}
+              </div>
+
+              {/* Forgot Password Link */}
+              <div className="form-control mt-2">
+                <button
+                  className="text-Primary underline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/forgot-password'); // Navigate to Forgot Password page
+                  }}
+                >
+                  Forgot Password?
+                </button>
               </div>
 
               {/* Submit Button */}
