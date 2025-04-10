@@ -1,18 +1,41 @@
 import { useForm } from "react-hook-form";
 import gadget from "./../../assets/gadget1.png";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import {
+  fetchProductByCode,
+  setBookingDetails,
+} from "../../Redux/Feature/checkoutSlice";
+import { useState } from "react";
 
 const BookYourGadgets = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [months, setMonths] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  // Increase/Decrease functions for months
+  const increaseMonths = () => setMonths((prev) => Math.min(prev + 1, 12));
+  const decreaseMonths = () => setMonths((prev) => Math.max(prev - 1, 1));
 
-  const onSubmit = (data) => {
+  // Increase/Decrease functions for quantity
+  const increaseQuantity = () => setQuantity((prev) => Math.min(prev + 1, 10));
+  const decreaseQuantity = () => setQuantity((prev) => Math.max(prev - 1, 1));
+
+  const onSubmit = async (data) => {
     console.log("Form Data:", data);
-    navigate("/checkout");
+    try {
+      const fullData = { ...data, months, quantity };
+      dispatch(setBookingDetails(fullData));
+      await dispatch(fetchProductByCode(data.productCode));
+      navigate("/checkout");
+    } catch (error) {
+      console.error("Failed to fetch product:", error);
+    }
   };
 
   return (
@@ -124,6 +147,46 @@ const BookYourGadgets = () => {
             {errors.dropDate && (
               <p className="text-red-500 w-1/2">{errors.dropDate.message}</p>
             )}
+          </div>
+          <div className="flex gap-2">
+            {/* Choose Month Section */}
+            <div className="flex items-center gap-3 w-1/2 bg-white px-2 py-2">
+              <p className="font-semibold">Choose Month:</p>
+              <button
+                type="button"
+                onClick={decreaseMonths}
+                className="bg-gray-300 px-2 py-1 rounded"
+              >
+                -
+              </button>
+              <p className="">{months}</p>
+              <button
+                type="button"
+                onClick={increaseMonths}
+                className="bg-gray-300 px-2 py-1 rounded"
+              >
+                +
+              </button>
+            </div>
+            {/* Quantity Section */}
+            <div className="flex items-center gap-3 w-1/2 bg-white px-2 py-2">
+              <p className="font-semibold">Choose Quantity:</p>
+              <button
+                type="button"
+                onClick={decreaseQuantity}
+                className="bg-gray-300 px-2 py-1 rounded"
+              >
+                -
+              </button>
+              <p className="">{quantity}</p>
+              <button
+                type="button"
+                onClick={increaseQuantity}
+                className="bg-gray-300 px-2 py-1 rounded"
+              >
+                +
+              </button>
+            </div>
           </div>
 
           <div className="flex justify-center">
