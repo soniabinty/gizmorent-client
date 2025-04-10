@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { IoWallet } from "react-icons/io5";
 
 import { MdHomeWork } from "react-icons/md";
 
@@ -80,6 +81,11 @@ const Sidebar = () => {
               <NavLink to="/dashboard/userprofile">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <FaRegCircleUser></FaRegCircleUser> Uaer Profile
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/payment-history">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <IoWallet></IoWallet> Payment History
                 </p>
               </NavLink>
             </nav>

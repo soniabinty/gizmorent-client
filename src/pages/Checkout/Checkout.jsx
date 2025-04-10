@@ -1,9 +1,15 @@
+
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import CartTotal from "./CartTotal";
+
 import { useSelector } from "react-redux";
 import CartTotal from "./CartTotal";
 import CheckoutForm from "./CheckoutForm";
 import { useForm } from "react-hook-form";
 import LocationSelector from "../../Shared/LocationSelector";
 import { useNavigate } from "react-router";
+
 
 const Checkout = () => {
 
@@ -31,6 +37,31 @@ const Checkout = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+
+    try {
+      // Prepare payment initiation data
+      const paymentData = {
+        total_amount: 1000, // Replace with actual total amount (can be dynamic)
+        cus_name: data.name,
+        cus_email: data.email,
+        cus_phone: data.phone,
+      };
+
+      // Call backend to initiate payment
+      const response = await axios.post("http://localhost:3000/initiate-payment", paymentData);
+
+      // Redirect to SSLCommerz payment gateway
+      if (response.data?.url) {
+        window.location.href = response.data.url;
+      } else {
+        alert("Failed to initiate payment.");
+      }
+    } catch (error) {
+      console.error("Payment initiation error:", error);
+      alert("An error occurred during payment initiation.");
+    }
+  };
+
     console.log("Form Data:", data);
     
   };
@@ -46,6 +77,7 @@ const Checkout = () => {
   };
   
   
+
 
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
@@ -172,7 +204,6 @@ const Checkout = () => {
 
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold">Payment Method</h3>
-                {/* <label className="block font-medium">Payment Method</label> */}
                 <div className="space-y-2">
                   <label className="flex items-center space-x-2 cursor-pointer">
                     <input
@@ -192,10 +223,10 @@ const Checkout = () => {
                       {...register("paymentMethod", {
                         required: "Please select a payment method",
                       })}
-                      value="PayPal"
+                      value="SSLCommerz"
                       className="form-radio h-5 w-5 text-blue-600"
                     />
-                    <span>PayPal</span>
+                    <span>SSLCommerz</span>
                   </label>
 
                   <label className="flex items-center space-x-2 cursor-pointer">
