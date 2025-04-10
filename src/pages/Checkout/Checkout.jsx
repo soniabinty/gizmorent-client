@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import LocationSelector from "../../Shared/LocationSelector";
 
 const Checkout = () => {
-  const { bookingDetails, checkoutProduct, loading, error } = useSelector(
-    (state) => state.checkout
-  );
+  const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
+    useSelector((state) => state.checkout);
   console.log(bookingDetails);
   console.log(checkoutProduct);
+  console.log(paymentDetails);
   const {
     register,
     handleSubmit,

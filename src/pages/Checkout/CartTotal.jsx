@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPaymentDetails } from "../../Redux/Feature/checkoutSlice";
 
 const CartTotal = () => {
   const { checkoutProduct, bookingDetails } = useSelector(
     (state) => state.checkout
   );
+  const dispatch = useDispatch();
 
   // const months = bookingDetails?.months || 1;
   // const quantity = bookingDetails?.quantity || 1;
@@ -39,6 +41,28 @@ const CartTotal = () => {
 
   // Final Total
   const total = subtotal + shipping - discountAmount;
+
+  useEffect(() => {
+    dispatch(
+      setPaymentDetails({
+        products,
+        subtotal,
+        shipping,
+        discount: discountAmount,
+        total,
+        coupon: couponCode,
+      })
+    );
+  }, [
+    products,
+    bookingDetails,
+    discountAmount,
+    couponCode,
+    subtotal,
+    shipping,
+    total,
+    dispatch,
+  ]);
 
   return (
     <div className="">
