@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import {
   fetchProductByCode,
-  setCheckoutProduct,
+  setBookingDetails,
 } from "../../Redux/Feature/checkoutSlice";
 import { useState } from "react";
 
@@ -30,7 +30,7 @@ const BookYourGadgets = () => {
     console.log("Form Data:", data);
     try {
       const fullData = { ...data, months, quantity };
-      dispatch(setCheckoutProduct(fullData));
+      dispatch(setBookingDetails(fullData));
       await dispatch(fetchProductByCode(data.productCode));
       navigate("/checkout");
     } catch (error) {
