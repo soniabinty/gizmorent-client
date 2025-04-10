@@ -1,8 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
@@ -73,7 +73,7 @@ const CheckOutForm = () => {
           date: new Date(),
         };
 
-        const res = await axiosSecure.post("/payments", paymentInfo);
+        const res = await axiosSecure.post("/stripe-payment-success", paymentInfo);
         if (res.data.success) {
           setSuccessMessage("Payment successful! Coins have been added to your account.");
           Swal.fire({
@@ -116,11 +116,10 @@ const CheckOutForm = () => {
         <button
           type="submit"
           disabled={!stripe || !clientSecret || processing}
-          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
-            processing
+          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${processing
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700 transition duration-300"
-          }`}
+            }`}
         >
           {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
         </button>
