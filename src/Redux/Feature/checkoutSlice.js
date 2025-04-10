@@ -31,9 +31,13 @@ const checkoutSlice = createSlice({
     setBookingDetails: (state, action) => {
       state.bookingDetails = action.payload; // Store form data
     },
+    setPaymentDetails: (state, action) => {
+      state.paymentDetails = action.payload;
+    },
     clearCheckout: (state) => {
       state.bookingDetails = null;
       state.productDetails = null;
+      state.paymentDetails = null;
     },
   },
   extraReducers: (builder) => {
@@ -53,7 +57,11 @@ const checkoutSlice = createSlice({
   },
 });
 
-export const { setCheckoutProduct, setBookingDetails, clearCheckout } =
-  checkoutSlice.actions;
+export const {
+  setCheckoutProduct,
+  setPaymentDetails,
+  setBookingDetails,
+  clearCheckout,
+} = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;
