@@ -6,7 +6,7 @@ import { IoShieldCheckmark } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 import { logoutUser } from "../Redux/authSlice";
 
 // Memoized selector
@@ -61,7 +61,7 @@ const Navbar = () => {
             <IoShieldCheckmark />
             <h2 className="text-sm text-white">Welcome To GizmoRent</h2>
           </div>
-          <Link to="/tracking" >
+          <Link to="/tracking">
             <div className="flex justify-center items-center space-x-2">
               <TbTruckDelivery />
               <h2 className="text-sm text-white">Track Your Order</h2>
@@ -176,7 +176,11 @@ const Navbar = () => {
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="rounded-full">
                   {photoURL ? (
-                    <img src={photoURL} alt="Profile" className="w-10 h-10 object-cover rounded-full" />
+                    <img
+                      src={photoURL}
+                      alt="Profile"
+                      className="w-10 h-10 object-cover rounded-full"
+                    />
                   ) : (
                     <CgProfile className="text-2xl" />
                   )}
@@ -190,12 +194,19 @@ const Navbar = () => {
                 <li className="flex items-center justify-between">
                   <div className="flex items-center flex-row">
                     {photoURL ? (
-                      <img src={photoURL} alt="Profile" className="w-10 h-10 object-cover rounded-full" />
+                      <img
+                        src={photoURL}
+                        alt="Profile"
+                        className="w-10 h-10 object-cover rounded-full"
+                      />
                     ) : (
                       <CgProfile className="text-2xl" />
                     )}
                     <div className="ml-3">
-                      <p className="font-bold"> {displayName ? (displayName) : ("User Name")} </p>
+                      <p className="font-bold">
+                        {" "}
+                        {displayName ? displayName : "User Name"}{" "}
+                      </p>
                       <a href="#" className="text-sm text-blue-500">
                         See your profile
                       </a>

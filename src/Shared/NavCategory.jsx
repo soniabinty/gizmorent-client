@@ -105,7 +105,7 @@ const NavCategory = () => {
             </NavLink>
             {/* Dropdown for Products */}
             {category.products && (
-              <ul className="absolute mx-auto hidden group-hover:block mt-8 bg-white shadow-lg rounded-lg  p-2 space-y-2 min-w-[200px] z-50">
+              <ul className="absolute mx-auto hidden group-hover:block  bg-white shadow-lg rounded-lg  p-2 space-y-2 min-w-[200px] z-50">
                 {category.products.map((product, productIndex) => (
                   <li key={productIndex}>
                     <NavLink

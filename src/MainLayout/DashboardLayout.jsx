@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 import Sidebar from "../pages/Dashboard/Sidebar";
+import { useSelector } from "react-redux";
 
 const DashboardLayout = () => {
   return (

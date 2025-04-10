@@ -25,6 +25,7 @@ import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
+import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 
 
 
@@ -61,6 +62,11 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+
+      {
+        path: "/creditpayment",
+        element: <CreditPayment></CreditPayment>,
       },
       {
         path: "/renter",
