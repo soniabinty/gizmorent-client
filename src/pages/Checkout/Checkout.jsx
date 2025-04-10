@@ -7,6 +7,11 @@ import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
 
 const Checkout = () => {
+
+  const { bookingDetails, loading, error } = useSelector(
+    (state) => state.checkout
+  );
+
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
@@ -15,7 +20,10 @@ const Checkout = () => {
   console.log("Checkout Product:", checkoutProduct);
   console.log("Payment Details:", paymentDetails);
 
-  const navigate = useNavigate();
+
+
+  const navigate = useNavigate()
+
 
   const {
     register,
@@ -37,7 +45,7 @@ const Checkout = () => {
     try {
       // Prepare payment initiation data
       const paymentData = {
-        total_amount: paymentDetails?.total || 0, // Replace with actual total amount (can be dynamic)
+        total_amount: paymentDetails?.total || 0,
         cus_name: data.name,
         cus_email: data.email,
         cus_phone: data.phone,

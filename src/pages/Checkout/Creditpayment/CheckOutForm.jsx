@@ -9,31 +9,34 @@ const CheckOutForm = () => {
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+
   const user = useSelector((state) => state.auth.user);
+  const { checkoutProduct, bookingDetails } = useSelector((state) => state.checkout);
+  
   const [processing, setProcessing] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const price = 10;
 
-  // Fetch client secret for payment intent
+  // Calculate the price (total amount to be paid)
+  const price = checkoutProduct.reduce((total, product) => {
+    const quantity = bookingDetails?.quantity || product?.quantity || 1;
+    const months = bookingDetails?.months || product?.months || 1;
+    return total + product.price * quantity * months;
+  }, 0);
+
   useEffect(() => {
     if (price > 0) {
       axiosSecure
         .post("/create-payment-intent", { price })
         .then((res) => {
-          if (res.data && res.data.clientSecret) {
-            setClientSecret(res.data.clientSecret);
-          } else {
-            console.error("Invalid response from server:", res.data);
-          }
+          if (res.data?.clientSecret) setClientSecret(res.data.clientSecret);
         })
         .catch((err) => console.error("Payment Intent Error:", err));
     }
   }, [price, axiosSecure]);
 
-  // Handle payment submission
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!stripe || !elements) return;
 
     setProcessing(true);
@@ -41,16 +44,12 @@ const CheckOutForm = () => {
     setSuccessMessage("");
 
     const card = elements.getElement(CardElement);
-    if (!card) {
-      setErrorMessage("Card element not found.");
-      setProcessing(false);
-      return;
-    }
+    if (!card) return setProcessing(false);
 
     try {
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: card,
+          card,
           billing_details: {
             name: user?.displayName || "Anonymous",
             email: user?.email || "no-email@example.com",
@@ -60,11 +59,7 @@ const CheckOutForm = () => {
 
       if (error) {
         setErrorMessage(error.message);
-        setProcessing(false);
-        return;
-      }
-
-      if (paymentIntent.status === "succeeded") {
+      } else if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
           userId: user._id,
           email: user.email,
@@ -74,18 +69,22 @@ const CheckOutForm = () => {
         };
 
         const res = await axiosSecure.post("/stripe-payment-success", paymentInfo);
+
+        const res = await axiosSecure.post("/payments", paymentInfo);
+        
+
         if (res.data.success) {
-          setSuccessMessage("Payment successful! Coins have been added to your account.");
+          setSuccessMessage("Payment successful!");
           Swal.fire({
             icon: "success",
-            title: "Payment Successful!",
-            text: "Your coins have been credited to your account.",
+            title: "Payment Complete",
+            text: "Your coins have been added to your account.",
           });
         }
       }
     } catch (err) {
       console.error("Payment Error:", err);
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage("Something went wrong.");
     } finally {
       setProcessing(false);
     }
@@ -93,41 +92,69 @@ const CheckOutForm = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border">
-      <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">Complete Your Payment</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-2 text-center">
+        Amount being paid now: <span className="text-blue-600">${price.toFixed(2)}</span>
+      </h2>
+
+      <div className="flex justify-center gap-3 mb-4">
+        <img src="https://img.icons8.com/color/48/visa.png" className="h-6" alt="Visa" />
+        <img src="https://img.icons8.com/color/48/mastercard-logo.png" className="h-6" alt="Mastercard" />
+        <img src="https://img.icons8.com/color/48/discover.png" className="h-6" alt="Discover" />
+        <img src="https://img.icons8.com/color/48/amex.png" className="h-6" alt="Amex" />
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#32325d",
-                fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
-                "::placeholder": { color: "#aab7c4" },
-              },
-              invalid: { color: "#fa755a" },
-            },
-          }}
-          className="p-4 border rounded-lg shadow-sm focus:outline-none"
-        />
-        {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
-        {successMessage && <p className="text-green-500 text-sm mt-2">{successMessage}</p>}
+        <label className="block">
+          <span className="text-gray-700">Cardholder's name</span>
+          <input
+            type="text"
+            value={user?.displayName || ""}
+            disabled
+            className="mt-1 block w-full border rounded-md px-3 py-2 shadow-sm bg-gray-100 text-gray-700"
+          />
+        </label>
+
+        <label className="block">
+          <span className="text-gray-700">Card details</span>
+          <div className="mt-1 p-4 border rounded-lg bg-white shadow-sm">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#32325d",
+                    "::placeholder": { color: "#aab7c4" },
+                  },
+                  invalid: { color: "#fa755a" },
+                },
+              }}
+            />
+          </div>
+        </label>
+
+        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+        {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
 
         <button
           type="submit"
           disabled={!stripe || !clientSecret || processing}
           className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${processing
               ? "bg-gray-400 cursor-not-allowed"
+
               : "bg-blue-600 hover:bg-blue-700 transition duration-300"
             }`}
+
+              : "bg-blue-600 hover:bg-blue-700 transition"
+          }`}
+
         >
           {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
         </button>
-      </form>
 
-      <p className="text-sm text-center text-gray-500 mt-4">
-        Secure payments powered by <span className="font-bold">Stripe</span>.
-      </p>
+        <p className="text-sm text-center text-gray-500 mt-4">
+          Secure payments powered by <span className="font-bold">Stripe</span>.
+        </p>
+      </form>
     </div>
   );
 };

@@ -20,16 +20,19 @@ const checkoutSlice = createSlice({
   initialState: {
     bookingDetails: null,
     checkoutProduct: [],
+    paymentDetails: null,
     loading: false,
     error: null,
   },
   reducers: {
     setCheckoutProduct: (state, action) => {
-      state.checkoutProduct = action.payload; // array of products (e.g., from cart)
+      state.checkoutProduct = action.payload;
     },
-
     setBookingDetails: (state, action) => {
-      state.bookingDetails = action.payload; // Store form data
+      state.bookingDetails = action.payload;
+    },
+    setPaymentDetails: (state, action) => {
+      state.paymentDetails = action.payload;
     },
     setPaymentDetails: (state, action) => {
       state.paymentDetails = action.payload;
@@ -40,6 +43,7 @@ const checkoutSlice = createSlice({
       state.paymentDetails = null;
     },
   },
+  
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductByCode.pending, (state) => {
@@ -57,11 +61,13 @@ const checkoutSlice = createSlice({
   },
 });
 
+
 export const {
   setCheckoutProduct,
   setPaymentDetails,
   setBookingDetails,
   clearCheckout,
 } = checkoutSlice.actions;
+
 
 export default checkoutSlice.reducer;
