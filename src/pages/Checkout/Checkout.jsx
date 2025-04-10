@@ -6,11 +6,21 @@ import LocationSelector from "../../Shared/LocationSelector";
 import { useNavigate } from "react-router";
 
 const Checkout = () => {
+
   const { bookingDetails, loading, error } = useSelector(
     (state) => state.checkout
   );
 
+  const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
+    useSelector((state) => state.checkout);
+  console.log(bookingDetails);
+  console.log(checkoutProduct);
+
+  console.log(paymentDetails);
+
+
   const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
