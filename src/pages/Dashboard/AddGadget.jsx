@@ -114,7 +114,9 @@ const AddGadget = () => {
           className="input w-full py-6 rounded-lg"
           placeholder="Product Name*"
         />
-        {errors.productName && <p className="text-red-500">{errors.productName.message}</p>}
+        {errors.productName && (
+          <p className="text-red-500">{errors.productName.message}</p>
+        )}
 
         <select
           {...register("category", { required: "Category is required" })}

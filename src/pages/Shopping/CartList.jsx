@@ -1,21 +1,27 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeFromCart, updateCartQuantity } from "../../Redux/Feature/cartSlice";
+import {
+  fetchCart,
+  removeFromCart,
+  updateCartQuantity,
+} from "../../Redux/Feature/cartSlice";
 import Swal from "sweetalert2";
+import { setCheckoutProduct } from "../../Redux/Feature/checkoutSlice";
 
 const CartList = () => {
   const dispatch = useDispatch();
   const { items, status, error } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.email) {
-      dispatch(fetchCart(user.email)); 
+      dispatch(fetchCart(user.email));
     }
   }, [dispatch, user?.email]);
 
-  const handleDelete = (_id) => { 
+  const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "This gadget will be removed from your cart.",
@@ -26,20 +32,26 @@ const CartList = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(removeFromCart(_id)); 
-        Swal.fire("Removed!", "The gadget was removed from your cart.", "success");
+        dispatch(removeFromCart(_id));
+        Swal.fire(
+          "Removed!",
+          "The gadget was removed from your cart.",
+          "success"
+        );
       }
     });
   };
 
-  const handleQuantityChange = (_id, newQty) => { 
+  const handleQuantityChange = (_id, newQty) => {
     if (newQty < 1 || !user?.email) return;
 
-    dispatch(updateCartQuantity({
-      _id, 
-      userEmail: user.email,
-      quantity: newQty,
-    }));
+    dispatch(
+      updateCartQuantity({
+        _id,
+        userEmail: user.email,
+        quantity: newQty,
+      })
+    );
   };
 
   if (status === "loading") {
@@ -50,14 +62,21 @@ const CartList = () => {
     return <div>Error: {error}</div>;
   }
 
-  // Calculate total price 
+  // Calculate total price
   const totalPrice = items.reduce((total, item) => {
     let price = item.price;
-    if (typeof price === 'string') {
+    if (typeof price === "string") {
       price = price.replace("TK ", "").replace(",", "");
     }
     return total + parseFloat(price) * item.quantity;
   }, 0);
+
+  const handleProceedToCheckout = () => {
+    dispatch(setCheckoutProduct(items));
+    console.log(items);
+
+    navigate("/checkout");
+  };
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -70,7 +89,7 @@ const CartList = () => {
         <div className="space-y-6">
           {items.map((item) => (
             <div
-              key={item._id} 
+              key={item._id}
               className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
             >
               <div className="flex items-center space-x-4">
@@ -91,8 +110,10 @@ const CartList = () => {
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={() => handleQuantityChange(item._id, item.quantity - 1)} 
-                    disabled={item.quantity <= 1} 
+                    onClick={() =>
+                      handleQuantityChange(item._id, item.quantity - 1)
+                    }
+                    disabled={item.quantity <= 1}
                   >
                     -
                   </button>
@@ -101,18 +122,24 @@ const CartList = () => {
                     value={item.quantity}
                     min="1"
                     onChange={(e) =>
-                      handleQuantityChange(item._id, Math.max(1, parseInt(e.target.value) || 1)) 
+                      handleQuantityChange(
+                        item._id,
+                        Math.max(1, parseInt(e.target.value) || 1)
+                      )
                     }
                     className="w-12 text-center"
                   />
                   <button
-                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)} 
+                    onClick={() =>
+                      handleQuantityChange(item._id, item.quantity + 1)
+                    }
                   >
                     +
                   </button>
                 </div>
+
                 <button
-                  onClick={() => handleDelete(item._id)} 
+                  onClick={() => handleDelete(item._id)}
                   className="text-red-500 hover:text-red-700"
                 >
                   REMOVE
@@ -124,12 +151,12 @@ const CartList = () => {
             <p className="text-xl font-bold text-Secondary">
               Total: {totalPrice ? `TK ${totalPrice.toLocaleString()}` : "TK 0"}
             </p>
-            <Link
-              to="/checkout"
+            <button
+              onClick={handleProceedToCheckout}
               className="mt-4 inline-block bg-Primary text-white px-6 py-2 rounded-lg hover:bg-Primary/90"
             >
               Proceed to Checkout
-            </Link>
+            </button>
           </div>
         </div>
       )}

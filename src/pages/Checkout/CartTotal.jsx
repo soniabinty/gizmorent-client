@@ -6,24 +6,39 @@ const CartTotal = () => {
     (state) => state.checkout
   );
 
-  const months = bookingDetails?.months || 1;
-  const quantity = bookingDetails?.quantity || 1;
+  // const months = bookingDetails?.months || 1;
+  // const quantity = bookingDetails?.quantity || 1;
   const [products, setProducts] = useState(checkoutProduct);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [error, setError] = useState("");
+  const validCoupons = {
+    GIZ_EID_30: 30,
+  };
+  const handleApplyCoupon = () => {
+    const upperCode = couponCode.trim().toUpperCase();
+    if (validCoupons[upperCode]) {
+      setDiscount(validCoupons[upperCode]);
+      setError("");
+    } else {
+      setDiscount(0);
+      setError("Invalid coupon code");
+    }
+  };
 
   // Calculate Subtotal based on quantity and months
-  const subtotal = products.reduce(
-    (total, product) => total + product.price * months * quantity,
-    0
-  );
+  const subtotal = products.reduce((total, product) => {
+    const quantity = bookingDetails?.quantity || product?.quantity || 1;
+    const months = bookingDetails?.months || product?.months || 1;
+    return total + product.price * months * quantity;
+  }, 0);
 
-  // Shipping Cost (fixed $5 fee)
   const shipping = products.length > 0 ? 5.0 : 0;
 
-  // Discount (placeholder)
-  const discount = 0;
+  const discountAmount = (subtotal * discount) / 100;
 
   // Final Total
-  const total = subtotal + shipping - discount;
+  const total = subtotal + shipping - discountAmount;
 
   return (
     <div className="">
@@ -37,14 +52,12 @@ const CartTotal = () => {
           <div key={product._id} className="flex justify-between w-full gap-6">
             <div>
               <h4 className="font-semibold">{product.name}</h4>
-              {/* <p className="font-semibold">${product.price}/month</p>
-              <p className="text-gray-600">Months: {months}</p>
-              <p className="text-gray-600">Quantity: {quantity}</p> */}
             </div>
             <div>
               <p className=" font-semibold">
-                {product.price} * {quantity} * {months} =$
-                {quantity * months * product.price}
+                {product.price} * {product?.quantity} * {product?.months || 1}{" "}
+                =$
+                {product?.quantity * product?.months || 1 * product.price}
               </p>
             </div>
           </div>
@@ -53,10 +66,15 @@ const CartTotal = () => {
         <div className="flex">
           <input
             className="w-full p-2 border border-gray-300"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
             placeholder="Discount code"
             type="text"
           />
-          <button className="bg-primary px-5 py-2 text-white cursor-pointer">
+          <button
+            onClick={handleApplyCoupon}
+            className="bg-primary px-5 py-2 text-white cursor-pointer"
+          >
             Apply
           </button>
         </div>
@@ -71,7 +89,7 @@ const CartTotal = () => {
         </div>
         <div className="flex justify-between">
           <p>Discount</p>
-          <p className="font-semibold">${discount.toFixed(2)}</p>
+          <p className="font-semibold">${discountAmount.toFixed(2)}</p>
         </div>
         <div className="flex justify-between border-t border-gray-300">
           <p className="font-semibold">Total</p>
