@@ -1,15 +1,10 @@
-
-import axios from "axios";
+/* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
-import CartTotal from "./CartTotal";
-
 import { useSelector } from "react-redux";
-import CartTotal from "./CartTotal";
-import CheckoutForm from "./CheckoutForm";
-import { useForm } from "react-hook-form";
-import LocationSelector from "../../Shared/LocationSelector";
 import { useNavigate } from "react-router";
-
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import LocationSelector from "../../Shared/LocationSelector";
+import CartTotal from "./CartTotal";
 
 const Checkout = () => {
 
@@ -19,13 +14,16 @@ const Checkout = () => {
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
-  console.log(bookingDetails);
-  console.log(checkoutProduct);
+  const axiosPubic = useAxiosPublic();
 
-  console.log(paymentDetails);
+  console.log("Booking Details:", bookingDetails);
+  console.log("Checkout Product:", checkoutProduct);
+  console.log("Payment Details:", paymentDetails);
+
 
 
   const navigate = useNavigate()
+
 
   const {
     register,
@@ -37,18 +35,25 @@ const Checkout = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log("Form Data:", data);
+
+    if (data.paymentMethod === "Credit Card") {
+      navigate("/creditpayment");
+      return;
+    }
 
     try {
       // Prepare payment initiation data
       const paymentData = {
-        total_amount: 1000, // Replace with actual total amount (can be dynamic)
+        total_amount: paymentDetails?.total || 0,
         cus_name: data.name,
         cus_email: data.email,
         cus_phone: data.phone,
       };
 
       // Call backend to initiate payment
-      const response = await axios.post("http://localhost:3000/initiate-payment", paymentData);
+      const response = await axiosPubic.post("/initiate-payment", paymentData);
+      console.log("Payment Response:", response.data);
 
       // Redirect to SSLCommerz payment gateway
       if (response.data?.url) {
@@ -62,22 +67,10 @@ const Checkout = () => {
     }
   };
 
-    console.log("Form Data:", data);
-    
-  };
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   const paymentMethod = watch("paymentMethod");
-
-  const handleOrder = () => {
-    if (paymentMethod === 'Credit Card') {
-      navigate('/creditpayment');
-    }
-  };
-  
-  
-
 
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
@@ -120,81 +113,6 @@ const Checkout = () => {
                 <p className="text-red-500">{errors.email.message}</p>
               )}
 
-              {/* <input
-                type="text"
-                {...register("productCode", {
-                  required: "Product code is required",
-                })}
-                className="input w-full py-6"
-                placeholder="Product Code*"
-              />
-              {errors.productCode && (
-                <p className="text-red-500">{errors.productCode.message}</p>
-              )} */}
-
-              {/* <div className="flex gap-2">
-                <input
-                  type="text"
-                  defaultValue={bookingDetails.pickupLocation}
-                  {...register("pickupLocation", {
-                    required: "Pick-up location is required",
-                  })}
-                  className="input w-full py-6"
-                  placeholder="Pick-Up Location*"
-                />
-                <input
-                  type="date"
-                  defaultValue={bookingDetails.pickupDate}
-                  {...register("pickupDate", {
-                    required: "Pick-up date is required",
-                  })}
-                  className="input w-full py-6"
-                />
-              </div> */}
-              {/* <div className="flex">
-                {errors.pickupLocation && (
-                  <p className="text-red-500 w-1/2">
-                    {errors.pickupLocation.message}
-                  </p>
-                )}
-                {errors.pickupDate && (
-                  <p className="text-red-500 w-1/2">
-                    {errors.pickupDate.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  defaultValue={bookingDetails.dropLocation}
-                  {...register("dropLocation", {
-                    required: "Drop-off location is required",
-                  })}
-                  className="input w-full py-6"
-                  placeholder="Drop-Off Location*"
-                />
-                <input
-                  type="date"
-                  defaultValue={bookingDetails.dropDate}
-                  {...register("dropDate", {
-                    required: "Drop-off date is required",
-                  })}
-                  className="input w-full py-6"
-                />
-              </div>
-              <div className="flex">
-                {errors.dropLocation && (
-                  <p className="text-red-500 w-1/2">
-                    {errors.dropLocation.message}
-                  </p>
-                )}
-                {errors.dropDate && (
-                  <p className="text-red-500 w-1/2">
-                    {errors.dropDate.message}
-                  </p>
-                )}
-              </div> */}
               <LocationSelector
                 control={control}
                 register={register}
@@ -246,11 +164,10 @@ const Checkout = () => {
                   <p className="text-red-500">{errors.paymentMethod.message}</p>
                 )}
               </div>
-           
+
               <button
-              onClick={handleOrder}
                 type="submit"
-                className="bg-Primary py-4 px-10 mt-4 text-white"
+                className="bg-blue-600 py-4 px-10 mt-4 text-white"
               >
                 Place Order
               </button>
@@ -258,7 +175,7 @@ const Checkout = () => {
           </div>
         </div>
         <div className="md:w-1/3">
-          <CartTotal></CartTotal>
+          <CartTotal />
         </div>
       </div>
     </div>
