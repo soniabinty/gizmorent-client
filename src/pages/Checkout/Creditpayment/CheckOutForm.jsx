@@ -38,14 +38,14 @@ const CheckOutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
-
+  
     setProcessing(true);
     setErrorMessage("");
     setSuccessMessage("");
-
+  
     const card = elements.getElement(CardElement);
     if (!card) return setProcessing(false);
-
+  
     try {
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -56,10 +56,11 @@ const CheckOutForm = () => {
           },
         },
       });
-
+  
       if (error) {
         setErrorMessage(error.message);
       } else if (paymentIntent.status === "succeeded") {
+        // Prepare payment information
         const paymentInfo = {
           userId: user._id,
           email: user.email,
@@ -67,9 +68,24 @@ const CheckOutForm = () => {
           transactionId: paymentIntent.id,
           date: new Date(),
         };
-
-        const res = await axiosSecure.post("/payments", paymentInfo);
+  
+        // Prepare order details (checkout + booking details)
+        const orderData = {
+         amount : paymentInfo.amount ,
+         product_name : checkoutProduct.name || bookingDetails.name,
+         product_id : checkoutProduct.gadgetId,
+         product_img : checkoutProduct.image
+   
         
+         
+        
+         
+        };
+        console.log(orderData )
+  
+        // Send payment and order data to backend to create an order
+        const res = await axiosSecure.post("/orders", orderData);
+  
         if (res.data.success) {
           setSuccessMessage("Payment successful!");
           Swal.fire({
@@ -86,6 +102,7 @@ const CheckOutForm = () => {
       setProcessing(false);
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border">
