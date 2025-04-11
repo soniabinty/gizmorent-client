@@ -5,14 +5,18 @@ import { useNavigate } from "react-router";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
+import { useDispatch } from "react-redux";
+import { setFormData } from "../../Redux/Feature/checkoutSlice"; // path as needed
 
 const Checkout = () => {
 
- 
+  const dispatch = useDispatch();
+
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
+  console.log(bookingDetails)
 
 
 
@@ -32,7 +36,7 @@ const Checkout = () => {
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
-
+    dispatch(setFormData(data));
     if (data.paymentMethod === "Credit Card") {
       navigate("/creditpayment");
       return;

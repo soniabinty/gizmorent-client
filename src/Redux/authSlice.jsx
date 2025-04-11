@@ -13,7 +13,7 @@ import { auth } from "../Firebase/firebase.config.js";
 
 const googleProvider = new GoogleAuthProvider();
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:5000'
 });
 
 // Helper function to transform Firebase user object to a serializable format
