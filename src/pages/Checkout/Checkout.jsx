@@ -8,15 +8,13 @@ import CartTotal from "./CartTotal";
 
 const Checkout = () => {
 
-
+ 
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
 
-  console.log("Booking Details:", bookingDetails);
-  console.log("Checkout Product:", checkoutProduct);
-  console.log("Payment Details:", paymentDetails);
+
 
 
 
@@ -50,7 +48,7 @@ const Checkout = () => {
       };
 
       // Call backend to initiate payment
-      const response = await axiosPubic.post("/initiate-payment ", paymentData);
+      const response = await axiosPubic.post("/initiate-payment", paymentData);
       console.log("Payment Response:", response.data);
 
       // Redirect to SSLCommerz payment gateway
