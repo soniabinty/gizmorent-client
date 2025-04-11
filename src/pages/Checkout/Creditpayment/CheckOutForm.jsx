@@ -11,8 +11,10 @@ const CheckOutForm = () => {
   const elements = useElements();
 
   const user = useSelector((state) => state.auth.user);
-  const { checkoutProduct, bookingDetails } = useSelector((state) => state.checkout);
-  
+  const { checkoutProduct, bookingDetails , formData  } = useSelector((state) => state.checkout);
+console.log(checkoutProduct)
+
+
   const [processing, setProcessing] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,8 +61,11 @@ const CheckOutForm = () => {
   
       if (error) {
         setErrorMessage(error.message);
-      } else if (paymentIntent.status === "succeeded") {
-        // Prepare payment information
+        setProcessing(false);
+        return;
+      }
+  
+      if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
           userId: user._id,
           email: user.email,
@@ -68,32 +73,32 @@ const CheckOutForm = () => {
           transactionId: paymentIntent.id,
           date: new Date(),
         };
-
-
+  
         const orderData = {
-         amount : paymentInfo.amount ,
-         product_name : checkoutProduct.name ,
-         product_id : checkoutProduct.gadgetId,
-         product_img : checkoutProduct.image
-   
-        
-         
-        
-         
+          amount: paymentInfo.amount,
+          product_name: checkoutProduct[0]?.name,
+          product_id: checkoutProduct[0]?.gadgetId,
+          product_img: checkoutProduct[0]?.image,
+          customer_name: formData?.name,
+          customer_email: formData?.email,
+          customer_phone: formData?.phone,
+          customer_address: `${formData?.upazila}, ${formData?.district}`,
         };
-        console.log(orderData )
   
-        // Send payment and order data to backend to create an order
-        const res = await axiosSecure.post("/payments",paymentInfo );
+        const res = await axiosSecure.post("/payments", paymentInfo);
+        console.log(res.data)
   
-
-        if (res.data.success) {
+        if (res.data.acknowledged) {
+          await axiosSecure.post("/orders", orderData);
+  
           setSuccessMessage("Payment successful!");
           Swal.fire({
             icon: "success",
             title: "Payment Complete",
-            text: "Your coins have been added to your account.",
+            text: "Your Oeder is now Pending. Wait for Confirm.",
           });
+        } else {
+          setErrorMessage("Payment succeeded but order creation failed.");
         }
       }
     } catch (err) {
@@ -103,6 +108,7 @@ const CheckOutForm = () => {
       setProcessing(false);
     }
   };
+  
   
 
   return (

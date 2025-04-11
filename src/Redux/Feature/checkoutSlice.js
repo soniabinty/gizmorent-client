@@ -21,6 +21,7 @@ const checkoutSlice = createSlice({
     bookingDetails: null,
     checkoutProduct: [],
     paymentDetails: null,
+    formData: null, // add this to initial state for safety
     loading: false,
     error: null,
   },
@@ -34,11 +35,14 @@ const checkoutSlice = createSlice({
     setPaymentDetails: (state, action) => {
       state.paymentDetails = action.payload;
     },
-  
+    setFormData: (state, action) => {
+      state.formData = action.payload; // ✅ fix here
+    },
     clearCheckout: (state) => {
       state.bookingDetails = null;
       state.productDetails = null;
       state.paymentDetails = null;
+      state.formData = null;
     },
   },
   
@@ -65,8 +69,9 @@ export const {
   setPaymentDetails,
   setBookingDetails,
   clearCheckout,
-  paymentDetails
+  setFormData,
 } = checkoutSlice.actions;
+
 
 
 export default checkoutSlice.reducer;
