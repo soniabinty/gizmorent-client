@@ -149,22 +149,17 @@ const CheckOutForm = () => {
 
         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
         {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
-
         <button
-          type="submit"
-          disabled={!stripe || !clientSecret || processing}
-          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${processing
-              ? "bg-gray-400 cursor-not-allowed"
-
-              : "bg-blue-600 hover:bg-blue-700 transition duration-300"
-            }`}
-
-              : "bg-blue-600 hover:bg-blue-700 transition"
-          }`}
-
-        >
-          {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
-        </button>
+  type="submit"
+  disabled={!stripe || !clientSecret || processing}
+  className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
+    processing
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-blue-600 hover:bg-blue-700 transition duration-300"
+  }`}
+>
+  {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
+</button>
 
         <p className="text-sm text-center text-gray-500 mt-4">
           Secure payments powered by <span className="font-bold">Stripe</span>.
