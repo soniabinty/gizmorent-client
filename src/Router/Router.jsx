@@ -109,7 +109,7 @@ export const router = createBrowserRouter([
       {
         path: "update-gadget/:id",
         element: <UpdateGadget />,
-        loader: ({ params }) => fetch(`http://localhost:3000/gadgets/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:5000/gadgets/${params.id}`),
       },
       {
         path: "my-gadget",

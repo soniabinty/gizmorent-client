@@ -46,7 +46,7 @@ const HeroSection = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/renter_request",
+        "http://localhost:5000/renter_request",
         formData
       );
       console.log(response.data);
