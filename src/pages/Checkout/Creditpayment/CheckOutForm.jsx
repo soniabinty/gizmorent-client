@@ -1,8 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
@@ -68,8 +68,8 @@ const CheckOutForm = () => {
           transactionId: paymentIntent.id,
           date: new Date(),
         };
-  
-        // Prepare order details (checkout + booking details)
+
+
         const orderData = {
          amount : paymentInfo.amount ,
          product_name : checkoutProduct.name ,
@@ -86,6 +86,7 @@ const CheckOutForm = () => {
         // Send payment and order data to backend to create an order
         const res = await axiosSecure.post("/payments",paymentInfo );
   
+
         if (res.data.success) {
           setSuccessMessage("Payment successful!");
           Swal.fire({
@@ -152,11 +153,15 @@ const CheckOutForm = () => {
         <button
           type="submit"
           disabled={!stripe || !clientSecret || processing}
-          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
-            processing
+          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${processing
               ? "bg-gray-400 cursor-not-allowed"
+
+              : "bg-blue-600 hover:bg-blue-700 transition duration-300"
+            }`}
+
               : "bg-blue-600 hover:bg-blue-700 transition"
           }`}
+
         >
           {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
         </button>
