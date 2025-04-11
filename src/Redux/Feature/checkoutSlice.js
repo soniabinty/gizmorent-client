@@ -34,9 +34,7 @@ const checkoutSlice = createSlice({
     setPaymentDetails: (state, action) => {
       state.paymentDetails = action.payload;
     },
-    setPaymentDetails: (state, action) => {
-      state.paymentDetails = action.payload;
-    },
+  
     clearCheckout: (state) => {
       state.bookingDetails = null;
       state.productDetails = null;
@@ -67,6 +65,7 @@ export const {
   setPaymentDetails,
   setBookingDetails,
   clearCheckout,
+  paymentDetails
 } = checkoutSlice.actions;
 
 

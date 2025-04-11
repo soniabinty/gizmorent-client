@@ -8,17 +8,13 @@ import CartTotal from "./CartTotal";
 
 const Checkout = () => {
 
-  const { bookingDetails, loading, error } = useSelector(
-    (state) => state.checkout
-  );
+ 
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
 
-  console.log("Booking Details:", bookingDetails);
-  console.log("Checkout Product:", checkoutProduct);
-  console.log("Payment Details:", paymentDetails);
+
 
 
 
