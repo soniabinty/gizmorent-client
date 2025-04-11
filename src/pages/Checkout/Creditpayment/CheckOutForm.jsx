@@ -72,7 +72,7 @@ const CheckOutForm = () => {
         // Prepare order details (checkout + booking details)
         const orderData = {
          amount : paymentInfo.amount ,
-         product_name : checkoutProduct.name || bookingDetails.name,
+         product_name : checkoutProduct.name ,
          product_id : checkoutProduct.gadgetId,
          product_img : checkoutProduct.image
    
@@ -84,7 +84,7 @@ const CheckOutForm = () => {
         console.log(orderData )
   
         // Send payment and order data to backend to create an order
-        const res = await axiosSecure.post("/orders", orderData);
+        const res = await axiosSecure.post("/payments",paymentInfo );
   
         if (res.data.success) {
           setSuccessMessage("Payment successful!");
