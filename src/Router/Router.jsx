@@ -30,6 +30,7 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
 import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
+import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
 
 
 
@@ -106,6 +107,12 @@ export const router = createBrowserRouter([
         path: "add-gadget",
         element: <AddGadget />,
       },
+
+      {
+        path: "allorder",
+        element: <AllOrder></AllOrder>,
+      },
+    
       {
         path: "update-gadget/:id",
         element: <UpdateGadget />,

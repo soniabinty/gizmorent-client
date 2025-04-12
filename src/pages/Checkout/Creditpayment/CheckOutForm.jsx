@@ -11,7 +11,7 @@ const CheckOutForm = () => {
   const elements = useElements();
 
   const user = useSelector((state) => state.auth.user);
-  const { checkoutProduct, bookingDetails , formData  } = useSelector((state) => state.checkout);
+  const { checkoutProduct, formData,  paymentDetails  } = useSelector((state) => state.checkout);
 console.log(checkoutProduct)
 
 
@@ -20,11 +20,8 @@ console.log(checkoutProduct)
   const [errorMessage, setErrorMessage] = useState("");
 
   // Calculate the price (total amount to be paid)
-  const price = checkoutProduct.reduce((total, product) => {
-    const quantity = bookingDetails?.quantity || product?.quantity || 1;
-    const months = bookingDetails?.months || product?.months || 1;
-    return total + product.price * quantity * months;
-  }, 0);
+  const price = paymentDetails?.total || 0;
+console.log(checkoutProduct)
 
   useEffect(() => {
     if (price > 0) {
@@ -74,16 +71,21 @@ console.log(checkoutProduct)
           date: new Date(),
         };
   
-        const orderData = {
-          amount: paymentInfo.amount,
-          product_name: checkoutProduct[0]?.name,
-          product_id: checkoutProduct[0]?.gadgetId,
-          product_img: checkoutProduct[0]?.image,
+        const orderData = checkoutProduct.map(product => ({
+          amount: product.price,
+          product_name: product.name,
+          product_id: product.gadgetId,
+          product_img: product.image,
           customer_name: formData?.name,
           customer_email: formData?.email,
           customer_phone: formData?.phone,
           customer_address: `${formData?.upazila}, ${formData?.district}`,
-        };
+          renting_time: 10,
+          returning_time:10,
+          status:"pending",
+          quantity: product.quantity
+        }));
+        
   
         const res = await axiosSecure.post("/payments", paymentInfo);
         console.log(res.data)
