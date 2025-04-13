@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { IoCheckmarkDoneCircleSharp, IoWallet } from "react-icons/io5";
+import { IoBagAddSharp, IoCheckmarkDoneCircleSharp, IoWallet } from "react-icons/io5";
 import { LuNotebookPen } from "react-icons/lu";
 
 import { MdHomeWork, MdOutlineEventNote } from "react-icons/md";
@@ -73,6 +73,11 @@ const Sidebar = () => {
               <NavLink to="/dashboard/my-gadget">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                 <MdOutlineEventNote></MdOutlineEventNote> My Gadget
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/allorder">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                <IoBagAddSharp /> All Orders
                 </p>
               </NavLink>
 

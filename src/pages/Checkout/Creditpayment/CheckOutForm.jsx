@@ -83,7 +83,8 @@ console.log(checkoutProduct)
           renting_time: 10,
           returning_time:10,
           status:"pending",
-          quantity: product.quantity
+          quantity: product.quantity,
+          orderId: product._id
         }));
         
   

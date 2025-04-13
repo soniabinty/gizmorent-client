@@ -6,10 +6,21 @@ export const fetchorders = createAsyncThunk(
   'order/fetchAll',
   async () => {
     const res = await axios.get('http://localhost:5000/orders');
-    console.log("Fetched orders:", res.data); // 👈 See what's inside
+    console.log("Fetched orders:", res.data); 
     return res.data.requests;
   }
 );
+
+export const updateOrderStatus = createAsyncThunk(
+  'order/updateStatus',
+  async ({ orderId, newStatus }) => {
+    const res = await axios.patch(`http://localhost:5000/orders/${orderId}`, {
+      status: newStatus,
+    });
+    return res.data;
+  }
+);
+
 
 
 const orderSlice = createSlice({
