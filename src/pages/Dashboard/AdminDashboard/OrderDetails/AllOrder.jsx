@@ -2,22 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchorders, updateOrderStatus } from '../../../../Redux/Feature/OrderSlice';
 
-const statusOptions = ['pending', 'ordered', 'on the way', 'delivered', 'returned'];
+const statusOptions = ['pending', 'ordered', 'on the way', 'delivered', 'way to return', 'returned'];
 
 const statusColors = {
-  pending: 'border-gray-400',
-  ordered: 'border-blue-400',
-  'on the way': 'border-yellow-400',
-  delivered: 'border-green-400',
-  returned: 'border-red-400',
+  pending: 'border-yellow-500',
+  ordered: 'border-blue-500',
+  'on the way': 'border-purple-500',
+  delivered: 'border-green-500',
+ 'way to return': 'border-orange-500',
+  returned: 'border-red-500',
 };
 
 const selectedStatusColors = {
-  pending: 'bg-gray-500',
-  ordered: 'bg-blue-500',
-  'on the way': 'bg-yellow-500',
-  delivered: 'bg-green-500',
-  returned: 'bg-red-500',
+  pending: 'bg-yellow-500 border-yellow-500',
+  ordered: 'bg-blue-500 border-blue-500',
+  'on the way': 'bg-purple-500 border-purple-500',
+  delivered: 'bg-green-500 border-green-500',
+  'way to return': 'border-orange-500 bg-orange-500',
+  returned: 'bg-red-500 border-red-500',
 };
 
 const AllOrder = () => {
@@ -30,6 +32,10 @@ const AllOrder = () => {
   }, [dispatch]);
 
   const handleStatusChange = (orderId, status) => {
+    const currentIndex = statusOptions.indexOf(selectedStatuses[orderId] || orders.find(o => o._id === orderId)?.status);
+    const newIndex = statusOptions.indexOf(status);
+    if (newIndex < currentIndex) return; 
+
     setSelectedStatuses((prev) => ({
       ...prev,
       [orderId]: status,
@@ -38,7 +44,6 @@ const AllOrder = () => {
     dispatch(updateOrderStatus({ orderId, newStatus: status }));
   };
 
-  // Function to return all statuses up to the selected one (inclusive)
   const getSelectedStatusesUpTo = (status) => {
     const index = statusOptions.indexOf(status);
     return statusOptions.slice(0, index + 1);
@@ -54,12 +59,7 @@ const AllOrder = () => {
         <div className="grid grid-cols-1 gap-4">
           {orders.map((order) => {
             const selectedStatus = selectedStatuses[order._id] || order.status;
-            const selectedStatusList = getSelectedStatusesUpTo(selectedStatus);
-
-            // Ensure 'pending' is always included in the selected list
-            const finalSelectedStatusList = selectedStatusList.includes('pending') 
-              ? selectedStatusList 
-              : ['pending', ...selectedStatusList];
+            const filledStatusList = getSelectedStatusesUpTo(selectedStatus);
 
             return (
               <div key={order._id} className="border border-gray-300 flex gap-4 flex-col p-4 rounded shadow">
@@ -67,47 +67,40 @@ const AllOrder = () => {
                   <img
                     src={order.product_img}
                     alt={order.product_name}
-                    className="w-50 object-cover rounded mb-2"
+                    className="w-48 h-auto object-cover rounded mb-2"
                   />
-                  <div className='flex justify-between'>
+                  <div className='flex flex-col justify-between'>
                     <div>
                       <h3 className="text-lg font-bold">{order.product_name}</h3>
                       <p><strong>Customer:</strong> {order.customer_name}</p>
                       <p><strong>Email:</strong> {order.customer_email}</p>
                       <p><strong>Phone:</strong> {order.customer_phone}</p>
                       <p><strong>Address:</strong> {order.customer_address}</p>
-                      <p><strong>Amount:</strong> {order.amount}</p>
+                      <p><strong>Amount:</strong> ${order.amount}</p>
                       <p><strong>Quantity:</strong> {order.quantity}</p>
-                      <p><strong>Renting Time:<br /></strong>From: {order.renting_time}</p>
+                      <p><strong>Renting Time:</strong> <br />From: {order.renting_time}</p>
                       <p>To: {order.returning_time}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex  gap-3 flex-wrap">
-                  <div className="radio-status-wrapper text-start">
-                    {statusOptions.map((status) => {
-                      const isSelected = finalSelectedStatusList.includes(status);
-                      const borderClass = statusColors[status]; // Default border color
-                      const selectedClass = isSelected ? selectedStatusColors[status] : ''; // Background when selected
-
-                      return (
-                        <label
-                          key={status}
-                          className={`radio-status flex items-center gap-2 p-2 rounded-full cursor-pointer ${borderClass}`}
-                        >
-                          <input
-                            type="radio"
-                            name={`status-${order._id}`}
-                            checked={selectedStatus === status}
-                            onChange={() => handleStatusChange(order._id, status)}
-                            className={`form-radio h-5 w-5 ${selectedClass}`}
-                          />
-                          <span className="capitalize text-base">{status}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
+                <div className="flex gap-3 flex-wrap justify-center">
+                  {statusOptions.map((status) => {
+                    const isFilled = filledStatusList.includes(status);
+                    return (
+                      <label key={status} className="flex items-center gap-1 cursor-pointer">
+                        <input
+                          type="radio"
+                          name={`status-${order._id}`}
+                          checked={selectedStatus === status}
+                          onChange={() => handleStatusChange(order._id, status)}
+                          className={`radio w-6 h-6 rounded-full border-2 transition-colors duration-300
+                            ${isFilled ? selectedStatusColors[status] : 'bg-white border-gray-400'}`}
+                        />
+                        <span className="capitalize">{status}</span>
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
             );
