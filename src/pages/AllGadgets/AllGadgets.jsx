@@ -9,7 +9,9 @@ import FilterPrice from "./FilterPrice";
 
 const AllGadgets = () => {
   const dispatch = useDispatch();
-  const { gadgets, filters, loading, error, pagination } = useSelector((state) => state.gadgets);
+  const { gadgets, filters, loading, error, pagination } = useSelector(
+    (state) => state.gadgets
+  );
 
   useEffect(() => {
     dispatch(fetchGadgets({ ...filters, page: pagination.currentPage }));
@@ -24,7 +26,7 @@ const AllGadgets = () => {
   return (
     <div className="max-w-7xl mx-auto p-7">
       <h2 className="text-4xl my-6">All Gadgets</h2>
-      
+
       <div className="md:flex items-center gap-[130px] justify-between">
         <Search />
         <Filter />
@@ -43,40 +45,45 @@ const AllGadgets = () => {
           </div>
 
           {/* Pagination  */}
-          <div className="flex justify-center items-center mt-6 space-x-2">
-            {/* Previous  */}
-            <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              disabled={pagination.currentPage === 1}
-            >
-              Previous
-            </button>
-
-            {/* Page Number */}
-            {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((page) => (
+          {gadgets && (
+            <div className="flex justify-center items-center mt-6 space-x-2">
+              {/* Previous  */}
               <button
-                key={page}
-                className={`px-4 py-2 rounded-lg ${
-                  pagination.currentPage === page
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-700"
-                }`}
-                onClick={() => handlePageChange(page)}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
+                onClick={() => handlePageChange(pagination.currentPage - 1)}
+                disabled={pagination.currentPage === 1}
               >
-                {page}
+                Previous
               </button>
-            ))}
 
-            {/* Next  */}
-            <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              disabled={pagination.currentPage >= pagination.totalPages}
-            >
-              Next
-            </button>
-          </div>
+              {/* Page Number */}
+              {Array.from(
+                { length: pagination.totalPages },
+                (_, i) => i + 1
+              ).map((page) => (
+                <button
+                  key={page}
+                  className={`px-4 py-2 rounded-lg ${
+                    pagination.currentPage === page
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))}
+
+              {/* Next  */}
+              <button
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
+                onClick={() => handlePageChange(pagination.currentPage + 1)}
+                disabled={pagination.currentPage >= pagination.totalPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="col-span-1">
