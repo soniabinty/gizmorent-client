@@ -58,8 +58,6 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-            
-              {/* admin dash */}
               <NavLink to="/dashboard/adminhome">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <BsFillHouseAddFill></BsFillHouseAddFill> Home
@@ -75,11 +73,14 @@ const Sidebar = () => {
                 <MdOutlineEventNote></MdOutlineEventNote> My Gadget
                 </p>
               </NavLink>
+
+
               <NavLink to="/dashboard/allorder">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                 <IoBagAddSharp /> All Orders
                 </p>
               </NavLink>
+
 
               <NavLink to="/dashboard/renterapprove">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
