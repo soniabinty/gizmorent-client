@@ -4,15 +4,5 @@
 @theme {
   --color-Primary: #ff6b00;
   --color-Secondary: #005f73;
-  --color-Accent: #ffd166;
-};
-
-.radio-status-wrapper {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  width: 100%;
+  --color-Accent: #ffd166;
 }
