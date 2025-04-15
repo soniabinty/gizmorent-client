@@ -56,7 +56,11 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               {/*  Menu Items */}
-
+              <NavLink to="/dashboard/adminhome">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <BsFillHouseAddFill></BsFillHouseAddFill> Home
+                </p>
+              </NavLink>
               <NavLink to="/dashboard/add-gadget">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <BsFillHouseAddFill></BsFillHouseAddFill> Add Gadget
@@ -68,11 +72,7 @@ const Sidebar = () => {
                 </p>
               </NavLink>
               {/* admin dash */}
-              <NavLink to="/dashboard/adminhome">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <BsFillHouseAddFill></BsFillHouseAddFill> Home
-                </p>
-              </NavLink>
+
               <NavLink to="/dashboard/renterapprove">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <BsFillHouseAddFill></BsFillHouseAddFill> Renter Approve

@@ -7,6 +7,7 @@ import AboutPage from "../pages/About/AboutPage";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
+import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel";
 import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail";
 import PaymentSuccess from "../pages/Checkout/SSLCommerzService/Success";
@@ -16,28 +17,27 @@ import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/Ren
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
 import PaymentPage from "../pages/Dashboard/PaymentPage";
-import UpdateGadget from "../pages/Dashboard/UpdateGadget";
+import UpdateGadget from "../pages/Dashboard/UpdateGadget.jsx";
 import UserProfiles from "../pages/Dashboard/UserProfile/UserProfiles";
+import ErrorPage from "../pages/ErrorPage";
 import GadgetDetail from "../pages/GadgetDetail/GadgetDetail";
 import Home from "../pages/Home/Home";
 import ForgotPassword from "../pages/Login/ForgotPassword";
 import Login from "../pages/Login/Login";
 import ResetPasswordPage from "../pages/Login/ResetPasswordPage";
 import PackagePage from "../pages/Package/PackagePage";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import Register from "../pages/Register/Register";
 import CartList from "../pages/Shopping/CartList";
 import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
-import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
-
-
-
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -92,6 +92,22 @@ export const router = createBrowserRouter([
         path: "/pricing",
         element: <PackagePage></PackagePage>,
       },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment-cancel",
+        element: <PaymentCancel />,
+      },
+      {
+        path: "/payment-fail",
+        element: <PaymentFail />,
+      },
     ],
   },
   {
@@ -109,7 +125,14 @@ export const router = createBrowserRouter([
       {
         path: "update-gadget/:id",
         element: <UpdateGadget />,
-        loader: ({ params }) => fetch(`http://localhost:5000/gadgets/${params.id}`),
+        loader: async ({ params }) => {
+          const response = await fetch(`http://localhost:5000/gadgets/${params.id}`);
+          if (!response.ok) {
+            throw new Error(`Gadget not found for ID: ${params.id}`);
+          }
+          const data = await response.json();
+          return data;
+        }
       },
       {
         path: "my-gadget",
@@ -133,18 +156,6 @@ export const router = createBrowserRouter([
         element: <PaymentPage></PaymentPage>
       },
     ],
-  },
-  {
-    path: "/payment-success",
-    element: <PaymentSuccess />,
-  },
-  {
-    path: "/payment-cancel",
-    element: <PaymentCancel />,
-  },
-  {
-    path: "/payment-fail",
-    element: <PaymentFail />,
   },
   {
     path: "/login",

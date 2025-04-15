@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa6";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { uploadImage } from "../../utility/utility";
 
 const UpdateGadget = () => {
-
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
+    const location = useLocation(); // Get location to access the previous route
+    const previousRoute = location.state?.from || "/dashboard/my-gadget"; // Default to "My Gadgets" if no state is passed
+
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [gadget, setGadget] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
@@ -30,12 +32,13 @@ const UpdateGadget = () => {
                 setValue("description", response.data.description);
                 setImagePreview(response.data.image);
             } catch (error) {
-                console.error("Error fetching gadget:", error);
+                Swal("Error", "Gadget not found or an error occurred while fetching data.", error.message);
+                navigate(previousRoute); // Redirect the user to the previous route
             }
         };
 
         fetchGadget();
-    }, [axiosPublic, id, setValue]);
+    }, [axiosPublic, id, setValue, navigate, previousRoute]);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -76,7 +79,7 @@ const UpdateGadget = () => {
 
             await axiosPublic.put(`/gadgets/${id}`, formattedData);
             Swal("Updated!", "Your gadget has been updated.", "success").then(() => {
-                navigate("/my-gadgets");
+                navigate(previousRoute); // Navigate back to the previous route
             });
         } catch (error) {
             console.error("Error updating gadget:", error);

@@ -46,26 +46,6 @@ export const loginUser = createAsyncThunk("auth/login", async ({ email, password
     }
 });
 
-// export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
-//     const userCredential = await signInWithPopup(auth, googleProvider);
-//     const { email, displayName, photoURL } = userCredential.user;
-
-//     console.log("Google login:", email);
-
-//     const response = await axiosPublic.get(`/users?email=${email}`);
-//     console.log("DB check result:", response.data);
-
-//     // Save user only if not found
-//     if (!response.data?._id && !response.data?.email) {
-//         const newUser = { name: displayName, email, photoURL, role: 'user' };
-//         const postResponse = await axiosPublic.post("/users", newUser);
-//         console.log("User saved:", postResponse.data);
-//     } else {
-//         console.log("User already exists in DB");
-//     }
-
-//     return transformUser(userCredential.user);
-// });
 
 export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
     const result = await signInWithPopup(auth, googleProvider);
@@ -110,25 +90,27 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: null,
-        loading: false,
         failedAttempts: 0,
         isLocked: false,
         lockExpiration: null,
         error: null,
-        resetPasswordSuccess: null, // Add this state to track password reset success
+        resetPasswordSuccess: null,
+        authChecked: false,
     },
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload;
+            state.authChecked = true;
         },
         clearUser: (state) => {
             state.user = null;
+            state.authChecked = true;
         },
         incrementFailedAttempts: (state) => {
             state.failedAttempts += 1;
             if (state.failedAttempts >= 3) {
                 state.isLocked = true;
-                state.lockExpiration = Date.now() + 5 * 60 * 1000; // Lock for 5 minutes
+                state.lockExpiration = Date.now() + 5 * 60 * 1000;
             }
         },
         resetFailedAttempts: (state) => {
@@ -136,7 +118,7 @@ const authSlice = createSlice({
             state.isLocked = false;
             state.lockExpiration = null;
         },
-        clearResetPasswordState: (state) => { // Add this reducer
+        clearResetPasswordState: (state) => {
             state.resetPasswordSuccess = null;
             state.error = null;
         },

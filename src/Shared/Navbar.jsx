@@ -280,20 +280,10 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-1 shadow"
               >
                 <li>
-                  <Link to="/wishlist">Wishlist</Link>
-                </li>
-                <li>
-                  <Link to="/cart">Cart</Link>
-                </li>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/allgadgets">All Gadgets</Link>
                 </li>
                 <li>
                   <Link to="/about">About</Link>
-                  <Link to="/AdminDashboard">Admin Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/pricing">Pricing</Link>
@@ -302,10 +292,10 @@ const Navbar = () => {
                   <Link to="/tracking-page">Tracking</Link>
                 </li>
                 <li>
-                  <Link to="/allgadgets">All Gadgets</Link>
+                  <Link to="/renter">Become a Renter</Link>
                 </li>
                 <li>
-                  <Link to="/renter">Become a Renter</Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
               </ul>
             </div>
