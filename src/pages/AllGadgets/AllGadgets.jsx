@@ -43,40 +43,42 @@ const AllGadgets = () => {
           </div>
 
           {/* Pagination  */}
-          <div className="flex justify-center items-center mt-6 space-x-2">
-            {/* Previous  */}
-            <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              disabled={pagination.currentPage === 1}
-            >
-              Previous
-            </button>
+         {
+          gadgets &&  <div className="flex justify-center items-center mt-6 space-x-2">
+          {/* Previous  */}
+          <button
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
+            onClick={() => handlePageChange(pagination.currentPage - 1)}
+            disabled={pagination.currentPage === 1}
+          >
+            Previous
+          </button>
 
-            {/* Page Number */}
-            {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                className={`px-4 py-2 rounded-lg ${
-                  pagination.currentPage === page
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-700"
-                }`}
-                onClick={() => handlePageChange(page)}
-              >
-                {page}
-              </button>
-            ))}
-
-            {/* Next  */}
+          {/* Page Number */}
+          {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((page) => (
             <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              disabled={pagination.currentPage >= pagination.totalPages}
+              key={page}
+              className={`px-4 py-2 rounded-lg ${
+                pagination.currentPage === page
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+              onClick={() => handlePageChange(page)}
             >
-              Next
+              {page}
             </button>
-          </div>
+          ))}
+
+          {/* Next  */}
+          <button
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
+            onClick={() => handlePageChange(pagination.currentPage + 1)}
+            disabled={pagination.currentPage >= pagination.totalPages}
+          >
+            Next
+          </button>
+        </div>
+         }
         </div>
 
         <div className="col-span-1">
