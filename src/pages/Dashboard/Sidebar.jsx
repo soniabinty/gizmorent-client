@@ -2,9 +2,10 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { IoWallet } from "react-icons/io5";
+import { IoBagAddSharp, IoCheckmarkDoneCircleSharp, IoWallet } from "react-icons/io5";
+import { LuNotebookPen } from "react-icons/lu";
 
-import { MdHomeWork } from "react-icons/md";
+import { MdHomeWork, MdOutlineEventNote } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
 
@@ -57,37 +58,45 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-              <NavLink to="/dashboard/add-gadget">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <BsFillHouseAddFill></BsFillHouseAddFill> Add Gadget
-                </p>
-              </NavLink>
-              <NavLink to="/dashboard/my-gadget">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <MdHomeWork></MdHomeWork> My Gadget
-                </p>
-              </NavLink>
+            
               {/* admin dash */}
               <NavLink to="/dashboard/adminhome">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <BsFillHouseAddFill></BsFillHouseAddFill> Home
                 </p>
               </NavLink>
+              <NavLink to="/dashboard/add-gadget">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                <LuNotebookPen /> Add Gadget
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/my-gadget">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                <MdOutlineEventNote></MdOutlineEventNote> My Gadget
+                </p>
+              </NavLink>
+              <NavLink to="/dashboard/allorder">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                <IoBagAddSharp /> All Orders
+                </p>
+              </NavLink>
+
               <NavLink to="/dashboard/renterapprove">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <BsFillHouseAddFill></BsFillHouseAddFill> Renter Approve
+                <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>Renter Approve
                 </p>
               </NavLink>
-              <NavLink to="/dashboard/userprofile">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <FaRegCircleUser></FaRegCircleUser> Uaer Profile
-                </p>
-              </NavLink>
-              <NavLink to="/dashboard/payment-history">
+          
+              {/* <NavLink to="/dashboard/payment-history">
                 <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                   <IoWallet></IoWallet> Payment History
                 </p>
-              </NavLink>
+              </NavLink> */}
+              {/* <NavLink to="/dashboard/orders">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <FaRegCircleUser></FaRegCircleUser> Al Orders
+                </p>
+              </NavLink> */}
             </nav>
           </div>
         </div>
