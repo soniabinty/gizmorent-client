@@ -1,78 +1,47 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrdersByEmail } from "../../Redux/Feature/OrderSlice";
 
 export default function OrderForm() {
-    const [order, setOrder] = useState({ orderId: "", email: "" });
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const orders = useSelector((state) => state.order.orders); // Correct state reference
 
-    const handleChange = (e) => {
-        setOrder({ ...order, [e.target.name]: e.target.value });
-    };
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(fetchOrdersByEmail(user.email));  // Fetch orders based on the logged-in user's email
+    }
+  }, [dispatch, user?.email]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (order.orderId !== "12345" || order.email !== "test@example.com") {
-            Swal.fire({
-                icon: "error",
-                title: "Order Not Found",
-                text: "Please check your Order ID and Email and try again.",
-            });
-            return;
-        }
-        Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "Your order has been placed successfully!",
-        }).then(() => {
-            navigate("/tracking-page");
-        });
-    };
+  // Filter the orders by the user's email
+  const filteredOrders = orders.filter((order) => order.customer_email === user?.email);
 
-    return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-gray-50 p-8 shadow-md rounded-lg w-full max-w-xl">
-                <p className="text-gray-600 mb-4">
-                    To place your order, enter your Order ID and Billing Email below.
-                    Ensure the details are correct before proceeding.
-                </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-1">Order ID</label>
-                        <input
-                            type="text"
-                            name="orderId"
-                            value={order.orderId}
-                            onChange={handleChange}
-                            placeholder="Found in your order confirmation email."
-                            className="w-full p-2 border border-gray-300 rounded"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-1">Billing Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={order.email}
-                            onChange={handleChange}
-                            placeholder="Email you used during checkout."
-                            className="w-full p-2 border border-gray-300 rounded"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600"
-                    >
-                        PLACE ORDER
-                    </button>
-                </form>
-                <p className="text-gray-500 text-sm mt-4">
-                    By placing an order, you agree to our <a href="#" className="text-blue-500">Terms & Conditions</a> and
-                    <a href="#" className="text-blue-500"> Privacy Policy</a>.
-                </p>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex flex-col items-center min-h-screen bg-gray-100 p-8">
+        <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
+
+        {filteredOrders.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
+            {filteredOrders.map((order) => (
+              <div key={order._id} className="bg-white p-4 rounded shadow border border-gray-300">
+                <h3 className="text-lg font-bold mb-2">{order.product_name}</h3>
+                <img
+                  src={order.product_img}
+                  alt={order.product_name}
+                  className="w-full h-48 object-cover rounded mb-3"
+                />
+                <p><strong>Amount:</strong> ₹{order.amount}</p>
+                <p><strong>Quantity:</strong> {order.quantity}</p>
+                <p><strong>Status:</strong> <span className="capitalize">{order.status}</span></p>
+                <p><strong>Renting:</strong> {order.renting_time} → {order.returning_time}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-600">No orders found.</p>
+        )}
+      </div>
+    </div>
+  );
 }
