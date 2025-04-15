@@ -49,7 +49,7 @@ const MyGadget = () => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/update-gadget/${id}`);
+    navigate(`/dashboard/update-gadget/${id}`);
   };
 
   return (
