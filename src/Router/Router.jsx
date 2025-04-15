@@ -8,9 +8,9 @@ import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
 import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
-import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel";
-import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail";
-import PaymentSuccess from "../pages/Checkout/SSLCommerzService/Success";
+import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel.jsx";
+import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail.jsx";
+import PaymentSuccess from "../pages/Checkout/SSLCommerzService/PaymentSuccess.jsx";
 import AddGadget from "../pages/Dashboard/AddGadget";
 import HomeAdmin from "../pages/Dashboard/AdminDashboard/HomeAdmin";
 import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx';
@@ -96,18 +96,6 @@ export const router = createBrowserRouter([
         path: "/privacy-policy",
         element: <PrivacyPolicy></PrivacyPolicy>,
       },
-      {
-        path: "/payment-success",
-        element: <PaymentSuccess />,
-      },
-      {
-        path: "/payment-cancel",
-        element: <PaymentCancel />,
-      },
-      {
-        path: "/payment-fail",
-        element: <PaymentFail />,
-      },
     ],
   },
   {
@@ -156,6 +144,18 @@ export const router = createBrowserRouter([
         element: <PaymentPage></PaymentPage>
       },
     ],
+  },
+  {
+    path: "/payment-success",
+    element: <PaymentSuccess />,
+  },
+  {
+    path: "/payment-cancel",
+    element: <PaymentCancel />,
+  },
+  {
+    path: "/payment-fail",
+    element: <PaymentFail />,
   },
   {
     path: "/login",
