@@ -15,7 +15,7 @@ const Checkout = () => {
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
-  console.log(bookingDetails)
+  console.log(checkoutProduct)
 
 
 

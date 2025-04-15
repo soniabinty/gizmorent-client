@@ -1,9 +1,10 @@
+import HomeAdmin from "./AdminDashboard/HomeAdmin";
 import RenterDashboardHome from "./RenterDashboardHome";
 
 const DashboardHome = () => {
   return (
     <div>
-      <RenterDashboardHome></RenterDashboardHome>
+    <HomeAdmin></HomeAdmin>
       
     </div>
   );
