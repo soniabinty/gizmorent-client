@@ -1,91 +1,106 @@
-
+import React, { useEffect, useState } from "react";
 import { TbAdjustmentsSearch } from "react-icons/tb";
-const orders = [
-  {
-    id: 1,
-    image: "https://i.ibb.co.com/MDGZ3vbv/Adobe-Express-file-7.png",
-    name: "Macbook Pro 13”",
-    variants: "2 Variants",
-    category: "Laptop",
-    price: "$2399.00",
-    status: "Delivered",
-    statusColor: "badge-success",
-  },
-  {
-    id: 2,
-    image: "https://i.ibb.co.com/zHXPLs2s/Adobe-Express-file-6.png",
-    name: "Apple Watch Ultra",
-    variants: "1 Variant",
-    category: "Watch",
-    price: "$879.00",
-    status: "Pending",
-    statusColor: "badge-warning",
-  },
-  {
-    id: 3,
-    image: "https://i.ibb.co.com/MDGZ3vbv/Adobe-Express-file-7.png",
-    name: "iPhone 15 Pro Max",
-    variants: "2 Variants",
-    category: "SmartPhone",
-    price: "$1869.00",
-    status: "Delivered",
-    statusColor: "badge-success",
-  },
-  {
-    id: 4,
-    image: "https://i.ibb.co.com/zHXPLs2s/Adobe-Express-file-6.png",
-    name: "iPad Pro 3rd Gen",
-    variants: "2 Variants",
-    category: "Electronics",
-    price: "$1699.00",
-    status: "Canceled",
-    statusColor: "badge-error",
-  },
-
-];
+import { Link } from "react-router";
 
 const RecentOrders = () => {
+  const [orders, setOrders] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/recent-Order");
+        const data = await response.json();
+        setOrders(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching recent orders:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Status background color function
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "delivered":
+        return "bg-green-500";
+      case "pending":
+        return "bg-yellow-500";
+      case "returned":
+        return "bg-red-500";
+      case "on the way":
+        return "bg-orange-500";
+      case "way to return":
+        return "bg-blue-500";
+      case "ordered":
+        return "bg-green-400";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
+  // Capitalize each word in the status text
+  const capitalizeFirstLetter = (str) => {
+    if (!str) return "";
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
     <div className="p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Recent Orders</h2>
         <div className="flex space-x-2">
-          <button className="btn btn-outline btn-sm">
-            <span><TbAdjustmentsSearch /></span>Filter
-          </button>
-          <button className="btn btn-outline btn-sm">See all</button>
+        <Link to='/dashboard/allorder'>
+        <button className="btn btn-outline btn-sm">See all</button>
+        </Link>
+        
         </div>
       </div>
 
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="table w-full">
-          {/* Table Head */}
           <thead>
             <tr className="text-gray-500 text-sm">
               <th>Products</th>
-              <th>Category</th>
+              <th>Customer</th>
               <th>Price</th>
               <th>Status</th>
             </tr>
           </thead>
-          {/* Table Body */}
           <tbody>
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-100">
+              <tr key={order._id} className="hover:bg-gray-100">
                 <td className="flex items-center space-x-3 py-2">
-                  <img src={order.image} alt={order.name} className="w-10 h-10 rounded-lg" />
+                  <img
+                    src={order.product_img}
+                    alt={order.product_name}
+                    className="w-10 h-10 rounded-lg"
+                  />
                   <div>
-                    <p className="font-medium">{order.name}</p>
-                    <p className="text-gray-500 text-sm">{order.variants}</p>
+                    <p className="font-medium">{order.product_name}</p>
                   </div>
                 </td>
-                <td>{order.category}</td>
-                <td className="font-semibold">{order.price}</td>
+                <td>{order.customer_name}</td>
+                <td className="font-semibold">${order.amount}</td>
                 <td>
-                  <span className={`badge ${order.statusColor} px-3 py-1 text-sm font-semibold`}>
-                    {order.status}
+                  <span
+                    className={`text-white px-3 py-1 text-sm font-semibold rounded-lg ${getStatusColor(
+                      order.status
+                    )}`}
+                  >
+                    {capitalizeFirstLetter(order.status)}
                   </span>
                 </td>
               </tr>
