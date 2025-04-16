@@ -22,12 +22,13 @@ export const updateOrderStatus = createAsyncThunk(
   }
 );
 
-// fetchOrdersByEmail action
 export const fetchOrdersByEmail = createAsyncThunk("order/fetchOrdersByEmail", async (email) => {
-  const response = await axios.get(`http://localhost:5000/orders?email=${email}`);
-  console.log("Fetched orders by email:", response.data); 
-  return response.data.requests || response.data; 
+  const response = await axios.get(`http://localhost:5000/orders/api?email=${email}`);
+  console.log("Fetched Orders:", response.data); 
+  return response.data || []; 
 });
+
+
 
 const orderSlice = createSlice({
   name: 'order',
@@ -38,7 +39,6 @@ const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // fetch all orders
       .addCase(fetchorders.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -52,7 +52,6 @@ const orderSlice = createSlice({
         state.error = action.error.message || "Unknown error occurred";
       })
 
-      // update order status
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
         const updatedOrder = action.payload;
         const index = state.orders.findIndex(order => order._id === updatedOrder._id);
@@ -61,19 +60,19 @@ const orderSlice = createSlice({
         }
       })
 
-      // fetch orders by email
       .addCase(fetchOrdersByEmail.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchOrdersByEmail.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload; 
+        state.orders = action.payload;
       })
       .addCase(fetchOrdersByEmail.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Unknown error occurred";
       });
+      
   }
 });
 
