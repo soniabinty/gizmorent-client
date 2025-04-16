@@ -77,7 +77,7 @@ console.log(checkoutProduct)
           product_id: product.gadgetId,
           product_img: product.image,
           customer_name: formData?.name,
-          customer_email: formData?.email,
+          email: user.email,
           customer_phone: formData?.phone,
           customer_address: `${formData?.upazila}, ${formData?.district}`,
           renting_time: 10,
