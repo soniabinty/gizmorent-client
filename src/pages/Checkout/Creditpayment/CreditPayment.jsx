@@ -10,7 +10,7 @@ const creditPayment = () => (
   <div className="md:p-8">
    
     <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-      <Elements stripe={stripePromise}> {/* Use the same stripe instance here */}
+      <Elements stripe={stripePromise}> 
         <CheckOutForm />
       </Elements>
     </div>

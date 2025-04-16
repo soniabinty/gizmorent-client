@@ -21,36 +21,7 @@ const Navbar = () => {
   const { displayName, email, photoURL } = user;
 
   // Sample cart and wishlist data
-  const cartItems = [
-    {
-      id: 1,
-      name: "Canon EOS Revel T7",
-      price: "$25",
-      image:
-        "https://i.ibb.co.com/RTN5YDY8/realistic-digital-photo-camera-tripod.png",
-    },
-    {
-      id: 2,
-      name: "iPhone 14 Pro Max",
-      price: "$18",
-      image: "https://i.ibb.co.com/wZw1bjwJ/Adobe-Express-file-7.png",
-    },
-  ];
 
-  const wishlistItems = [
-    {
-      id: 1,
-      name: "Epson 4K Projector",
-      price: "$42",
-      image: "https://i.ibb.co.com/W4NGdTwz/Adobe-Express-file-4.png",
-    },
-    {
-      id: 2,
-      name: "Oculus Quest 3",
-      price: "$35",
-      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
-    },
-  ];
 
   return (
     <div>
@@ -92,83 +63,31 @@ const Navbar = () => {
           </div>
 
           {/* Navbar End (Icons and Dropdowns) */}
-          <div className="navbar-end gap-5">
+          <div className="navbar-end gap-2 md:gap-5">
             {/* Wishlist Dropdown */}
             <div className="dropdown dropdown-end">
-              <label tabIndex="0" className="btn btn-ghost btn-circle">
+             
+                <Link  to="/wishlist">
+             <label tabIndex="0" className="btn btn-ghost btn-circle">
                 <AiOutlineHeart className="text-2xl" />
-              </label>
-              <ul
-                tabIndex="0"
-                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-64 z-50"
-              >
-                <li className="font-semibold text-Primary mb-2">Wishlist</li>
-                {wishlistItems.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      to="/wishlist"
-                      className="flex items-center space-x-4 p-2 hover:bg-gray-100 rounded-lg"
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-10 h-10 object-cover rounded-lg"
-                      />
-                      <div>
-                        <p className="text-sm font-semibold">{item.name}</p>
-                        <p className="text-xs text-gray-600">{item.price}</p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link
-                    to="/wishlist"
-                    className="block text-center text-Primary hover:bg-gray-100 rounded-lg p-2"
-                  >
-                    View All
-                  </Link>
-                </li>
-              </ul>
+                  </label>
+                </Link>
+                
+            
+          
             </div>
 
             {/* Cart Dropdown */}
             <div className="dropdown dropdown-end">
-              <label tabIndex="0" className="btn btn-ghost btn-circle">
-                <AiOutlineShoppingCart className="text-2xl" />
+             
+              <Link to="/cart">
+               <label tabIndex="0" className="btn btn-ghost btn-circle">
+              <AiOutlineShoppingCart className="text-2xl" />
               </label>
-              <ul
-                tabIndex="0"
-                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-64 z-50"
-              >
-                <li className="font-semibold text-Primary mb-2">Cart</li>
-                {cartItems.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      to="/cart"
-                      className="flex items-center space-x-4 p-2 hover:bg-gray-100 rounded-lg"
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-10 h-10 object-cover rounded-lg"
-                      />
-                      <div>
-                        <p className="text-sm font-semibold">{item.name}</p>
-                        <p className="text-xs text-gray-600">{item.price}</p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link
-                    to="/cart"
-                    className="block text-center text-Primary hover:bg-gray-100 rounded-lg p-2"
-                  >
-                    View All
-                  </Link>
-                </li>
-              </ul>
+              </Link>
+                
+              
+             
             </div>
 
             {/* Profile Dropdown */}
@@ -280,20 +199,12 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-1 shadow"
               >
                 <li>
-                  <Link to="/wishlist">Wishlist</Link>
+                  <Link to="/allgadgets">All Gadgets</Link>
                 </li>
-                <li>
-                  <Link to="/cart">Cart</Link>
-                </li>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
+            
+               
                 <li>
                   <Link to="/about">About</Link>
-                  <Link to="/AdminDashboard">Admin Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/pricing">Pricing</Link>
@@ -301,11 +212,12 @@ const Navbar = () => {
                 <li>
                   <Link to="/tracking-page">Tracking</Link>
                 </li>
-                <li>
-                  <Link to="/allgadgets">All Gadgets</Link>
-                </li>
+                
                 <li>
                   <Link to="/renter">Become a Renter</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
               </ul>
             </div>

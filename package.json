@@ -38,6 +38,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-slick": "^0.30.3",
     "recharts": "^2.15.1",
+    "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
     "sweetalert": "^2.1.2",
