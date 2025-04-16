@@ -7,13 +7,13 @@ import AboutPage from "../pages/About/AboutPage";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
-import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
+
 import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel.jsx";
 import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail.jsx";
 import PaymentSuccess from "../pages/Checkout/SSLCommerzService/PaymentSuccess.jsx";
 import AddGadget from "../pages/Dashboard/AddGadget";
 import HomeAdmin from "../pages/Dashboard/AdminDashboard/HomeAdmin";
-import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx';
+import RenterApproval from "../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
 import PaymentPage from "../pages/Dashboard/PaymentPage";
@@ -128,7 +128,7 @@ export const router = createBrowserRouter([
           }
           const data = await response.json();
           return data;
-        }
+
       },
       {
         path: "my-gadget",
@@ -145,11 +145,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "renterapprove",
-        element: <RenterApproval></RenterApproval>
+        element: <RenterApproval></RenterApproval>,
       },
       {
         path: "payment-history",
-        element: <PaymentPage></PaymentPage>
+        element: <PaymentPage></PaymentPage>,
       },
     ],
   },
