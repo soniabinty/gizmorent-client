@@ -2,16 +2,26 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { IoBagAddSharp, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+
+import {
+  IoBagAddSharp,
+  IoCheckmarkDoneCircleSharp,
+  IoWallet,
+} from "react-icons/io5";
+
+
 import { LuNotebookPen } from "react-icons/lu";
 
 import { MdOutlineEventNote } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin";
+import useRenter from "../../Hooks/useRenter";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
-
+  const [isAdmin] = useAdmin();
+  const [isRenter] = useRenter();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -39,8 +49,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
-          }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
+          isActive && "-translate-x-full"
+        }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -58,53 +69,53 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-              <NavLink to="/dashboard/adminhome">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <BsFillHouseAddFill></BsFillHouseAddFill> Home
-                </p>
-              </NavLink>
-              <NavLink to="/dashboard/add-gadget">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <LuNotebookPen /> Add Gadget
-                </p>
-              </NavLink>
-              <NavLink to="/dashboard/my-gadget">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <MdOutlineEventNote></MdOutlineEventNote> My Gadget
-                </p>
-              </NavLink>
+
+              {isAdmin && (
+                <NavLink to="/dashboard/adminhome">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <BsFillHouseAddFill></BsFillHouseAddFill> Home
+                  </p>
+                </NavLink>
+              )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/add-gadget">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <LuNotebookPen /> Add Gadget
+                  </p>
+                </NavLink>
+              )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/my-gadget">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <MdOutlineEventNote></MdOutlineEventNote> My Gadget
+                  </p>
+                </NavLink>
+              )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/allorder">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <IoBagAddSharp /> All Orders
+                  </p>
+                </NavLink>
+              )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/renterapprove">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>
+                    Renter Approve
+                  </p>
+                </NavLink>
+              )}
 
 
-              <NavLink to="/dashboard/allorder">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoBagAddSharp /> All Orders
-                </p>
-              </NavLink>
-
-
-              <NavLink to="/dashboard/renterapprove">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>Renter Approve
-                </p>
-              </NavLink>
-
-              {/* <NavLink to="/dashboard/payment-history">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoWallet></IoWallet> Payment History
-                </p>
-              </NavLink> */}
-
-              <NavLink to="/dashboard/user-profile">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <FaRegCircleUser></FaRegCircleUser> User Profile
-                </p>
-              </NavLink>
             </nav>
           </div>
         </div>
-
-
-      </div >
+      </div>
     </>
   );
 };
