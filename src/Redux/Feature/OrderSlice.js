@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Fetch all pending renter orders
+// Fetch all renter orders
 export const fetchorders = createAsyncThunk(
   'order/fetchAll',
   async () => {
     const res = await axios.get('http://localhost:5000/orders');
     console.log("Fetched orders:", res.data); 
-    return res.data.requests;
+    return res.data.requests; 
   }
 );
 
+// Update order status
 export const updateOrderStatus = createAsyncThunk(
   'order/updateStatus',
   async ({ orderId, newStatus }) => {
@@ -20,6 +21,12 @@ export const updateOrderStatus = createAsyncThunk(
     return res.data;
   }
 );
+
+export const fetchOrdersByEmail = createAsyncThunk("order/fetchOrdersByEmail", async (email) => {
+  const response = await axios.get(`http://localhost:5000/orders/api?email=${email}`);
+  console.log("Fetched Orders:", response.data); 
+  return response.data || []; 
+});
 
 
 
@@ -43,8 +50,29 @@ const orderSlice = createSlice({
       .addCase(fetchorders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Unknown error occurred";
-        console.error("Error fetching orders:", action.error);
+      })
+
+      .addCase(updateOrderStatus.fulfilled, (state, action) => {
+        const updatedOrder = action.payload;
+        const index = state.orders.findIndex(order => order._id === updatedOrder._id);
+        if (index !== -1) {
+          state.orders[index] = updatedOrder;
+        }
+      })
+
+      .addCase(fetchOrdersByEmail.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchOrdersByEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+      })
+      .addCase(fetchOrdersByEmail.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Unknown error occurred";
       });
+      
   }
 });
 
