@@ -81,16 +81,6 @@ const AddGadget = () => {
       <h2 className="text-3xl font-semibold">Add Gadget</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-4">
         <input
-          type="text"
-          {...register("name", { required: "Name is required" })}
-          className="input w-full py-6 rounded-lg"
-          placeholder="Name*"
-          value={user.displayName}
-          readOnly={user}
-        />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-
-        <input
           type="email"
           {...register("email", { required: "Email is required" })}
           className="input w-full py-6 rounded-lg"
@@ -110,12 +100,12 @@ const AddGadget = () => {
 
         <input
           type="text"
-          {...register("productName", { required: "Product Name is required" })}
+          {...register("name", { required: "Product Name is required" })}
           className="input w-full py-6 rounded-lg"
           placeholder="Product Name*"
         />
-        {errors.productName && (
-          <p className="text-red-500">{errors.productName.message}</p>
+        {errors.name && (
+          <p className="text-red-500">{errors.name.message}</p>
         )}
 
         <select

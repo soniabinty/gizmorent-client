@@ -7,11 +7,7 @@ import AboutPage from "../pages/About/AboutPage";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
-<<<<<<< HEAD
 
-=======
-import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
->>>>>>> 9fe6b111a5f4463644d5835532245922cfd54b32
 import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel.jsx";
 import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail.jsx";
 import PaymentSuccess from "../pages/Checkout/SSLCommerzService/PaymentSuccess.jsx";
@@ -37,7 +33,6 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
 
-import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
 
 export const router = createBrowserRouter([
@@ -122,39 +117,25 @@ export const router = createBrowserRouter([
         path: "allorder",
         element: <AllOrder></AllOrder>,
       },
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 9fe6b111a5f4463644d5835532245922cfd54b32
       {
         path: "update-gadget/:id",
         element: <UpdateGadget />,
         loader: async ({ params }) => {
-<<<<<<< HEAD
-          const response = await fetch(
-            `http://localhost:5000/gadgets/${params.id}`
-          );
-=======
           const response = await fetch(`http://localhost:5000/gadgets/${params.id}`);
->>>>>>> 9fe6b111a5f4463644d5835532245922cfd54b32
           if (!response.ok) {
             throw new Error(`Gadget not found for ID: ${params.id}`);
           }
           const data = await response.json();
           return data;
-<<<<<<< HEAD
-        },
-=======
-        }
->>>>>>> 9fe6b111a5f4463644d5835532245922cfd54b32
+
       },
       {
         path: "my-gadget",
         element: <MyGadget />,
       },
       {
-        path: "userprofile",
+        path: "user-profile",
         element: <UserProfiles />,
       },
       // admin

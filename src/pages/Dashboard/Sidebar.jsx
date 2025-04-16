@@ -2,14 +2,17 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegCircleUser } from "react-icons/fa6";
+
 import {
   IoBagAddSharp,
   IoCheckmarkDoneCircleSharp,
   IoWallet,
 } from "react-icons/io5";
+
+
 import { LuNotebookPen } from "react-icons/lu";
 
-import { MdHomeWork, MdOutlineEventNote } from "react-icons/md";
+import { MdOutlineEventNote } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
@@ -66,6 +69,7 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
+
               {isAdmin && (
                 <NavLink to="/dashboard/adminhome">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -107,16 +111,7 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-              {/* <NavLink to="/dashboard/payment-history">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoWallet></IoWallet> Payment History
-                </p>
-              </NavLink> */}
-              {/* <NavLink to="/dashboard/orders">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <FaRegCircleUser></FaRegCircleUser> Al Orders
-                </p>
-              </NavLink> */}
+
             </nav>
           </div>
         </div>
