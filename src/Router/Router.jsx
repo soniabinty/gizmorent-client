@@ -129,7 +129,7 @@ export const router = createBrowserRouter([
           const data = await response.json();
           return data;
 
-      },
+      }},
       {
         path: "my-gadget",
         element: <MyGadget />,
