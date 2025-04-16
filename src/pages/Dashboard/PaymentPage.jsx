@@ -13,7 +13,7 @@ const PaymentPage = () => {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await axiosPublic.get("/initiate-payment");
+                const response = await axiosPublic.get("/orders");
                 setPayments(response.data);
             } catch (err) {
                 setError("Failed to fetch payments. Please try again.");
@@ -25,31 +25,7 @@ const PaymentPage = () => {
         fetchPayments();
     }, [axiosPublic]);
 
-    // Handle status update
-    const handleStatusUpdate = async (transactionId) => {
-        try {
-            const response = await axiosPublic.post("/update-payment-status", {
-                transactionId,
-                status: "Successful",
-            });
 
-            if (response.data.success) {
-                setPayments((prevPayments) =>
-                    prevPayments.map((payment) =>
-                        payment.transactionId === transactionId
-                            ? { ...payment, status: "Successful" }
-                            : payment
-                    )
-                );
-                alert("Payment status updated successfully");
-            } else {
-                alert(response.data.error || "Failed to update the payment status");
-            }
-        } catch (err) {
-            console.error(err);
-            alert("An error occurred while updating the payment status");
-        }
-    };
 
     // Render table
     return (
@@ -66,11 +42,9 @@ const PaymentPage = () => {
                             <tr>
                                 <th className="text-Primary">#</th>
                                 <th className="text-Primary">Transaction ID</th>
-                                <th className="text-Primary">Customer Name</th>
+                                <th className="text-Primary">Customer Email</th>
                                 <th className="text-Primary">Amount</th>
-                                <th className="text-Primary">Status</th>
                                 <th className="text-Primary">Date</th>
-                                <th className="text-Primary">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,28 +52,11 @@ const PaymentPage = () => {
                                 <tr key={payment.transactionId}>
                                     <th>{index + 1}</th>
                                     <td>{payment.transactionId}</td>
-                                    <td>{payment.customer?.cus_name || "N/A"}</td>
+                                    <td>{payment.email || "N/A"}</td>
                                     <td>{payment.amount.toFixed(2)}</td>
-                                    <td
-                                        className={
-                                            payment.status === "Successful"
-                                                ? "text-green-500"
-                                                : "text-red-500"
-                                        }
-                                    >
-                                        {payment.status}
-                                    </td>
+
                                     <td>{new Date(payment.date).toLocaleString()}</td>
-                                    <td>
-                                        {payment.status === "Pending" && (
-                                            <button
-                                                onClick={() => handleStatusUpdate(payment.transactionId)}
-                                                className="btn bg-Primary text-white btn-sm"
-                                            >
-                                                Mark as Successful
-                                            </button>
-                                        )}
-                                    </td>
+
                                 </tr>
                             ))}
                         </tbody>

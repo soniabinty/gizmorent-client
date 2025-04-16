@@ -1,42 +1,51 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { auth } from "../Firebase/firebase.config.js";
+import OfferModal from "../pages/Home/OfferModal.jsx";
 import { clearUser, setUser } from "../Redux/authSlice";
 import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
 import NavCategory from "../Shared/NavCategory";
-import OfferModal from "../pages/Home/OfferModal.jsx";
-
 const Root = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const authChecked = useSelector((state) => state.auth.authChecked);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, set the user in Redux
-        dispatch(
-          setUser({
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          })
-        );
+        dispatch(setUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          providerId: user.providerData[0]?.providerId || "password",
+        }));
+
       } else {
-        // User is signed out, clear the user in Redux
         dispatch(clearUser());
       }
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, [dispatch]);
 
+
+  if (!authChecked) {
+    console.log("Auth state not checked yet...");
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
+
+
   return (
-    <div className="font-sans relative ">
+    <div className="font-sans relative">
       {isModalOpen && (
         <div className="fixed z-50 inset-0 ">
           <OfferModal setIsModalOpen={setIsModalOpen} />
