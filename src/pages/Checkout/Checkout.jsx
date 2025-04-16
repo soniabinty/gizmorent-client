@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { setFormData } from "../../Redux/Feature/checkoutSlice"; // path as needed
+import { setFormData } from "../../Redux/Feature/checkoutSlice"; 
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
 
@@ -39,11 +39,8 @@ const Checkout = () => {
     if (data.paymentMethod === "Credit Card") {
       navigate("/creditpayment");
       return;
-    } else if (data.paymentMethod === "Bank Transfer") {
-      alert("Bank Transfer is currently not supported.");
-      return;
-    }
-
+    } 
+    
     if (!paymentDetails?.total) {
       alert("Invalid payment amount. Please check your cart.");
       return;
@@ -76,8 +73,6 @@ const Checkout = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
-
-  const paymentMethod = watch("paymentMethod");
 
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
@@ -154,17 +149,7 @@ const Checkout = () => {
                     <span>SSLCommerz</span>
                   </label>
 
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      {...register("paymentMethod", {
-                        required: "Please select a payment method",
-                      })}
-                      value="Bank Transfer"
-                      className="form-radio h-5 w-5 text-blue-600"
-                    />
-                    <span>Bank Transfer</span>
-                  </label>
+               
                 </div>
 
                 {errors.paymentMethod && (
