@@ -7,7 +7,7 @@ import AboutPage from "../pages/About/AboutPage";
 import AllGadgets from "../pages/AllGadgets/AllGadgets";
 import Renter from "../pages/BecomeRenter/Renter";
 import Checkout from "../pages/Checkout/Checkout";
-
+import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 import PaymentCancel from "../pages/Checkout/SSLCommerzService/PaymentCancel.jsx";
 import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail.jsx";
 import PaymentSuccess from "../pages/Checkout/SSLCommerzService/PaymentSuccess.jsx";
@@ -129,7 +129,8 @@ export const router = createBrowserRouter([
           const data = await response.json();
           return data;
 
-      },
+      }},
+
       {
         path: "my-gadget",
         element: <MyGadget />,
