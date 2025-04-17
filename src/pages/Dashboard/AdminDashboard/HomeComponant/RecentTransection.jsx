@@ -1,73 +1,51 @@
+import React, { useEffect, useState } from "react";
 
-import { TbAdjustmentsSearch } from "react-icons/tb";
-const Transection = [
-  {
-    id: 1,
-   company: "Rentio GanZ”",
-   amount: "$2399.00",
-    status: "Pending",
-    statusColor: "badge-warning",
-  },
-  {
-    id: 2,
-   company: "Gadget Ultra",
-   amount: "$879.00",
-    status: "Pending",
-    statusColor: "badge-warning",
-  },
-  {
-    id: 3,
-  company: " Pro Max",
-   amount: "$1869.00",
-    status: "Success",
-    statusColor: "badge-success",
-  },
-  {
-    id: 4,
-    company: "Maxixo Gadget",
-   amount: "$1699.00",
-   status: "Pending",
-   statusColor: "badge-warning",
-  },
-  {
-    id: 5,
-    company: "IPhoneWala",
-   amount: "$240.00",
-    status: "Success",
-    statusColor: "badge-success",
-  },
-];
+const RecentPayments = () => {
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const RecentTransection = () => {
+  useEffect(() => {
+    const fetchPayments = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/recent-payment");
+        const data = await response.json();
+        setPayments(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching recent payments:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPayments();
+  }, []);
+
+  if (loading) {
+    return <div>Loading payments...</div>;
+  }
+
   return (
     <div className="p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Recent Transections</h2>
-       
-      </div>
-
-      {/* Table */}
+      <h2 className="text-2xl font-semibold mb-4">Recent Payments</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
-          {/* Table Head */}
           <thead>
             <tr className="text-gray-500 text-sm">
-              <th>Company</th>
+              <th>Email</th>
               <th>Amount</th>
+              <th>Transaction ID</th>
               <th>Status</th>
             </tr>
           </thead>
-          {/* Table Body */}
           <tbody>
-            {Transection.map((transection) => (
-              <tr key={transection.id} className="hover:bg-gray-100">
-               
-                <td className="font-semibold">{transection.company}</td>
-                <td className="font-semibold">{transection.amount}</td>
-                <td>
-                  <span className={`badge ${transection.statusColor} px-3 py-1 text-sm font-semibold`}>
-                    {transection.status}
+            {payments.map((payment) => (
+              <tr key={payment._id} className="hover:bg-gray-100">
+                <td>{payment.email}</td>
+                <td className="font-semibold">${payment.amount}</td>
+                <td>{payment.transactionId}</td>
+                <td className="py-2 px-4">
+                  <span className="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded">
+                    Success
                   </span>
                 </td>
               </tr>
@@ -79,4 +57,4 @@ const RecentTransection = () => {
   );
 };
 
-export default RecentTransection;
+export default RecentPayments;

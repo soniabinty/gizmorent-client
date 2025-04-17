@@ -39,11 +39,8 @@ const Checkout = () => {
     if (data.paymentMethod === "Credit Card") {
       navigate("/creditpayment");
       return;
-    } else if (data.paymentMethod === "SSLCommerz") {
-      alert("Bank Transfer is currently not supported.");
-      return;
-    }
-
+    } 
+    
     if (!paymentDetails?.total) {
       alert("Invalid payment amount. Please check your cart.");
       return;
@@ -76,8 +73,6 @@ const Checkout = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
-
-  const paymentMethod = watch("paymentMethod");
 
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
