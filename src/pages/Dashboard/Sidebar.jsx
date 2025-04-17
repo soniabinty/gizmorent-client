@@ -9,7 +9,6 @@ import {
   IoWallet,
 } from "react-icons/io5";
 
-
 import { LuNotebookPen } from "react-icons/lu";
 
 import { MdOutlineEventNote } from "react-icons/md";
@@ -69,7 +68,6 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-
               {isAdmin && (
                 <NavLink to="/dashboard/adminhome">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -111,7 +109,12 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-
+              <NavLink to="/dashboard/userprofile">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>
+                  Profile
+                </p>
+              </NavLink>
             </nav>
           </div>
         </div>
