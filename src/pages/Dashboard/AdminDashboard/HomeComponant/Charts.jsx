@@ -13,42 +13,30 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const Charts = () => {
-  const data = [
-    { name: "Jan", value: 150 },
-    { name: "Feb", value: 380 },
-    { name: "Mar", value: 200 },
-    { name: "Apr", value: 300 },
-    { name: "May", value: 180 },
-    { name: "Jun", value: 190 },
-    { name: "Jul", value: 210 },
-    { name: "Aug", value: 90 },
-    { name: "Sep", value: 220 },
-    { name: "Oct", value: 400 },
-    { name: "Nov", value: 230 },
-    { name: "Dec", value: 100 },
-  ];
   const axiosSecure = useAxiosSecure();
   const [avatars, setAvatars] = useState([]);
   const [addedLastMonth, setAddedLastMonth] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [chartData, setChartData] = useState([]);
+  const [ordersData, setOrdersData] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       const res = await axiosSecure.get("/new-users");
       const data = res.data;
-      setAvatars(data.users.slice(0, 3)); // show only 3 avatars
+      setAvatars(data.users.slice(0, 3));
       setAddedLastMonth(data.addedLastMonth);
       setTotalUsers(data.totalNewUsers);
       setChartData(data.chart);
+      const orderRes = await axiosSecure.get("/monthly-order");
+      setOrdersData(orderRes.data);
     };
 
-    fetchUsers();
-  }, [axiosPubic]);
+    fetchData();
+  }, [axiosSecure]);
 
   return (
     <div className="flex flex-col md:flex-row gap-8 mt-12">
@@ -58,7 +46,7 @@ const Charts = () => {
           <h2 className="text-2xl font-semibold mb-4">Monthly Sales</h2>
           <div className="w-full h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
+              <BarChart data={ordersData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
