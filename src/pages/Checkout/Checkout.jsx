@@ -70,8 +70,6 @@ const Checkout = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
-  const paymentMethod = watch("paymentMethod");
-
   return (
     <div className="max-w-7xl mx-auto px-5 mb-6">
       <h2 className="text-4xl font-semibold mb-4">Checkout</h2>

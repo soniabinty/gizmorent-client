@@ -115,6 +115,14 @@ const Sidebar = () => {
                   Profile
                 </p>
               </NavLink>
+              {isAdmin && (
+                <NavLink to="/dashboard/payment-history">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <IoWallet></IoWallet>
+                    Payment
+                  </p>
+                </NavLink>
+              )}
             </nav>
           </div>
         </div>
