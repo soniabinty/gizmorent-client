@@ -23,10 +23,10 @@ const Footer = () => {
                         <ul className="mt-3 space-y-2">
                             {[
                                 { name: "Home", link: "/" },
-                                { name: "Browse Gadgets", link: "/browse" },
+                                { name: "Browse Gadgets", link: "/allgadgets" },
                                 { name: "Pricing", link: "/pricing" },
                                 { name: "About", link: "/about" },
-                                { name: "Contact Us", link: "/contact" }
+                                { name: "Contact Us", link: "/contact-us" }
                             ].map((linkItem, index) => (
                                 <li key={index}>
                                     <a href={linkItem.link} className="hover:text-Primary transition">{linkItem.name}</a>
@@ -43,7 +43,7 @@ const Footer = () => {
                                 { name: "Instant Rental Confirmation", link: "#" },
                                 { name: "Secure Payments", link: "#" },
                                 { name: "Flexible Rental Periods", link: "#" },
-                                { name: "Verified Users", link: "#" }
+                                { name: "Write Review", link: "/reviews" }
                             ].map((service, index) => (
                                 <li key={index}>
                                     <a href={service.link} className="hover:text-Primary transition">{service.name}</a>
@@ -55,8 +55,8 @@ const Footer = () => {
                     {/* Column 4 - Contact Info */}
                     <div>
                         <h2 className="text-xl font-semibold text-white">Contact Us</h2>
-                        <p className="mt-3 text-gray-400 flex items-center gap-2"><FaLocationDot></FaLocationDot> 1234 Gadget Street, Tech City, USA</p>
-                        <p className="text-gray-400 flex items-center gap-2"><IoCallOutline></IoCallOutline> +1 234 567 890</p>
+                        <p className="mt-3 text-gray-400 flex items-center gap-2"><FaLocationDot></FaLocationDot>House 42, Dhanmondi Dhaka 1209, Bangladesh</p>
+                        <p className="text-gray-400 flex items-center gap-2"><IoCallOutline></IoCallOutline> +880 1777-123456</p>
                         <p className="text-gray-400 flex items-center gap-2"><IoMdMailOpen /> support@gizmorent.com</p>
                         <div className="flex gap-4 mt-3">
                             <a href="#" className="hover:text-Primary transition">Facebook</a>

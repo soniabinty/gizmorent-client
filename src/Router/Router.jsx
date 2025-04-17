@@ -13,7 +13,7 @@ import PaymentFail from "../pages/Checkout/SSLCommerzService/PaymentFail.jsx";
 import PaymentSuccess from "../pages/Checkout/SSLCommerzService/PaymentSuccess.jsx";
 import AddGadget from "../pages/Dashboard/AddGadget";
 import HomeAdmin from "../pages/Dashboard/AdminDashboard/HomeAdmin";
-import RenterApproval from '../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx';
+import RenterApproval from "../pages/Dashboard/AdminDashboard/RenterApproval/RenterApproval.jsx";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import MyGadget from "../pages/Dashboard/MyGadget";
 import PaymentPage from "../pages/Dashboard/PaymentPage";
@@ -33,7 +33,9 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
 
+import Contact from "../pages/Contact/ContactUs";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
+import Reviews from "../pages/Review/Review";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +100,14 @@ export const router = createBrowserRouter([
         path: "/privacy-policy",
         element: <PrivacyPolicy></PrivacyPolicy>,
       },
+      {
+        path: "/reviews",
+        element: <Reviews></Reviews>,
+      },
+      {
+        path: "/contact-us",
+        element: <Contact></Contact>,
+      }
     ],
   },
   {
@@ -128,8 +138,10 @@ export const router = createBrowserRouter([
           }
           const data = await response.json();
           return data;
+
         }
       },
+
       {
         path: "my-gadget",
         element: <MyGadget />,
@@ -145,11 +157,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "renterapprove",
-        element: <RenterApproval></RenterApproval>
+        element: <RenterApproval></RenterApproval>,
       },
       {
         path: "payment-history",
-        element: <PaymentPage></PaymentPage>
+        element: <PaymentPage></PaymentPage>,
       },
     ],
   },

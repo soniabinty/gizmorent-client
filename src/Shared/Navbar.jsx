@@ -66,28 +66,28 @@ const Navbar = () => {
           <div className="navbar-end gap-2 md:gap-5">
             {/* Wishlist Dropdown */}
             <div className="dropdown dropdown-end">
-             
-                <Link  to="/wishlist">
-             <label tabIndex="0" className="btn btn-ghost btn-circle">
-                <AiOutlineHeart className="text-2xl" />
-                  </label>
-                </Link>
-                
-            
-          
+
+              <Link to="/wishlist">
+                <label tabIndex="0" className="btn btn-ghost btn-circle">
+                  <AiOutlineHeart className="text-2xl" />
+                </label>
+              </Link>
+
+
+
             </div>
 
             {/* Cart Dropdown */}
             <div className="dropdown dropdown-end">
-             
+
               <Link to="/cart">
-               <label tabIndex="0" className="btn btn-ghost btn-circle">
-              <AiOutlineShoppingCart className="text-2xl" />
-              </label>
+                <label tabIndex="0" className="btn btn-ghost btn-circle">
+                  <AiOutlineShoppingCart className="text-2xl" />
+                </label>
               </Link>
-                
-              
-             
+
+
+
             </div>
 
             {/* Profile Dropdown */}
@@ -201,8 +201,8 @@ const Navbar = () => {
                 <li>
                   <Link to="/allgadgets">All Gadgets</Link>
                 </li>
-            
-               
+
+
                 <li>
                   <Link to="/about">About</Link>
                 </li>
@@ -212,12 +212,15 @@ const Navbar = () => {
                 <li>
                   <Link to="/tracking-page">Tracking</Link>
                 </li>
-                
+
                 <li>
                   <Link to="/renter">Become a Renter</Link>
                 </li>
                 <li>
                   <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link to="/reviews">Reviews</Link>
                 </li>
               </ul>
             </div>

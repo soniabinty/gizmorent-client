@@ -4,8 +4,7 @@ import RenterDashboardHome from "./RenterDashboardHome";
 const DashboardHome = () => {
   return (
     <div>
-    <HomeAdmin></HomeAdmin>
-      
+      <HomeAdmin></HomeAdmin>
     </div>
   );
 };
