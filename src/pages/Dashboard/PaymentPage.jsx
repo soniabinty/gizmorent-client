@@ -13,7 +13,7 @@ const PaymentPage = () => {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await axiosPublic.get("/orders");
+                const response = await axiosPublic.get("/payments");
                 setPayments(response.data);
             } catch (err) {
                 setError("Failed to fetch payments. Please try again.");
