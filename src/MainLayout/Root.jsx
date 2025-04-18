@@ -8,6 +8,7 @@ import { clearUser, setUser } from "../Redux/authSlice";
 import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
 import NavCategory from "../Shared/NavCategory";
+import WhatsAppWidget from "../Shared/WhatsAppWidget.jsx";
 const Root = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -16,14 +17,15 @@ const Root = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          providerId: user.providerData[0]?.providerId || "password",
-        }));
-
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            providerId: user.providerData[0]?.providerId || "password",
+          })
+        );
       } else {
         dispatch(clearUser());
       }
@@ -31,7 +33,6 @@ const Root = () => {
 
     return () => unsubscribe();
   }, [dispatch]);
-
 
   if (!authChecked) {
     console.log("Auth state not checked yet...");
@@ -41,8 +42,6 @@ const Root = () => {
       </div>
     );
   }
-
-
 
   return (
     <div className="font-sans relative">
@@ -62,6 +61,7 @@ const Root = () => {
           <Outlet />
         </div>
         <div>
+          <WhatsAppWidget></WhatsAppWidget>
           <Footer />
         </div>
       </div>
