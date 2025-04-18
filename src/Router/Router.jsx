@@ -36,6 +36,7 @@ import TrackingPage from "../pages/TrackingPage/TrackingPage";
 import Contact from "../pages/Contact/ContactUs";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
 import Reviews from "../pages/Review/Review";
+import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
 
 export const router = createBrowserRouter([
   {
@@ -101,13 +102,21 @@ export const router = createBrowserRouter([
         element: <PrivacyPolicy></PrivacyPolicy>,
       },
       {
+        path: "/terms-and-condition",
+        element: <TermsAndCondition></TermsAndCondition>,
+      },
+      {
         path: "/reviews",
         element: <Reviews></Reviews>,
       },
       {
         path: "/contact-us",
         element: <Contact></Contact>,
-      }
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfiles />,
+      },
     ],
   },
   {

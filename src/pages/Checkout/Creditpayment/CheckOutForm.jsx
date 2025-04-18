@@ -84,7 +84,8 @@ console.log(checkoutProduct)
           returning_time:10,
           status:"pending",
           quantity: product.quantity,
-          orderId: product._id
+          orderId: product._id,
+          date: new Date(),
         }));
         
   

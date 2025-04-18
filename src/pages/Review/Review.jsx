@@ -120,7 +120,7 @@ const Reviews = () => {
                 <p className="text-center">Loading reviews...</p>
             ) : allReviews.length > 0 ? (
                 <div className="mt-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16">
                         {allReviews.map((review) => (
                             <div key={review._id} className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative">
                                 {review.photo && (

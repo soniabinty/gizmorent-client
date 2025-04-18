@@ -126,7 +126,7 @@ const Navbar = () => {
                         {" "}
                         {displayName ? displayName : "User Name"}{" "}
                       </p>
-                      <a href="#" className="text-sm text-blue-500">
+                      <a href="/user-profile" className="text-sm text-blue-500">
                         See your profile
                       </a>
                     </div>

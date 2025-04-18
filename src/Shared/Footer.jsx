@@ -40,9 +40,9 @@ const Footer = () => {
                         <h2 className="text-xl font-semibold text-white">Our Services</h2>
                         <ul className="mt-3 space-y-2">
                             {[
-                                { name: "Instant Rental Confirmation", link: "#" },
-                                { name: "Secure Payments", link: "#" },
-                                { name: "Flexible Rental Periods", link: "#" },
+                                { name: "Instant Rental Confirmation", link: "/renter" },
+                                { name: "Terms And Condition", link: "/terms-and-condition" },
+                                { name: "Privacy Policy", link: "/privacy-policy" },
                                 { name: "Write Review", link: "/reviews" }
                             ].map((service, index) => (
                                 <li key={index}>
