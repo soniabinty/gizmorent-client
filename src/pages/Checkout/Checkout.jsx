@@ -3,26 +3,19 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { setFormData } from "../../Redux/Feature/checkoutSlice"; 
+import { setFormData } from "../../Redux/Feature/checkoutSlice";
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
 
 const Checkout = () => {
-
   const dispatch = useDispatch();
-
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
-  console.log(checkoutProduct)
+  console.log(checkoutProduct);
 
-
-
-
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const {
     register,
@@ -39,8 +32,8 @@ const Checkout = () => {
     if (data.paymentMethod === "Credit Card") {
       navigate("/creditpayment");
       return;
-    } 
-    
+    }
+
     if (!paymentDetails?.total) {
       alert("Invalid payment amount. Please check your cart.");
       return;
@@ -56,7 +49,10 @@ const Checkout = () => {
       };
 
       // Call backend to initiate payment
-      const response = await axiosPubic.post("/sslcommerz-payment", paymentData);
+      const response = await axiosPubic.post(
+        "/sslcommerz-payment",
+        paymentData
+      );
       console.log("Payment Response:", response.data);
 
       // Redirect to SSLCommerz payment gateway
@@ -148,8 +144,6 @@ const Checkout = () => {
                     />
                     <span>SSLCommerz</span>
                   </label>
-
-               
                 </div>
 
                 {errors.paymentMethod && (
