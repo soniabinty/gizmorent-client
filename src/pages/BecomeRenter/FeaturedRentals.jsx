@@ -39,7 +39,7 @@ const featuredRentals = [
 
 const FeaturedRentals = () => {
     return (
-        <div>
+        <div className="px-8 py-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
                 <span className="text-Primary">Featured</span> Rentals
             </h2>
