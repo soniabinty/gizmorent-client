@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { CgProfile } from "react-icons/cg";
 
 import {
   IoBagAddSharp,
@@ -48,9 +48,8 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -112,8 +111,17 @@ const Sidebar = () => {
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoWallet></IoWallet>
-                   Payment
+                    <IoWallet></IoWallet>
+                    Payment
+                  </p>
+                </NavLink>
+              )}
+
+              {isAdmin || isRenter && (
+                <NavLink to="/dashboard/user-profile">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <CgProfile></CgProfile>
+                    User Profile
                   </p>
                 </NavLink>
               )}
