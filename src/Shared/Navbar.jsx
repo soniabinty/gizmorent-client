@@ -5,9 +5,11 @@ import { IoMdLogOut } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { createSelector } from "reselect";
 import { logoutUser } from "../Redux/authSlice";
+import { useState } from "react";
+import { setFilters } from "../Redux/Feature/gadgetSlice";
 
 // Memoized selector
 const selectUser = createSelector(
@@ -19,9 +21,19 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const { displayName, email, photoURL } = user;
+  const [query, setQuery] = useState("");
+  const filters = useSelector((state) => state.gadgets.filters);
+  const navigate = useNavigate();
 
-  // Sample cart and wishlist data
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const value = e.target.value;
 
+      const updatedFilters = { ...filters, query: value };
+      dispatch(setFilters(updatedFilters));
+      navigate("/allgadgets");
+    }
+  };
 
   return (
     <div>
@@ -56,6 +68,9 @@ const Navbar = () => {
               <FaSearch className="absolute left-3 text-gray-500" />
               <input
                 type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Search for gadgets..."
                 className="w-full pl-10 pr-4 py-2 border focus:border-none rounded-full focus:outline-none focus:ring-2 focus:ring-Primary"
               />
@@ -73,8 +88,6 @@ const Navbar = () => {
                 </label>
               </Link>
 
-
-
             </div>
 
             {/* Cart Dropdown */}
@@ -85,8 +98,6 @@ const Navbar = () => {
                   <AiOutlineShoppingCart className="text-2xl" />
                 </label>
               </Link>
-
-
 
             </div>
 
@@ -201,7 +212,6 @@ const Navbar = () => {
                 <li>
                   <Link to="/allgadgets">All Gadgets</Link>
                 </li>
-
 
                 <li>
                   <Link to="/about">About</Link>
