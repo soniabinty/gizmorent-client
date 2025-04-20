@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilters, fetchGadgets } from "../../Redux/Feature/gadgetSlice";
+import { fetchGadgets, setFilters } from "../../Redux/Feature/gadgetSlice";
 
 const Search = () => {
   const [query, setQuery] = useState("");

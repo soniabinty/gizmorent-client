@@ -1,52 +1,70 @@
-import React from 'react';
-import img1 from '../../assets/img1.jpg';
-import img2 from '../../assets/img2.jpg';
-import img3 from '../../assets/img3.jpg';
+import React, { useEffect, useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Testimonial = () => {
-    const testimonials = [
-        {
-            image: img1,
-            name: "Anay Kr",
-            position: "Co-Founder at xyz",
-            quote: "Explore the world of rental gadgets and unlock new possibilities. Drop your questions in the comments, and don't forget to subscribe to our channel for more updates on rental services, tech tips, and more!"
-        },
-        {
-            image: img2,
-            name: "Jamie Doe",
-            position: "CEO at ABC",
-            quote: "Need a gadget for a short time? We've got you covered! Ask us anything in the comments and make sure to subscribe for more insights on the best gadgets, rental tips, and tech trends."
-        },
-        {
-            image: img3,
-            name: "Jane Smith",
-            position: "Marketing Head at 123 Corp",
-            quote: "Rent smarter, not harder! Have questions? Leave them in the comments, and subscribe for more videos on how our gadget rental marketplace can make your life easier."
-        }
-    ];
+    const [reviews, setReviews] = useState([]);
+    const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const res = await axiosPublic.get('/websitereview');
+                const shuffled = res.data.sort(() => 0.5 - Math.random());
+                setReviews(shuffled);
+            } catch (err) {
+                console.error('Error fetching reviews:', err);
+            }
+        };
+
+        fetchReviews();
+    }, [axiosPublic]);
 
     return (
-        <section>
+        <section className="py-16 bg-white">
             <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
                 Testimonial
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-20">
-                {testimonials.map((info, index) => (
-                    <div key={index} className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative">
-                        <img
-                            className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-md absolute -top-8 left-1/2 transform -translate-x-1/2"
-                            src={info.image}
-                            alt={info.name}
-                        />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16 mt-20">
+                {reviews.map((review) => (
+                    <div
+                        key={review._id}
+                        className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative"
+                    >
+                        {review.photo && (
+                            <img
+                                className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-md absolute -top-8 left-1/2 transform -translate-x-1/2"
+                                src={review.photo}
+                                alt={review.name}
+                            />
+                        )}
 
-                        <div className="mt-8">
+                        <div className="mt-10">
+                            <div className="flex justify-center mb-2">
+                                {[...Array(5)].map((_, index) => (
+                                    <FaStar
+                                        key={index}
+                                        className={`mr-1 text-xl ${index < review.rating ? "text-yellow-400" : "text-gray-300"
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+
                             <p className="text-gray-600">
                                 <span className="text-yellow-500 text-2xl font-bold">“</span>
-                                {info.quote}
+                                {review.comment}
                                 <span className="text-yellow-500 text-2xl font-bold">”</span>
                             </p>
-                            <h3 className="mt-4 font-semibold text-lg text-gray-800">{info.name}</h3>
-                            <p className="text-gray-500 text-sm">{info.position}</p>
+
+                            <h3 className="mt-4 font-semibold text-lg text-gray-800">
+                                {review.name}
+                            </h3>
+
+                            {review.timestamp && (
+                                <p className="text-gray-500 text-sm">
+                                    {new Date(review.timestamp).toLocaleDateString()}
+                                </p>
+                            )}
                         </div>
                     </div>
                 ))}

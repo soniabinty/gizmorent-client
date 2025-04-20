@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGadgets, setPagination } from "../../Redux/Feature/gadgetSlice";
 import Filter from "./Filter";
-import Search from "./Search";
-import Gadget from "./Gadget";
 import FilterCategory from "./FilterCategory";
 import FilterPrice from "./FilterPrice";
+import Gadget from "./Gadget";
+import Search from "./Search";
 
 const AllGadgets = () => {
   const dispatch = useDispatch();
@@ -63,11 +63,10 @@ const AllGadgets = () => {
               ).map((page) => (
                 <button
                   key={page}
-                  className={`px-4 py-2 rounded-lg ${
-                    pagination.currentPage === page
+                  className={`px-4 py-2 rounded-lg ${pagination.currentPage === page
                       ? "bg-blue-500 text-white"
                       : "bg-gray-200 text-gray-700"
-                  }`}
+                    }`}
                   onClick={() => handlePageChange(page)}
                 >
                   {page}

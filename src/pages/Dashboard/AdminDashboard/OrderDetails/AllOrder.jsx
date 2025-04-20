@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchorders, updateOrderStatus } from '../../../../Redux/Feature/OrderSlice';
 
 const statusOptions = ['pending', 'ordered', 'on the way', 'delivered', 'way to return', 'returned'];
 
-const statusColors = {
-  pending: 'border-yellow-500',
-  ordered: 'border-blue-500',
-  'on the way': 'border-purple-500',
-  delivered: 'border-green-500',
- 'way to return': 'border-orange-500',
-  returned: 'border-red-500',
-};
+
 
 const selectedStatusColors = {
   pending: 'bg-yellow-500 border-yellow-500',
@@ -26,15 +20,34 @@ const AllOrder = () => {
   const dispatch = useDispatch();
   const { orders, loading, error } = useSelector((state) => state.order);
   const [selectedStatuses, setSelectedStatuses] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [statusFilter, setStatusFilter] = useState(''); // Add state for the status filter
 
   useEffect(() => {
     dispatch(fetchorders());
   }, [dispatch]);
 
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const result = orders.filter((order) => {
+      const productName = order.product_name || '';
+      const customerName = order.customer_name || '';
+      const email = order.email || '';
+      const matchesSearch =
+        productName.toLowerCase().includes(lowerCaseQuery) ||
+        customerName.toLowerCase().includes(lowerCaseQuery) ||
+        email.toLowerCase().includes(lowerCaseQuery);
+      const matchesStatus = statusFilter ? order.status === statusFilter : true;
+      return matchesSearch && matchesStatus; // Match both search and status filter
+    });
+    setFilteredOrders(result);
+  }, [searchQuery, statusFilter, orders]);
+
   const handleStatusChange = (orderId, status) => {
     const currentIndex = statusOptions.indexOf(selectedStatuses[orderId] || orders.find(o => o._id === orderId)?.status);
     const newIndex = statusOptions.indexOf(status);
-    if (newIndex < currentIndex) return; 
+    if (newIndex < currentIndex) return;
 
     setSelectedStatuses((prev) => ({
       ...prev,
@@ -55,21 +68,51 @@ const AllOrder = () => {
   return (
     <div className="p-4">
       <h2 className="text-xl font-semibold mb-4">All Orders</h2>
-      {orders.length > 0 ? (
+
+      {/* Search and Filter Section */}
+      <div className="flex justify-between gap-4 mb-4">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by product name, customer name, or email"
+          className="w-1/2 p-2 border border-gray-300 rounded"
+        />
+        <div className="relative w-1/5">
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="appearance-none w-full p-2 pr-8 border border-gray-300 rounded-md"
+          >
+            <option value="">Filter by status</option>
+            {statusOptions.map((option) => (
+              <option key={option} value={option}>
+                {option.charAt(0).toUpperCase() + option.slice(1)}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
+            <RiArrowDropDownLine className="text-gray-500" size={24} />
+          </div>
+        </div>
+
+      </div>
+
+      {filteredOrders.length > 0 ? (
         <div className="grid grid-cols-1 gap-4">
-          {orders.map((order) => {
+          {filteredOrders.map((order) => {
             const selectedStatus = selectedStatuses[order._id] || order.status;
             const filledStatusList = getSelectedStatusesUpTo(selectedStatus);
 
             return (
               <div key={order._id} className="border border-gray-300 flex gap-4 flex-col p-4 rounded shadow">
-                <div className='flex gap-6'>
+                <div className="flex gap-6">
                   <img
                     src={order.product_img}
                     alt={order.product_name}
                     className="w-48 h-auto object-cover rounded mb-2"
                   />
-                  <div className='flex flex-col justify-between'>
+                  <div className="flex flex-col justify-between">
                     <div>
                       <h3 className="text-lg font-bold">{order.product_name}</h3>
                       <p><strong>Customer:</strong> {order.customer_name}</p>

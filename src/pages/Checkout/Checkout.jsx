@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
+
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { setFormData } from "../../Redux/Feature/checkoutSlice"; 
+import { setFormData } from "../../Redux/Feature/checkoutSlice";
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
 
@@ -39,8 +39,8 @@ const Checkout = () => {
     if (data.paymentMethod === "Credit Card") {
       navigate("/creditpayment");
       return;
-    } 
-    
+    }
+
     if (!paymentDetails?.total) {
       alert("Invalid payment amount. Please check your cart.");
       return;
@@ -149,7 +149,7 @@ const Checkout = () => {
                     <span>SSLCommerz</span>
                   </label>
 
-               
+
                 </div>
 
                 {errors.paymentMethod && (

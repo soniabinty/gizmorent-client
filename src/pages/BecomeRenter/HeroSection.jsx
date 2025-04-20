@@ -52,7 +52,7 @@ const HeroSection = () => {
       console.log(response.data);
       toggleModal();
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
+      if (error.response?.data?.error) {
         setErrorMessage(error.response.data.error);
       } else {
         setErrorMessage("An error occurred. Please try again.");
@@ -63,22 +63,22 @@ const HeroSection = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gray-800 text-white py-24 text-center">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl font-bold">
+      <section className="bg-gray-800 text-white py-20 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
             Find the Perfect Rental for You
           </h1>
-          <p className="mt-4 text-lg text-gray-300">
+          <p className="mt-4 text-base sm:text-lg text-gray-300">
             Explore a wide range of rental options and get started today.
           </p>
-          <div className="mt-6 flex justify-center gap-4">
+          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
             <button
-              className="bg-Primary hover:bg-orange-600 px-6 py-3 rounded-lg text-lg font-semibold"
+              className="bg-Primary hover:bg-orange-600 px-6 py-3 rounded-lg text-lg font-semibold transition"
               onClick={toggleModal}
             >
               Become a Renter
             </button>
-            <button className="bg-Secondary hover:bg-sky-900 px-6 py-3 rounded-lg text-lg font-semibold">
+            <button className="bg-Secondary hover:bg-sky-900 px-6 py-3 rounded-lg text-lg font-semibold transition">
               List Your Products
             </button>
           </div>
@@ -87,91 +87,40 @@ const HeroSection = () => {
 
       {/* Rental Application Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-800/60 bg-opacity-75 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
-            <h3 className="text-2xl font-bold mb-4">Rental Application</h3>
+        <div className="fixed inset-0 bg-gray-800/60 flex justify-center items-center z-50 px-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm sm:max-w-md md:max-w-lg">
+            <h3 className="text-2xl font-bold mb-4 text-center">Rental Application</h3>
             {errorMessage && (
-              <p className="text-red-500 mb-4">{errorMessage}</p>
+              <p className="text-red-500 mb-4 text-sm text-center">{errorMessage}</p>
             )}
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="name">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-3 py-2 border rounded"
-                  value={formData.name}
-                  readOnly={user}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="email">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-3 py-2 border rounded"
-                  value={formData.email}
-                  readOnly={user}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-3 py-2 border rounded"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="company">
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  className="w-full px-3 py-2 border rounded"
-                  value={formData.company}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2" htmlFor="address">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  className="w-full px-3 py-2 border rounded"
-                  value={formData.address}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="text-right">
+              {["name", "email", "phone", "company", "address"].map((field) => (
+                <div className="mb-4" key={field}>
+                  <label htmlFor={field} className="block text-gray-700 mb-2 capitalize">
+                    {field === "email" ? "Email Address" : field === "name" ? "Full Name" : field}
+                  </label>
+                  <input
+                    type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                    id={field}
+                    className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-Primary"
+                    value={formData[field]}
+                    onChange={handleChange}
+                    readOnly={["name", "email"].includes(field) && user}
+                    required
+                  />
+                </div>
+              ))}
+              <div className="text-right mt-6 flex justify-end gap-2">
                 <button
                   type="button"
-                  className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 mr-2"
+                  className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
                   onClick={toggleModal}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+                  className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
                 >
                   Submit
                 </button>
