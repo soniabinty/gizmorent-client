@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -13,32 +13,30 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const Charts = () => {
-  const data = [
-    { name: "Jan", value: 150 },
-    { name: "Feb", value: 380 },
-    { name: "Mar", value: 200 },
-    { name: "Apr", value: 300 },
-    { name: "May", value: 180 },
-    { name: "Jun", value: 190 },
-    { name: "Jul", value: 210 },
-    { name: "Aug", value: 90 },
-    { name: "Sep", value: 220 },
-    { name: "Oct", value: 400 },
-    { name: "Nov", value: 230 },
-    { name: "Dec", value: 100 },
-  ];
+  const axiosSecure = useAxiosSecure();
+  const [avatars, setAvatars] = useState([]);
+  const [addedLastMonth, setAddedLastMonth] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [chartData, setChartData] = useState([]);
+  const [ordersData, setOrdersData] = useState([]);
 
-  const percentage = [
-    { day: "Mon", users: 120 },
-    { day: "Tue", users: 150 },
-    { day: "Wed", users: 140 },
-    { day: "Thu", users: 160 },
-    { day: "Fri", users: 130 },
-    { day: "Sat", users: 90 },
-    { day: "Sun", users: 110 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axiosSecure.get("/new-users");
+      const data = res.data;
+      setAvatars(data.users.slice(0, 3));
+      setAddedLastMonth(data.addedLastMonth);
+      setTotalUsers(data.totalNewUsers);
+      setChartData(data.chart);
+      const orderRes = await axiosSecure.get("/monthly-order");
+      setOrdersData(orderRes.data);
+    };
+
+    fetchData();
+  }, [axiosSecure]);
 
   return (
     <div className="flex flex-col md:flex-row gap-8 mt-12">
@@ -48,7 +46,7 @@ const Charts = () => {
           <h2 className="text-2xl font-semibold mb-4">Monthly Sales</h2>
           <div className="w-full h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
+              <BarChart data={ordersData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
@@ -73,28 +71,28 @@ const Charts = () => {
           {/* Top Section */}
           <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
             <div className="flex -space-x-2">
-              <img
-                className="w-10 h-10 rounded-full border-2 border-white"
-                src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt="User1"
-              />
-              <img
-                className="w-10 h-10 rounded-full border-2 border-white"
-                src="https://randomuser.me/api/portraits/women/45.jpg"
-                alt="User2"
-              />
-              <img
-                className="w-10 h-10 rounded-full border-2 border-white"
-                src="https://randomuser.me/api/portraits/men/52.jpg"
-                alt="User3"
-              />
-              <div className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full border-2 border-white text-sm font-semibold">
-                10+
-              </div>
+              {avatars.map((user, index) => (
+                <img
+                  key={index}
+                  className="w-10 h-10 rounded-full border-2 border-white"
+                  src={
+                    user.photoURL ||
+                    "https://i.ibb.co/rQr6L83/default-avatar-icon-of-social-media-user-vector.jpg"
+                  }
+                  alt={user.name || "User"}
+                />
+              ))}
+              {avatars.length > 3 && (
+                <div className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full border-2 border-white text-sm font-semibold">
+                  {avatars.length - 3}+
+                </div>
+              )}
             </div>
             <div className="text-right">
               <p className="text-gray-500 text-sm">Added last month</p>
-              <p className="text-xl font-semibold">8,490</p>
+              <p className="text-xl font-semibold">
+                {addedLastMonth.toLocaleString()}
+              </p>
             </div>
           </div>
 
@@ -102,12 +100,14 @@ const Charts = () => {
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-lg font-semibold">Total New Users</h2>
           </div>
-          <p className="text-2xl font-bold mb-4">5.9K</p>
+          <p className="text-2xl font-bold mb-4">
+            {totalUsers.toLocaleString()}
+          </p>
 
           {/* Area Chart */}
           <div className="w-full h-[150px]">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={percentage}>
+              <AreaChart data={chartData}>
                 <XAxis dataKey="day" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />

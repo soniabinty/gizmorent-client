@@ -108,11 +108,18 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
+              <NavLink to="/dashboard/userprofile">
+                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>
+                  Profile
+                </p>
+              </NavLink>
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <IoWallet></IoWallet>
                     Payment
+
                   </p>
                 </NavLink>
               )}
@@ -122,6 +129,7 @@ const Sidebar = () => {
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <CgProfile></CgProfile>
                     User Profile
+
                   </p>
                 </NavLink>
               )}

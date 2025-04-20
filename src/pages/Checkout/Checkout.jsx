@@ -8,21 +8,14 @@ import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
 
 const Checkout = () => {
-
   const dispatch = useDispatch();
-
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
   const axiosPubic = useAxiosPublic();
-  console.log(checkoutProduct)
+  console.log(checkoutProduct);
 
-
-
-
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const {
     register,
@@ -56,7 +49,10 @@ const Checkout = () => {
       };
 
       // Call backend to initiate payment
-      const response = await axiosPubic.post("/sslcommerz-payment", paymentData);
+      const response = await axiosPubic.post(
+        "/sslcommerz-payment",
+        paymentData
+      );
       console.log("Payment Response:", response.data);
 
       // Redirect to SSLCommerz payment gateway
@@ -148,7 +144,6 @@ const Checkout = () => {
                     />
                     <span>SSLCommerz</span>
                   </label>
-
 
                 </div>
 
