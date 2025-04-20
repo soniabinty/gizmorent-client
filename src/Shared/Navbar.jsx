@@ -81,20 +81,24 @@ const Navbar = () => {
           <div className="navbar-end gap-2 md:gap-5">
             {/* Wishlist Dropdown */}
             <div className="dropdown dropdown-end">
+
               <Link to="/wishlist">
                 <label tabIndex="0" className="btn btn-ghost btn-circle">
                   <AiOutlineHeart className="text-2xl" />
                 </label>
               </Link>
+
             </div>
 
             {/* Cart Dropdown */}
             <div className="dropdown dropdown-end">
+
               <Link to="/cart">
                 <label tabIndex="0" className="btn btn-ghost btn-circle">
                   <AiOutlineShoppingCart className="text-2xl" />
                 </label>
               </Link>
+
             </div>
 
             {/* Profile Dropdown */}
@@ -133,7 +137,7 @@ const Navbar = () => {
                         {" "}
                         {displayName ? displayName : "User Name"}{" "}
                       </p>
-                      <a href="#" className="text-sm text-blue-500">
+                      <a href="/user-profile" className="text-sm text-blue-500">
                         See your profile
                       </a>
                     </div>
@@ -224,6 +228,9 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link to="/reviews">Reviews</Link>
                 </li>
               </ul>
             </div>

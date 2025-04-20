@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -144,6 +144,7 @@ const Checkout = () => {
                     />
                     <span>SSLCommerz</span>
                   </label>
+
                 </div>
 
                 {errors.paymentMethod && (
