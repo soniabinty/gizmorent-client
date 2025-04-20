@@ -33,7 +33,10 @@ import Wishlist from "../pages/Shopping/Wishlist";
 import OrderForm from "../pages/TrackingPage/OrderForm";
 import TrackingPage from "../pages/TrackingPage/TrackingPage";
 
+import Contact from "../pages/Contact/ContactUs";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
+import Reviews from "../pages/Review/Review";
+import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +101,22 @@ export const router = createBrowserRouter([
         path: "/privacy-policy",
         element: <PrivacyPolicy></PrivacyPolicy>,
       },
+      {
+        path: "/terms-and-condition",
+        element: <TermsAndCondition></TermsAndCondition>,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews></Reviews>,
+      },
+      {
+        path: "/contact-us",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfiles />,
+      },
     ],
   },
   {
@@ -129,7 +148,8 @@ export const router = createBrowserRouter([
           const data = await response.json();
           return data;
 
-      }},
+        }
+      },
 
       {
         path: "my-gadget",
