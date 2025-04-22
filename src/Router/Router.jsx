@@ -39,6 +39,7 @@ import Contact from "../pages/Contact/ContactUs";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
 import Reviews from "../pages/Review/Review";
 import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
+import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/Rentergadget.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -151,9 +152,7 @@ export const router = createBrowserRouter([
           }
           const data = await response.json();
           return data;
-
-
-        }
+        },
       },
 
       {
@@ -172,6 +171,10 @@ export const router = createBrowserRouter([
       {
         path: "renterapprove",
         element: <RenterApproval></RenterApproval>,
+      },
+      {
+        path: "renter-gadget",
+        element: <RenterGadget></RenterGadget>,
       },
       {
         path: "payment-history",
