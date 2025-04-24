@@ -4,90 +4,79 @@ import { useForm } from "react-hook-form";
 const CheckAvail = () => {
   const {
     register,
-
     formState: { errors },
   } = useForm();
+
   return (
-    <div className="bg-sky-100 rounded-lg mt-8 ">
-      <h3 className="px-5 pt-5 text-2xl">Check Availability</h3>
-      <form className="card-body ">
-        {/* pickup */}
-    
-
-        {/* pickup date */}
-
-        <div className="flex justify-between items-center">
-          <div className="form-control flex flex-col">
+    <div className="bg-sky-100 rounded-lg mt-8 p-5">
+      <h3 className="text-2xl font-bold mb-4">Check Availability</h3>
+      <form className="space-y-4">
+        {/* Pickup Date and Time */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="form-control">
             <label className="label">
-              <span className="label-text mb-2 font-bold">Pick-up Date</span>
+              <span className="label-text font-semibold">Pick-up Date</span>
             </label>
+            <input
+              {...register("pickdate", { required: "Pick-up date is required" })}
+              type="date"
+              className="input input-bordered w-full"
+            />
+            {errors.pickdate && (
+              <span className="text-red-600 text-sm mt-1">{errors.pickdate.message}</span>
+            )}
+          </div>
 
-            <div className="flex gap-5 items-center">
-              <input
-                {...register("pickdate")}
-                type="text"
-                placeholder="Pick-up Date"
-                className="input input-bordered border-none w-full rounded-lg"
-              />
-              {errors.pickdate && (
-                <span className="pl-1 text-red-600">
-                  {errors.pickdate.message}
-                </span>
-              )}
-
-              <input
-                {...register("picktime")}
-                type="text"
-                placeholder="Pick-up Time"
-                className="input input-bordered border-none w-full rounded-lg"
-              />
-              {errors.picktime && (
-                <span className="pl-1 text-red-600">
-                  {errors.picktime.message}
-                </span>
-              )}
-            </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-semibold">Pick-up Time</span>
+            </label>
+            <input
+              {...register("picktime", { required: "Pick-up time is required" })}
+              type="time"
+              className="input input-bordered w-full"
+            />
+            {errors.picktime && (
+              <span className="text-red-600 text-sm mt-1">{errors.picktime.message}</span>
+            )}
           </div>
         </div>
 
-        {/*pickoff date  */}
-
-        <div className="flex justify-between items-center">
-          <div className="form-control flex flex-col">
+        {/* Drop-off Date and Time */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="form-control">
             <label className="label">
-              <span className="label-text mb-2 font-bold">DROP-OFF-date</span>
+              <span className="label-text font-semibold">Drop-off Date</span>
             </label>
+            <input
+              {...register("dropdate", { required: "Drop-off date is required" })}
+              type="date"
+              className="input input-bordered w-full"
+            />
+            {errors.dropdate && (
+              <span className="text-red-600 text-sm mt-1">{errors.dropdate.message}</span>
+            )}
+          </div>
 
-            <div className="flex gap-5 items-center">
-              <input
-                {...register("dropdate")}
-                type="text"
-                placeholder="DROP-OFF-date"
-                className="input input-bordered border-none w-full rounded-lg"
-              />
-              {errors.dropdate && (
-                <span className="pl-1 text-red-600">
-                  {errors.dropdate.message}
-                </span>
-              )}
-
-              <input
-                {...register("droptime")}
-                type="text"
-                placeholder="Drop-OFF Time"
-                className="input input-bordered border-none w-full rounded-lg"
-              />
-              {errors.droptime && (
-                <span className="pl-1 text-red-600">
-                  {errors.droptime.message}
-                </span>
-              )}
-            </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-semibold">Drop-off Time</span>
+            </label>
+            <input
+              {...register("droptime", { required: "Drop-off time is required" })}
+              type="time"
+              className="input input-bordered w-full"
+            />
+            {errors.droptime && (
+              <span className="text-red-600 text-sm mt-1">{errors.droptime.message}</span>
+            )}
           </div>
         </div>
 
-        <button className="btn bg-Primary hover:bg-Primary text-white mt-4 rounded-lg">Check Availibity</button>
-
+        {/* Submit Button */}
+        <button className="btn bg-Primary hover:bg-Primary text-white mt-4 rounded-lg  w-full">
+          Check Availability
+        </button>
       </form>
     </div>
   );

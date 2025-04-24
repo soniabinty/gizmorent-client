@@ -1,21 +1,24 @@
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { setFormData } from "../../Redux/Feature/checkoutSlice";
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
-
+import { initiateSSLCOMMERZPayment } from "./SSLCommerzService/sslcommerzPayment";
 const Checkout = () => {
   const dispatch = useDispatch();
 
   const { bookingDetails, paymentDetails, checkoutProduct, loading, error } =
     useSelector((state) => state.checkout);
-  const axiosPubic = useAxiosPublic();
   console.log(checkoutProduct);
 
+  const { user } = useSelector((state) => state.auth);
+
+
   const navigate = useNavigate();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const {
     register,
@@ -33,37 +36,16 @@ const Checkout = () => {
       navigate("/creditpayment");
       return;
     }
+    if (data.paymentMethod === "SSLCommerz") {
+
+      setIsProcessing(true);
+      await initiateSSLCOMMERZPayment(paymentDetails, data);
+      setIsProcessing(false);
+    }
 
     if (!paymentDetails?.total) {
       alert("Invalid payment amount. Please check your cart.");
       return;
-    }
-
-    try {
-      // Prepare payment initiation data
-      const paymentData = {
-        total_amount: paymentDetails?.total || 0,
-        cus_name: data.name,
-        cus_email: data.email,
-        cus_phone: data.phone,
-      };
-
-      // Call backend to initiate payment
-      const response = await axiosPubic.post(
-        "/sslcommerz-payment",
-        paymentData
-      );
-      console.log("Payment Response:", response.data);
-
-      // Redirect to SSLCommerz payment gateway
-      if (response.data?.url) {
-        window.location.href = response.data.url;
-      } else {
-        alert("Failed to initiate payment.");
-      }
-    } catch (error) {
-      console.error("Payment initiation error:", error);
-      alert("An error occurred during payment initiation.");
     }
   };
 
@@ -102,7 +84,7 @@ const Checkout = () => {
 
               <input
                 type="email"
-                defaultValue={bookingDetails?.email}
+                defaultValue={bookingDetails?.email || user?.email}
                 {...register("email", { required: "Email is required" })}
                 className="input w-full py-6"
                 placeholder="Email*"
@@ -154,10 +136,12 @@ const Checkout = () => {
 
               <button
                 type="submit"
-                className="bg-blue-600 py-4 px-10 mt-4 text-white"
+                disabled={isProcessing}
+                className={`bg-Primary py-4 px-10 mt-4 text-white ${isProcessing && "opacity-50 cursor-not-allowed"}`}
               >
-                Place Order
+                {isProcessing ? "Processing..." : "Place Order"}
               </button>
+
             </form>
           </div>
         </div>

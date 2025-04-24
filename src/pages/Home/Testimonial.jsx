@@ -26,7 +26,7 @@ const Testimonial = () => {
                 Testimonial
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16 mt-20">
-                {reviews.map((review) => (
+                {reviews.slice(0, 3).map((review) => (
                     <div
                         key={review._id}
                         className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative"

@@ -71,26 +71,34 @@ const UserProfiles = () => {
         try {
             let updatedData = { ...formData };
 
+            // Check if a new image is uploaded
             if (formData.image) {
                 const uploadedImageUrl = await uploadImage(formData.image);
                 if (uploadedImageUrl) {
-                    updatedData.photoURL = uploadedImageUrl;
+                    updatedData.photoURL = uploadedImageUrl; // Update the photoURL
+                    setFormData((prevFormData) => ({
+                        ...prevFormData,
+                        photoURL: uploadedImageUrl, // Reflect the updated photoURL in the form data
+                    }));
                 }
             }
 
+            // Update user data in the backend
             await axiosPublic.patch(`/users/${userEmail}`, updatedData);
 
+            // Dispatch the updated user profile to the Redux store
             dispatch(updateUserProfile({
                 name: updatedData.name,
-                photo: updatedData.photoURL
+                photo: updatedData.photoURL,
             }));
 
+            // Show success message
             await Swal.fire({
                 icon: "success",
                 title: "Success",
                 text: "Profile updated successfully!",
                 timer: 1500,
-                showConfirmButton: false
+                showConfirmButton: false,
             });
 
             closeModal(); // Close modal automatically after success
