@@ -62,6 +62,7 @@ const AddGadget = () => {
       };
       if (isRenter) {
         formattedData.status = "pending";
+        formattedData.renterId = userData?.renterCode
         formattedData.companyname = userData?.companyname;
         await axiosPubic.post("/renter-gadgets", formattedData);
         console.log("Renter Gadget Data:", formattedData);

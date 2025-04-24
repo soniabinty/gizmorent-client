@@ -12,6 +12,7 @@ export const addToWishlist = createAsyncThunk("wishlist/addToWishlist", async ({
       image: gadget.image,
       price: gadget.price,
       category: gadget.category,
+      renterId: gadget.renterId,
       email,
     }),
   });
