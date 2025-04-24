@@ -109,9 +109,15 @@ export default function RentalEarning() {
               <tr key={summary.renterId} className="border-t">
                 <td className="p-3">{summary.renterId}</td>
                 <td className="p-3">{summary.totalOrders}</td>
-                <td className="p-3">${summary.totalRevenue}</td>
-                <td className="p-3 text-green-600">${summary.renterEarnings}</td>
-                <td className="p-3 text-red-500">${summary.adminCommission}</td>
+                <td className="p-3">
+                  ${Number(summary.totalRevenue || 0).toFixed(2)}
+                </td>
+                <td className="p-3 text-green-600">
+                  ${Number(summary.renterEarnings || 0).toFixed(2)}
+                </td>
+                <td className="p-3 text-red-500">
+                  ${Number(summary.adminCommission || 0).toFixed(2)}
+                </td>
               </tr>
             ))}
           </tbody>
