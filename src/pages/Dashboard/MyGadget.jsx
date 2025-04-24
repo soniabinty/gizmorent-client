@@ -47,6 +47,7 @@ const MyGadget = () => {
       }
     });
   };
+  console.log("myGadgets", myGadgets);
 
   const handleUpdate = (id) => {
     navigate(`/dashboard/update-gadget/${id}`);
