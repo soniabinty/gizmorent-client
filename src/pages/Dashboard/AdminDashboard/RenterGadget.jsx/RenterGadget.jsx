@@ -10,6 +10,7 @@ const RenterGadget = () => {
     await axiosPubic.put(`/renter-gadgets/${gadget._id}`, updatedGadget);
     const { _id, ...rest } = updatedGadget;
     const newGadget = { ...rest, gadgetId: _id };
+    
     const res = await axiosPubic.post("/gadgets", newGadget);
     console.log(res.data);
     refetch();

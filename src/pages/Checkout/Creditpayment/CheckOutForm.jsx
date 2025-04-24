@@ -86,6 +86,7 @@ console.log(checkoutProduct)
           quantity: product.quantity,
           orderId: product._id,
           date: new Date(),
+          renterId: product.renterId
         }));
         
   

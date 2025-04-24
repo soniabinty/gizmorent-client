@@ -119,13 +119,8 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-
-              <NavLink to="/dashboard/userprofile">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <CgProfile></CgProfile>
-                  Profile
-                </p>
-              </NavLink>
+            
+                
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -135,12 +130,24 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
+
+
+{isAdmin && (
+                <NavLink to="/dashboard/Rental-earning">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <IoWallet></IoWallet>
+                    Rentar Earning
+                  </p>
+                </NavLink>
+              )}
+
+
               {isAdmin ||
                 (isRenter && (
                   <NavLink to="/dashboard/userprofile">
                     <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                       <CgProfile></CgProfile>
-                      User Profile
+                     Profile
                     </p>
                   </NavLink>
                 ))}

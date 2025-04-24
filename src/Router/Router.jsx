@@ -39,7 +39,8 @@ import Contact from "../pages/Contact/ContactUs";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
 import Reviews from "../pages/Review/Review";
 import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
-import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/Rentergadget.jsx";
+import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/RenterGadget.jsx";
+import  RentalEarning  from "../pages/Dashboard/AdminDashboard/RentalEarning/RentalEarning.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -179,6 +180,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentPage></PaymentPage>,
+      },
+      {
+        path: "Rental-earning",
+        element: <RentalEarning></RentalEarning>,
       },
     ],
   },
