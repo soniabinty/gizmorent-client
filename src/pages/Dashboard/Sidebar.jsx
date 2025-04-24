@@ -10,12 +10,13 @@ import {
 } from "react-icons/io5";
 
 import { LuNotebookPen } from "react-icons/lu";
-
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { MdOutlineEventNote } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useRenter from "../../Hooks/useRenter";
+import { FaUsersViewfinder } from "react-icons/fa6";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
@@ -129,28 +130,36 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
+                  {isAdmin && (
+                <NavLink to="/dashboard/rental-list">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <FaUsersViewfinder></FaUsersViewfinder> 
+                    All Renter
+                   
+                  </p>
+                </NavLink>
+              )}
 
 
 
-{isAdmin && (
+               {isAdmin && (
                 <NavLink to="/dashboard/Rental-earning">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                    <IoWallet></IoWallet>
+                  <FaMoneyBill1Wave />
                     Rentar Earning
                   </p>
                 </NavLink>
               )}
 
 
-              {isAdmin ||
-                (isRenter && (
+              {isRenter && (
                   <NavLink to="/dashboard/userprofile">
                     <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                       <CgProfile></CgProfile>
                      Profile
                     </p>
                   </NavLink>
-                ))}
+                )}
             </nav>
           </div>
         </div>
