@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Fetch all renter orders
@@ -6,8 +6,8 @@ export const fetchorders = createAsyncThunk(
   'order/fetchAll',
   async () => {
     const res = await axios.get('http://localhost:5000/orders');
-    console.log("Fetched orders:", res.data); 
-    return res.data.requests; 
+    console.log("Fetched orders:", res.data);
+    return res.data.requests;
   }
 );
 
@@ -24,8 +24,8 @@ export const updateOrderStatus = createAsyncThunk(
 
 export const fetchOrdersByEmail = createAsyncThunk("order/fetchOrdersByEmail", async (email) => {
   const response = await axios.get(`http://localhost:5000/orders/api?email=${email}`);
-  console.log("Fetched Orders:", response.data); 
-  return response.data || []; 
+  console.log("Fetched Orders:", response.data);
+  return response.data || [];
 });
 
 
@@ -72,7 +72,7 @@ const orderSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Unknown error occurred";
       });
-      
+
   }
 });
 

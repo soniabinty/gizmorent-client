@@ -1,13 +1,10 @@
 import Lottie from "lottie-react";
 import { Link, useRouteError } from "react-router-dom";
 import Error404 from "../assets/lottie/Lost in Space.json";
-import Footer from "../Shared/Footer";
-import Navbar from "../Shared/Navbar";
 function ErrorPage() {
   const error = useRouteError();
   return (
     <div>
-      <Navbar />
       <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
         <div className="m-2 w-2/3">
           <Lottie animationData={Error404} loop={true} />
@@ -24,7 +21,6 @@ function ErrorPage() {
           </button>
         </Link>
       </div>
-      <Footer />
     </div>
   );
 }

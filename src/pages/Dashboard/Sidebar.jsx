@@ -21,9 +21,9 @@ import { FaUsersViewfinder } from "react-icons/fa6";
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const [isAdmin] = useAdmin();
+
   const [isRenter] = useRenter();
 
-  // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
