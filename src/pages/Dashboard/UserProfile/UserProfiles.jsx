@@ -77,6 +77,17 @@ const UserProfiles = () => {
           updatedData.photoURL = uploadedImageUrl;
         }
       }
+      // Check if a new image is uploaded
+      if (formData.image) {
+        const uploadedImageUrl = await uploadImage(formData.image);
+        if (uploadedImageUrl) {
+          updatedData.photoURL = uploadedImageUrl; // Update the photoURL
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            photoURL: uploadedImageUrl, // Reflect the updated photoURL in the form data
+          }));
+        }
+      }
 
       await axiosPublic.patch(`/users/${userEmail}`, updatedData);
 

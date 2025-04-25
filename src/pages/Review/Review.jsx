@@ -13,7 +13,11 @@ const Reviews = () => {
     const [loading, setLoading] = useState(false);
     const { user } = useSelector((state) => state.auth);
     const userId = user?.email;
+    const [charCount, setCharCount] = useState(0);
 
+    const handleInputChange = (e) => {
+        setCharCount(e.target.value.length);
+    };
     useEffect(() => {
         const fetchAllReviews = async () => {
             try {
@@ -99,13 +103,33 @@ const Reviews = () => {
                     <div className="form-control">
                         <label className="label font-bold">Comment</label>
                         <textarea
-                            {...register("comment", { required: "Comment is required" })}
+                            {...register("comment", {
+                                required: "Comment is required",
+                                minLength: {
+                                    value: 45,
+                                    message: "Comment must be at least 45 characters",
+                                },
+                                maxLength: {
+                                    value: 140,
+                                    message: "Comment cannot exceed 140 characters",
+                                },
+                            })}
                             className="textarea textarea-bordered w-full"
                             rows="4"
                             placeholder="Write your review here..."
+                            onChange={handleInputChange}
                         ></textarea>
-                        {errors.comment && <p className="text-red-500">{errors.comment.message}</p>}
+
+                        {/* Live Character Count */}
+                        <div className="text-sm mt-1 text-gray-500">
+                            {charCount} / 140 characters
+                        </div>
+
+                        {errors.comment && (
+                            <p className="text-red-500">{errors.comment.message}</p>
+                        )}
                     </div>
+
 
                     {/* Submit Button */}
                     <button type="submit" className="btn bg-Primary text-white w-full">
@@ -120,7 +144,7 @@ const Reviews = () => {
                 <p className="text-center">Loading reviews...</p>
             ) : allReviews.length > 0 ? (
                 <div className="mt-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-16">
                         {allReviews.map((review) => (
                             <div key={review._id} className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative">
                                 {review.photo && (
