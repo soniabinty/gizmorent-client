@@ -93,11 +93,13 @@ const CartList = () => {
               className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
             >
               <div className="flex items-center space-x-4">
-                <img
+              <div className="hidden md:block">
+              <img
                   src={item.image}
                   alt={item.name}
                   className="w-20 h-20 object-cover rounded-lg"
                 />
+              </div>
                 <div>
                   <h2 className="text-xl font-semibold text-Secondary">
                     {item.name}

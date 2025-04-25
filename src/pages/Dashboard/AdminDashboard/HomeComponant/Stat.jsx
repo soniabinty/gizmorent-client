@@ -65,7 +65,7 @@ const Stat = () => {
 
   return (
     <div className='md:flex gap-8'>
-      <div className='flex p-4 gap-6 items-center shadow-xl rounded-lg'>
+      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
         <div>
           <h5 className='text-xl'>Total Products</h5>
           <h3 className='text-3xl font-bold'>{gadgets.length}+</h3>
@@ -75,7 +75,7 @@ const Stat = () => {
         </div>
       </div>
 
-      <div className='flex p-4 gap-6 items-center shadow-xl rounded-lg'>
+      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
         <div>
           <h5 className='text-xl'>Total Orders</h5>
           <h3 className='text-3xl font-bold'>{orders.length}+</h3>
@@ -85,7 +85,7 @@ const Stat = () => {
         </div>
       </div>
 
-      <div className='flex p-4 gap-6 items-center shadow-xl rounded-lg'>
+      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
         <div>
           <h5 className='text-xl'>Total Revenue</h5>
           <h3 className='text-3xl font-bold'>{totalRevenue}K+</h3>
@@ -95,7 +95,7 @@ const Stat = () => {
         </div>
       </div>
 
-      <div className='flex p-4 gap-6 items-center shadow-xl rounded-lg'>
+      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
         <div>
           <h5 className='text-xl'>Total Users</h5>
           <h3 className='text-3xl font-bold'>{users.length}+</h3>

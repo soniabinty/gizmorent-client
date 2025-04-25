@@ -83,11 +83,13 @@ const RecentOrders = () => {
             {orders.map((order) => (
               <tr key={order._id} className="hover:bg-gray-100">
                 <td className="flex items-center space-x-3 py-2">
+                  <div>
                   <img
                     src={order.product_img}
                     alt={order.product_name}
-                    className="w-10 h-10 rounded-lg"
+                    className="w-10 h-10 rounded-lg hidden md:block"
                   />
+                  </div>
                   <div>
                     <p className="font-medium">{order.product_name}</p>
                   </div>

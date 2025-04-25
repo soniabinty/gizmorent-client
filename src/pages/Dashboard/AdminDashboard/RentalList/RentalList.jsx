@@ -23,7 +23,7 @@ export default function RentalList() {
   if (renters.length === 0) return <p className="p-4">No renters found.</p>;
 
   return (
-    <div className="p-4">
+    <div className="py-12">
       <h2 className="text-2xl font-bold mb-4">All Renters</h2>
 
       <div className="overflow-x-auto">

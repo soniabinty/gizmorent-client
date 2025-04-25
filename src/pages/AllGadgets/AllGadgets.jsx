@@ -24,7 +24,7 @@ const AllGadgets = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-7">
+    <div className="max-w-7xl mx-auto p-4">
       <h2 className="text-4xl my-6">All Gadgets</h2>
 
       <div className="md:flex items-center gap-[130px] justify-between">
@@ -46,7 +46,7 @@ const AllGadgets = () => {
 
           {/* Pagination  */}
           {gadgets && (
-            <div className="flex justify-center items-center mt-6 space-x-2">
+            <div className="flex flex-wrap space-y-2 justify-center items-center mt-6 space-x-2">
               {/* Previous  */}
               <button
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50"
