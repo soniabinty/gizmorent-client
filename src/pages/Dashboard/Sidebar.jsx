@@ -69,8 +69,8 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-              {isAdmin && (
-                <NavLink to="/dashboard/adminhome">
+              {(isAdmin || isRenter) && (
+                <NavLink to="/dashboard">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <BsFillHouseAddFill></BsFillHouseAddFill> Home
                   </p>
@@ -120,8 +120,7 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-            
-                
+
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -130,36 +129,32 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-                  {isAdmin && (
+              {isAdmin && (
                 <NavLink to="/dashboard/rental-list">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <FaUsersViewfinder></FaUsersViewfinder> 
+                    <FaUsersViewfinder></FaUsersViewfinder>
                     All Renter
-                   
                   </p>
                 </NavLink>
               )}
 
-
-
-               {isAdmin && (
+              {isAdmin && (
                 <NavLink to="/dashboard/Rental-earning">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <FaMoneyBill1Wave />
+                    <FaMoneyBill1Wave />
                     Rentar Earning
                   </p>
                 </NavLink>
               )}
 
-
               {isRenter && (
-                  <NavLink to="/dashboard/userprofile">
-                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                      <CgProfile></CgProfile>
-                     Profile
-                    </p>
-                  </NavLink>
-                )}
+                <NavLink to="/dashboard/userprofile">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <CgProfile></CgProfile>
+                    Profile
+                  </p>
+                </NavLink>
+              )}
             </nav>
           </div>
         </div>
