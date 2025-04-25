@@ -71,7 +71,7 @@ export default function RentalEarning() {
     return <p className="p-4">No earnings data available.</p>;
 
   return (
-    <div className="p-4">
+    <div className="py-12">
       <h2 className="text-2xl font-bold mb-4">Rental Earnings</h2>
 
       {/* Filters */}
