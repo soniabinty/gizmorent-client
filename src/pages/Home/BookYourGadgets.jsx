@@ -148,9 +148,9 @@ const BookYourGadgets = () => {
               <p className="text-red-500 w-1/2">{errors.dropDate.message}</p>
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="md:flex gap-2">
             {/* Choose Month Section */}
-            <div className="flex items-center gap-3 w-1/2 bg-white px-2 py-2">
+            <div className="flex items-center gap-3 md:w-1/2 bg-white px-2 py-2">
               <p className="font-semibold">Choose Month:</p>
               <button
                 type="button"
@@ -169,7 +169,7 @@ const BookYourGadgets = () => {
               </button>
             </div>
             {/* Quantity Section */}
-            <div className="flex items-center gap-3 w-1/2 bg-white px-2 py-2">
+            <div className="flex items-center gap-3 md:w-1/2 bg-white px-2 py-2">
               <p className="font-semibold">Choose Quantity:</p>
               <button
                 type="button"

@@ -29,7 +29,7 @@ const PaymentPage = () => {
 
     // Render table
     return (
-        <div className="bg-white p-5 lg:p-6 min-h-screen">
+        <div className="bg-white py-12 lg:p-6 min-h-screen">
             <h1 className="text-2xl font-bold mb-6 text-Primary">Payment History</h1>
             {loading ? (
                 <p>Loading payments...</p>

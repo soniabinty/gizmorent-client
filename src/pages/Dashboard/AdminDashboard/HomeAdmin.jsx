@@ -11,7 +11,7 @@ const HomeAdmin = () => {
     <div className='py-6 mt-4'>
    <Stat></Stat>
    <Charts></Charts>
-   <div className='mt-12 md:grid gap-8 grid-cols-6 '>
+   <div className='mt-12 md:grid gap-8 space-y-6 grid-cols-6 '>
    
 <div className='col-span-2'>
 <ProductData></ProductData>
@@ -24,7 +24,7 @@ const HomeAdmin = () => {
    
    </div>
 
-   <div className='mt-12 grid gap-8 grid-cols-6 '>
+   <div className='mt-12 md:grid gap-8 space-y-6 grid-cols-6 '>
    
    <div className='col-span-2'>
    <TopRenter></TopRenter>
