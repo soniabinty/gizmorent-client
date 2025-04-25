@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineBars } from "react-icons/ai";
+import { AiFillProduct, AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 
@@ -10,12 +10,13 @@ import {
 } from "react-icons/io5";
 
 import { LuNotebookPen } from "react-icons/lu";
-
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { MdOutlineEventNote } from "react-icons/md";
 
 import { Link, NavLink } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useRenter from "../../Hooks/useRenter";
+import { FaUsersViewfinder } from "react-icons/fa6";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
@@ -48,8 +49,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
-          }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
+          isActive && "-translate-x-full"
+        }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -75,21 +77,23 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-              {isAdmin && (
-                <NavLink to="/dashboard/add-gadget">
-                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                    <LuNotebookPen /> Add Gadget
-                  </p>
-                </NavLink>
-              )}
+              {isAdmin ||
+                (isRenter && (
+                  <NavLink to="/dashboard/add-gadget">
+                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                      <LuNotebookPen /> Add Gadget
+                    </p>
+                  </NavLink>
+                ))}
 
-              {isAdmin && (
-                <NavLink to="/dashboard/my-gadget">
-                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                    <MdOutlineEventNote></MdOutlineEventNote> My Gadget
-                  </p>
-                </NavLink>
-              )}
+              {isAdmin ||
+                (isRenter && (
+                  <NavLink to="/dashboard/my-gadget">
+                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                      <MdOutlineEventNote></MdOutlineEventNote> My Gadget
+                    </p>
+                  </NavLink>
+                ))}
 
               {isAdmin && (
                 <NavLink to="/dashboard/allorder">
@@ -108,31 +112,54 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-              <NavLink to="/dashboard/userprofile">
-                <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                  <IoCheckmarkDoneCircleSharp></IoCheckmarkDoneCircleSharp>
-                  Profile
-                </p>
-              </NavLink>
+              {isAdmin && (
+                <NavLink to="/dashboard/renter-gadget">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <AiFillProduct />
+                    Gadget Approve
+                  </p>
+                </NavLink>
+              )}
+            
+                
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <IoWallet></IoWallet>
                     Payment
-
                   </p>
                 </NavLink>
               )}
-
-              {isAdmin || isRenter && (
-                <NavLink to="/dashboard/user-profile">
+                  {isAdmin && (
+                <NavLink to="/dashboard/rental-list">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                    <CgProfile></CgProfile>
-                    User Profile
-
+                  <FaUsersViewfinder></FaUsersViewfinder> 
+                    All Renter
+                   
                   </p>
                 </NavLink>
               )}
+
+
+
+               {isAdmin && (
+                <NavLink to="/dashboard/Rental-earning">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                  <FaMoneyBill1Wave />
+                    Rentar Earning
+                  </p>
+                </NavLink>
+              )}
+
+
+              {isRenter && (
+                  <NavLink to="/dashboard/userprofile">
+                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                      <CgProfile></CgProfile>
+                     Profile
+                    </p>
+                  </NavLink>
+                )}
             </nav>
           </div>
         </div>

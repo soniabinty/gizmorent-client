@@ -5,9 +5,17 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { uploadImage } from "../../utility/utility";
+import useUser from "../../Hooks/useUser";
+import useRenter from "../../Hooks/useRenter";
+import useAdmin from "../../Hooks/useAdmin";
 
 const AddGadget = () => {
   const axiosPubic = useAxiosPublic();
+  const [userData] = useUser();
+  console.log("User Data:", userData?.companyname);
+  console.log("User Data:", userData);
+  const [isRenter] = useRenter();
+  const [isAdmin] = useAdmin();
   const {
     register,
     handleSubmit,
@@ -19,7 +27,6 @@ const AddGadget = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [uploading, setUploading] = useState(false);
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -53,8 +60,15 @@ const AddGadget = () => {
         price: parseFloat(data.price),
         quantity: parseInt(data.quantity, 10),
       };
-
-      await axiosPubic.post("/gadgets", formattedData);
+      if (isRenter) {
+        formattedData.status = "pending";
+        formattedData.renterId = userData?.renterCode
+        formattedData.companyname = userData?.companyname;
+        await axiosPubic.post("/renter-gadgets", formattedData);
+        console.log("Renter Gadget Data:", formattedData);
+      } else if (isAdmin) {
+        await axiosPubic.post("/gadgets", formattedData);
+      }
       Swal({
         title: "Gadget added successfully!",
         text: "The form will reset in 3 seconds.",
@@ -104,9 +118,7 @@ const AddGadget = () => {
           className="input w-full py-6 rounded-lg"
           placeholder="Product Name*"
         />
-        {errors.name && (
-          <p className="text-red-500">{errors.name.message}</p>
-        )}
+        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
         <select
           {...register("category", { required: "Category is required" })}

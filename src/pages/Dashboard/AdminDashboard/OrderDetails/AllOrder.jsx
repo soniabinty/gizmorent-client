@@ -66,7 +66,7 @@ const AllOrder = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="p-4">
+    <div className="py-12">
       <h2 className="text-xl font-semibold mb-4">All Orders</h2>
 
       {/* Search and Filter Section */}
@@ -106,7 +106,7 @@ const AllOrder = () => {
 
             return (
               <div key={order._id} className="border border-gray-300 flex gap-4 flex-col p-4 rounded shadow">
-                <div className="flex gap-6">
+                <div className="flex flex-col md:flex-row gap-6">
                   <img
                     src={order.product_img}
                     alt={order.product_name}
@@ -127,7 +127,7 @@ const AllOrder = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-3 flex-wrap justify-center">
+                <div className="flex gap-3 flex-wrap">
                   {statusOptions.map((status) => {
                     const isFilled = filledStatusList.includes(status);
                     return (

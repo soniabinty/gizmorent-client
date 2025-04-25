@@ -13,6 +13,7 @@ export const addToCart = createAsyncThunk(
           image: gadget.image,
           price: gadget.price,
           category: gadget.category,
+          renterId:gadget.renterId,
           email,
           quantity,
         }),
