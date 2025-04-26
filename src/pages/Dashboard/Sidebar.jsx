@@ -66,8 +66,8 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
 
-              {isAdmin && (
-                <NavLink to="/dashboard/adminhome">
+              {(isAdmin || isRenter) && (
+                <NavLink to="/dashboard">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <BsFillHouseAddFill></BsFillHouseAddFill> Home
                   </p>
@@ -136,8 +136,6 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-
-
 
               {isAdmin && (
                 <NavLink to="/dashboard/Rental-earning">
