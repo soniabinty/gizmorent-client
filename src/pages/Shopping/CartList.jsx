@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import {
   fetchCart,
   removeFromCart,
   updateCartQuantity,
 } from "../../Redux/Feature/cartSlice";
-import Swal from "sweetalert2";
 import { setCheckoutProduct } from "../../Redux/Feature/checkoutSlice";
 
 const CartList = () => {
@@ -93,13 +93,13 @@ const CartList = () => {
               className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
             >
               <div className="flex items-center space-x-4">
-              <div className="hidden md:block">
-              <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-20 h-20 object-cover rounded-lg"
-                />
-              </div>
+                <div className="hidden md:block">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-20 h-20 object-cover rounded-lg"
+                  />
+                </div>
                 <div>
                   <h2 className="text-xl font-semibold text-Secondary">
                     {item.name}
@@ -151,7 +151,7 @@ const CartList = () => {
           ))}
           <div className="text-right">
             <p className="text-xl font-bold text-Secondary">
-              Total: {totalPrice ? `TK ${totalPrice.toLocaleString()}` : "TK 0"}
+              Total: {totalPrice ? `USD ${totalPrice.toLocaleString()}` : "USD 0"}
             </p>
             <button
               onClick={handleProceedToCheckout}
