@@ -72,7 +72,7 @@ console.log(checkoutProduct)
         };
   
         const orderData = checkoutProduct.map(product => ({
-          amount: bookingDetails.price*product.quantity,
+          amount: product.price*product.quantity,
           product_name: product.name,
           product_id: product.gadgetId,
           product_img: product.image,
