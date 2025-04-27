@@ -17,6 +17,7 @@ const CartTotal = () => {
   const validCoupons = {
     GIZ_EID_30: 30,
   };
+  console.log("Products:", products);
   const handleApplyCoupon = () => {
     const upperCode = couponCode.trim().toUpperCase();
     if (validCoupons[upperCode]) {
@@ -34,6 +35,7 @@ const CartTotal = () => {
     const months = bookingDetails?.months || product?.months || 1;
     return total + product.price * months * quantity;
   }, 0);
+  console.log("Subtotal:", subtotal);
 
   const shipping = products.length > 0 ? 5.0 : 0;
 

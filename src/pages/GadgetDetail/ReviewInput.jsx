@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import "@smastrom/react-rating/style.css";
 import { Rating } from "@smastrom/react-rating";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 const selectUser = createSelector(
   (state) => state.auth.user,
   (user) => ({ ...user })
 );
-const ReviewInput = () => {
+const ReviewInput = ({ productId }) => {
   const axiosPubic = useAxiosPublic();
+  const dispatch = useDispatch();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -32,7 +33,6 @@ const ReviewInput = () => {
       comment,
       date: new Date(),
     };
-    console.log(newReview);
 
     try {
       const response = await axiosPubic.post("/product-review", newReview);
