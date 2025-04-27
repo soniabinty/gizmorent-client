@@ -6,7 +6,7 @@ const Gadget = ({ gadgets }) => {
     return <p>No gadgets available.</p>;
   }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       {gadgets.length === 0 ? (
         <p>No gadgets found based on your search criteria.</p>
       ) : (

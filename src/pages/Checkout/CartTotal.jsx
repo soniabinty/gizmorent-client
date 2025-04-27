@@ -83,7 +83,7 @@ const CartTotal = () => {
               <p className=" font-semibold">
                 {product.price} * {product?.quantity} * {product?.months || 1}{" "}
                 =$
-                {product?.quantity * product?.months || 1 * product.price}
+                {subtotal}
               </p>
             </div>
           </div>
