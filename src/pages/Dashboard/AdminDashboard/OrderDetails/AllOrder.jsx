@@ -12,7 +12,7 @@ const selectedStatusColors = {
   ordered: 'bg-blue-500 border-blue-500',
   'on the way': 'bg-purple-500 border-purple-500',
   delivered: 'bg-green-500 border-green-500',
-  'way to return': 'border-orange-500 bg-orange-500',
+  'way to return': 'border-sky-500 bg-sky-500',
   returned: 'bg-red-500 border-red-500',
 };
 
