@@ -45,7 +45,7 @@ const checkoutSlice = createSlice({
       state.formData = null;
     },
   },
-  
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductByCode.pending, (state) => {
@@ -63,7 +63,6 @@ const checkoutSlice = createSlice({
   },
 });
 
-
 export const {
   setCheckoutProduct,
   setPaymentDetails,
@@ -71,7 +70,5 @@ export const {
   clearCheckout,
   setFormData,
 } = checkoutSlice.actions;
-
-
 
 export default checkoutSlice.reducer;

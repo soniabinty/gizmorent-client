@@ -16,20 +16,16 @@ const BookYourGadgets = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [months, setMonths] = useState(1);
+
   const [quantity, setQuantity] = useState(1);
-  // Increase/Decrease functions for months
-  const increaseMonths = () => setMonths((prev) => Math.min(prev + 1, 12));
-  const decreaseMonths = () => setMonths((prev) => Math.max(prev - 1, 1));
 
   // Increase/Decrease functions for quantity
   const increaseQuantity = () => setQuantity((prev) => Math.min(prev + 1, 10));
   const decreaseQuantity = () => setQuantity((prev) => Math.max(prev - 1, 1));
 
   const onSubmit = async (data) => {
-    console.log("Form Data:", data);
     try {
-      const fullData = { ...data, months, quantity };
+      const fullData = { ...data, quantity };
       dispatch(setBookingDetails(fullData));
       await dispatch(fetchProductByCode(data.productCode));
       navigate("/checkout");
@@ -80,117 +76,51 @@ const BookYourGadgets = () => {
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
           )}
-
-          <input
-            type="text"
-            {...register("productCode", {
-              required: "Product code is required",
-            })}
-            className="input w-full py-6"
-            placeholder="Product Code*"
-          />
-          {errors.productCode && (
-            <p className="text-red-500">{errors.productCode.message}</p>
-          )}
-
-          <div className="flex gap-2">
-            <input
-              type="text"
-              {...register("pickupLocation", {
-                required: "Pick-up location is required",
-              })}
-              className="input w-full py-6"
-              placeholder="Pick-Up Location*"
-            />
-            <input
-              type="date"
-              {...register("pickupDate", {
-                required: "Pick-up date is required",
-              })}
-              className="input w-full py-6"
-            />
-          </div>
-          <div className="flex">
-            {errors.pickupLocation && (
-              <p className="text-red-500 w-1/2">
-                {errors.pickupLocation.message}
-              </p>
-            )}
-            {errors.pickupDate && (
-              <p className="text-red-500 w-1/2">{errors.pickupDate.message}</p>
-            )}
-          </div>
-
-          <div className="flex gap-2">
-            <input
-              type="text"
-              {...register("dropLocation", {
-                required: "Drop-off location is required",
-              })}
-              className="input w-full py-6"
-              placeholder="Drop-Off Location*"
-            />
-            <input
-              type="date"
-              {...register("dropDate", {
-                required: "Drop-off date is required",
-              })}
-              className="input w-full py-6"
-            />
-          </div>
-          <div className="flex">
-            {errors.dropLocation && (
-              <p className="text-red-500 w-1/2">
-                {errors.dropLocation.message}
-              </p>
-            )}
-            {errors.dropDate && (
-              <p className="text-red-500 w-1/2">{errors.dropDate.message}</p>
-            )}
-          </div>
-          <div className="md:flex gap-2">
-            {/* Choose Month Section */}
-            <div className="flex items-center gap-3 md:w-1/2 bg-white px-2 py-2">
-              <p className="font-semibold">Choose Month:</p>
-              <button
-                type="button"
-                onClick={decreaseMonths}
-                className="bg-gray-300 px-2 py-1 rounded"
-              >
-                -
-              </button>
-              <p className="">{months}</p>
-              <button
-                type="button"
-                onClick={increaseMonths}
-                className="bg-gray-300 px-2 py-1 rounded"
-              >
-                +
-              </button>
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col md:w-1/2">
+              <input
+                type="text"
+                {...register("productCode", {
+                  required: "Product code is required",
+                })}
+                className="input w-full py-6"
+                placeholder="Product Code*"
+              />
+              {errors.productCode && (
+                <p className="text-red-500">{errors.productCode.message}</p>
+              )}
             </div>
+
+            {/* Choose Month Section */}
+
             {/* Quantity Section */}
-            <div className="flex items-center gap-3 md:w-1/2 bg-white px-2 py-2">
-              <p className="font-semibold">Choose Quantity:</p>
-              <button
-                type="button"
-                onClick={decreaseQuantity}
-                className="bg-gray-300 px-2 py-1 rounded"
-              >
-                -
-              </button>
-              <p className="">{quantity}</p>
-              <button
-                type="button"
-                onClick={increaseQuantity}
-                className="bg-gray-300 px-2 py-1 rounded"
-              >
-                +
-              </button>
+            <div className="flex items-center md:w-1/2 gap-3 px-2 py-2 bg-white border px-4 border-slate-300">
+              <p className="">Choose Quantity:</p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={decreaseQuantity}
+                  className="bg-gray-300 px-2 py-1 rounded"
+                >
+                  -
+                </button>
+                <p className="">{quantity}</p>
+                <button
+                  type="button"
+                  onClick={increaseQuantity}
+                  className="bg-gray-300 px-2 py-1 rounded"
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
 
           <div className="flex justify-center">
-            <button type="submit" className="btn btn-neutral py-6 px-10 mt-4">
+            <button
+              type="submit"
+              className="btn bg-Primary text-white py-6 px-10 mt-4"
+            >
               Submit a Request
             </button>
           </div>

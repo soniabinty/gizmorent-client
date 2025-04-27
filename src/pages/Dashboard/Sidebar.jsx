@@ -74,23 +74,21 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-              {isAdmin ||
-                (isRenter && (
-                  <NavLink to="/dashboard/add-gadget">
-                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                      <LuNotebookPen /> Add Gadget
-                    </p>
-                  </NavLink>
-                ))}
+              {(isAdmin || isRenter) && (
+                <NavLink to="/dashboard/add-gadget">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <LuNotebookPen /> Add Gadget
+                  </p>
+                </NavLink>
+              )}
 
-              {isAdmin ||
-                (isRenter && (
-                  <NavLink to="/dashboard/my-gadget">
-                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
-                      <MdOutlineEventNote></MdOutlineEventNote> My Gadget
-                    </p>
-                  </NavLink>
-                ))}
+              {(isAdmin || isRenter) && (
+                <NavLink to="/dashboard/my-gadget">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <MdOutlineEventNote></MdOutlineEventNote> My Gadget
+                  </p>
+                </NavLink>
+              )}
 
               {isAdmin && (
                 <NavLink to="/dashboard/allorder">
