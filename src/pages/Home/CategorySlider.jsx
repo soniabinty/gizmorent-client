@@ -85,7 +85,7 @@ const CategorySlider = () => {
           {categories.map((category, index) => (
             <SwiperSlide key={index}>
               <div
-                className="flex flex-col items-center w-44 h-44 bg-[#FFD166] p-4 rounded-lg cursor-pointer"
+                className="flex flex-col items-center w-44 h-44 bg-white p-4 rounded-lg cursor-pointer"
                 onClick={() => handleCategoryClick(category.name)}
               >
                 <img

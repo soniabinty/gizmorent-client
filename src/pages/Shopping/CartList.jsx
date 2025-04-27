@@ -151,7 +151,7 @@ const CartList = () => {
           ))}
           <div className="text-right">
             <p className="text-xl font-bold text-Secondary">
-              Total: {totalPrice ? `TK ${totalPrice.toLocaleString()}` : "TK 0"}
+              Total: {totalPrice ? `$ ${totalPrice.toLocaleString()}` : "TK 0"}
             </p>
             <button
               onClick={handleProceedToCheckout}
