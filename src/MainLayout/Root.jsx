@@ -44,7 +44,7 @@ const Root = () => {
   }
 
   return (
-    <div className="font-sans relative">
+    <div className="font-sans relative bg-sky-100 ">
       {isModalOpen && (
         <div className="fixed z-50 inset-0 ">
           <OfferModal setIsModalOpen={setIsModalOpen} />

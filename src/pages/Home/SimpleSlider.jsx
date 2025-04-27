@@ -83,7 +83,7 @@ export default function SimpleSlider() {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className=" w-full bg-gradient-to-t from-[#ffd166] to-sky-200 ... overflow-hidden relative md:px-10 "
+            className=" w-full bg-gradient-to-t from-sky-300 to-sky-100 ... overflow-hidden relative md:px-10 "
           >
             <div className="flex flex-col md:flex-row-reverse max-w-7xl mx-auto justify-center items-center gap-8 p-5 h-full">
               {/* Image Section (50% width on desktop, full width on mobile) */}
