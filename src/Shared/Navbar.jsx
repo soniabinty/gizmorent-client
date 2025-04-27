@@ -85,7 +85,7 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <div className="w-11/12 mx-auto max-w-7xl">
-        <div className="navbar bg-base-100 z-50">
+        <div className="navbar  z-50">
           {/* Navbar Start (Logo and Search Bar) */}
           <div className="navbar-start gap-6">
             {/* Logo */}
@@ -135,11 +135,11 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
 
               <Link to="/notifications" >
-                <div className="relative bg-orange-100 p-1.5 rounded-lg cursor-pointer">
+                <div className="relative bg-sky-100 p-1.5 rounded-lg cursor-pointer">
                   <MdNotificationsActive className="text-2xl text-gray-700" />
                   {unreadCount > 0 && (
-                    <div className="px-1 py-0.5 bg-orange-500 min-w-5 rounded-full text-center text-white text-xs absolute -top-2 -end-1 translate-x-1/4 text-nowrap">
-                      <div className="absolute top-0 start-0 rounded-full -z-10 animate-ping bg-orange-200 w-full h-full"></div>
+                    <div className="px-1 py-0.5 bg-sky-500 min-w-5 rounded-full text-center text-white text-xs absolute -top-2 -end-1 translate-x-1/4 text-nowrap">
+                      <div className="absolute top-0 start-0 rounded-full -z-10 animate-ping bg-sky-200 w-full h-full"></div>
                       {unreadCount}
                     </div>
                   )}
@@ -215,12 +215,11 @@ const Navbar = () => {
                 {email && (
                   <>
                     <div className="mt-3">
-                      <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                        Invite people
-                      </button>
-                      <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                        Help Center
-                      </button>
+                      <Link to="/contact-us">
+                        <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                          Help Center
+                        </button>
+                      </Link>
                     </div>
                     <li>
                       <a

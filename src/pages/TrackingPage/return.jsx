@@ -62,7 +62,7 @@ const ReturnSection = ({ order }) => {
           </button>
           <button
             onClick={() => handleReturn(order._id, "returned")}
-            className="bg-Primary text-white px-4 py-2 rounded hover:bg-orange-600"
+            className="bg-Primary text-white px-4 py-2 rounded hover:bg-sky-600"
           >
             Return
           </button>

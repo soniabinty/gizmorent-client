@@ -91,7 +91,7 @@ const FilterBar = () => {
                 {/* Search Button */}
                 <button
                     onClick={handleSearch}
-                    className="bg-Primary text-white px-4 py-2 rounded-md font-semibold hover:bg-orange-600"
+                    className="bg-Primary text-white px-4 py-2 rounded-md font-semibold hover:bg-sky-600"
                 >
                     Search
                 </button>

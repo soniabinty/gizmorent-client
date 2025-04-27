@@ -37,6 +37,56 @@ const TopRented = () => {
      category: "VR Headset",
       avail:"Available"
     },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    {
+      id: 4,
+      name: "Oculus Quest 3",
+      price: "$35",
+      image: "https://i.ibb.co.com/W4kY8TcV/Adobe-Express-file-6.png",
+     category: "VR Headset",
+      avail:"Available"
+    },
+    
+    
   ];
   return (
 
@@ -45,7 +95,7 @@ const TopRented = () => {
 
       <h2 className='text-4xl max-sm:text-3xl font-bold max-sm:px-4 '>Top Rented Gadgets</h2>
 
-      <div className='grid grid-cols-1 md:grid-cols-4 max-sm:px-4 gap-4 md:gap-8 mt-7'>
+      <div className='grid grid-cols-1 md:grid-cols-5 max-sm:px-4 gap-4 md:gap-6 mt-7'>
    
       {
         TopRentedGadgets.map((gadget) =>(

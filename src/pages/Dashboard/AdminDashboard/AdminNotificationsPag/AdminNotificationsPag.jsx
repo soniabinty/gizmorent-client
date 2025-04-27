@@ -79,13 +79,13 @@ const AdminNotificationsPage = () => {
                                 key={notification._id}
                                 className={`relative w-full flex flex-col gap-3 p-6 rounded-xl shadow-md transition-all ${notification.isRead
                                     ? "bg-gray-200 border-l-4 border-gray-400"
-                                    : "bg-orange-50 border-l-4 border-orange-500"
+                                    : "bg-sky-50 border-l-4 border-sky-500"
                                     }`}
                             >
                                 {/* 🗑️ Delete Button */}
                                 <button
                                     onClick={() => deleteNotification(notification._id)}
-                                    className="absolute top-4 right-4 text-orange-500 hover:text-orange-700"
+                                    className="absolute top-4 right-4 text-sky-500 hover:text-sky-700"
                                     title="Delete notification"
                                 >
                                     <MdDelete />

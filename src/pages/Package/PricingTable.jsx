@@ -116,7 +116,7 @@ const PricingTable = () => {
                             ))}
                             <div className="border-t border-gray-300 p-6 text-center rounded-bl-lg">
                                 <button
-                                    className="flex items-center mt-auto text-white bg-Primary border-0 py-2 px-4 w-full focus:outline-none hover:bg-orange-600 rounded"
+                                    className="flex items-center mt-auto text-white bg-Primary border-0 py-2 px-4 w-full focus:outline-none hover:bg-sky-600 rounded"
                                 >
                                     Choose Plan
                                     <svg

@@ -32,7 +32,7 @@ const FAQSection = () => {
                 <p className="text-gray-600 mt-5">
                     Can't find the answer you're looking for? Our friendly support team is here to help.
                 </p>
-                <button className="mt-7 bg-Primary text-white py-2 px-4 rounded-lg hover:bg-orange-600">
+                <button className="mt-7 bg-Primary text-white py-2 px-4 rounded-lg hover:bg-sky-600">
                     Get in touch
                 </button>
             </div>

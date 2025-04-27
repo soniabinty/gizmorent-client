@@ -85,7 +85,7 @@ const NotificationPage = () => {
                     <h2 className="text-3xl font-semibold text-gray-800">Notifications</h2>
                     <button
                         onClick={handleMarkAllAsRead}
-                        className="bg-Primary hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg text-sm"
+                        className="bg-Primary hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg text-sm"
                     >
                         Read All
                     </button>
@@ -99,7 +99,7 @@ const NotificationPage = () => {
                                 onClick={() => setFilterType(type)}
                                 className={`w-full text-left py-3 px-4 rounded-lg font-medium ${filterType === type
                                     ? "bg-Primary text-white"
-                                    : "bg-white hover:bg-orange-100 text-gray-700"
+                                    : "bg-white hover:bg-sky-100 text-gray-700"
                                     }`}
                             >
                                 {type}
@@ -113,13 +113,13 @@ const NotificationPage = () => {
                                     key={notification._id}
                                     className={`relative w-full flex flex-col gap-3 p-6 rounded-xl shadow-md transition-all ${notification.isRead
                                         ? "bg-gray-200 border-l-4 border-gray-400"
-                                        : "bg-orange-50 border-l-4 border-orange-500"
+                                        : "bg-sky-50 border-l-4 border-Primary"
                                         }`}
                                 >
                                     {/* 🗑️ Delete Button */}
                                     <button
                                         onClick={() => deleteNotification(notification._id)}
-                                        className="absolute top-4 right-4 text-orange-500 hover:text-orange-700"
+                                        className="absolute top-4 right-4 text-sky-500 hover:text-sky-700"
                                         title="Delete notification"
                                     >
                                         <MdDelete />
@@ -141,10 +141,10 @@ const NotificationPage = () => {
                                     {/* Bottom actions */}
                                     <div className="flex justify-between items-center">
                                         <div className="flex items-center gap-6 text-gray-500 text-sm">
-                                            <button className="flex items-center gap-1 hover:text-orange-600">
+                                            <button className="flex items-center gap-1 hover:text-sky-600">
                                                 <FaHeart /> Like
                                             </button>
-                                            <button className="flex items-center gap-1 hover:text-orange-600">
+                                            <button className="flex items-center gap-1 hover:text-sky-600">
                                                 <FaBookmark />
                                                 Save
                                             </button>
@@ -154,7 +154,7 @@ const NotificationPage = () => {
                                             {!notification.isRead && (
                                                 <button
                                                     onClick={() => mutation.mutate(notification._id)}
-                                                    className="flex items-center gap-1 text-orange-600 font-semibold hover:text-Primary"
+                                                    className="flex items-center gap-1 text-sky-600 font-semibold hover:text-Primary"
                                                 >
                                                     <MdMarkEmailUnread className="text-[20px]" /> Read Me
                                                 </button>

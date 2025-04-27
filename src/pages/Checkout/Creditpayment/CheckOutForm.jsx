@@ -11,7 +11,7 @@ const CheckOutForm = () => {
   const elements = useElements();
 
   const user = useSelector((state) => state.auth.user);
-  const { checkoutProduct, formData,  paymentDetails  } = useSelector((state) => state.checkout);
+  const { checkoutProduct, formData,  paymentDetails ,bookingDetails   } = useSelector((state) => state.checkout);
 console.log(checkoutProduct)
 
 
@@ -72,7 +72,7 @@ console.log(checkoutProduct)
         };
   
         const orderData = checkoutProduct.map(product => ({
-          amount: product.price,
+          amount: bookingDetails.price*product.quantity,
           product_name: product.name,
           product_id: product.gadgetId,
           product_img: product.image,

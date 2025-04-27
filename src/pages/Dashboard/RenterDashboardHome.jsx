@@ -3,17 +3,16 @@ import { FaDollarSign } from "react-icons/fa6";
 import { MdOutlinePendingActions, MdOutlineRateReview } from "react-icons/md";
 
 import {
-  BarChart,
   Bar,
-  ResponsiveContainer,
+  BarChart,
   CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
   Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
 
 const RenterDashboardHome = () => {
@@ -137,7 +136,7 @@ const RenterDashboardHome = () => {
         {/* total order */}
         <div className="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md px-6 py-2 items-center justify-between">
           <div
-            className={`bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-orange-600 to-orange-400 text-white shadow-pink-500/40`}
+            className={`bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-sky-600 to-sky-400 text-white shadow-pink-500/40`}
           >
             <BsFillCartPlusFill className="w-6 h-6" />
           </div>

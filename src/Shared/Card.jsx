@@ -52,46 +52,34 @@ const Card = ({ gadget }) => {
   
   return (
     <div className="flex flex-grow">
-      <div className="bg-sky-100 rounded-lg p-4 flex flex-col grow h-full">
-        <div className="flex justify-between items-center">
-          <div>
-            <h4 className="text-2xl font-bold">{gadget.name}</h4>
-            <p>{gadget.category}</p>
-          </div>
+      <div className="bg-white rounded-lg p-2 py-2  grow h-full">
+  
 
-          <div>
-            <FaHeart onClick={handleAddToWishlist} className="text-xl text-red-600 mb-4 cursor-pointer" />
+        <div className="flex-grow  items-center justify-center relative ">
+          <img className="w-50 h-40 mx-auto rounded-lg mt-2" src={gadget.image} alt={gadget.name} />
+           <div className="absolute top-2 right-2">
+            <FaHeart onClick={handleAddToWishlist} className="text-md text-red-600 mb-4 cursor-pointer" />
           </div>
         </div>
 
-        <div className="flex-grow flex items-center justify-center">
-          <img className="w-50 mx-auto" src={gadget.image} alt={gadget.name} />
-        </div>
-
-        <div className="flex gap-7 my-3">
-          <div className="font-bold flex items-center gap-2">
-            <FaRegStar className="text-xl" />
-            <p>4.8</p>
+        <div className="px-2 mt-3 flex flex-col flex-grow">
+            <h4 className="text-sm font-medium mb-1 flex-grow">{gadget.name}</h4>
+            <p className="text-xs">{gadget.category}</p>
+          </div>
+          <div className="font-bold flex items-center mt-2 px-2 gap-2">
+            <FaRegStar className="text-xs" />
+            <p className="text-xs">4.8</p>
           </div>
 
-          <div className="font-bold flex items-center gap-2">
-            <MdOutlineEventNote className="text-xl" />
-            <p>Available</p>
-          </div>
+      
 
-          <div className="font-bold flex items-center gap-2">
-            <LuUsers className="text-xl" />
-            <p>13</p>
-          </div>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <h6 className="font-bold">
+        <div className="flex justify-between mt-1 grow items-center px-2">
+          <h6 className="font-medium text-xs text-Primary">
             ${gadget.price}.00/<span className="text-sm font-normal">day</span>
           </h6>
 
           <Link to={`/gadgetdetail/${gadget._id}`}>
-            <button className="bg-Primary py-2 px-5 rounded-lg text-white font-bold">
+            <button className="bg-Primary py-1 text-xs px-3 rounded-lg text-white font-medium">
               Rent Now
             </button>
           </Link>
