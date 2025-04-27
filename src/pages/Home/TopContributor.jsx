@@ -38,6 +38,7 @@ const TopContributor = () => {
     orders.forEach((order) => {
       const customerEmail = order.customer_email;
       const amount = parseFloat(order.amount);
+      const userNahme = order.customer_name;
 
       if (!customerEmail || isNaN(amount)) return;
 
@@ -46,7 +47,7 @@ const TopContributor = () => {
       if (!contributions[customerEmail]) {
         contributions[customerEmail] = {
           email: customerEmail,
-          name: user?.name || "Unknown",
+          name: user?.name || userNahme || "Unknown",
           profileImage:
             user?.photoURL ||
             "https://i.ibb.co/rQr6L83/default-avatar-icon-of-social-media-user-vector.jpg",
