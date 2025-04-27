@@ -7,17 +7,17 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist } from "../Redux/wishlistSlice";
 
-
-
 const Card = ({ gadget }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.items);
-  const user = useSelector((state) => state.auth.user); 
+  const user = useSelector((state) => state.auth.user);
 
   const handleAddToWishlist = () => {
-    const isAlreadyWishlisted = wishlistItems.some((item) => item._id === gadget._id);
-  
+    const isAlreadyWishlisted = wishlistItems.some(
+      (item) => item._id === gadget._id
+    );
+
     if (isAlreadyWishlisted) {
       Swal.fire({
         icon: "info",
@@ -26,7 +26,7 @@ const Card = ({ gadget }) => {
       });
       return;
     }
-  
+
     if (!user?.email) {
       Swal.fire({
         icon: "error",
@@ -35,7 +35,7 @@ const Card = ({ gadget }) => {
       });
       return;
     }
-  
+
     // ✅ Pass both gadget and email
     dispatch(addToWishlist({ gadget, email: user?.email }));
 
@@ -46,19 +46,19 @@ const Card = ({ gadget }) => {
       showConfirmButton: false,
       timer: 1500,
     });
-  
+
     navigate("/wishlist");
   };
-  
+
   return (
     <div className="flex flex-grow">
       <div className="bg-white rounded-lg p-2 py-2  grow h-full">
   
-
         <div className="flex-grow  items-center justify-center relative ">
           <img className="w-50 h-40 mx-auto rounded-lg mt-2" src={gadget.image} alt={gadget.name} />
            <div className="absolute top-2 right-2">
             <FaHeart onClick={handleAddToWishlist} className="text-md text-red-600 mb-4 cursor-pointer" />
+
           </div>
         </div>
 

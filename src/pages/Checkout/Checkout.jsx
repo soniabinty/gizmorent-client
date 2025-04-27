@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +14,6 @@ const Checkout = () => {
   console.log(checkoutProduct);
 
   const { user } = useSelector((state) => state.auth);
-
 
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -37,7 +35,6 @@ const Checkout = () => {
       return;
     }
     if (data.paymentMethod === "SSLCommerz") {
-
       setIsProcessing(true);
       await initiateSSLCOMMERZPayment(paymentDetails, data);
       setIsProcessing(false);
@@ -92,6 +89,26 @@ const Checkout = () => {
               {errors.email && (
                 <p className="text-red-500">{errors.email.message}</p>
               )}
+              <input
+                type="date"
+                {...register("pickupDate", {
+                  required: "Pickup date is required",
+                })}
+                className="input w-full py-6"
+                placeholder="Pickup Date*"
+              />
+              {errors.pickupDate && (
+                <p className="text-red-500">{errors.pickupDate.message}</p>
+              )}
+              <input
+                type="date"
+                {...register("dropDate", { required: "Drop date is required" })}
+                className="input w-full py-6"
+                placeholder="Drop Date*"
+              />
+              {errors.dropDate && (
+                <p className="text-red-500">{errors.dropDate.message}</p>
+              )}
 
               <LocationSelector
                 control={control}
@@ -126,7 +143,6 @@ const Checkout = () => {
                     />
                     <span>SSLCommerz</span>
                   </label>
-
                 </div>
 
                 {errors.paymentMethod && (
@@ -137,11 +153,12 @@ const Checkout = () => {
               <button
                 type="submit"
                 disabled={isProcessing}
-                className={`bg-Primary py-4 px-10 mt-4 text-white ${isProcessing && "opacity-50 cursor-not-allowed"}`}
+                className={`bg-Primary py-4 px-10 mt-4 text-white ${
+                  isProcessing && "opacity-50 cursor-not-allowed"
+                }`}
               >
                 {isProcessing ? "Processing..." : "Place Order"}
               </button>
-
             </form>
           </div>
         </div>

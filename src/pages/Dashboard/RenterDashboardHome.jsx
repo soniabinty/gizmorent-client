@@ -15,6 +15,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import RenterStat from "./RenterDashboard/RenterStat";
 
 const RenterDashboardHome = () => {
   const data = [
@@ -108,57 +109,7 @@ const RenterDashboardHome = () => {
   };
   return (
     <div className="pt-14">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Revenue */}
-        <div className="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md px-6 py-2 items-center justify-between">
-          <div
-            className={`bg-clip-border  rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-pink-600 to-pink-400 text-white shadow-pink-500/40`}
-          >
-            <FaDollarSign className="w-6 h-6 "></FaDollarSign>
-          </div>
-          <div className="flex flex-col items-end">
-            <p>Total Revenue</p>
-            <h3 className="text-2xl font-semibold">$5550</h3>
-          </div>
-        </div>
-
-        {/* pending */}
-        <div className="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md px-6 py-2 items-center justify-between">
-          <div
-            className={`bg-clip-border  rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-blue-600 to-blue-400 text-white shadow-blue-500/40`}
-          >
-            <MdOutlinePendingActions className="w-6 h-6 " />
-          </div>
-          <div className="flex flex-col items-end">
-            <p>Pending Order</p>
-            <h3 className="text-2xl font-semibold">50</h3>
-          </div>
-        </div>
-        {/* total order */}
-        <div className="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md px-6 py-2 items-center justify-between">
-          <div
-            className={`bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-orange-600 to-orange-400 text-white shadow-pink-500/40`}
-          >
-            <BsFillCartPlusFill className="w-6 h-6" />
-          </div>
-          <div className="flex flex-col items-end">
-            <p>Total Order</p>
-            <h3 className="text-2xl font-semibold">50</h3>
-          </div>
-        </div>
-        {/* total reviews */}
-        <div className="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md px-6 py-2 items-center justify-between">
-          <div
-            className={`bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr shadow-lg grid h-16 w-16 place-items-center from-green-600 to-green-400 text-white shadow-pink-500/40`}
-          >
-            <MdOutlineRateReview className="w-6 h-6" />
-          </div>
-          <div className="flex flex-col items-end">
-            <p>Total Reviews</p>
-            <h3 className="text-2xl font-semibold">550</h3>
-          </div>
-        </div>
-      </div>
+      <RenterStat></RenterStat>
       <div className="flex flex-col md:flex-row items-center justify-center mt-10 gap-6">
         <div className="w-full md:w-1/2">
           <ResponsiveContainer width="100%" height={350}>
