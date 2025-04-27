@@ -20,7 +20,7 @@ const Services = () => {
                                 <img src={item.icon} alt={item.name} className="w-16 mx-auto mb-4 transition-transform duration-500 hover:scale-105" />
                                 <h3 className="text-2xl font-bold mb-4">{item.name}</h3>
                                 <p className="text-gray-600 text-sm">{item.description}</p>
-                                <div className="flex items-center mt-4 text-Primary font-medium transition-all duration-500 ease-in-out hover:text-orange-800">
+                                <div className="flex items-center mt-4 text-Primary font-medium transition-all duration-500 ease-in-out hover:text-sky-800">
                                     <p>Find A Service</p>
                                     <LuMoveRight className="ml-2 " />
                                 </div>

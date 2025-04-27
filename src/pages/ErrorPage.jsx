@@ -16,7 +16,7 @@ function ErrorPage() {
           <i>Sorry, {error.statusText || error.message}</i>
         </p>
         <Link to="/">
-          <button className="mt-6 mb-12 px-4 py-2 bg-Primary text-white rounded-lg shadow-lg hover:bg-orange-400">
+          <button className="mt-6 mb-12 px-4 py-2 bg-Primary text-white rounded-lg shadow-lg hover:bg-sky-400">
             Go to Home
           </button>
         </Link>
