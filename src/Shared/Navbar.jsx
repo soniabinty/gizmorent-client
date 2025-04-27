@@ -55,7 +55,7 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <div className="w-11/12 mx-auto max-w-7xl">
-        <div className="navbar bg-base-100 z-50">
+        <div className="navbar  z-50">
           {/* Navbar Start (Logo and Search Bar) */}
           <div className="navbar-start gap-6">
             {/* Logo */}
