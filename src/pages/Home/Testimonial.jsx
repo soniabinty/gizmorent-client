@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
+import { FaArrowLeft, FaArrowRight, FaStar } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Testimonial = () => {
     const [reviews, setReviews] = useState([]);
     const axiosPublic = useAxiosPublic();
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -25,35 +27,49 @@ const Testimonial = () => {
     }, [axiosPublic]);
 
     return (
-        <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-                <div className="flex justify-between items-center mb-10">
-                    <h2 className="text-3xl font-bold text-gray-800">15k+ Clients Loves Exposure</h2>
-                    <button className="text-blue-600 font-semibold hover:underline">View All</button>
+        <section className="py-5 bg-white relative rounded-lg ">
+            <div className="container mx-auto px-5">
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-2xl font-bold text-Primary">
+                        {reviews.length}+ Clients Love Exposure
+                    </h2>
                 </div>
 
                 <Swiper
-                    modules={[Navigation]}
-                    navigation
+                    modules={[Navigation, Autoplay]}
+                    navigation={{
+                        prevEl: prevRef.current,
+                        nextEl: nextRef.current,
+                    }}
+                    onInit={(swiper) => {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                        swiper.navigation.init();
+                        swiper.navigation.update();
+                    }}
+                    autoplay={{
+                        delay: 8000,
+                        disableOnInteraction: false,
+                    }}
+                    loop={reviews.length > 1}
                     spaceBetween={30}
-                    slidesPerView={1}
                     className="mySwiper"
                 >
                     {reviews.map((review) => (
                         <SwiperSlide key={review._id}>
-                            <div className="bg-base-200 rounded-lg shadow-lg flex flex-col md:flex-row p-6 items-center">
+                            <div className="rounded-lg shadow-lg flex flex-col md:flex-row  items-center">
                                 {/* Left - Photo */}
-                                <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">
-                                    <img
-                                        src={review.photo}
-                                        alt={review.name}
-                                        className="rounded-lg w-80 h-80 object-cover"
-                                    />
-                                </div>
+                                {/* <div className="w-full flex justify-center  "> */}
+                                <img
+                                    src={review.photo}
+                                    alt={review.name}
+                                    className="rounded-lg w-[550px] h-[450px]  object-cover"
+                                />
+                                {/* </div> */}
 
                                 {/* Right - Content */}
                                 <div className="w-full md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
-                                    <h3 className="text-2xl font-bold text-gray-800 mb-4">“Smooth And Comfortable”</h3>
+                                    <h3 className="text-2xl font-bold text-sky-800 mb-4">“{review.name}”</h3>
                                     <div className="flex justify-center md:justify-start mb-4">
                                         {[...Array(5)].map((_, index) => (
                                             <FaStar
@@ -62,30 +78,41 @@ const Testimonial = () => {
                                             />
                                         ))}
                                     </div>
-
+                                    <div className="divider"></div>
                                     <p className="text-gray-600 mb-6">
-
-                                        {review.comment} ...
-
-                                        <span className="text-blue-600 font-semibold hover:underline cursor-pointer">
+                                        {review.comment.length > 150
+                                            ? review.comment.slice(0, 150) + '...'
+                                            : review.comment
+                                        }
+                                        {" "}
+                                        <span className="text-sky-600 font-semibold hover:underline cursor-pointer">
                                             Read More
                                         </span>
                                     </p>
 
                                     <div>
-                                        <h4 className="text-lg font-bold text-gray-800">{review.name}</h4>
+                                        {/* <h4 className="text-lg font-bold text-gray-800">{review.name}</h4> */}
                                         {review.timestamp && (
                                             <p className="text-gray-500 text-sm">
                                                 {new Date(review.timestamp).toLocaleDateString()}
                                             </p>
                                         )}
-                                        <p className="text-gray-500 text-sm">CEO of Louis Vuitton</p> {/* You can make this dynamic if you have it */}
                                     </div>
                                 </div>
                             </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
+
+                {/* Custom navigation buttons */}
+                <div className="absolute bottom-8 right-8 md:bottom-18 md:left-[600px]  flex z-20">
+                    <div ref={prevRef} className="bg-Primary hover:bg-Secondary p-3 rounded-full shadow-md cursor-pointer mr-4">
+                        <FaArrowLeft className="text-white text-xl" />
+                    </div>
+                    <div ref={nextRef} className="bg-Primary hover:bg-Secondary p-3 rounded-full shadow-md cursor-pointer">
+                        <FaArrowRight className="text-white text-xl" />
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { FaLock } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
+import { HiCubeTransparent } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
+import { MdAttachMoney } from "react-icons/md";
+import highVoltage from "../../assets/high-voltage-svgrepo-com.svg";
 import aboutImg from "../../assets/svg/aboutus.svg";
+
 const AboutUs = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [videoUrl, setVideoUrl] = useState("");
@@ -78,19 +83,19 @@ const AboutUs = () => {
                     {/* Features List */}
                     <div className="grid grid-cols-2 gap-4 mt-6">
                         <div className="flex items-center gap-3">
-                            <span className="bg-red-100 p-2 rounded-full text-red-600">📱</span>
+                            <span className="bg-Primary p-2 rounded-full text-white"><HiCubeTransparent /></span>
                             <p className="text-gray-800 font-medium">Rent Latest Gadgets</p>
                         </div>
                         <div className="flex items-center gap-3">
-                            <span className="bg-red-100 p-2 rounded-full text-red-600">🔒</span>
+                            <span className="bg-Primary p-2 rounded-full text-white"><FaLock /></span>
                             <p className="text-gray-800 font-medium">Secure Transactions</p>
                         </div>
                         <div className="flex items-center gap-3">
-                            <span className="bg-red-100 p-2 rounded-full text-red-600">💰</span>
+                            <span className="bg-Primary p-2 rounded-full text-white"><MdAttachMoney /></span>
                             <p className="text-gray-800 font-medium">Earn Passive Income</p>
                         </div>
                         <div className="flex items-center gap-3">
-                            <span className="bg-red-100 p-2 rounded-full text-red-600">⚡</span>
+                            <span className="bg-Primary p-2 rounded-full text-sky-800"><img src={highVoltage} alt="" className="size-4" /></span>
                             <p className="text-gray-800 font-medium">Instant Bookings</p>
                         </div>
                     </div>
