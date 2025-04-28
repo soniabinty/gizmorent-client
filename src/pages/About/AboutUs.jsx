@@ -63,7 +63,7 @@ const AboutUs = () => {
 
                 {/* Right Side - Text Content */}
                 <div className="md:w-1/2">
-                    <span className="bg-orange-100 text-Primary px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-sky-100 text-Primary px-3 py-1 rounded-full text-sm font-semibold">
                         About Us
                     </span>
                     <h2 className="text-4xl font-bold text-gray-800 mt-4">
@@ -97,7 +97,7 @@ const AboutUs = () => {
 
                     {/* CTA Button */}
                     <div className="mt-6">
-                        <button className="bg-Primary text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-md hover:bg-orange-600 transition">
+                        <button className="bg-Primary text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-md hover:bg-sky-600 transition">
                             Explore Services
                         </button>
                     </div>

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Testimonial = () => {
@@ -22,52 +26,66 @@ const Testimonial = () => {
 
     return (
         <section className="py-16 bg-white">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
-                Testimonial
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16 mt-20">
-                {reviews.slice(0, 3).map((review) => (
-                    <div
-                        key={review._id}
-                        className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative"
-                    >
-                        {review.photo && (
-                            <img
-                                className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-md absolute -top-8 left-1/2 transform -translate-x-1/2"
-                                src={review.photo}
-                                alt={review.name}
-                            />
-                        )}
+            <div className="container mx-auto px-4">
+                <div className="flex justify-between items-center mb-10">
+                    <h2 className="text-3xl font-bold text-gray-800">15k+ Clients Loves Exposure</h2>
+                    <button className="text-blue-600 font-semibold hover:underline">View All</button>
+                </div>
 
-                        <div className="mt-10">
-                            <div className="flex justify-center mb-2">
-                                {[...Array(5)].map((_, index) => (
-                                    <FaStar
-                                        key={index}
-                                        className={`mr-1 text-xl ${index < review.rating ? "text-yellow-400" : "text-gray-300"
-                                            }`}
+                <Swiper
+                    modules={[Navigation]}
+                    navigation
+                    spaceBetween={30}
+                    slidesPerView={1}
+                    className="mySwiper"
+                >
+                    {reviews.map((review) => (
+                        <SwiperSlide key={review._id}>
+                            <div className="bg-base-200 rounded-lg shadow-lg flex flex-col md:flex-row p-6 items-center">
+                                {/* Left - Photo */}
+                                <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">
+                                    <img
+                                        src={review.photo}
+                                        alt={review.name}
+                                        className="rounded-lg w-80 h-80 object-cover"
                                     />
-                                ))}
+                                </div>
+
+                                {/* Right - Content */}
+                                <div className="w-full md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                                    <h3 className="text-2xl font-bold text-gray-800 mb-4">“Smooth And Comfortable”</h3>
+                                    <div className="flex justify-center md:justify-start mb-4">
+                                        {[...Array(5)].map((_, index) => (
+                                            <FaStar
+                                                key={index}
+                                                className={`mr-1 text-xl ${index < review.rating ? "text-yellow-400" : "text-gray-300"}`}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <p className="text-gray-600 mb-6">
+
+                                        {review.comment} ...
+
+                                        <span className="text-blue-600 font-semibold hover:underline cursor-pointer">
+                                            Read More
+                                        </span>
+                                    </p>
+
+                                    <div>
+                                        <h4 className="text-lg font-bold text-gray-800">{review.name}</h4>
+                                        {review.timestamp && (
+                                            <p className="text-gray-500 text-sm">
+                                                {new Date(review.timestamp).toLocaleDateString()}
+                                            </p>
+                                        )}
+                                        <p className="text-gray-500 text-sm">CEO of Louis Vuitton</p> {/* You can make this dynamic if you have it */}
+                                    </div>
+                                </div>
                             </div>
-
-                            <p className="text-gray-600">
-                                <span className="text-yellow-500 text-2xl font-bold">“</span>
-                                {review.comment}
-                                <span className="text-yellow-500 text-2xl font-bold">”</span>
-                            </p>
-
-                            <h3 className="mt-4 font-semibold text-lg text-gray-800">
-                                {review.name}
-                            </h3>
-
-                            {review.timestamp && (
-                                <p className="text-gray-500 text-sm">
-                                    {new Date(review.timestamp).toLocaleDateString()}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                ))}
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
         </section>
     );

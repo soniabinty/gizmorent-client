@@ -73,7 +73,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
             <button
-              className="bg-Primary hover:bg-orange-600 px-6 py-3 rounded-lg text-lg font-semibold transition"
+              className="bg-Primary hover:bg-sky-600 px-6 py-3 rounded-lg text-lg font-semibold transition"
               onClick={toggleModal}
             >
               Become a Renter
@@ -120,7 +120,7 @@ const HeroSection = () => {
                 </button>
                 <button
                   type="submit"
-                  className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+                  className="bg-sky-500 text-white py-2 px-4 rounded hover:bg-sky-600 transition"
                 >
                   Submit
                 </button>

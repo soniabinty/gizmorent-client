@@ -1,19 +1,15 @@
-import { BsFillCartPlusFill } from "react-icons/bs";
-import { FaDollarSign } from "react-icons/fa6";
-import { MdOutlinePendingActions, MdOutlineRateReview } from "react-icons/md";
 
 import {
-  BarChart,
   Bar,
-  ResponsiveContainer,
+  BarChart,
   CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
   Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
 import RenterStat from "./RenterDashboard/RenterStat";
 
