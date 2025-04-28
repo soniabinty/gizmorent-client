@@ -17,14 +17,15 @@ const Details = ({ order }) => {
     <div className="bg-gray-100 p-6 rounded-xl">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Details</h3>
       <div className="space-y-3">
-        <p className="text-sm text-gray-700">
+        {/* <p className="text-sm text-gray-700">
           <strong>Seller Name:</strong> {sellerName}
+        </p> */}
+        <p className="text-sm text-gray-700">
+          <strong>Start Time:</strong> {order.renting_time}
         </p>
         <p className="text-sm text-gray-700">
-          <strong>Start Time:</strong> {startTime}
-        </p>
-        <p className="text-sm text-gray-700">
-          <strong>Expected Time:</strong> {expectedTime}
+          <strong>Expected Time:</strong>{" "}
+          {new Date(order.returning_time).toLocaleString()}
         </p>
         <p className="text-sm text-gray-600">
           <strong>Description:</strong> <br />
