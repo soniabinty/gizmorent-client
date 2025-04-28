@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaSearch } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
+import { MdNotificationsActive } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { createSelector } from "reselect";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { logoutUser } from "../Redux/authSlice";
-import { useState } from "react";
 import { setFilters } from "../Redux/Feature/gadgetSlice";
 
 // Memoized selector
@@ -17,6 +19,7 @@ const selectUser = createSelector(
   (user) => ({ ...user })
 );
 
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -24,6 +27,9 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
   const filters = useSelector((state) => state.gadgets.filters);
   const navigate = useNavigate();
+  const [notifications, setNotifications] = useState([]);
+  const axiosPublic = useAxiosPublic();
+
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -34,6 +40,30 @@ const Navbar = () => {
       navigate("/allgadgets");
     }
   };
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const res = await axiosPublic.get(`/notifications?email=${email}`);
+        setNotifications(res.data);
+        // setNotificationCount(res.data.length);
+      } catch (error) {
+        console.error("Failed to fetch notifications", error);
+      }
+    };
+
+    let intervalId;
+    if (email) {
+      fetchNotifications();
+      intervalId = setInterval(fetchNotifications, 10000);
+    }
+
+    return () => clearInterval(intervalId);
+  }, [email, axiosPublic]);
+
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
+
+
 
   return (
     <div>
@@ -98,6 +128,25 @@ const Navbar = () => {
                   <AiOutlineShoppingCart className="text-2xl" />
                 </label>
               </Link>
+
+
+            </div>
+            {/* Notification Icon */}
+            <div className="dropdown dropdown-end">
+
+              <Link to="/notifications" >
+                <div className="relative bg-sky-100 p-1.5 rounded-lg cursor-pointer">
+                  <MdNotificationsActive className="text-2xl text-gray-700" />
+                  {unreadCount > 0 && (
+                    <div className="px-1 py-0.5 bg-sky-500 min-w-5 rounded-full text-center text-white text-xs absolute -top-2 -end-1 translate-x-1/4 text-nowrap">
+                      <div className="absolute top-0 start-0 rounded-full -z-10 animate-ping bg-sky-200 w-full h-full"></div>
+                      {unreadCount}
+                    </div>
+                  )}
+                </div>
+              </Link>
+
+
 
             </div>
 
@@ -166,12 +215,11 @@ const Navbar = () => {
                 {email && (
                   <>
                     <div className="mt-3">
-                      <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                        Invite people
-                      </button>
-                      <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-                        Help Center
-                      </button>
+                      <Link to="/contact-us">
+                        <button className="block text-left w-full px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                          Help Center
+                        </button>
+                      </Link>
                     </div>
                     <li>
                       <a

@@ -36,12 +36,14 @@ import CreditPayment from "../pages/Checkout/Creditpayment/CreditPayment.jsx";
 
 import Contact from "../pages/Contact/ContactUs";
 
+import AdminNotificationsPage from "../pages/Dashboard/AdminDashboard/AdminNotificationsPag/AdminNotificationsPag";
 import AllOrder from "../pages/Dashboard/AdminDashboard/OrderDetails/AllOrder.jsx";
+import RentalEarning from "../pages/Dashboard/AdminDashboard/RentalEarning/RentalEarning.jsx";
+import RentalList from "../pages/Dashboard/AdminDashboard/RentalList/RentalList.jsx";
+import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/RenterGadget.jsx";
+import NotificationPage from "../pages/Notifications/NotificationPage.jsx";
 import Reviews from "../pages/Review/Review";
 import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
-import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/RenterGadget.jsx";
-import  RentalEarning  from "../pages/Dashboard/AdminDashboard/RentalEarning/RentalEarning.jsx";
-import RentalList from "../pages/Dashboard/AdminDashboard/RentalList/RentalList.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -122,6 +124,10 @@ export const router = createBrowserRouter([
         path: "/user-profile",
         element: <UserProfiles />,
       },
+      {
+        path: "/notifications",
+        element: <NotificationPage />,
+      }
     ],
   },
   {
@@ -189,6 +195,10 @@ export const router = createBrowserRouter([
       {
         path: "rental-list",
         element: <RentalList></RentalList>,
+      },
+      {
+        path: "admin-notifications",
+        element: <AdminNotificationsPage></AdminNotificationsPage>,
       },
     ],
   },

@@ -38,6 +38,7 @@ const TopContributor = () => {
     orders.forEach((order) => {
       const customerEmail = order.customer_email;
       const amount = parseFloat(order.amount);
+      const userNahme = order.customer_name;
 
       if (!customerEmail || isNaN(amount)) return;
 
@@ -46,7 +47,7 @@ const TopContributor = () => {
       if (!contributions[customerEmail]) {
         contributions[customerEmail] = {
           email: customerEmail,
-          name: user?.name || "Unknown",
+          name: user?.name || userNahme || "Unknown",
           profileImage:
             user?.photoURL ||
             "https://i.ibb.co/rQr6L83/default-avatar-icon-of-social-media-user-vector.jpg",
@@ -91,7 +92,7 @@ const TopContributor = () => {
             </div>
             <div className="absolute -top-2 -right-2 w-[32px] h-[32px] transform rotate-45">
               <svg
-                fill="#ff6b00"
+                fill="#0198b6"
                 className="w-9 h-9"
                 viewBox="0 0 220 220"
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +134,7 @@ const TopContributor = () => {
                     className={`w-8 h-8 rounded-full flex items-center justify-center ${index === 0
                       ? "bg-Primary"
                       : index === 1
-                        ? "bg-blue-500"
+                        ? "bg-sky-500"
                         : index === 2
                           ? "bg-Secondary"
                           : "bg-transparent"

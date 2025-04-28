@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { TbAdjustmentsSearch } from "react-icons/tb";
 import { Link } from "react-router";
 
 const RecentOrders = () => {
-  const [orders, setOrders] = useState([]); 
-  const [loading, setLoading] = useState(true); 
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -36,7 +35,7 @@ const RecentOrders = () => {
       case "returned":
         return "bg-red-500";
       case "on the way":
-        return "bg-orange-500";
+        return "bg-sky-500";
       case "way to return":
         return "bg-blue-500";
       case "ordered":
@@ -61,10 +60,10 @@ const RecentOrders = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Recent Orders</h2>
         <div className="flex space-x-2">
-        <Link to='/dashboard/allorder'>
-        <button className="btn btn-outline btn-sm">See all</button>
-        </Link>
-        
+          <Link to='/dashboard/allorder'>
+            <button className="btn btn-outline btn-sm">See all</button>
+          </Link>
+
         </div>
       </div>
 
@@ -84,11 +83,11 @@ const RecentOrders = () => {
               <tr key={order._id} className="hover:bg-gray-100">
                 <td className="flex items-center space-x-3 py-2">
                   <div>
-                  <img
-                    src={order.product_img}
-                    alt={order.product_name}
-                    className="w-10 h-10 rounded-lg hidden md:block"
-                  />
+                    <img
+                      src={order.product_img}
+                      alt={order.product_name}
+                      className="w-10 h-10 rounded-lg hidden md:block"
+                    />
                   </div>
                   <div>
                     <p className="font-medium">{order.product_name}</p>

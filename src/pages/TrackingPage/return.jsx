@@ -82,8 +82,10 @@ const ReturnSection = ({ order, fetchOrder }) => {
             Extend Rent
           </button>
           <button
+
             onClick={handleReturn}
             className="bg-Primary text-white px-4 py-2 rounded hover:bg-orange-600"
+
           >
             Return
           </button>

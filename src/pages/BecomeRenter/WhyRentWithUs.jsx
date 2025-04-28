@@ -10,7 +10,7 @@ const features = [
 
 const WhyBecomeRenter = () => {
     return (
-        <section className="flex flex-col-reverse md:flex-row items-center justify-between gap-10 bg-white px-6 md:px-12 py-12">
+        <section className="flex flex-col-reverse md:flex-row items-center justify-between gap-10 bg-white px-6 md:px-12 py-12 rounded-lg">
             {/* Text Section */}
             <div className="md:w-1/2">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">

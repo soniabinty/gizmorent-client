@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
+import { FaArrowLeft, FaArrowRight, FaStar } from 'react-icons/fa';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Autoplay, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Testimonial = () => {
     const [reviews, setReviews] = useState([]);
     const axiosPublic = useAxiosPublic();
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -21,53 +27,92 @@ const Testimonial = () => {
     }, [axiosPublic]);
 
     return (
-        <section className="py-16 bg-white">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
-                Testimonial
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-16 mt-20">
-                {reviews.slice(0, 3).map((review) => (
-                    <div
-                        key={review._id}
-                        className="max-w-sm mx-auto bg-base-200 shadow-lg rounded-lg p-6 text-center relative"
-                    >
-                        {review.photo && (
-                            <img
-                                className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-md absolute -top-8 left-1/2 transform -translate-x-1/2"
-                                src={review.photo}
-                                alt={review.name}
-                            />
-                        )}
+        <section className="py-5 bg-white relative rounded-lg ">
+            <div className="container mx-auto px-5">
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-2xl font-bold text-Primary">
+                        {reviews.length}+ Clients Love Exposure
+                    </h2>
+                </div>
 
-                        <div className="mt-10">
-                            <div className="flex justify-center mb-2">
-                                {[...Array(5)].map((_, index) => (
-                                    <FaStar
-                                        key={index}
-                                        className={`mr-1 text-xl ${index < review.rating ? "text-yellow-400" : "text-gray-300"
-                                            }`}
-                                    />
-                                ))}
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    navigation={{
+                        prevEl: prevRef.current,
+                        nextEl: nextRef.current,
+                    }}
+                    onInit={(swiper) => {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                        swiper.navigation.init();
+                        swiper.navigation.update();
+                    }}
+                    autoplay={{
+                        delay: 8000,
+                        disableOnInteraction: false,
+                    }}
+                    loop={reviews.length > 1}
+                    spaceBetween={30}
+                    className="mySwiper"
+                >
+                    {reviews.map((review) => (
+                        <SwiperSlide key={review._id}>
+                            <div className="rounded-lg shadow-lg flex flex-col md:flex-row  items-center">
+                                {/* Left - Photo */}
+                                {/* <div className="w-full flex justify-center  "> */}
+                                <img
+                                    src={review.photo}
+                                    alt={review.name}
+                                    className="rounded-lg w-[550px] h-[450px]  object-cover"
+                                />
+                                {/* </div> */}
+
+                                {/* Right - Content */}
+                                <div className="w-full md:w-1/2 pl-0 md:pl-8 text-center md:text-left">
+                                    <h3 className="text-2xl font-bold text-sky-800 mb-4">“{review.name}”</h3>
+                                    <div className="flex justify-center md:justify-start mb-4">
+                                        {[...Array(5)].map((_, index) => (
+                                            <FaStar
+                                                key={index}
+                                                className={`mr-1 text-xl ${index < review.rating ? "text-yellow-400" : "text-gray-300"}`}
+                                            />
+                                        ))}
+                                    </div>
+                                    <div className="divider"></div>
+                                    <p className="text-gray-600 mb-6">
+                                        {review.comment.length > 150
+                                            ? review.comment.slice(0, 150) + '...'
+                                            : review.comment
+                                        }
+                                        {" "}
+                                        <span className="text-sky-600 font-semibold hover:underline cursor-pointer">
+                                            Read More
+                                        </span>
+                                    </p>
+
+                                    <div>
+                                        {/* <h4 className="text-lg font-bold text-gray-800">{review.name}</h4> */}
+                                        {review.timestamp && (
+                                            <p className="text-gray-500 text-sm">
+                                                {new Date(review.timestamp).toLocaleDateString()}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
 
-                            <p className="text-gray-600">
-                                <span className="text-yellow-500 text-2xl font-bold">“</span>
-                                {review.comment}
-                                <span className="text-yellow-500 text-2xl font-bold">”</span>
-                            </p>
-
-                            <h3 className="mt-4 font-semibold text-lg text-gray-800">
-                                {review.name}
-                            </h3>
-
-                            {review.timestamp && (
-                                <p className="text-gray-500 text-sm">
-                                    {new Date(review.timestamp).toLocaleDateString()}
-                                </p>
-                            )}
-                        </div>
+                {/* Custom navigation buttons */}
+                <div className="absolute bottom-8 right-8 md:bottom-18 md:left-[600px]  flex z-20">
+                    <div ref={prevRef} className="bg-Primary hover:bg-Secondary p-3 rounded-full shadow-md cursor-pointer mr-4">
+                        <FaArrowLeft className="text-white text-xl" />
                     </div>
-                ))}
+                    <div ref={nextRef} className="bg-Primary hover:bg-Secondary p-3 rounded-full shadow-md cursor-pointer">
+                        <FaArrowRight className="text-white text-xl" />
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -49,7 +49,7 @@ const Checkbox = ({ order }) => {
             {fileName && (
               <button
                 onClick={() => setShowModal(true)}
-                className="text-Primary hover:text-orange-700"
+                className="text-Primary hover:text-sky-700"
               >
                 <FaEye className="text-2xl" />
               </button>
@@ -111,11 +111,10 @@ const Checkbox = ({ order }) => {
 
           <button
             onClick={handleUpload}
-            className={`w-full mt-6 py-2 px-4 text-white font-semibold rounded-lg transition-all duration-300 ${
-              selectedImage && isChecked
-                ? "bg-Primary hover:bg-orange-600"
+            className={`w-full mt-6 py-2 px-4 text-white font-semibold rounded-lg transition-all duration-300 ${selectedImage && isChecked
+                ? "bg-Primary hover:bg-sky-600"
                 : "bg-gray-400 cursor-not-allowed"
-            }`}
+              }`}
             disabled={!selectedImage || !isChecked}
           >
             Upload
@@ -140,7 +139,7 @@ const Checkbox = ({ order }) => {
             />
             <button
               onClick={() => setShowModal(false)}
-              className="mt-4 px-4 py-2 bg-Primary text-white rounded hover:bg-orange-600"
+              className="mt-4 px-4 py-2 bg-Primary text-white rounded hover:bg-sky-600"
             >
               Close
             </button>

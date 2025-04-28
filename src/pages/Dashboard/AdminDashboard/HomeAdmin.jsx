@@ -8,7 +8,7 @@ import ProductData from './HomeComponant/ProductData';
 
 const HomeAdmin = () => {
   return (
-    <div className='py-6 mt-4'>
+    <div className='py-6 mt-4 '>
    <Stat></Stat>
    <Charts></Charts>
    <div className='mt-12 md:grid gap-8 space-y-6 grid-cols-6 '>

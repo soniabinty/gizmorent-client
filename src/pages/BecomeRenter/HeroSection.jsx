@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -55,7 +54,7 @@ const HeroSection = () => {
       if (error.response?.data?.error) {
         setErrorMessage(error.response.data.error);
       } else {
-        setErrorMessage("An error occurred. Please try again.");
+        setErrorMessage("An error occursky. Please try again.");
       }
     }
   };
@@ -73,14 +72,16 @@ const HeroSection = () => {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
             <button
-              className="bg-Primary hover:bg-orange-600 px-6 py-3 rounded-lg text-lg font-semibold transition"
+              className="bg-Primary hover:bg-sky-600 px-6 py-3 rounded-lg text-lg font-semibold transition"
               onClick={toggleModal}
             >
               Become a Renter
             </button>
-            <button className="bg-Secondary hover:bg-sky-900 px-6 py-3 rounded-lg text-lg font-semibold transition">
-              List Your Products
-            </button>
+            <Link to="/dashboard/add-gadget">
+              <button className="bg-Secondary hover:bg-sky-900 px-6 py-3 rounded-lg text-lg font-semibold transition">
+                List Your Products
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -91,7 +92,7 @@ const HeroSection = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm sm:max-w-md md:max-w-lg">
             <h3 className="text-2xl font-bold mb-4 text-center">Rental Application</h3>
             {errorMessage && (
-              <p className="text-red-500 mb-4 text-sm text-center">{errorMessage}</p>
+              <p className="text-sky-500 mb-4 text-sm text-center">{errorMessage}</p>
             )}
             <form onSubmit={handleSubmit}>
               {["name", "email", "phone", "company", "address"].map((field) => (
@@ -106,7 +107,7 @@ const HeroSection = () => {
                     value={formData[field]}
                     onChange={handleChange}
                     readOnly={["name", "email"].includes(field) && user}
-                    required
+                    requisky
                   />
                 </div>
               ))}
@@ -120,7 +121,7 @@ const HeroSection = () => {
                 </button>
                 <button
                   type="submit"
-                  className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+                  className="bg-sky-500 text-white py-2 px-4 rounded hover:bg-sky-600 transition"
                 >
                   Submit
                 </button>

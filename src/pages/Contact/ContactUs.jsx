@@ -38,7 +38,7 @@ const Contact = () => {
         <section className="" id="contact">
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
                 <div className="text-center mb-12">
-                    <p className="text-base font-semibold uppercase tracking-wide text-orange-600">
+                    <p className="text-base font-semibold uppercase tracking-wide text-sky-600">
                         Contact
                     </p>
                     <h2 className="text-3xl sm:text-5xl font-bold text-gray-900">
@@ -124,7 +124,7 @@ const Contact = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-Primary hover:bg-orange-700 text-white py-3 font-semibold rounded-md transition-all duration-300"
+                                className="w-full bg-Primary hover:bg-sky-700 text-white py-3 font-semibold rounded-md transition-all duration-300"
                             >
                                 Send Message
                             </button>
