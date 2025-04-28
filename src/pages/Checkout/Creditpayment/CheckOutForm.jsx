@@ -4,15 +4,21 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+import { toPng } from "html-to-image";
+import download from "downloadjs"; 
+
+
 const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
+  const [modalIsOpen, setModalIsOpen] = useState(false); // Modal visibility state
+  const [invoiceData, setInvoiceData] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const { checkoutProduct, formData,  paymentDetails ,bookingDetails   } = useSelector((state) => state.checkout);
 console.log(checkoutProduct)
+
 
 
   const [processing, setProcessing] = useState(false);
@@ -33,6 +39,22 @@ console.log(checkoutProduct)
         .catch((err) => console.error("Payment Intent Error:", err));
     }
   }, [price, axiosSecure]);
+
+  const handleDownloadInvoice = () => {
+    const invoiceElement = document.getElementById("export"); // Get element by ID
+  
+    if (!invoiceElement) return;
+  
+    toPng(invoiceElement, { cacheBust: true, backgroundColor: "#f0f9ff" })
+      .then((dataUrl) => {
+        download(dataUrl, "invoice.png");
+      })
+      .catch((err) => {
+        console.error("Could not generate image", err);
+      });
+  };
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,11 +119,10 @@ console.log(checkoutProduct)
           await axiosSecure.post("/orders", orderData);
   
           setSuccessMessage("Payment successful!");
-          Swal.fire({
-            icon: "success",
-            title: "Payment Complete",
-            text: "Your Oeder is now Pending. Wait for Confirm.",
-          });
+       
+
+          setInvoiceData(orderData); // Set order data for the modal
+          setModalIsOpen(true); 
         } else {
           setErrorMessage("Payment succeeded but order creation failed.");
         }
@@ -176,6 +197,63 @@ console.log(checkoutProduct)
           Secure payments powered by <span className="font-bold">Stripe</span>.
         </p>
       </form>
+
+
+         {/* Normal Tailwind Modal */}
+         {modalIsOpen && (
+  <div className="fixed inset-0 bg-sky-100/60 flex justify-center items-center  z-50 backdrop-blur-sm">
+    <div className="bg-white rounded-2xl py-6  w-[500px] shadow-2xl animate-fade-in space-y-6">
+      <h2 className="text-3xl font-bold text-center text-sky-700 mb-4">Invoice Summary</h2>
+<div id='export' className="p-6">
+
+ {/* Customer Information */}
+      {invoiceData.length > 0 && (
+        <div className="bg-sky-50 p-4 rounded-xl shadow-inner">
+          <h3 className="text-xl font-semibold mb-2 text-sky-800">Customer Information</h3>
+          <p><span className="font-medium">Name:</span> {invoiceData[0]?.customer_name}</p>
+          <p><span className="font-medium">Email:</span> {invoiceData[0]?.email}</p>
+          <p><span className="font-medium">Phone:</span> {invoiceData[0]?.customer_phone}</p>
+          <p><span className="font-medium">Address:</span> {invoiceData[0]?.customer_address}</p>
+        </div>
+      )}
+
+      {/* Order Details */}
+      <div className="bg-sky-50 p-4 rounded-xl shadow-inner mt-3">
+        <h3 className="text-xl font-semibold mb-2 text-sky-800">Order Details</h3>
+        {invoiceData.map((order, index) => (
+          <div key={index} className="">
+            <p><span className="font-semibold">Product:</span> {order.product_name}</p>
+            <p><span className="font-semibold">Price:</span> ${order.amount}</p>
+            <p><span className="font-semibold">Quantity:</span> {order.quantity}</p>
+            <p><span className="font-semibold">Status:</span> {order.status}</p>
+            <p><span className="font-semibold">Order Date:</span> {new Date(order.date).toLocaleDateString()}</p>
+          </div>
+        ))}
+      </div>
+
+</div>
+     
+
+      {/* Buttons */}
+      <div className="flex justify-between items-center mt-6 px-6">
+        <button
+          onClick={handleDownloadInvoice}
+          className="bg-Primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all duration-300"
+        >
+          Download Invoice
+        </button>
+
+        <button
+          onClick={() => setModalIsOpen(false)}
+          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
