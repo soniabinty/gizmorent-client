@@ -32,8 +32,8 @@ const CartTotal = () => {
   // Calculate Subtotal based on quantity and months
   const subtotal = products.reduce((total, product) => {
     const quantity = bookingDetails?.quantity || product?.quantity || 1;
-    const months = bookingDetails?.months || product?.months || 1;
-    return total + product.price * months * quantity;
+    // const months = bookingDetails?.months || product?.months || 1;
+    return total + product.price * quantity;
   }, 0);
   console.log("Subtotal:", subtotal);
 

@@ -1,0 +1,190 @@
+[
+  {
+    "id": 1,
+    "name": "Phone & Tablet",
+    "subcategories": [
+      {
+        "id": 1,
+        "name": "Smartphone",
+        "image": "https://example.com/smartphone.jpg"
+      },
+      { "id": 2, "name": "Tablet", "image": "https://example.com/laptop.jpg" },
+      { "id": 3, "name": "IPhone", "image": "https://example.com/tablet.jpg" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Computer",
+    "subcategories": [
+      {
+        "id": 4,
+        "name": "Laptop",
+        "image": "https://example.com/gaming-console.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Desktop",
+        "image": "https://example.com/smartwatch.jpg"
+      },
+      { "id": 6, "name": "Monitor", "image": "https://example.com/monitor.jpg" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Camera & Photography",
+    "subcategories": [
+      {
+        "id": 7,
+        "name": "DSLR Camera",
+        "image": "https://example.com/gaming-console.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Action Camera",
+        "image": "https://example.com/action-camera.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Camera Lens",
+        "image": "https://example.com/smartwatch.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Gaming & VR",
+    "subcategories": [
+      {
+        "id": 10,
+        "name": "Gaming Console",
+        "image": "https://example.com/gaming-console.jpg"
+      },
+      {
+        "id": 11,
+        "name": "VR Headset",
+        "image": "https://example.com/smartwatch.jpg"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Audio & Music",
+    "subcategories": [
+      {
+        "id": 12,
+        "name": "Speakers",
+        "image": "https://example.com/headphones.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Microphone",
+        "image": "https://example.com/vr-headset.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Headphones",
+        "image": "https://example.com/gaming-mouse.jpg"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Wearable Technology",
+    "subcategories": [
+      {
+        "id": 15,
+        "name": "Smartwatch",
+        "image": "https://example.com/gaming-keyboard.jpg"
+      },
+      {
+        "id": 16,
+        "name": "Fitness Tracker",
+        "image": "https://example.com/fitness-tracker.jpg"
+      },
+      {
+        "id": 17,
+        "name": "Smart Glasses",
+        "image": "https://example.com/smart-glasses.jpg"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Smart Home Devices",
+    "subcategories": [
+      {
+        "id": 18,
+        "name": "Smart Speaker",
+        "image": "https://example.com/smart-speaker.jpg"
+      },
+      {
+        "id": 19,
+        "name": "Smart Home Hub",
+        "image": "https://example.com/smart-home-hub.jpg"
+      },
+      {
+        "id": 20,
+        "name": "Smart Lock",
+        "image": "https://example.com/smart-lock.jpg"
+      },
+      {
+        "id": 25,
+        "name": "Smart Security Camera",
+        "image": "https://example.com/smart-security-camera.jpg"
+      },
+      {
+        "id": 26,
+        "name": "Smart Air Purifier",
+        "image": "https://example.com/smart-air-purifier.jpg"
+      },
+      {
+        "id": 27,
+        "name": "Smart Vacuum Cleaner",
+        "image": "https://example.com/smart-vacuum-cleaner.jpg"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Home Appliances",
+    "subcategories": [
+      {
+        "id": 28,
+        "name": "Air Conditioner",
+        "image": "https://example.com/air-conditioner.jpg"
+      },
+      { "id": 29, "name": "Heater", "image": "https://example.com/heater.jpg" },
+      {
+        "id": 30,
+        "name": "Air Purifier",
+        "image": "https://example.com/air-purifier.jpg"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Entertainment Devices",
+    "subcategories": [
+      {
+        "id": 21,
+        "name": "Television",
+        "image": "https://example.com/television.jpg"
+      },
+      {
+        "id": 22,
+        "name": "Projector",
+        "image": "https://example.com/projector.jpg"
+      },
+      {
+        "id": 23,
+        "name": "Streaming Device",
+        "image": "https://example.com/streaming-device.jpg"
+      },
+      {
+        "id": 24,
+        "name": "Smart Remote",
+        "image": "https://example.com/smart-remote.jpg"
+      }
+    ]
+  }
+]
