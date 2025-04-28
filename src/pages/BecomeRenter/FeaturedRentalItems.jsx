@@ -36,7 +36,7 @@ const FeaturedRentalItems = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="px-8 py-10">
+        <div className=" py-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
                 <span className="text-Primary">Featured</span> Rental Items
             </h2>
@@ -46,15 +46,15 @@ const FeaturedRentalItems = () => {
             <div className="grid gap-8 mt-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {gadgets.map((gadget) => (
                     <div key={gadget.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                        <div className='flex-grow flex items-center justify-center p-4'>
+                        <div className='flex-grow flex items-center justify-center p-4 h-60'>
                             <img src={gadget.image} alt={gadget.title} className="w-50 mx-auto  object-cover" />
                         </div>
 
                         <div className="p-6">
                             <h3 className="text-lg font-semibold text-gray-800">{gadget.title}</h3>
-                            <p className="text-gray-600 mt-2">{truncateDescription(gadget.description, 50)}</p>
+                            <p className="text-gray-600 mt-2">{truncateDescription(gadget.description, 75)}</p>
                             <ul className="space-y-2 text-gray-700 text-md mt-4">
-                                {gadget.specifications.map((feature, index) => (
+                                {gadget.specifications.slice(0, 3).map((feature, index) => (
                                     <li key={index} className="flex items-center gap-2">
                                         <IoMdCheckmarkCircleOutline className="text-Primary w-5 h-5" />
                                         <span className="text-md">{feature}</span>
