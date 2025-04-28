@@ -60,7 +60,7 @@ const AdminNotificationsPage = () => {
     }
 
     return (
-        <div className="w-full h-full p-5 border border-base-300 rounded-2xl bg-base-100">
+        <div className="w-full h-full p-5 border border-base-300 rounded-2xl bg-sky-100">
             <div className="lg:w-[70%] sm:w-[80%] w-[90%] mx-auto flex flex-col gap-4 py-10">
                 <div className="flex justify-between items-center">
                     <h2 className="text-3xl font-semibold">Admin Notifications</h2>

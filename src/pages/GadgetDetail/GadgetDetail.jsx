@@ -14,7 +14,7 @@ import { fetchGadgetDetails } from "../../Redux/Feature/gadgetSlice";
 import { addToCart } from "../../Redux/Feature/cartSlice";
 import { addToWishlist } from "../../Redux/wishlistSlice";
 import Swal from "sweetalert2";
-
+import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 const GadgetDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -107,45 +107,37 @@ const handleAddToCart = () => {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-3 md:mx-12 p-6 md:p-8">
-        <div className="md:col-span-2  items-center">
-          <div className="flex">
+      <div className="md:grid md:grid-cols-2 md:mx-12 p-6 md:p-12">
+        <div className="md:col-span-1  items-center">
+          <div className="border border-gray-300  rounded-lg">
       <img
-            className="w-[400px] mx-auto"
+            className="w-[400px] h-[400px] mx-auto cover"
             src={gadgetDetails.image}
             alt={gadgetDetails.name}
           />
           </div>
     
-          <div className="md:flex justify-center gap-8">
-          <button onClick={handleAddToCart}className="btn border border-Primary hover:bg-Primary text-Primary hover:text-white mt-4 uppercase rounded-lg">Add to cartlist</button>
-          <button onClick={handleAddToWishlist} className="btn border border-Primary hover:bg-Primary text-Primary hover:text-white mt-4 uppercase rounded-lg">add to wishlist</button>
+          <div className="md:flex justify-center mt-8 gap-8">
+          <button onClick={handleAddToCart}className=" text-Primary gap-2 items-center md:font-bold flex  mt-4 uppercase rounded-lg"><AiOutlineShoppingCart className="font-bold text-sm md:text-2xl"></AiOutlineShoppingCart> Add to cartlist</button>
+          <button onClick={handleAddToWishlist} className="text-Primary gap-2 items-center md:font-bold flex  mt-4 uppercase rounded-lg"><AiOutlineHeart className="font-bold text-sm md:text-2xl"></AiOutlineHeart> add to wishlist</button>
 
           </div>
         </div>
 
-        <div className="col-span-1 space-y-5">
+        <div className="col-span-1 space-y-4 md:mx-6">
           {/* short describe */}
-          <div className="bg-sky-100 p-5 rounded-lg space-y-2 md:mt-14">
-            <div className="font-bold flex items-center gap-2">
-              <FaRegStar className="text-xl" />
-              <p>4.8</p>
-            </div>
-            <h2 className="text-3xl">{gadgetDetails.name}</h2>
-            <h6 className="font-bold">
+          <div className="bg-sky-100 md:px-5 rounded-lg space-y-2 ">
+          
+            <h2 className="text-2xl">{gadgetDetails.name}</h2>
+            <p>{gadgetDetails.category}</p>
+            <h6 className="font-bold text-Primary text-2xl">
               ${gadgetDetails.price || "48.00"}/
               <span className="text-sm font-normal">day</span>
             </h6>
-            <div className="flex gap-8">
-              <div className="flex items-center gap-2 pr-8">
-                <MdLocationOn className="text-xl" />
-                <p>Location : Old BrookFeild Street, USA</p>
-              </div>
-              <div className="font-bold flex items-center gap-2">
-                <LuUsers className="text-xl" />
-                <p>13</p>
-              </div>
-            </div>
+        
+
+           
+          
           </div>
 
           <div>
@@ -155,12 +147,12 @@ const handleAddToCart = () => {
       </div>
 
       {/* description start */}
-      <div className="md:grid bg-sky-100 grid-cols-3 md:p-12 max-sm:py-4">
+      <div className="md:grid bg-sky-100 grid-cols-3 md:px-12 py-8 max-sm:py-4">
         <div className="col-span-2 mx-6">
           <Description gadgetDetails={gadgetDetails} />
         </div>
 
-           <div className=" max-sm:mx-6  bg-white rounded-lg ">
+           <div className=" max-sm:mx-6 bg-white rounded-lg ">
         <div className="space-y-5 max-sm:mt-4 max-sm:pt-3 rounded-lg">
           <ReviewInput />
         </div>
