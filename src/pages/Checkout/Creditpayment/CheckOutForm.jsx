@@ -11,17 +11,16 @@ const CheckOutForm = () => {
   const elements = useElements();
 
   const user = useSelector((state) => state.auth.user);
-  const { checkoutProduct, formData,  paymentDetails ,bookingDetails   } = useSelector((state) => state.checkout);
-console.log(checkoutProduct)
-
+  const { checkoutProduct, formData, paymentDetails, bookingDetails } =
+    useSelector((state) => state.checkout);
 
   const [processing, setProcessing] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  console.log(formData);
 
   // Calculate the price (total amount to be paid)
   const price = paymentDetails?.total || 0;
-console.log(checkoutProduct)
 
   useEffect(() => {
     if (price > 0) {
@@ -37,31 +36,34 @@ console.log(checkoutProduct)
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
-  
+
     setProcessing(true);
     setErrorMessage("");
     setSuccessMessage("");
-  
+
     const card = elements.getElement(CardElement);
     if (!card) return setProcessing(false);
-  
+
     try {
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card,
-          billing_details: {
-            name: user?.displayName || "Anonymous",
-            email: user?.email || "no-email@example.com",
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card,
+            billing_details: {
+              name: user?.displayName || "Anonymous",
+              email: user?.email || "no-email@example.com",
+            },
           },
-        },
-      });
-  
+        }
+      );
+
       if (error) {
         setErrorMessage(error.message);
         setProcessing(false);
         return;
       }
-  
+
       if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
           userId: user._id,
@@ -70,9 +72,10 @@ console.log(checkoutProduct)
           transactionId: paymentIntent.id,
           date: new Date(),
         };
-  
-        const orderData = checkoutProduct.map(product => ({
-          amount: bookingDetails.price*product.quantity,
+        console.log(checkoutProduct);
+
+        const orderData = checkoutProduct.map((product) => ({
+          amount: product.price * product.quantity,
           product_name: product.name,
           product_id: product.gadgetId,
           product_img: product.image,
@@ -80,22 +83,21 @@ console.log(checkoutProduct)
           email: user.email,
           customer_phone: formData?.phone,
           customer_address: `${formData?.upazila}, ${formData?.district}`,
-          renting_time: 10,
-          returning_time:10,
-          status:"pending",
+          renting_time: formData?.pickupDate,
+          returning_time: formData?.dropDate,
+          status: "pending",
           quantity: product.quantity,
           orderId: product._id,
           date: new Date(),
-          renterId: product.renterId
+          renterId: product.renterId,
         }));
-        
-  
+
         const res = await axiosSecure.post("/payments", paymentInfo);
-        console.log(res.data)
-  
+        console.log(res.data);
+
         if (res.data.acknowledged) {
           await axiosSecure.post("/orders", orderData);
-  
+
           setSuccessMessage("Payment successful!");
           Swal.fire({
             icon: "success",
@@ -113,20 +115,35 @@ console.log(checkoutProduct)
       setProcessing(false);
     }
   };
-  
-  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border">
       <h2 className="text-xl font-bold text-gray-800 mb-2 text-center">
-        Amount being paid now: <span className="text-blue-600">${price.toFixed(2)}</span>
+        Amount being paid now:{" "}
+        <span className="text-blue-600">${price.toFixed(2)}</span>
       </h2>
 
       <div className="flex justify-center gap-3 mb-4">
-        <img src="https://img.icons8.com/color/48/visa.png" className="h-6" alt="Visa" />
-        <img src="https://img.icons8.com/color/48/mastercard-logo.png" className="h-6" alt="Mastercard" />
-        <img src="https://img.icons8.com/color/48/discover.png" className="h-6" alt="Discover" />
-        <img src="https://img.icons8.com/color/48/amex.png" className="h-6" alt="Amex" />
+        <img
+          src="https://img.icons8.com/color/48/visa.png"
+          className="h-6"
+          alt="Visa"
+        />
+        <img
+          src="https://img.icons8.com/color/48/mastercard-logo.png"
+          className="h-6"
+          alt="Mastercard"
+        />
+        <img
+          src="https://img.icons8.com/color/48/discover.png"
+          className="h-6"
+          alt="Discover"
+        />
+        <img
+          src="https://img.icons8.com/color/48/amex.png"
+          className="h-6"
+          alt="Amex"
+        />
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -159,18 +176,20 @@ console.log(checkoutProduct)
         </label>
 
         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
-        {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-green-500 text-sm">{successMessage}</p>
+        )}
         <button
-  type="submit"
-  disabled={!stripe || !clientSecret || processing}
-  className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
-    processing
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-blue-600 hover:bg-blue-700 transition duration-300"
-  }`}
->
-  {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
-</button>
+          type="submit"
+          disabled={!stripe || !clientSecret || processing}
+          className={`w-full px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
+            processing
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 transition duration-300"
+          }`}
+        >
+          {processing ? "Processing..." : `Pay $${price.toFixed(2)}`}
+        </button>
 
         <p className="text-sm text-center text-gray-500 mt-4">
           Secure payments powered by <span className="font-bold">Stripe</span>.

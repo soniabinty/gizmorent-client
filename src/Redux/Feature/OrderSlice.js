@@ -1,37 +1,42 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // Fetch all renter orders
-export const fetchorders = createAsyncThunk(
-  'order/fetchAll',
-  async () => {
-    const res = await axios.get('http://localhost:5000/orders');
-    console.log("Fetched orders:", res.data);
-    return res.data.requests;
-  }
-);
+export const fetchorders = createAsyncThunk("order/fetchAll", async () => {
+  const res = await axios.get("http://localhost:5000/orders");
+  console.log("Fetched orders:", res.data);
+  return res.data.requests;
+});
 
 // Update order status
 export const updateOrderStatus = createAsyncThunk(
-  'order/updateStatus',
-  async ({ orderId, newStatus }) => {
-    const res = await axios.patch(`http://localhost:5000/orders/${orderId}`, {
-      status: newStatus,
-    });
+  "order/updateStatus",
+  async ({ orderId, newStatus, newReturningTime }) => {
+    const updateData = { status: newStatus };
+    if (newReturningTime) {
+      updateData.returning_time = newReturningTime;
+    }
+    const res = await axios.patch(
+      `http://localhost:5000/orders/${orderId}`,
+      updateData
+    );
     return res.data;
   }
 );
 
-export const fetchOrdersByEmail = createAsyncThunk("order/fetchOrdersByEmail", async (email) => {
-  const response = await axios.get(`http://localhost:5000/orders/api?email=${email}`);
-  console.log("Fetched Orders:", response.data);
-  return response.data || [];
-});
-
-
+export const fetchOrdersByEmail = createAsyncThunk(
+  "order/fetchOrdersByEmail",
+  async (email) => {
+    const response = await axios.get(
+      `http://localhost:5000/orders/api?email=${email}`
+    );
+    console.log("Fetched Orders:", response.data);
+    return response.data || [];
+  }
+);
 
 const orderSlice = createSlice({
-  name: 'order',
+  name: "order",
   initialState: {
     orders: [],
     loading: false,
@@ -54,7 +59,9 @@ const orderSlice = createSlice({
 
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
         const updatedOrder = action.payload;
-        const index = state.orders.findIndex(order => order._id === updatedOrder._id);
+        const index = state.orders.findIndex(
+          (order) => order._id === updatedOrder._id
+        );
         if (index !== -1) {
           state.orders[index] = updatedOrder;
         }
@@ -72,8 +79,7 @@ const orderSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Unknown error occurred";
       });
-
-  }
+  },
 });
 
 export default orderSlice.reducer;
