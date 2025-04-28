@@ -8,22 +8,24 @@ const Description = ({gadgetDetails}) => {
   return (
     <div className='space-y-6'>
 
-      <div className='bg-white rounded-lg p-6'>
-        <h2 className='text-2xl'>Description</h2>
-        <div className='divider'></div>
-        <p>{description}
+     
+        <p className='text-sm text-gray-600'>{description}
         </p>
-
-      </div>
+        
+        <h6 className="font-bold text-Primary text-2xl">
+              ${gadgetDetails.price || "48.00"}/
+              <span className="text-sm font-normal">day</span>
+            </h6>
+ 
       {/* specification */}
-      <div className='bg-white rounded-lg p-6'>
-        <h2 className='text-2xl'>Specifications</h2>
-        <div className='divider'></div>
-      <div className='md:grid grid-cols-3 gap-5'>
+      <div className=''>
+        <h2 className='text-md mb-3'>Specifications</h2>
+     
+      <div className='md:grid grid-cols-3 gap-2'>
 
         {
 specifications.map((specification) =>
-<div className='flex gap-2 items-center'>
+<div className='flex gap-2 items-center text-xs'>
         <IoMdCheckmarkCircleOutline  className='text-xl text-Primary'/>
         <h4>{specification}</h4>
         </div>)
@@ -34,14 +36,14 @@ specifications.map((specification) =>
 
       {/*feature  */}
 
-      <div className='bg-white rounded-lg p-6'>
-        <h2 className='text-2xl'>Features</h2>
+      <div className=''>
+        <h2 className='text-md mb-3'>Features</h2>
         <div className='divider'></div>
-      <div className='md:grid grid-cols-3 gap-5'>
+      <div className='md:grid grid-cols-3 gap-2'>
    
       {
 features.map((feature) =>
-<div className='flex gap-2 items-center'>
+<div className='flex gap-2 items-center text-xs'>
         <IoMdCheckmarkCircleOutline  className='text-xl text-Primary'/>
         <h4>{feature}</h4>
         </div>)

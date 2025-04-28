@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const CheckAvail = () => {
   const {
@@ -7,8 +8,21 @@ const CheckAvail = () => {
     formState: { errors },
   } = useForm();
 
+
+  const handleCheck = (e) => {
+    e.preventDefault(); 
+    Swal.fire({
+      title: "Gadget Available!",
+      text: "The gadget is available now. You can proceed to booking.",
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "OK"
+    });
+  };
+  
+
   return (
-    <div className="bg-sky-100 rounded-lg mt-8 p-5">
+    <div className="bg-sky-100 rounded-lg mt-4 md:p-5">
       <h3 className="text-2xl font-bold mb-4">Check Availability</h3>
       <form className="space-y-4">
         {/* Pickup Date and Time */}
@@ -74,7 +88,7 @@ const CheckAvail = () => {
         </div>
 
         {/* Submit Button */}
-        <button className="btn bg-Primary hover:bg-Primary text-white mt-4 rounded-lg  w-full">
+        <button onClick={handleCheck} className="btn bg-Primary hover:bg-Primary text-white mt-4 rounded-lg  w-full">
           Check Availability
         </button>
       </form>
