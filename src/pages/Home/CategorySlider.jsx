@@ -9,31 +9,35 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const categories = [
   {
-    name: "Smartphone",
+    name: "Iphone",
     img: "https://i.ibb.co/ymq1PSjj/Adobe-Express-file-7.png",
   },
   {
-    name: "Computer",
+    name: "Monitor",
     img: "https://i.ibb.co/jv6t5FBN/Adobe-Express-file-9.png",
   },
   {
-    name: "Cameras",
+    name: "DSLR Camera",
     img: "https://i.ibb.co/fdxdcJyh/Adobe-Express-file-8.png",
   },
   {
-    name: "Gaming & VR",
+    name: "VR Headset",
     img: "https://i.ibb.co/gnhBhVf/Adobe-Express-file-10.png",
   },
   {
-    name: "Audio & Music",
+    name: "Headphones",
     img: "https://i.ibb.co/jvbVYsWs/Adobe-Express-file-6.png",
   },
   {
-    name: "Wearables",
+    name: "Smartwatch",
     img: "https://i.ibb.co/C5mbRDz0/Adobe-Express-file-11.png",
   },
   {
     name: "Laptop",
+    img: "https://i.ibb.co/jv6t5FBN/Adobe-Express-file-9.png",
+  },
+  {
+    name: "Refrigarator",
     img: "https://i.ibb.co/jv6t5FBN/Adobe-Express-file-9.png",
   },
 ];
@@ -55,12 +59,12 @@ const CategorySlider = () => {
       <div className="flex justify-between items-center">
         <h2 className="md:text-4xl text-2xl font-bold mb-4">Top Categories</h2>
         <div className="flex">
-          <button className="prev-btn mr-3 bg-Accent p-2 shadow-lg rounded-full z-10">
-            <FaChevronLeft />
+          <button className="prev-btn mr-3 bg-Primary  p-2 shadow-lg rounded-full z-10">
+            <FaChevronLeft className="text-white" />
           </button>
 
-          <button className="next-btn bg-[#ffd166] p-2 shadow-lg rounded-full z-10">
-            <FaChevronRight />
+          <button className="next-btn bg-Primary p-2 shadow-lg rounded-full z-10">
+            <FaChevronRight className="text-white"  />
           </button>
         </div>
       </div>

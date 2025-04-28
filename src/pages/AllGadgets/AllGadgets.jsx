@@ -24,7 +24,7 @@ const AllGadgets = () => {
   };
 
   return (
-    <div className="max-w-7xl  mx-auto px-4 pb-6">
+    <div className="max-w-7xl mt-3  mx-auto px-8 pb-6">
 
     
 
@@ -34,7 +34,7 @@ const AllGadgets = () => {
      
    <div className="col-span-1">
           {/* Filters */}
-          <div className=" rounded-lg p-10">
+          <div className=" rounded-lg ">
             <FilterCategory />
             <FilterPrice />
           </div>

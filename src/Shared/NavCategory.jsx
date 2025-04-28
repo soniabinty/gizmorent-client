@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilters, fetchGadgets } from "../Redux/Feature/gadgetSlice";
+import { setFilters, fetchGadgets } from "../Redux/Feature/gadgetSlice"; 
+import { useNavigate } from "react-router-dom";
 
 const NavCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -25,8 +25,8 @@ const NavCategory = () => {
     fetchCategories();
   }, []);
 
-  const handleCategoryClick = (categoryName) => {
-    const updatedFilters = { ...filters, category: categoryName };
+  const handleSubCategoryClick = (subcategoryName) => {
+    const updatedFilters = { ...filters, category: subcategoryName };
     dispatch(setFilters(updatedFilters));
     dispatch(fetchGadgets(updatedFilters));
     navigate(`/allgadgets`);
@@ -37,21 +37,18 @@ const NavCategory = () => {
       <ul className="flex text-sm gap-5">
         {categories.map((category) => (
           <li className="font-bold relative group" key={category.id}>
-            {/* When clicking on a parent category */}
-            <button
-              onClick={() => handleCategoryClick(category.name)}
-              className="hover:underline"
-            >
+            {/* Parent category is only static text */}
+            <span className="hover:underline cursor-default">
               {category.name}
-            </button>
+            </span>
 
-            {/* Dropdown for Subcategories */}
+            {/* Subcategories are clickable */}
             {category.subcategories && (
               <ul className="absolute mx-auto hidden group-hover:block bg-white shadow-lg rounded-lg p-2 space-y-2 min-w-[200px] z-50">
                 {category.subcategories.map((subcategory) => (
                   <li key={subcategory.id}>
                     <button
-                      onClick={() => handleCategoryClick(subcategory.name)}
+                      onClick={() => handleSubCategoryClick(subcategory.name)}
                       className="block px-2 py-1 text-gray-700 hover:bg-gray-100 rounded-md w-full text-left"
                     >
                       {subcategory.name}
