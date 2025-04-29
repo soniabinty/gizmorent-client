@@ -42,7 +42,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="relative min-h-screen md:flex  bg-white">
+    <div className="relative min-h-screen md:flex bg-gradient-to-b from-sky-100 via-white to-sky-50">
       {/* Left Side: Sidebar Component */}
 
       <Sidebar />

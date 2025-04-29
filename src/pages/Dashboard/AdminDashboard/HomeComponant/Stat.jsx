@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaUsers } from 'react-icons/fa';
-import { MdAttachMoney, MdOutlineBorderColor, MdOutlineProductionQuantityLimits } from 'react-icons/md';
-import { fetchorders } from '../../../../Redux/Feature/OrderSlice';
+import React, { useEffect, useState } from 'react';
+import CountUp from "react-countup";
+import { FaDollarSign, FaUsers } from 'react-icons/fa';
+import { MdOutlineBorderColor, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchorders } from '../../../../Redux/Feature/OrderSlice';
 
 const Stat = () => {
   const dispatch = useDispatch();
   const [gadgets, setGadgets] = useState([]);
   const [users, setUsers] = useState([]);
-  const [amount , setAmount] = useState([])
+  const [amount, setAmount] = useState([])
   const { orders } = useSelector((state) => state.order);
   const [totalRevenue, setTotalRevenue] = useState(0);
 
- 
+
   useEffect(() => {
     dispatch(fetchorders());
   }, [dispatch]);
@@ -28,7 +29,7 @@ const Stat = () => {
       }
     };
 
-    fetchGadgets(); 
+    fetchGadgets();
   }, []);
   useEffect(() => {
     const fetchUsers = async () => {
@@ -40,7 +41,7 @@ const Stat = () => {
       }
     };
 
-    fetchUsers(); 
+    fetchUsers();
   }, []);
 
   useEffect(() => {
@@ -59,51 +60,84 @@ const Stat = () => {
     };
     fetchPayments();
   }, []);
-  
-  
+
+
 
 
   return (
-    <div className='md:flex gap-8'>
-      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
-        <div>
-          <h5 className='text-xl'>Total Products</h5>
-          <h3 className='text-3xl font-bold'>{gadgets.length}+</h3>
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8 max-w-7xl mx-auto">
+
+        {/* Total Gadgets */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Gadgets</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={gadgets.length} duration={2} />
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">10 Gadgets add everyday</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdOutlineProductionQuantityLimits className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
         </div>
-        <div className='bg-blue-400 rounded-full h-16 w-16 justify-center flex items-center'>
-          <MdOutlineProductionQuantityLimits className='text-3xl text-white' />
+
+        {/* Total Orders */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Orders</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={orders.length} duration={2} />
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">10% Order place every day</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdOutlineBorderColor className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
         </div>
+
+        {/* Total Revenue */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Revenue</p>
+              <h3 className="text-3xl font-bold mt-2">
+                $<CountUp end={totalRevenue} duration={2} separator="," />K+
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">+36% from last month</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <FaDollarSign className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
+        </div>
+
+        {/* Total Users */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Users</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={users.length} duration={2} />+
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">+47% from last month</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <FaUsers className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
+        </div>
+
       </div>
 
-      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
-        <div>
-          <h5 className='text-xl'>Total Orders</h5>
-          <h3 className='text-3xl font-bold'>{orders.length}+</h3>
-        </div>
-        <div className='bg-purple-500 rounded-full h-16 w-16 justify-center flex items-center'>
-          <MdOutlineBorderColor className='text-3xl text-white' />
-        </div>
-      </div>
-
-      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
-        <div>
-          <h5 className='text-xl'>Total Revenue</h5>
-          <h3 className='text-3xl font-bold'>{totalRevenue}K+</h3>
-        </div>
-        <div className='bg-green-400 rounded-full h-16 w-16 justify-center flex items-center'>
-          <MdAttachMoney className='text-3xl text-white' />
-        </div>
-      </div>
-
-      <div className='flex p-4 gap-6 items-center justify-between shadow-xl rounded-lg'>
-        <div>
-          <h5 className='text-xl'>Total Users</h5>
-          <h3 className='text-3xl font-bold'>{users.length}+</h3>
-        </div>
-        <div className='bg-red-400 rounded-full h-16 w-16 justify-center flex items-center'>
-          <FaUsers className='text-3xl text-white' />
-        </div>
-      </div>
     </div>
   );
 };

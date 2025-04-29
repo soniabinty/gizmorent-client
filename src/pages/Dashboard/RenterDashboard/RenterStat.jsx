@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
+import CountUp from "react-countup";
 import {
   MdAttachMoney,
   MdOutlineBorderColor,
   MdOutlineProductionQuantityLimits,
   MdOutlineRateReview,
 } from "react-icons/md";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useUser from "../../../Hooks/useUser";
-import { se } from "date-fns/locale/se";
 
 const RenterStat = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,6 +17,8 @@ const RenterStat = () => {
   const [orders, setOrders] = useState([]);
   const [renterEarnings, setRenterEarnings] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (userData && userData.email) {
       const fetchGadgets = async () => {
@@ -78,46 +80,108 @@ const RenterStat = () => {
   }, [axiosPublic, userData]);
 
   return (
-    <div className="md:flex gap-8">
-      <div className="flex p-4 gap-6 items-center shadow-xl rounded-lg">
-        <div>
-          <h5 className="text-xl">Total Products</h5>
-          <h3 className="text-3xl font-bold">{myGadgets.length}</h3>
+    <div className="p-6">
+      <div
+        className=" h-[300px] md:h-[350px] bg-cover bg-center  rounded-xl shadow-md overflow-hidden bg-white "
+        style={{
+          backgroundImage: `linear-gradient(rgb(1, 152, 182), rgba(1, 152, 182, 0.7)), url(${user?.photoURL || "https://i.imgur.com/8Km9tLL.png"
+            })`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="  flex items-center justify-center">
+          <div className="text-center p-6 flex flex-col items-center gap-4">
+            <img
+              src={user?.photoURL || "https://i.imgur.com/8Km9tLL.png"}
+              alt={user?.displayName || "User"}
+              className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
+            />
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              Welcome Back, {user?.displayName?.split(" ")[1] || "User"}!
+            </h1>
+            <p className="text-purple-100 max-w-2xl mx-auto">
+              Here's your personalized dashboard.
+            </p>
+          </div>
         </div>
-        <div className="bg-blue-400 rounded-full h-16 w-16 justify-center flex items-center">
-          <MdOutlineProductionQuantityLimits className="text-3xl text-white" />
-        </div>
+
+
       </div>
 
-      <div className="flex p-4 gap-6 items-center shadow-xl rounded-lg">
-        <div>
-          <h5 className="text-xl">Total Orders</h5>
-          <h3 className="text-3xl font-bold">{orders || 0}</h3>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8 max-w-7xl mx-auto">
+
+        {/* Total Gadgets */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Gadgets</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={myGadgets.length} duration={2} />
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">10 Gadgets add everyday</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdOutlineProductionQuantityLimits className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
         </div>
-        <div className="bg-purple-500 rounded-full h-16 w-16 justify-center flex items-center">
-          <MdOutlineBorderColor className="text-3xl text-white" />
+
+        {/* Total Orders */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Orders</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={orders || 0} duration={2} />
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">10% Order place every day</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdOutlineBorderColor className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
         </div>
+
+        {/* Total Revenue */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Revenue</p>
+              <h3 className="text-3xl font-bold mt-2">
+                $<CountUp end={renterEarnings} duration={2} separator="," />K+
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">+36% from last month</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdAttachMoney className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
+        </div>
+
+        {/* Total Users */}
+        <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
+          <div className="p-6 flex items-start justify-between">
+            <div>
+              <p className="text-sm font-medium text-sky-600">Total Users</p>
+              <h3 className="text-3xl font-bold mt-2">
+                <CountUp end={reviews.length} duration={2} />+
+              </h3>
+              <p className="text-xs mt-1 text-gray-500">+47% from last month</p>
+            </div>
+            <div className="p-3 rounded-lg bg-sky-100">
+              <MdOutlineRateReview className="text-2xl text-sky-500" />
+            </div>
+          </div>
+          <div className="h-1 bg-sky-200"></div>
+        </div>
+
       </div>
 
-      <div className="flex p-4 gap-6 items-center shadow-xl rounded-lg">
-        <div>
-          <h5 className="text-xl">Total Revenue</h5>
-          <h3 className="text-3xl font-bold">{renterEarnings}</h3>
-        </div>
-        <div className="bg-green-400 rounded-full h-16 w-16 justify-center flex items-center">
-          <MdAttachMoney className="text-3xl text-white" />
-        </div>
-      </div>
-
-      <div className="flex p-4 gap-6 items-center shadow-xl rounded-lg">
-        <div>
-          <h5 className="text-xl">Total Review</h5>
-          <h3 className="text-3xl font-bold">{reviews.length}</h3>
-        </div>
-        <div className="bg-red-400 rounded-full h-16 w-16 justify-center flex items-center">
-          <MdOutlineRateReview className="text-3xl text-white" />
-        </div>
-      </div>
     </div>
   );
 };

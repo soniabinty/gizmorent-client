@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import Header from "../../../../Shared/Header";
 
 export default function RentalList() {
   const axiosPublic = useAxiosPublic();
@@ -23,11 +24,17 @@ export default function RentalList() {
   if (renters.length === 0) return <p className="p-4">No renters found.</p>;
 
   return (
-    <div className="py-12">
-      <h2 className="text-2xl font-bold mb-4">All Renters</h2>
+    <div className="p-6">
+      <Header
+        header={"All Renters"}
+        title={
+          "View and manage all registered renters, monitor their activity, and maintain a trusted community."
+        }
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-xl shadow">
+      />
+
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
+        <table className="table">
           <thead className="bg-gray-100 text-left">
             <tr>
               <th className="p-3">Name</th>

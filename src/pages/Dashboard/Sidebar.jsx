@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiFillProduct, AiOutlineBars } from "react-icons/ai";
+import { BiMoneyWithdraw } from "react-icons/bi";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
@@ -10,7 +11,6 @@ import {
 } from "react-icons/io5";
 import { LuNotebookPen } from "react-icons/lu";
 import { MdNotificationsActive, MdOutlineEventNote } from "react-icons/md";
-import { BiMoneyWithdraw } from "react-icons/bi";
 
 import { FaUsersViewfinder } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
@@ -46,16 +46,16 @@ const Sidebar = () => {
         </button>
       </div>
 
+      {/* bg-gradient-to-b from-sky-50 to-sky-100 */}
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-Primary text-white w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
             <Link to="/">
-              <div className="w-full  px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto">
+              <div className="w-full  px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-sky-100 mx-auto">
                 <h2 className="text-xl text-Primary font-semibold">
                   GizmoRent
                 </h2>
@@ -182,8 +182,14 @@ const Sidebar = () => {
               )}
             </nav>
           </div>
+
         </div>
-      </div>
+        <div
+          className="mt-auto pt-6 text-center text-xs"
+        >
+          <p>gizmo-rent v1.2.0</p>
+        </div>
+      </div >
     </>
   );
 };

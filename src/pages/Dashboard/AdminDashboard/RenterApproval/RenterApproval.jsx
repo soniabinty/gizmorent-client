@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchRenterRequests,
   approveRenter,
+  fetchRenterRequests,
   rejectRenter,
 } from "../../../../Redux/Feature/renterRequestSlice";
 
 import Swal from "sweetalert2";
+import Header from "../../../../Shared/Header";
 
 const RenterApproval = () => {
   const dispatch = useDispatch();
@@ -66,9 +67,15 @@ const RenterApproval = () => {
   };
 
   return (
-    <div className="pt-14">
-      <h2 className="text-3xl font-semibold">Approve Renter</h2>
-      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-6">
+    <div className="p-6">
+      <Header
+        header={"Approve Renter"}
+        title={
+          "Review renter applications, verify details, and approve trusted individuals for your rentals."
+        }
+
+      />
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
         <table className="table">
           <thead>
             <tr>

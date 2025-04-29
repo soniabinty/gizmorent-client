@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Header from "../../Shared/Header";
 
 const MyGadget = () => {
   const axiosPublic = useAxiosPublic();
@@ -54,9 +55,15 @@ const MyGadget = () => {
   };
 
   return (
-    <div className="pt-14">
-      <h2 className="text-3xl font-semibold">My Gadget</h2>
-      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-6">
+    <div className="p-6">
+      <Header
+        header={"My Gadget"}
+        title={
+          "Manage your listed gadgets and track their rental activity easily."
+        }
+
+      />
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
         <table className="table">
           <thead>
             <tr>

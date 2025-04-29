@@ -25,7 +25,7 @@ const RecentPayments = () => {
   }
 
   return (
-    <div className="p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
+    <div className="p-4 border border-gray-300 rounded-xl shadow-md overflow-hidden bg-white">
       <h2 className="text-2xl font-semibold mb-4">Recent Payments</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
