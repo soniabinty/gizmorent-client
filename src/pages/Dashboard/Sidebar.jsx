@@ -10,6 +10,7 @@ import {
 } from "react-icons/io5";
 import { LuNotebookPen } from "react-icons/lu";
 import { MdNotificationsActive, MdOutlineEventNote } from "react-icons/md";
+import { BiMoneyWithdraw } from "react-icons/bi";
 
 import { FaUsersViewfinder } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
@@ -47,8 +48,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${isActive && "-translate-x-full"
-          }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
+          isActive && "-translate-x-full"
+        }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
@@ -90,6 +92,15 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
+              {isAdmin ||
+                (isRenter && (
+                  <NavLink to="/dashboard/withdraw">
+                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                      <BiMoneyWithdraw /> Withdraw
+                    </p>
+                  </NavLink>
+                ))}
+
               {isAdmin && (
                 <NavLink to="/dashboard/allorder">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -116,7 +127,6 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -125,12 +135,21 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/withdraw-request">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <BiMoneyWithdraw />
+                    Withdraw Request
+                  </p>
+                </NavLink>
+              )}
+
               {isAdmin && (
                 <NavLink to="/dashboard/rental-list">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <FaUsersViewfinder></FaUsersViewfinder>
                     All Renter
-
                   </p>
                 </NavLink>
               )}
@@ -152,7 +171,6 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-
 
               {isRenter && (
                 <NavLink to="/dashboard/userprofile">
