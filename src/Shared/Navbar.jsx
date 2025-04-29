@@ -113,7 +113,7 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
 
               <Link to="/wishlist">
-                <label tabIndex="0" className="btn btn-ghost btn-circle">
+                <label tabIndex="0" className="btn btn-ghost btn-circle hidden md:flex item-center">
                   <AiOutlineHeart className="text-2xl" />
                 </label>
               </Link>
@@ -121,10 +121,10 @@ const Navbar = () => {
             </div>
 
             {/* Cart Dropdown */}
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end hidden md:flex item-center">
 
               <Link to="/cart">
-                <label tabIndex="0" className="btn btn-ghost btn-circle">
+                <label tabIndex="0" className="btn btn-ghost btn-circle ">
                   <AiOutlineShoppingCart className="text-2xl" />
                 </label>
               </Link>
@@ -267,9 +267,6 @@ const Navbar = () => {
                 <li>
                   <Link to="/pricing">Pricing</Link>
                 </li>
-                <li>
-                  <Link to="/tracking-page">Tracking</Link>
-                </li>
 
                 <li>
                   <Link to="/renter">Become a Renter</Link>
@@ -280,6 +277,14 @@ const Navbar = () => {
                 <li>
                   <Link to="/reviews">Reviews</Link>
                 </li>
+                <li className="md:hidden">
+                <Link to="/wishlist">
+                Wishlist
+              </Link>
+                </li>
+                <li className="md:hidden"><Link to="/cart">
+                CartList
+              </Link></li>
               </ul>
             </div>
           </div>

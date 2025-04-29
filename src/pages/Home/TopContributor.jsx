@@ -13,8 +13,8 @@ const TopContributor = () => {
     const fetchData = async () => {
       try {
         const [ordersRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:5000/orders"),
-          axios.get("http://localhost:5000/user"),
+          axios.get("https://gizmorent-server.vercel.app/orders"),
+          axios.get("https://gizmorent-server.vercel.app/user"),
         ]);
 
         setOrders(ordersRes.data.requests || []);
