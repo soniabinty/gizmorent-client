@@ -4,6 +4,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  Legend,
   Pie,
   PieChart,
   ResponsiveContainer,
@@ -13,7 +14,16 @@ import {
 } from "recharts";
 import RenterStat from "./RenterDashboard/RenterStat";
 
+
+
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658'];
+
 const RenterDashboardHome = () => {
+  const datapie = [
+    { name: 'Car Rentals', value: 40000 },
+    { name: 'Bike Rentals', value: 25000 },
+    { name: 'Truck Rentals', value: 15000 },
+  ];
   const data = [
     {
       category: "Laptops",
@@ -98,7 +108,12 @@ const RenterDashboardHome = () => {
     "#6A0572",
     "#C71585",
   ];
-
+  const topCustomers = [
+    { name: 'Jabir Hasan', totalOrders: 12, totalSpent: 15000 },
+    { name: 'Amina Rahman', totalOrders: 10, totalSpent: 13500 },
+    { name: 'Sajid Mia', totalOrders: 9, totalSpent: 12400 },
+    { name: 'Nasima Akter', totalOrders: 8, totalSpent: 9900 },
+  ];
   // Custom label function
   const renderCustomizedLabel = ({ name, percent }) => {
     return `${name} ${(percent * 100).toFixed(0)}%`;
@@ -106,6 +121,63 @@ const RenterDashboardHome = () => {
   return (
     <div className="pt-14">
       <RenterStat></RenterStat>
+
+      <div className='mt-8 md:grid gap-8 grid-cols-6 '>
+
+        <div className='col-span-4'>
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h2 className="text-xl font-bold mb-4 text-gray-700">Top Customers</h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm text-left">
+                <thead className="bg-gray-100 text-gray-600 uppercase">
+                  <tr>
+                    <th className="px-4 py-2">Name</th>
+                    <th className="px-4 py-2">Total Orders</th>
+                    <th className="px-4 py-2">Total Spent (৳)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {topCustomers.map((customer, index) => (
+                    <tr key={index} className="border-b">
+                      <td className="px-4 py-2">{customer.name}</td>
+                      <td className="px-4 py-2">{customer.totalOrders}</td>
+                      <td className="px-4 py-2">৳{customer.totalSpent.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-span-2'>
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h2 className="text-xl font-bold mb-4 text-gray-700">Earnings by Vehicle Type</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={data}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={90}
+                  label
+                  dataKey="value"
+                >
+                  {datapie.map((entry, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+
+      </div>
+
+
       <div className="flex flex-col md:flex-row items-center justify-center mt-10 gap-6">
         <div className="w-full md:w-1/2">
           <ResponsiveContainer width="100%" height={350}>

@@ -55,7 +55,7 @@ const RecentOrders = () => {
   };
 
   return (
-    <div className="p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
+    <div className="p-4 border border-gray-300 rounded-xl shadow-md overflow-hidden bg-white">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Recent Orders</h2>

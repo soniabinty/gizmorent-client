@@ -201,7 +201,7 @@ Advanced Autofocus
 
                 <button
                     type="submit"
-                    className="btn btn-neutral py-6 rounded-lg px-10 mt-4"
+                    className="btn bg-Primary text-white py-6 rounded-lg px-10 mt-4"
                     disabled={uploading}
                 >
                     {uploading ? "Updating..." : "Update Gadget"}

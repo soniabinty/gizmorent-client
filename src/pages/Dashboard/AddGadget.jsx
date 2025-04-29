@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { uploadImage } from "../../utility/utility";
-import useUser from "../../Hooks/useUser";
-import useRenter from "../../Hooks/useRenter";
 import useAdmin from "../../Hooks/useAdmin";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useRenter from "../../Hooks/useRenter";
+import useUser from "../../Hooks/useUser";
+import Header from "../../Shared/Header";
+import { uploadImage } from "../../utility/utility";
 
 const AddGadget = () => {
   const axiosPubic = useAxiosPublic();
@@ -91,9 +92,15 @@ const AddGadget = () => {
   };
 
   return (
-    <div className="pt-14">
-      <h2 className="text-3xl font-semibold">Add Gadget</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-4">
+    <div className="p-6">
+      <Header
+        header={"Add Gadget"}
+        title={
+          "List a new gadget for rent and make it available to renters."
+        }
+        icon={<FaPlus className="text-3xl" />}
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-4 overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
         <input
           type="email"
           {...register("email", { required: "Email is required" })}
@@ -219,7 +226,7 @@ Advanced Autofocus
 
         <button
           type="submit"
-          className="btn btn-neutral py-6 rounded-lg px-10 mt-4"
+          className="btn bg-Primary text-white py-6 rounded-lg px-10 mt-4"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Add Gadget"}
