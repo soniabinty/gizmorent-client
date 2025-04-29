@@ -7,6 +7,7 @@ import FilterPrice from "./FilterPrice";
 import Gadget from "./Gadget";
 import Search from "./Search";
 import img from '../../assets/image/2106.q703.016.S.m004.c10.household appliance realistic.jpg'
+import Loading from "../../Shared/Loading";
 const AllGadgets = () => {
   const dispatch = useDispatch();
   const { gadgets, filters, loading, error, pagination } = useSelector(
@@ -58,7 +59,7 @@ const AllGadgets = () => {
       </div>
           <div className="my-12">
             {loading ? (
-              <p>Loading gadgets...</p>
+              <Loading></Loading>
             ) : error ? (
               <p>Error: {error}</p>
             ) : (

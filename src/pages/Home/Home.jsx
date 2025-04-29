@@ -19,7 +19,6 @@ const Home = () => {
         <CategorySlider></CategorySlider>
         <TopRented></TopRented>
 
-        <AboutGizmoRent></AboutGizmoRent>
         <RealTimeBooking></RealTimeBooking>
         <TopContributor></TopContributor>
         <Testimonial></Testimonial>

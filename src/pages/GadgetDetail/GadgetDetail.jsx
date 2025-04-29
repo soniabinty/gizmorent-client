@@ -15,6 +15,7 @@ import { addToCart } from "../../Redux/Feature/cartSlice";
 import { addToWishlist } from "../../Redux/wishlistSlice";
 import Swal from "sweetalert2";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import Loading from "../../Shared/Loading";
 const GadgetDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -94,7 +95,7 @@ const handleAddToCart = () => {
   
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading></Loading></div>;
   }
 
   if (error) {
