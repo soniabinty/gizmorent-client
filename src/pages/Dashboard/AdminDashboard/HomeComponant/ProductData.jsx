@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useDispatch, useSelector } from "react-redux";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { fetchorders } from "../../../../Redux/Feature/OrderSlice";
 
 
@@ -40,7 +40,7 @@ const ProductData = () => {
   const activeData = activeIndex !== null ? data[activeIndex] : null;
 
   return (
-    <div className="p-4 border border-gray-300 bg-white shadow rounded-lg">
+    <div className="p-4 border border-gray-300 rounded-xl shadow-md overflow-hidden bg-white">
       <h2 className="text-xl font-semibold mb-4">Delivery Update</h2>
       <div className="relative w-full max-w-sm mx-auto">
         <ResponsiveContainer width="100%" height={250}>

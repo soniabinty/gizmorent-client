@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useRenterGadget from "../../../../Hooks/useRenterGadget";
+import Header from "../../../../Shared/Header";
 
 const RenterGadget = () => {
   const [renterGadgets, refetch] = useRenterGadget();
@@ -10,7 +11,7 @@ const RenterGadget = () => {
     await axiosPubic.put(`/renter-gadgets/${gadget._id}`, updatedGadget);
     const { _id, ...rest } = updatedGadget;
     const newGadget = { ...rest, gadgetId: _id };
-    
+
     const res = await axiosPubic.post("/gadgets", newGadget);
     console.log(res.data);
     refetch();
@@ -38,9 +39,15 @@ const RenterGadget = () => {
     });
   };
   return (
-    <div className="pt-14">
-      <h3 className="text-3xl">Renter Gadget Approval</h3>
-      <div className="overflow-x-auto w-full mt-5">
+    <div className="p-4">
+      <Header
+        header={"Renter Gadget Approval"}
+        title={
+          "Approve gadgets submitted by renters and ensure they meet platform standards."
+        }
+
+      />
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
         <table className="table w-full">
           <thead>
             <tr>

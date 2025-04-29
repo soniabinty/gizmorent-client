@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchorders, updateOrderStatus } from '../../../../Redux/Feature/OrderSlice';
+import Header from '../../../../Shared/Header';
 
 const statusOptions = ['pending', 'ordered', 'on the way', 'delivered', 'way to return', 'returned'];
 
@@ -66,11 +67,17 @@ const AllOrder = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="py-12">
-      <h2 className="text-xl font-semibold mb-4">All Orders</h2>
+    <div className="p-6">
+      <Header
+        header={"All Orders"}
+        title={
+          "View and manage all customer orders, track activity, and ensure smooth operations."
+        }
+
+      />
 
       {/* Search and Filter Section */}
-      <div className="flex justify-between gap-4 mb-4">
+      <div className="flex justify-between gap-4 mb-4 rounded-xl shadow-md  bg-white p-4 border border-gray-300">
         <input
           type="text"
           value={searchQuery}
@@ -105,7 +112,7 @@ const AllOrder = () => {
             const filledStatusList = getSelectedStatusesUpTo(selectedStatus);
 
             return (
-              <div key={order._id} className="border border-gray-300 flex gap-4 flex-col p-4 rounded shadow">
+              <div key={order._id} className="border border-gray-300 flex gap-4 flex-col p-6 rounded-xl shadow-md bg-white">
                 <div className="flex flex-col md:flex-row gap-6">
                   <img
                     src={order.product_img}

@@ -5,13 +5,10 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
-  RadialBar,
-  RadialBarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from "recharts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
@@ -39,10 +36,10 @@ const Charts = () => {
   }, [axiosSecure]);
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 mt-12">
+    <div className="flex flex-col md:flex-row gap-8 mt-8">
       {/* monthly sale */}
       <div className="w-full max-w-xl mx-auto">
-        <div className=" p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
+        <div className=" p-4 border border-gray-300 rounded-xl shadow-md overflow-hidden bg-white">
           <h2 className="text-2xl font-semibold mb-4">Monthly Sales</h2>
           <div className="w-full h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -66,7 +63,7 @@ const Charts = () => {
       {/* monthly target*/}
 
       <div className="w-full max-w-xl mx-auto">
-        <div className=" p-4 border border-gray-300 bg-white shadow-lg rounded-lg">
+        <div className=" p-4 border border-gray-300 rounded-xl shadow-md overflow-hidden bg-white">
           <h2 className="text-2xl font-semibold mb-4">New Users</h2>
           {/* Top Section */}
           <div className="flex justify-between items-center mb-4 flex-wrap gap-4">

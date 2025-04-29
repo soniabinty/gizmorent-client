@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Header from "../../Shared/Header";
 
 const PaymentPage = () => {
     const axiosPublic = useAxiosPublic();
@@ -29,14 +30,21 @@ const PaymentPage = () => {
 
     // Render table
     return (
-        <div className="bg-white py-12 lg:p-6 min-h-screen">
+        <div className="p-6">
+            <Header
+                header={"Payment History"}
+                title={
+                    "Review all past transactions, track payment statuses, and maintain clear financial records."
+                }
+
+            />
             <h1 className="text-2xl font-bold mb-6 text-Primary">Payment History</h1>
             {loading ? (
                 <p>Loading payments...</p>
             ) : error ? (
                 <p className="text-red-500">{error}</p>
             ) : (
-                <div className="overflow-x-auto p-5 border border-base-300 rounded-2xl bg-base-100">
+                <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
                     <table className="table w-full">
                         <thead>
                             <tr>

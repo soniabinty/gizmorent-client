@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchorders } from "../../../../Redux/Feature/OrderSlice";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { fetchorders } from "../../../../Redux/Feature/OrderSlice";
+import Header from "../../../../Shared/Header";
 
 export default function RentalEarning() {
   const dispatch = useDispatch();
@@ -71,11 +72,18 @@ export default function RentalEarning() {
     return <p className="p-4">No earnings data available.</p>;
 
   return (
-    <div className="py-12">
-      <h2 className="text-2xl font-bold mb-4">Rental Earnings</h2>
+    <div className="p-6">
+
+      <Header
+        header={"Rental Earnings"}
+        title={
+          "Track your rental income, monitor performance, and stay financially organized."
+        }
+
+      />
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-6 rounded-lg shadow-md bg-white p-4 border border-gray-300">
         <input
           type="text"
           placeholder="Search by renter ID..."
@@ -93,8 +101,8 @@ export default function RentalEarning() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-xl shadow">
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm bg-white p-4">
+        <table className="table">
           <thead className="bg-gray-100 text-left">
             <tr>
               <th className="p-3">Renter ID</th>
