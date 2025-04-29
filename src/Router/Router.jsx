@@ -44,6 +44,8 @@ import RenterGadget from "../pages/Dashboard/AdminDashboard/RenterGadget.jsx/Ren
 import NotificationPage from "../pages/Notifications/NotificationPage.jsx";
 import Reviews from "../pages/Review/Review";
 import TermsAndCondition from "../pages/TermsAndCondition/TermsAndCondition";
+import Withdraw from "../pages/Dashboard/Withdraw.jsx";
+import WithdrawPage from "../pages/Dashboard/WithdrawPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -127,7 +129,7 @@ export const router = createBrowserRouter([
       {
         path: "/notifications",
         element: <NotificationPage />,
-      }
+      },
     ],
   },
   {
@@ -142,7 +144,10 @@ export const router = createBrowserRouter([
         path: "add-gadget",
         element: <AddGadget />,
       },
-
+      {
+        path: "withdraw",
+        element: <Withdraw />,
+      },
       {
         path: "allorder",
         element: <AllOrder></AllOrder>,
@@ -187,6 +192,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentPage></PaymentPage>,
+      },
+      {
+        path: "withdraw-request",
+        element: <WithdrawPage />,
       },
       {
         path: "Rental-earning",
