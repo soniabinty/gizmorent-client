@@ -158,6 +158,11 @@
         "id": 30,
         "name": "Air Purifier",
         "image": "https://example.com/air-purifier.jpg"
+      },
+      {
+        "id": 31,
+        "name": "Refrigarator",
+        "image": "https://example.com/air-purifier.jpg"
       }
     ]
   },
