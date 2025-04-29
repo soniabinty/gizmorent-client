@@ -3,7 +3,6 @@ import Card from "../../Shared/Card";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const TopRented = () => {
-
   const [gadgets, setGadgets] = useState([]);
   const axiosPublic = useAxiosPublic();
 
@@ -22,6 +21,7 @@ const TopRented = () => {
 
   return (
     <div>
+
 
 
       <h2 className='text-4xl max-sm:text-3xl font-bold max-sm:px-4 '>Top Rented Gadgets</h2>

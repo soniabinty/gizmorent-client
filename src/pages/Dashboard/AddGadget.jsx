@@ -4,19 +4,23 @@ import { FaPlus } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert";
 import useAdmin from "../../Hooks/useAdmin";
+<<<<<<< HEAD
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useRenter from "../../Hooks/useRenter";
 import useUser from "../../Hooks/useUser";
 import Header from "../../Shared/Header";
 import { uploadImage } from "../../utility/utility";
+=======
+import useCategory from "../../Hooks/useCategory";
+>>>>>>> 1ca3c1b9647562d11f0343812b100134eed51d2d
 
 const AddGadget = () => {
   const axiosPubic = useAxiosPublic();
   const [userData] = useUser();
-  console.log("User Data:", userData?.companyname);
-  console.log("User Data:", userData);
   const [isRenter] = useRenter();
   const [isAdmin] = useAdmin();
+  const { categories } = useCategory();
+
   const {
     register,
     handleSubmit,
@@ -63,7 +67,7 @@ const AddGadget = () => {
       };
       if (isRenter) {
         formattedData.status = "pending";
-        formattedData.renterId = userData?.renterCode
+        formattedData.renterId = userData?.renterCode;
         formattedData.companyname = userData?.companyname;
         await axiosPubic.post("/renter-gadgets", formattedData);
         console.log("Renter Gadget Data:", formattedData);
@@ -132,14 +136,11 @@ const AddGadget = () => {
           className="select select-bordered w-full "
         >
           <option value="">Select Category</option>
-          <option value="Laptop">Laptop</option>
-          <option value="Smartphone">Smartphone</option>
-          <option value="Tablet">Tablet</option>
-          <option value="Gaming & VR">Gaming & VR</option>
-          <option value="Audio & Music">Audio & Music</option>
-          <option value="Wearable">Wearable</option>
-          <option value="Accessories">Accessories</option>
-          <option value="Other">Other</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
         </select>
         {errors.category && (
           <p className="text-red-500">{errors.category.message}</p>

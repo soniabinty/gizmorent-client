@@ -11,8 +11,16 @@ import NavCategory from "../Shared/NavCategory";
 import WhatsAppWidget from "../Shared/WhatsAppWidget.jsx";
 const Root = () => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const authChecked = useSelector((state) => state.auth.authChecked);
+  useEffect(() => {
+    const offerModalShown = sessionStorage.getItem("offerModalShown");
+
+    if (!offerModalShown) {
+      setIsModalOpen(true);
+      sessionStorage.setItem("offerModalShown", "true");
+    }
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiFillProduct, AiOutlineBars } from "react-icons/ai";
+import { BiMoneyWithdraw } from "react-icons/bi";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
@@ -91,6 +92,15 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
+              {isAdmin ||
+                (isRenter && (
+                  <NavLink to="/dashboard/withdraw">
+                    <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                      <BiMoneyWithdraw /> Withdraw
+                    </p>
+                  </NavLink>
+                ))}
+
               {isAdmin && (
                 <NavLink to="/dashboard/allorder">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -117,7 +127,6 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-
               {isAdmin && (
                 <NavLink to="/dashboard/payment-history">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
@@ -126,12 +135,21 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
+
+              {isAdmin && (
+                <NavLink to="/dashboard/withdraw-request">
+                  <p className="flex items-center gap-2 px-6 py-3 font-semibold">
+                    <BiMoneyWithdraw />
+                    Withdraw Request
+                  </p>
+                </NavLink>
+              )}
+
               {isAdmin && (
                 <NavLink to="/dashboard/rental-list">
                   <p className="flex items-center gap-2 px-6 py-3 font-semibold">
                     <FaUsersViewfinder></FaUsersViewfinder>
                     All Renter
-
                   </p>
                 </NavLink>
               )}
@@ -153,7 +171,6 @@ const Sidebar = () => {
                   </p>
                 </NavLink>
               )}
-
 
               {isRenter && (
                 <NavLink to="/dashboard/userprofile">

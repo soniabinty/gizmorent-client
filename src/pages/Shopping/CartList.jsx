@@ -90,7 +90,7 @@ const CartList = () => {
           {items.map((item) => (
             <div
               key={item._id}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              className="flex items-center justify-between p-4 border border-gray-300 rounded-lg"
             >
               <div className="flex items-center space-x-4">
                 <div className="hidden md:block">

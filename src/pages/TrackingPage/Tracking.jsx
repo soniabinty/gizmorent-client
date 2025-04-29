@@ -48,6 +48,7 @@ const Tracking = ({ order }) => {
     { status: "ordered", description: "Order confirmed and processed" },
     { status: "on the way", description: "Order is on the way" },
     { status: "delivered", description: "Order delivered to your address" },
+    { status: "extended", description: "Returning time is extended" },
     { status: "way to return", description: "Return process started" },
     { status: "returned", description: "Order returned successfully" },
   ];
@@ -58,6 +59,7 @@ const Tracking = ({ order }) => {
       "ordered",
       "on the way",
       "delivered",
+      "extended",
       "way to return",
       "returned",
     ];
