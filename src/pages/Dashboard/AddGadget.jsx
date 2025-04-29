@@ -92,7 +92,7 @@ const AddGadget = () => {
   };
 
   return (
-    <div className="md:p-6">
+    <div className="md:px-6 py-6">
        <Header
             header={"Add Gadget"}
             title={
@@ -223,7 +223,7 @@ Advanced Autofocus
 
         <button
           type="submit"
-          className="btn btn-neutral py-6 rounded-lg px-10 mt-4"
+          className="btn bg-Primary text-white py-6 rounded-lg px-10 mt-4"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Add Gadget"}
