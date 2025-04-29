@@ -27,7 +27,7 @@ const Testimonial = () => {
     }, [axiosPublic]);
 
     return (
-        <section className="py-8 bg-white relative rounded-lg ">
+        <section className="py-8 bg-white relative my-14 rounded-lg ">
             <div className="container mx-auto px-10">
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-xl font-bold text-Primary">

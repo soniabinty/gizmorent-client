@@ -12,6 +12,8 @@ import { createSelector } from "reselect";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { logoutUser } from "../Redux/authSlice";
 import { setFilters } from "../Redux/Feature/gadgetSlice";
+import useAdmin from "../Hooks/useAdmin";
+import useRenter from "../Hooks/useRenter";
 
 // Memoized selector
 const selectUser = createSelector(
@@ -29,7 +31,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const axiosPublic = useAxiosPublic();
-
+  const [isAdmin] = useAdmin();
+  const [isRenter] = useRenter();
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -271,9 +274,11 @@ const Navbar = () => {
                 <li>
                   <Link to="/renter">Become a Renter</Link>
                 </li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
+                {(isAdmin || isRenter) && (
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                )}
                 <li>
                   <Link to="/reviews">Reviews</Link>
                 </li>
