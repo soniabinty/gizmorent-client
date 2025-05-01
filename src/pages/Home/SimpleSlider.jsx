@@ -105,7 +105,7 @@ export default function SimpleSlider() {
 
               {/* Text and Buttons Section (50% width on desktop, full width on mobile) */}
               <div className="w-full md:w-1/2 h-full flex flex-col justify-center">
-                <h3 className="text-2xl md:text-4xl font-semibold ">
+                <h3 className="text-xl md:text-4xl font-semibold ">
                   <Typewriter
                     words={[slide.title]}
                     loop={0}
@@ -116,7 +116,7 @@ export default function SimpleSlider() {
                     delaySpeed={1000}
                   />
                 </h3>
-                <p className="mt-4 text-black font-semibold">
+                <p className="mt-4 text-black">
                   {slide.description}
                 </p>
                 <Bounce>
