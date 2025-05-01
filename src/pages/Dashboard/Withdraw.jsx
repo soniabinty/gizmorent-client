@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useUser from "../../Hooks/useUser";
 import Swal from "sweetalert2";
+import Header from "../../Shared/Header";
 
 const Withdraw = () => {
   const axiosPublic = useAxiosPublic();
@@ -56,9 +57,18 @@ const Withdraw = () => {
   const withdrawalAmount = watch("withdrawalAmount");
 
   return (
-    <div className="max-w-lg mx-auto md:p-6 rounded-md shadow-md mt-14">
-      <h1 className="text-2xl font-bold mb-6 text-center">Withdraw</h1>
 
+    <div>
+          
+   <Header
+            header={"Withdraw Amount"}
+            title={
+              "Manage your listed gadgets and track their rental activity easily."
+            }
+    
+          />
+     <div className="max-w-lg mx-auto md:px-6 py-6 rounded-md shadow-md mt-4">
+  
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Withdrawal Amount */}
         <div>
@@ -130,15 +140,17 @@ const Withdraw = () => {
           type="submit"
           className={`w-full py-2 rounded-md text-white font-semibold ${
             withdrawalAmount > 0
-              ? "bg-black text-white"
-              : "bg-gray-400 cursor-not-allowed"
+              ? "bg-Primary text-white"
+              : "bg-Primary cursor-not-allowed"
           }`}
           disabled={withdrawalAmount <= 0}
         >
           Withdraw
         </button>
       </form>
+    </div>  
     </div>
+   
   );
 };
 

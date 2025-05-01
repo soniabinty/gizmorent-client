@@ -49,7 +49,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gradient-to-t from-[#ffd166] to-gray-200 ... ">
+    <div className="bg-gradient-to-t from-sky-300 to-gray-200 ... ">
       <div className="md:flex min-h-screen  mx-auto  rounded-lg max-w-7xl">
         <div className="flex-1 flex flex-col justify-center  py-10 lg:px-6">
           <div className="text-center">
@@ -213,7 +213,7 @@ const Register = () => {
             <div className="p-3 text-center space-y-4 w-11/12 mx-auto ">
               <div className="mt-[380px]">
                 <div className="chat chat-start">
-                  <div className="chat-bubble c bg-Accent text-black">
+                  <div className="chat-bubble c bg-sky-300 text-black">
                     What kind of Gadgets do you Need?
                   </div>
                 </div>
@@ -223,7 +223,7 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="chat chat-start">
-                  <div className="chat-bubble  bg-Accent text-black">
+                  <div className="chat-bubble  bg-sky-300 text-black">
                     Feel Free to Contact With Us!!!
                   </div>
                 </div>

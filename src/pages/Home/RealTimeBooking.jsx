@@ -1,7 +1,9 @@
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import delivery from "../../assets/images/delivery-drivers-delivering-online.jpg";
+import { Navigate, useNavigate } from "react-router";
 
 const RealTimeBooking = () => {
+  const navigate = useNavigate()
   const features = [
     "Instant Rental Confirmation",
     "Secure & Multiple Payment Options",
@@ -9,10 +11,10 @@ const RealTimeBooking = () => {
     "Rent top-quality gadgets at affordable prices",
   ];
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16  bg-white">
+    <section className="flex flex-col md:flex-row items-center max-sm:pt-4 justify-between  py-6 px-6 md:px-16 rounded-lg  bg-white">
       {/* Text Section */}
       <div className="md:w-1/2">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <h2 className="text-3xl  font-bold text-gray-900">
           <span className="text-Primary">Real-Time</span> Gadget Rentals &
           Secure Payments
         </h2>
@@ -35,12 +37,12 @@ const RealTimeBooking = () => {
           ))}
         </ul>
         <div className="mt-6">
-          <a
-            href="#"
-            className="px-6 py-3 text-white text-md font-semibold bg-Primary rounded-lg shadow-md hover:bg-[#d95b00] transition duration-300"
+          <button
+          onClick={()=>navigate("allgadgets")}
+            className="px-6 py-3 text-white text-md font-semibold bg-Primary rounded-lg shadow-md transition duration-300"
           >
             Start Renting Now
-          </a>
+          </button>
         </div>
       </div>
 

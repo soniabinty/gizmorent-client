@@ -17,9 +17,9 @@ export default function OrderForm() {
   }, [dispatch, user?.email]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="flex flex-col items-center min-h-screen bg-gray-100 p-8">
-        <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
+    <div className="px-6 min-h-screen bg-gray-100">
+      <div className=" bg-gray-100 p-8">
+        <h2 className="text-2xl font-semibold mb-6 text-center">My Orders</h2>
 
         {loading && (
           <div className="flex justify-center items-center">
@@ -34,41 +34,49 @@ export default function OrderForm() {
         )}
 
         {orders.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-7xl">
-            {orders.map((order) => (
-              <div
-                onClick={() => navigate("/tracking-page", { state: { order } })}
-                key={order._id}
-                className="bg-white p-4 flex justify-between gap-6 items-center rounded shadow border border-gray-300"
-              >
-                <div>
-                  <img
-                    src={order.product_img}
-                    alt={order.product_name}
-                    className="w-full h-48 object-cover rounded mb-3"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2">
-                    {order.product_name}
-                  </h3>
-                  <p>
-                    <strong>Amount:</strong> ₹{order.amount}
-                  </p>
-                  <p>
-                    <strong>Quantity:</strong> {order.quantity}
-                  </p>
+          <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm  p-4">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Renting Time</th>
+                  <th>Returning Time</th>
 
-                  <p>
-                    <strong>
-                      Renting:
-                      <br />
-                    </strong>{" "}
-                    {order.renting_time} →<br /> {order.returning_time}
-                  </p>
-                </div>
-              </div>
-            ))}
+                  <th>Update</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>
+                      <img
+                        className="w-16 h-16 p-1"
+                        src={order.product_img}
+                        alt=""
+                      />
+                    </td>
+                    <td>{order.product_name}</td>
+                    <td>{order.amount}</td>
+                    <td>{new Date(order.renting_time).toLocaleDateString()}</td>
+                    <td>
+                      {new Date(order.returning_time).toLocaleDateString()}
+                    </td>
+                    <td>
+                      <button
+                        className="bg-Primary px-3 py-1 rounded-lg text-white cursor-pointer"
+                        onClick={() =>
+                          navigate("/tracking-page", { state: { order } })
+                        }
+                      >
+                        Track
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           !loading && <p className="text-gray-600">No orders found.</p>

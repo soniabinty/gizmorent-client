@@ -15,13 +15,13 @@ const AboutGizmoRent = () => {
     {
       title: "Use & Return",
       description: "Enjoy high-performance gadgets for work or entertainment, then return when you're done. Simple and affordable.",
-      image: "https://i.ibb.co.com/pvVFTCX6/happy-deliveryman-standing-near-customer-with-tablet-professional-postman-red-uniform-holding-boxes.jpg", 
+      image: "https://i.ibb.co/qJDfSVS/return-gadget.jpg", 
     }
     
   ];
 
   return (
-    <section className="text-center max-sm:mt-[150px]  pt-4 ">
+    <section className="text-center   pt-4 ">
       <h2 className="text-Primary font-semibold tracking-wide">HOW IT WORKS</h2>
       <h1 className="text-Primary text-3xl sm:text-4xl font-bold mt-2">
        Scroll Details, Submit Order for Rent & Get your Desires

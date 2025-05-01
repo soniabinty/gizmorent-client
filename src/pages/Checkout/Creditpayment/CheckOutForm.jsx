@@ -95,7 +95,6 @@ const CheckOutForm = () => {
           date: new Date(),
         };
 
-  
         const orderData = checkoutProduct.map(product => ({
           amount: product.price*product.quantity,
 
@@ -105,6 +104,7 @@ const CheckOutForm = () => {
           customer_name: formData?.name,
           email: user.email,
           customer_phone: formData?.phone,
+          customer_nid: formData?.nid,
           customer_address: `${formData?.upazila}, ${formData?.district}`,
           renting_time: formData?.pickupDate,
           returning_time: formData?.dropDate,
@@ -116,7 +116,7 @@ const CheckOutForm = () => {
         }));
 
         const res = await axiosSecure.post("/payments", paymentInfo);
-        console.log(res.data);
+     
 
         if (res.data.acknowledged) {
           await axiosSecure.post("/orders", orderData);
@@ -221,51 +221,48 @@ const CheckOutForm = () => {
 
          {/* Normal Tailwind Modal */}
          {modalIsOpen && (
-  <div className="fixed inset-0 bg-sky-100/60 flex justify-center items-center  z-50 backdrop-blur-sm">
-    <div className="bg-white rounded-2xl py-6  w-[500px] shadow-2xl animate-fade-in space-y-6">
-      <h2 className="text-3xl font-bold text-center text-sky-700 mb-4">Invoice Summary</h2>
-<div id='export' className="p-6">
-
- {/* Customer Information */}
-      {invoiceData.length > 0 && (
-        <div className="bg-sky-50 p-4 rounded-xl shadow-inner">
-          <h3 className="text-xl font-semibold mb-2 text-sky-800">Customer Information</h3>
-          <p><span className="font-medium">Name:</span> {invoiceData[0]?.customer_name}</p>
-          <p><span className="font-medium">Email:</span> {invoiceData[0]?.email}</p>
-          <p><span className="font-medium">Phone:</span> {invoiceData[0]?.customer_phone}</p>
-          <p><span className="font-medium">Address:</span> {invoiceData[0]?.customer_address}</p>
-        </div>
-      )}
-
-      {/* Order Details */}
-      <div className="bg-sky-50 p-4 rounded-xl shadow-inner mt-3">
-        <h3 className="text-xl font-semibold mb-2 text-sky-800">Order Details</h3>
-        {invoiceData.map((order, index) => (
-          <div key={index} className="">
-            <p><span className="font-semibold">Product:</span> {order.product_name}</p>
-            <p><span className="font-semibold">Price:</span> ${order.amount}</p>
-            <p><span className="font-semibold">Quantity:</span> {order.quantity}</p>
-            <p><span className="font-semibold">Status:</span> {order.status}</p>
-            <p><span className="font-semibold">Order Date:</span> {new Date(order.date).toLocaleDateString()}</p>
+  <div className="fixed inset-0 bg-sky-100/60 flex justify-center items-center z-50 backdrop-blur-sm px-4">
+    <div className="bg-white rounded-2xl py-6 w-full max-w-md md:max-w-xl shadow-2xl animate-fade-in space-y-6 max-h-[90vh] overflow-y-auto">
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-sky-700 mb-4">Invoice Summary</h2>
+      
+      <div id="export" className="p-4 sm:p-6">
+        {/* Customer Information */}
+        {invoiceData.length > 0 && (
+          <div className="bg-sky-50 p-4 rounded-xl shadow-inner mb-4">
+            <h3 className="text-lg md:text-xl font-semibold mb-2 text-sky-800">Customer Information</h3>
+            <p><span className="font-medium">Name:</span> {invoiceData[0]?.customer_name}</p>
+            <p><span className="font-medium">Email:</span> {invoiceData[0]?.email}</p>
+            <p><span className="font-medium">Phone:</span> {invoiceData[0]?.customer_phone}</p>
+            <p><span className="font-medium">Address:</span> {invoiceData[0]?.customer_address}</p>
           </div>
-        ))}
+        )}
+
+        {/* Order Details */}
+        <div className="bg-sky-50 p-4 rounded-xl shadow-inner space-y-2">
+          <h3 className="text-lg md:text-xl font-semibold mb-2 text-sky-800">Order Details</h3>
+          {invoiceData.map((order, index) => (
+            <div key={index} className="border-b pb-2 last:border-none">
+              <p><span className="font-semibold">Product:</span> {order.product_name}</p>
+              <p><span className="font-semibold">Price:</span> ${order.amount}</p>
+              <p><span className="font-semibold">Quantity:</span> {order.quantity}</p>
+              <p><span className="font-semibold">Status:</span> {order.status}</p>
+              <p><span className="font-semibold">Order Date:</span> {new Date(order.date).toLocaleDateString()}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-</div>
-     
-
       {/* Buttons */}
-      <div className="flex justify-between items-center mt-6 px-6">
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4 sm:px-6 gap-3">
         <button
           onClick={handleDownloadInvoice}
-          className="bg-Primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all duration-300"
+          className="w-full sm:w-auto bg-Primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all duration-300"
         >
           Download Invoice
         </button>
-
         <button
           onClick={() => setModalIsOpen(false)}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all duration-300"
+          className="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-all duration-300"
         >
           Close
         </button>
@@ -273,6 +270,7 @@ const CheckOutForm = () => {
     </div>
   </div>
 )}
+
 
     </div>
   );

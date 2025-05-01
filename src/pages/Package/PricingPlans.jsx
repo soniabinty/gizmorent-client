@@ -13,6 +13,7 @@ const plans = [
       "Rent 1 Gadget",
       "7-Day Rental Period",
       "Standard Support",
+      "Access to Devices",
       "Limited Access to Premium Devices",
     ],
     popular: false,
@@ -81,7 +82,7 @@ const PricingPlans = () => {
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <span
-              className="bg-orange-100 text-orange-500 px-3 py-1 rounded-full text-sm font-bold"
+              className="bg-Primary text-white px-3 py-1 rounded-full text-sm font-bold"
               data-aos="fade-down"
             >
               Our Pricing
@@ -107,12 +108,12 @@ const PricingPlans = () => {
                 key={plan.id}
                 className={`relative bg-white border-gray-200 px-6 py-10 rounded-xl shadow-lg ${
                   plan.popular
-                    ? "border-2 border-orange-500 hover:transform hover:-translate-y-2 transition-all duration-300"
+                    ? "border-2 border-Primary hover:transform hover:-translate-y-2 transition-all duration-300"
                     : ""
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-orange-600 px-3 py-1 text-white text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-Primary px-3 py-1 text-white text-sm font-semibold">
                     Most Popular
                   </div>
                 )}
@@ -121,7 +122,7 @@ const PricingPlans = () => {
                     {plan.name}
                   </h3>
                   <div className="mt-4 text-center">
-                    <span className="text-4xl text-orange-500 font-bold">
+                    <span className="text-4xl text-Primary font-bold">
                       {plan.price}
                     </span>
                     <span className="text-sm">{plan.period}</span>
@@ -132,7 +133,7 @@ const PricingPlans = () => {
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-center">
                         <svg
-                          className="mr-2 h-5 w-5 text-orange-500"
+                          className="mr-2 h-5 w-5 text-Primary"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
@@ -146,7 +147,7 @@ const PricingPlans = () => {
                   </ul>
                   <span
                     onClick={() => handlePlan(plan)}
-                    className="cursor-pointer w-full py-3 px-6 text-center text-white font-semibold rounded-full bg-gradient-to-r from-orange-400 to-orange-600 shadow-lg hover:from-orange-600 hover:to-orange-700 transition duration-300 ease-in-out transform hover:scale-105"
+                    className="cursor-pointer w-full py-3 px-6 text-center text-white font-semibold rounded-full bg-gradient-to-r from-sky-400 to-Primary shadow-lg ease-in-out transform hover:scale-105"
                   >
                     Choose Plan
                   </span>

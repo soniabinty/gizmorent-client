@@ -7,7 +7,7 @@ import Augmented_reality from "../../assets/vr.png";
 import camera_collection from "../../assets/camera_collection.png";
 import { Typewriter } from "react-simple-typewriter";
 import { Bounce } from "react-awesome-reveal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SimpleSlider() {
   var settings = {
@@ -45,37 +45,45 @@ export default function SimpleSlider() {
       title: "Explore Our Featured Gadgets",
       description:
         "Discover the latest and most innovative gadgets available for rent. From smart home devices to cutting-edge tech, we offer top-rated products at unbeatable prices. Whether you're a tech enthusiast or a professional, our collection has something for everyone.",
-      buttons: ["Browse Now", "Get Started"],
+      buttons: ["Explore Gadgets", "Go Premium"],
     },
     {
       src: Augmented_reality,
       title: "Augmented Reality Rentals",
       description:
         "Step into the future with our Augmented Reality devices. Perfect for gaming, education, or professional use, our AR rentals provide an immersive experience like no other. Try out the latest AR headsets and accessories today!",
-      buttons: ["View Rentals", "Book Yours"],
+        buttons: ["Explore Gadgets", "Go Premium"],
     },
     {
       src: camera_collection,
       title: "Professional Camera Rentals",
       description:
         "Capture every moment in stunning detail with our high-quality camera rentals. From DSLRs to mirrorless cameras, we offer a wide range of professional photography and videography equipment. Perfect for events, travel, or creative projects.",
-      buttons: ["See Cameras", "Reserve Now"],
+        buttons: ["Explore Gadgets", "Go Premium"],
     },
     {
       src: gadget, // Replace with another image if available
       title: "Smart Home Devices",
       description:
         "Upgrade your living space with our smart home devices. Rent the latest smart speakers, security cameras, and home automation systems to make your home smarter and more efficient. Experience the convenience of modern technology.",
-      buttons: ["Learn More", "Rent Now"],
+        buttons: ["Explore Gadgets", "Go Premium"],
     },
     {
       src: Augmented_reality, // Replace with another image if available
       title: "Virtual Reality Experiences",
       description:
         "Immerse yourself in a new world with our Virtual Reality headsets. Whether for gaming, training, or entertainment, our VR rentals provide an unforgettable experience. Explore the possibilities of VR today!",
-      buttons: ["Explore VR", "Book Now"],
+        buttons: ["Explore Gadgets", "Go Premium"],
     },
   ];
+  const navigate = useNavigate()
+  const handleButtonClick = (action) => {
+    if (action === "Explore Gadgets") {
+     navigate("/allgadgets")
+    } else if (action === "Go Premium") {
+     navigate("/pricing")
+    }
+  };
 
   return (
     <div className="overflow-hidden">
@@ -115,11 +123,12 @@ export default function SimpleSlider() {
                   <div className="flex flex-col md:flex-row gap-4 md:gap-7 mt-8 md:mt-12">
                     {slide.buttons.map((button, idx) => (
                       <button
+                      onClick={() => handleButtonClick(idx === 0 ? "Explore Gadgets" : "Go Premium")}
                         key={idx}
                         className={`${
                           idx === 0
-                            ? " bg-Primary hover:bg-Accent"
-                            : "bg-white  hover:bg-yellow-500"
+                            ? " bg-Primary"
+                            : "bg-white  "
                         } inline-flex text-black items-center justify-center rounded-lg py-3 px-5 md:py-4 md:px-6 text-center text-sm md:text-base font-medium `}
                       >
                         {button}

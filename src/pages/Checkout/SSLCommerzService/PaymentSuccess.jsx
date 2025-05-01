@@ -27,8 +27,8 @@ const PaymentSuccess = () => {
                         email: user.email,
                         customer_phone: formData?.phone,
                         customer_address: `${formData?.upazila}, ${formData?.district}`,
-                        renting_time: 10,
-                        returning_time:10,
+                        renting_time: formData?.pickupDate,
+                        returning_time: formData?.dropDate,
                         status:"pending",
                         quantity: product.quantity,
                         orderId: product._id,
@@ -36,6 +36,7 @@ const PaymentSuccess = () => {
                         renterId: product.renterId
                       }));
                       await axiosSecure.post("/orders", orderData);
+                    
                 } catch (error) {
                     console.error("Order creation failed:", error);
                 }

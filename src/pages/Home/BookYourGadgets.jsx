@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import gadget from "./../../assets/gadget1.png";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductByCode,
   setBookingDetails,
@@ -11,6 +11,7 @@ import { useState } from "react";
 const BookYourGadgets = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -35,7 +36,7 @@ const BookYourGadgets = () => {
   };
 
   return (
-    <div className="bg-gray-100 md:flex items-center px-8 py-12 rounded-lg">
+    <div className=" md:flex items-center px-8 py-12 rounded-lg">
       <div className="md:w-1/2">
         <img className="md:p-8" src={gadget} alt="Gadget" />
       </div>
@@ -69,6 +70,7 @@ const BookYourGadgets = () => {
 
           <input
             type="email"
+            defaultValue={user?.email}
             {...register("email", { required: "Email is required" })}
             className="input w-full py-6"
             placeholder="Email*"
@@ -76,7 +78,7 @@ const BookYourGadgets = () => {
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
           )}
-          <div className="flex items-center gap-4">
+          <div className="md:flex items-center gap-4">
             <div className="flex flex-col md:w-1/2">
               <input
                 type="text"
@@ -91,10 +93,10 @@ const BookYourGadgets = () => {
               )}
             </div>
 
-            {/* Choose Month Section */}
+           
 
             {/* Quantity Section */}
-            <div className="flex items-center md:w-1/2 gap-3 px-2 py-2 bg-white border px-4 border-slate-300">
+            <div className="flex items-center justify-around md:w-1/2 gap-3  py-2 bg-white border px-4 border-slate-300">
               <p className="">Choose Quantity:</p>
               <div className="flex items-center gap-2">
                 <button

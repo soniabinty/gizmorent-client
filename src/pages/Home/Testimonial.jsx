@@ -30,7 +30,7 @@ const Testimonial = () => {
         <section className="py-8 bg-white relative my-14 rounded-lg ">
             <div className="container mx-auto px-10">
                 <div className="flex justify-between items-center mb-5">
-                    <h2 className="text-xl font-bold text-Primary">
+                    <h2 className="text-2xl font-bold  mb-6d text-Primary">
                         {reviews.length}+ Clients Love Exposure
                     </h2>
                 </div>

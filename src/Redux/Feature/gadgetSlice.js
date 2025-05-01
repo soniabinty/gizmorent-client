@@ -82,7 +82,7 @@ const gadgetSlice = createSlice({
       })
       .addCase(fetchGadgetDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.gadgetDetails = action.payload; // Store gadget details properly
+        state.gadgetDetails = action.payload; 
       })
       .addCase(fetchGadgetDetails.rejected, (state, action) => {
         state.loading = false;

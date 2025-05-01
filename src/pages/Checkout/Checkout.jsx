@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import { setFormData } from "../../Redux/Feature/checkoutSlice";
 import LocationSelector from "../../Shared/LocationSelector";
 import CartTotal from "./CartTotal";
@@ -55,6 +55,7 @@ const Checkout = () => {
       fetchSubscription();
     }
   }, [user, axiosPubic]);
+
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
@@ -128,7 +129,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  defaultValue={bookingDetails?.name}
+                  defaultValue={bookingDetails?.name || user.displayName }
                   {...register("name", { required: "Name is required" })}
                   className="input w-full py-6"
                   placeholder="Name*"
@@ -136,6 +137,20 @@ const Checkout = () => {
               </div>
               {errors.name && (
                 <p className="text-red-500">{errors.name.message}</p>
+              )}
+                  <label htmlFor="email" className="block mb-1 font-semibold">
+                Email
+              </label>
+
+              <input
+                type="email"
+                defaultValue={bookingDetails?.email || user?.email}
+                {...register("email", { required: "Email is required" })}
+                className="input w-full py-6"
+                placeholder="Email*"
+              />
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
               )}
               <div>
                 <label htmlFor="phone" className="block mb-1 font-semibold">
@@ -155,21 +170,20 @@ const Checkout = () => {
               {errors.phone && (
                 <p className="text-red-500">{errors.phone.message}</p>
               )}
-
-              <label htmlFor="email" className="block mb-1 font-semibold">
-                Email
+             <label htmlFor="nid" className="block mb-1 font-semibold">
+                NID
               </label>
 
               <input
-                type="email"
-                defaultValue={bookingDetails?.email || user?.email}
-                {...register("email", { required: "Email is required" })}
+                type="number"
+                {...register("nid", { required: "NID is required" })}
                 className="input w-full py-6"
-                placeholder="Email*"
+                placeholder="NID*"
               />
               {errors.email && (
                 <p className="text-red-500">{errors.email.message}</p>
               )}
+          
 
               <label htmlFor="pickupDate" className="block mb-1 font-semibold">
                 Pickup Date

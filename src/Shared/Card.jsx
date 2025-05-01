@@ -40,14 +40,14 @@ const Card = ({ gadget }) => {
     dispatch(addToWishlist({ gadget, email: user?.email }));
 
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
       title: "Item added to wishlist",
       showConfirmButton: false,
       timer: 1500,
     });
 
-    navigate("/wishlist");
+  
   };
 
   return (
@@ -68,18 +68,18 @@ const Card = ({ gadget }) => {
           </div>
           <div className="font-bold flex items-center mt-2 px-2 gap-2">
             <FaRegStar className="text-xs" />
-            <p className="text-xs">4.8</p>
+            <p className="text-xs">{gadget?.averageRating || 0}</p>
           </div>
 
       
 
         <div className="flex justify-between mt-1 grow items-center px-2">
-          <h6 className="font-medium text-xs text-Primary">
+          <h6 className="font-medium text-Primary">
             ${gadget.price}.00/<span className="text-sm font-normal">day</span>
           </h6>
 
           <Link to={`/gadgetdetail/${gadget._id}`}>
-            <button className="bg-Primary py-1 text-xs px-3 rounded-lg text-white font-medium">
+            <button className="bg-Primary py-2 text-xs px-4  rounded-lg text-white font-medium">
               Rent Now
             </button>
           </Link>

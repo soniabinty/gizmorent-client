@@ -167,7 +167,7 @@ const RenterStat = () => {
         <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col h-40 justify-between">
           <div className="p-6 flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-sky-600">Total Users</p>
+              <p className="text-sm font-medium text-sky-600">Total Reviews</p>
               <h3 className="text-3xl font-bold mt-2">
                 <CountUp end={reviews.length} duration={2} />+
               </h3>

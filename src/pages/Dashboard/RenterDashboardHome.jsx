@@ -119,7 +119,7 @@ const RenterDashboardHome = () => {
     return `${name} ${(percent * 100).toFixed(0)}%`;
   };
   return (
-    <div className="pt-14">
+    <div className="pt-8">
       <RenterStat></RenterStat>
 
       <div className='mt-8 md:grid gap-8 grid-cols-6 '>

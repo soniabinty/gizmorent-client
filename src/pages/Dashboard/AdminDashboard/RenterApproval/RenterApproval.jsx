@@ -19,7 +19,7 @@ const RenterApproval = () => {
     dispatch(fetchRenterRequests());
   }, [dispatch]);
 
-  console.log(requests);
+  
   const handleApprove = (email) => {
     dispatch(approveRenter(email))
       .unwrap()

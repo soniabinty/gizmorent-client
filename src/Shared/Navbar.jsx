@@ -111,9 +111,11 @@ const Navbar = () => {
           </div>
 
           {/* Navbar End (Icons and Dropdowns) */}
+         
           <div className="navbar-end gap-2 md:gap-5">
             {/* Wishlist Dropdown */}
-            <div className="dropdown dropdown-end">
+            {email && (
+             <div className="dropdown dropdown-end">
 
               <Link to="/wishlist">
                 <label tabIndex="0" className="btn btn-ghost btn-circle hidden md:flex item-center">
@@ -122,9 +124,12 @@ const Navbar = () => {
               </Link>
 
             </div>
+            )}
 
-            {/* Cart Dropdown */}
-            <div className="dropdown dropdown-end hidden md:flex item-center">
+             {/* Cart Dropdown */}
+            
+            {email && (
+             <div className="dropdown dropdown-end hidden md:flex item-center">
 
               <Link to="/cart">
                 <label tabIndex="0" className="btn btn-ghost btn-circle ">
@@ -132,10 +137,13 @@ const Navbar = () => {
                 </label>
               </Link>
 
-
             </div>
+            )}
+           
+
             {/* Notification Icon */}
-            <div className="dropdown dropdown-end">
+            {email && (
+              <div className="dropdown dropdown-end">
 
               <Link to="/notifications" >
                 <div className="relative bg-sky-100 p-1.5 rounded-lg cursor-pointer">
@@ -152,8 +160,11 @@ const Navbar = () => {
 
 
             </div>
+                )}
+           
 
             {/* Profile Dropdown */}
+            
             <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="rounded-full">
@@ -279,17 +290,29 @@ const Navbar = () => {
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                 )}
-                <li>
+
+           {email && (
+            <li>
                   <Link to="/reviews">Reviews</Link>
-                </li>
-                <li className="md:hidden">
+                </li> 
+            )}
+
+            {email && (
+               <li className="md:hidden">
                 <Link to="/wishlist">
                 Wishlist
               </Link>
                 </li>
-                <li className="md:hidden"><Link to="/cart">
+            )}
+
+            {email && (
+            <li className="md:hidden"><Link to="/cart">
                 CartList
-              </Link></li>
+              </Link></li>   
+            )}
+                
+              
+              
               </ul>
             </div>
           </div>

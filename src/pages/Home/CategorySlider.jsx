@@ -57,7 +57,7 @@ const CategorySlider = () => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h2 className="md:text-4xl text-2xl font-bold mb-4">Top Categories</h2>
+        <h2 className="text-2xl font-bold  my-5">Top Categories</h2>
         <div className="flex">
           <button className="prev-btn mr-3 bg-Primary  p-2 shadow-lg rounded-full z-10">
             <FaChevronLeft className="text-white" />
@@ -73,23 +73,23 @@ const CategorySlider = () => {
       <div className="w-full">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={1}
-          spaceBetween={10}
+          slidesPerView={2}
+          spaceBetween={5}
           navigation={{
             nextEl: ".next-btn",
             prevEl: ".prev-btn",
           }}
           breakpoints={{
-            480: { slidesPerView: 2 },
-            640: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 6 },
+            480: { slidesPerView: 3 },
+            640: { slidesPerView: 4 },
+            768: { slidesPerView: 5 },
+            1024: { slidesPerView: 7 },
           }}
         >
           {categories.map((category, index) => (
             <SwiperSlide key={index}>
               <div
-                className="flex flex-col items-center w-44 h-44 bg-white p-4 rounded-lg cursor-pointer"
+                className="flex flex-col items-center w-36 h-36 bg-white p-4 rounded-lg cursor-pointer"
                 onClick={() => handleCategoryClick(category.name)}
               >
                 <img

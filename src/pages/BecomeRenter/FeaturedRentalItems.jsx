@@ -45,7 +45,7 @@ const FeaturedRentalItems = () => {
             </p>
             <div className="grid gap-8 mt-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {gadgets.map((gadget) => (
-                    <div key={gadget.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div key={gadget.id} className="bg-white max-sm:mx-4 shadow-lg rounded-lg overflow-hidden">
                         <div className='flex-grow flex items-center justify-center p-4 h-60'>
                             <img src={gadget.image} alt={gadget.title} className="w-50 mx-auto  object-cover" />
                         </div>

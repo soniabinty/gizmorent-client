@@ -61,7 +61,7 @@ const AdminNotificationsPage = () => {
     }
 
     return (
-        <div className="md:p-6">
+        <div className="md:px-6 py-6">
             <Header
                 header={"Admin Notifications"}
                 title={

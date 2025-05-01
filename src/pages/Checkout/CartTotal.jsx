@@ -35,7 +35,7 @@ const CartTotal = () => {
     // const months = bookingDetails?.months || product?.months || 1;
     return total + product.price * quantity;
   }, 0);
-  console.log("Subtotal:", subtotal);
+ 
 
   const shipping = products.length > 0 ? 5.0 : 0;
 
@@ -81,7 +81,7 @@ const CartTotal = () => {
             </div>
             <div>
               <p className=" font-semibold">
-                {product.price} * {product?.quantity} * {product?.months || 1}{" "}
+                {product.price} * {product?.quantity} 
                 =$
                 {subtotal}
               </p>
