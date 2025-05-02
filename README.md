@@ -117,9 +117,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 
 
----
 
-```
-
-Would you like a downloadable version of this README or help setting up your GitHub repo with it?
-```
