@@ -15,7 +15,7 @@ const AboutGizmoRent = () => {
     {
       title: "Use & Return",
       description: "Enjoy high-performance gadgets for work or entertainment, then return when you're done. Simple and affordable.",
-      image: "https://i.ibb.co/qJDfSVS/return-gadget.jpg", 
+      image: "https://i.ibb.co.com/pvVFTCX6/happy-deliveryman-standing-near-customer-with-tablet-professional-postman-red-uniform-holding-boxes.jpg", 
     }
     
   ];

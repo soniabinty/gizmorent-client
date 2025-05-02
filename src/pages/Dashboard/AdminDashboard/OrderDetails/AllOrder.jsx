@@ -125,6 +125,7 @@ const AllOrder = () => {
                       <p><strong>Customer:</strong> {order.customer_name}</p>
                       <p><strong>Email:</strong> {order.email}</p>
                       <p><strong>Phone:</strong> {order.customer_phone}</p>
+                      <p><strong>NID:</strong> {order.customer_nid}</p>
                       <p><strong>Address:</strong> {order.customer_address}</p>
                       <p><strong>Amount:</strong> ${order.amount}</p>
                       <p><strong>Quantity:</strong> {order.quantity}</p>

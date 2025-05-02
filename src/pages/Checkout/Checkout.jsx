@@ -73,6 +73,7 @@ const Checkout = () => {
         customer_name: data?.name,
         email: user.email,
         customer_phone: data?.phone,
+        customer_nid: data?.nid,
         customer_address: `${data?.upazila}, ${data?.district}`,
         renting_time: data?.pickupDate,
         returning_time: data?.dropDate,
